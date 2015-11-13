@@ -1,43 +1,43 @@
 package AStar;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
 
 public class NodeList {
-	List<Node> nodes;
-	
-	public NodeList(){
-		nodes=new ArrayList<Node>();
+	private HashMap<String, Node> nodes;
+
+	public NodeList() {
+		nodes = new HashMap<String, Node>();
 	}
-	//right now very inefficient. We could use some sorting algorithm...
-	public boolean addNode(Node n){
-		if(!nodes.contains(n)&&nodes!=null){
-			nodes.add(n);
-			return true;
-		}
-		
+	
+	public HashMap<String, Node> getListOfNodes(){
+		return nodes;
+	}
+
+	// right now very inefficient. We could use some sorting algorithm...
+	public boolean addNode(String s, Node n) {
+		return (nodes.put(s,n)==n);		
+
+	}
+
+	public boolean deleteNode(String name) {
+		return (nodes.remove(name) != null);
+
+	}
+	
+	public Node findNode(String name){
+		return nodes.get(name);
+	}
+	
+	public Node findNode (int x, int y){
+			
+		return null;
+	}
+
+	public boolean addNodes(Node... nodes) {
 		return false;
 	}
-	
-	public boolean deleteNode(String name){
-		Iterator it = nodes.iterator();
-		while(it.hasNext()){
-			Node node=(Node)it.next();
-			if(node.nodeName==name){		
-				it.remove();
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean addNodes (Node... nodes){
-		return false;
-	}
-	
-	public boolean deleteNodes (String... names){
+
+	public boolean deleteNodes(String... names) {
 		return false;
 	}
 
