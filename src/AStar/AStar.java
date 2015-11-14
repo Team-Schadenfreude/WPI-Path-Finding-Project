@@ -56,7 +56,7 @@ public class AStar{
 	}
 
 
-	public void findPath(Node start, Node end){
+	public List<Node> findPath(Node start, Node end){
 
 		
 		//create a new hashSet of nodes that we have already checked
@@ -153,11 +153,12 @@ public class AStar{
 			}
 
 		}
+		return printPath(end);
 
 	}
 	
 	//function gets the distance between two nodes. This will be used as the cost
-	public double getDistance(Node one, Node two){
+	public static double getDistance(Node one, Node two){
 
 		double dx = one.xPos - two.xPos;
 

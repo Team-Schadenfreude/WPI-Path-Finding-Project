@@ -27,6 +27,15 @@ public class Node{
             this.xPos = xPos;
             this.yPos = yPos;
     }
+    public Node(int xPos, int yPos, String nodeName)
+    {
+    	this.nodeName = nodeName;
+    	this.hValue = 0;
+        this.gValue = 0;
+        this.isObstacle = false;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
 
     //function to turn stringName into an actual string name.
     //Why do we have to do this? Because Java is stupid. JK, Java Master Race
