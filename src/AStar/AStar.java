@@ -1,7 +1,6 @@
 /*
  * Alonso Martinez
  */
-
 package AStar;
 /*Testing Testin*/
 
@@ -13,68 +12,24 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class MapSearch{
+public class AStar{
 	//variable to see if we have found our node
     static boolean found = false;
     int i = 0;
-	public static void main(String[] args){
-
-		
-		//define some test nodes 
-		Node node1 = new Node("First",0,0,0,false,0,0);
-		Node node2 = new Node("Second",0,0, 0, false,0,1);
-		Node node3 = new Node("Third",0,0, 0, false,0,2);
-		Node node4 = new Node("Fourth",0,0, 0, false,1,1);
-
-
-		//initialize the edges
-		//if two nodes connect, you need to add an edge between them.
-		//for future iteration, make this auto generated
-		node1.neighbors = new Edge[]{
-				new Edge(node2,getDistance(node1,node2)),
-				new Edge(node4,getDistance(node1,node4))
-
-		};
-
-		node2.neighbors = new Edge[]{
-				new Edge(node1,getDistance(node1,node2)),
-				new Edge(node3,getDistance(node2,node3))
-
-
-		};
-
-		node3.neighbors = new Edge[]{
-				new Edge(node2,getDistance(node2,node3)),
-				new Edge(node4,getDistance(node4,node3))
-
-
-		};
-		
-		
-		node4.neighbors = new Edge[]{
-				new Edge(node3,getDistance(node3,node4)),
-				new Edge(node1,getDistance(node1,node4)),
-
-
-		};
-	
-
-		//function finds the path between the nodes
-		findPath(node1,node4);
-
-		//create a new list of nodes and set it equal to the result of the 
-		List<Node> path = printPath(node4);
-
-		System.out.println(getDistance(node1,node4));
-		System.out.println(path);
-		
-
-
-	}
-
-	
+    List<Node> map;
+    public AStar()
+    {}
+    public AStar(List<Node> map)
+    {
+    	this.map = map;
+    }
+    public void useMap(List<Node> map)
+    {
+    	this.map = map;
+    }
+    
 	//function to print out the path. Takes a node and will print the path if there is one to this node
-	public static List<Node> printPath(Node end){
+	public List<Node> printPath(Node end){
 		
 		//create a new array list of nodes
 		List<Node> path = new ArrayList<Node>();
@@ -85,14 +40,14 @@ public class MapSearch{
 			path.add(node);
 		}
 
-		//reverse the path as it goes from end to finish and we want finish to start
+		//reverse the path as it goes from end to finish and we want start to finish
 		Collections.reverse(path);
 
 		return path;
 	}
 
 
-	public static void findPath(Node start, Node end){
+	public void findPath(Node start, Node end){
 
 		
 		//create a new hashSet of nodes that we have already checked
@@ -193,7 +148,7 @@ public class MapSearch{
 	}
 	
 	//function gets the distance between two nodes. This will be used as the cost
-	public static double getDistance(Node one, Node two){
+	public double getDistance(Node one, Node two){
 
 		double dx = one.xPos - two.xPos;
 
