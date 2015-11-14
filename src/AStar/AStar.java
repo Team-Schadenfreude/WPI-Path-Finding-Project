@@ -11,23 +11,32 @@ import java.util.HashSet;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Set;
-
+import AStar.Settings;
 public class AStar{
 	//variable to see if we have found our node
-    static boolean found = false;
-    int i = 0;
-    List<Node> map;
+    private boolean found = false;
+    
+    private List<Node> map; //A list of nodes representing the accessible map
+    private Settings settings; //The settings to be used for additional costs in AStar*
+    //Default constructor
     public AStar()
     {}
-    public AStar(List<Node> map)
+    //AStar constructor that takes in a map and selections of settings to prepare for a new AStar search
+    public AStar(List<Node> map, Settings settings)
+    {
+    	this.map = map;
+    	this.settings = settings;
+    }
+    //Function to change the map for the astar search
+    public void setMap(List<Node> map)
     {
     	this.map = map;
     }
-    public void useMap(List<Node> map)
+    //Function to change the AStar settings
+    public void setSettings(Settings settings)
     {
-    	this.map = map;
+    	this.settings = settings;
     }
-    
 	//function to print out the path. Takes a node and will print the path if there is one to this node
 	public List<Node> printPath(Node end){
 		
