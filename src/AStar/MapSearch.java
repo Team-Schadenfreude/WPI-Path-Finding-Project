@@ -2,7 +2,6 @@
  * Alonso Martinez
  */
 
-/**/
 package AStar;
 /*Testing Testin*/
 
