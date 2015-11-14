@@ -164,6 +164,7 @@ public class TestJunit{
 	   AStar astar = new AStar(map,defaultSettings);
 	   List<Node> path = astar.findPath(a, b);
 	   assertEquals(best_path,path);
+	   //
    }
 //   @Test(expected = ValueOutOfBoundsException.class)
 //   public void test10()throws ValueOutOfBoundsException{ //Test out of bounds execption where input is beyond maximum value
