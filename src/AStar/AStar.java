@@ -48,7 +48,10 @@ public class AStar{
 		for(Node node = end; node!=null; node = node.parent){
 			path.add(node);
 		}
-
+		if (path.size() <= 1)//If there is not path
+		{
+			return new ArrayList<Node>(); //Return empty list
+		}
 		//reverse the path as it goes from end to finish and we want start to finish
 		Collections.reverse(path);
 
