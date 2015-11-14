@@ -2,8 +2,9 @@
  * Alonso Martinez
  */
 
-
+/**/
 package AStar;
+/*Testing Testin*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class MapSearch{
 	//variable to see if we have found our node
     static boolean found = false;
-
+    int i = 0;
 	public static void main(String[] args){
 
 		
