@@ -37,14 +37,14 @@ public class main_runner {
 //		System.out.println("Enter your destinationn: ");
 //		String dest = reader.next();
 //		reader.close();
-		String nodePath = "C:\\Node_Map_MARS.csv";
-		String edgePath = "C:\\Edge_Map_MARS.csv";
+		String nodePath = "src/res/BGreenlaw_Node_Map_2.csv";
+		String edgePath = "src/res/BGreenlaw_Edge_Map_2.csv";
 		map = readMap(nodePath, edgePath);
 		//getPathFromString(startLoc, dest);
 		System.out.println(map);
-		System.out.println(map.get(2));
-		System.out.println(map.get(7));
-		List<Node> path = getPathFromNode(map.get(2), map.get(7));
+		System.out.println(map.get(1));
+		System.out.println(map.get(6));
+		List<Node> path = getPathFromNode(map.get(1), map.get(6));
 		System.out.println("Solution");
 		System.out.println(path);
 	}
