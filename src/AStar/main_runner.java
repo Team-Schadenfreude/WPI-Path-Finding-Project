@@ -178,14 +178,16 @@ public class main_runner {
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path)
 	{
+		
 		return null;
 	}
 	
-	//Method to determine a direction from three nodes.
-	public static String getDirections(Node firstNode, Node secondNode, Node thirdNode)
+	//Returns the angle between two nodes in degrees
+	private static int getAngle(Node n1, Node n2)
 	{
-		return null;
-		
+		int dx = n2.xPos - n1.xPos;
+		int dy = n2.yPos - n1.yPos;
+		return (int) ((180 / Math.PI) * Math.atan2(dy,dx));
 	}
 	
 	
