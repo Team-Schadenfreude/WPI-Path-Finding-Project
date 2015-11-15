@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TestJunit {
-
-	@Test
-	public void test1() {
-		assertEquals(1, 1);
-	}
+	
+	/*
+	 * Tests for running AStar.
+	 */
 
 	@Test
 	public void test_mcc_1() { // Test for horizontal nodes where path is curved
@@ -222,25 +221,56 @@ public class TestJunit {
 		assertEquals(best_path, path);
 	}
 	
+	/*
+	 * Test map importing and running AStar on the map.
+	 */
 	@Test
-	public void testDirectionRight()
+	public void mapTest1()
 	{
-		Node n1 = new Node(0, 0, "Node 1");
-		Node n2 = new Node(0, 1, "Node 2");
-		Node n3 = new Node(1, 1, "Node 3");
-		String testDirection = main_runner.getDirections(n1, n2, n3);
-		assertEquals("Right", testDirection);
+		String nodePath = "src/res/Alonso_Node_Map.csv";
+		String edgePath = "src/res/Alonso_Edge_Map.csv";
+		List<Node> map = main_runner.readMap(nodePath, edgePath);
+		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1));
+		List<Node> bestPath = new ArrayList<Node>();
+		bestPath.add(map.get(3));
+		bestPath.add(map.get(2));
+		bestPath.add(map.get(1));
+		assertEquals(bestPath, path);
 	}
 	
 	@Test
-	public void testDirectionLeft()
+	public void mapTest2()
 	{
-		Node n1 = new Node(3, 3, "Node 1");
-		Node n2 = new Node(4, 3, "Node 2");
-		Node n3 = new Node(4, 4, "Node 3");
-		String testDirection = main_runner.getDirections(n1, n2, n3);
-		assertEquals("Left", testDirection);
+		String nodePath = "src/res/Node_Map_MARS.csv";
+		String edgePath = "src/res/Edge_Map_MARS.csv";
+		List<Node> map = main_runner.readMap(nodePath, edgePath);
+		List<Node> path = main_runner.getPathFromNode(map.get(6), map.get(1));
+		List<Node> bestPath = new ArrayList<Node>();
+		bestPath.add(map.get(6));
+		bestPath.add(map.get(5));
+		bestPath.add(map.get(0));
+		bestPath.add(map.get(1));
+		assertEquals(bestPath, path);
 	}
+	
+	@Test
+	public void mapTest3()
+	{
+		String nodePath = "src/res/Node_Map_TSL.csv";
+		String edgePath = "src/res/Edge_Map_TSL.csv";
+		List<Node> map = main_runner.readMap(nodePath, edgePath);
+		List<Node> path = main_runner.getPathFromNode(map.get(0), map.get(4));
+		System.out.println(path);
+		List<Node> bestPath = new ArrayList<Node>();
+		bestPath.add(map.get(0));
+		bestPath.add(map.get(1));
+		bestPath.add(map.get(4));
+		assertEquals(bestPath, path);
+	}
+	
+	/*
+	 * Tests for the getAngle method used for finding directions.
+	 */
 	
 	@Test
 	public void getAngleTest1()
@@ -278,7 +308,64 @@ public class TestJunit {
 		assertEquals(19, testAngle);
 	}
 	
+	/*
+	 * Tests for the getDirectionList method.
+	 */
 	
+	@Test
+	public void directionTest1()
+	{
+		List<Node> path = new ArrayList<Node>();
+		Node n1 = new Node(5, 2, "Node 1");
+		Node n2 = new Node(5, 5, "Node 2");
+		Node n3 = new Node(8, 5, "Node 3");
+		path.add(n1);
+		path.add(n2);
+		path.add(n3);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = main_runner.getDirectionsList(path);
+		assertEquals(1, testDirections);
+	}
+	
+	@Test
+	public void directionTest2()
+	{
+		List<Node> path = new ArrayList<Node>();
+		Node n1 = new Node(5, 2, "Node 1");
+		Node n2 = new Node(5, 5, "Node 2");
+		Node n3 = new Node(2, 5, "Node 3");
+		path.add(n1);
+		path.add(n2);
+		path.add(n3);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = main_runner.getDirectionsList(path);
+		assertEquals(1, testDirections);
+	}
+	
+	@Test
+	public void directionTest3()
+	{
+		List<Node> path = new ArrayList<Node>();
+		Node n1 = new Node(10, 0, "Node 1");
+		Node n2 = new Node(10, 4, "Node 2");
+		Node n3 = new Node(7, 1, "Node 3");
+		Node n4 = new Node(4, 4, "Node 4");
+		Node n5 = new Node(12, 10, "Node 5");
+		Node n6 = new Node(12, 6, "Node 6");
+		path.add(n1);
+		path.add(n2);
+		path.add(n3);
+		path.add(n4);
+		path.add(n5);
+		path.add(n6);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = main_runner.getDirectionsList(path);
+		assertEquals(1, testDirections);
+	}
+	
+	/*
+	 * Sample test for exceptions.
+	 */
 	
 	// @Test(expected = ValueOutOfBoundsException.class)
 	// public void test10()throws ValueOutOfBoundsException{ //Test out of
