@@ -175,4 +175,18 @@ public class main_runner {
 		
 	}
 	
+	//Method to provide a list of directions from a list of nodes.
+	public static List<String> getDirectionsList(List<Node> path)
+	{
+		return null;
+	}
+	
+	//Method to determine a direction from three nodes.
+	public static String getDirections(Node firstNode, Node secondNode, Node thirdNode)
+	{
+		return null;
+		
+	}
+	
+	
 }

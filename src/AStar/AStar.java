@@ -2,7 +2,6 @@
  * Alonso Martinez
  */
 package AStar;
-/*Testing Testin*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,5 +175,5 @@ public class AStar{
 
 		return distance;
 	}
-
+	
 }
