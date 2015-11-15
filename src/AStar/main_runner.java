@@ -178,12 +178,76 @@ public class main_runner {
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path)
 	{
-		
+		List<String> directions = new ArrayList<String>();
+		if(path.size() == 0 || path.size() == 1)
+		{
+			directions.add("Can't Generate Directions as no path was found");
+			return directions;
+		}
+		else if(path.size() == 2)
+		{
+			directions.add("Proceed straight on path");
+			return directions;
+		}
+		int prevAngle = 0;
+		String prevDirection = "";
+		for(int i = 0; i < path.size(); i++)
+		{
+			if (i == path.size() - 1)
+			{
+				directions.add("You have reached your destination");
+				break;
+			}
+			int newAngle = getAngle(path.get(i), path.get(i+1));
+			int delta_angle = 0;
+			if (i != 0)
+			{
+				delta_angle = newAngle - prevAngle;
+				delta_angle = (int) Math.atan2(Math.sin(delta_angle), Math.cos(delta_angle));//Bind angle to range [-180,180]
+			}
+			String direction = getDirectionFromAngle(delta_angle);
+			if (direction.equals("Go Straight") && direction.equals(prevDirection))
+			{
+				//Don't repeat straight directions
+			}
+			else
+			{
+				directions.add(direction);
+			}
+			prevAngle = newAngle;
+			prevDirection = direction;
+		}
 		return null;
 	}
-	
+	public static String getDirectionFromAngle(int angle)
+	{
+		if (-30 < angle && angle < 30)//Going Straight
+		{
+			return "Go Straight";
+		}
+		else if (30 <= angle && angle < 60)
+		{
+			return "Slight left";
+		}
+		else if (60 <= angle && angle < 180)
+		{
+			return "Left turn";
+		}
+		else if (-60 < angle && angle <= -30)
+		{
+			return "Slight right";
+		}
+		else if (-180 < angle && angle <= -60)
+		{
+			return "Right turn";
+		}
+		else
+		{
+			return "Go Straight";
+		}
+	}
 	//Returns the angle between two nodes in degrees
-	private static int getAngle(Node n1, Node n2)
+	public static int getAngle(Node n1, Node n2)
 	{
 		int dx = n2.xPos - n1.xPos;
 		int dy = n2.yPos - n1.yPos;
