@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import AStar.Settings;
 import AStar.AStar;
+import AStar.main_runner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -220,6 +221,27 @@ public class TestJunit {
 		List<Node> path = astar.findPath(i, h);
 		assertEquals(best_path, path);
 	}
+	
+	@Test
+	public void testDirectionRight()
+	{
+		Node n1 = new Node(0, 0, "Node 1");
+		Node n2 = new Node(0, 1, "Node 2");
+		Node n3 = new Node(1, 1, "Node 3");
+		String testDirection = main_runner.getDirections(n1, n2, n3);
+		assertEquals("Right", testDirection);
+	}
+	
+	@Test
+	public void testDirectionLeft()
+	{
+		Node n1 = new Node(3, 3, "Node 1");
+		Node n2 = new Node(4, 3, "Node 2");
+		Node n3 = new Node(4, 4, "Node 3");
+		String testDirection = main_runner.getDirections(n1, n2, n3);
+		assertEquals("Left", testDirection);
+	}
+	
 	// @Test(expected = ValueOutOfBoundsException.class)
 	// public void test10()throws ValueOutOfBoundsException{ //Test out of
 	// bounds execption where input is beyond maximum value
