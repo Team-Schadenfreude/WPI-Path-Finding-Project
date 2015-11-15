@@ -31,22 +31,6 @@ public class main_runner {
 	      }
 	      System.out.println(result.wasSuccessful());
 	      
-//	    Scanner reader = new Scanner(System.in);
-//		System.out.println("Enter your start location: ");
-//		String startLoc = reader.next();
-//		System.out.println("Enter your destinationn: ");
-//		String dest = reader.next();
-//		reader.close();
-		String nodePath = "src/res/Alonso_Node_Map.csv";
-		String edgePath = "src/res/Alonso_Edge_Map.csv";
-		map = readMap(nodePath, edgePath);
-		//getPathFromString(startLoc, dest);
-		System.out.println(map);
-		System.out.println(map.get(3));
-		System.out.println(map.get(1));
-		List<Node> path = getPathFromNode(map.get(3), map.get(1));
-		System.out.println("Solution");
-		System.out.println(path);
 	}
 	private static List<Node> getNodesFromFile(String filePath)
 	{
@@ -207,7 +191,7 @@ public class main_runner {
 				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
 			}
 			
-			System.out.println(delta_angle);
+			// System.out.println(delta_angle);
 			String direction = getDirectionFromAngle(delta_angle);
 //			if (direction.equals("Go Straight") && direction.equals(prevDirection))
 //			{

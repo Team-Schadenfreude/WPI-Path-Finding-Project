@@ -231,6 +231,7 @@ public class TestJunit {
 		String edgePath = "src/res/Alonso_Edge_Map.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
 		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1));
+		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(3));
 		bestPath.add(map.get(2));
@@ -245,6 +246,7 @@ public class TestJunit {
 		String edgePath = "src/res/Edge_Map_MARS.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
 		List<Node> path = main_runner.getPathFromNode(map.get(6), map.get(1));
+		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(6));
 		bestPath.add(map.get(5));
@@ -260,7 +262,7 @@ public class TestJunit {
 		String edgePath = "src/res/Edge_Map_TSL.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
 		List<Node> path = main_runner.getPathFromNode(map.get(0), map.get(4));
-		System.out.println(path);
+		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(0));
 		bestPath.add(map.get(1));
@@ -324,9 +326,9 @@ public class TestJunit {
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = main_runner.getDirectionsList(path);
-		System.out.println("Path then directions");
-		System.out.println(path);
-		System.out.println(testDirections);
+		// System.out.println("Path and Directions:");
+		// System.out.println(path);
+		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
 		solution.add("Right turn");
@@ -344,6 +346,9 @@ public class TestJunit {
 		path.add(n1);
 		path.add(n2);
 		path.add(n3);
+		// System.out.println("Path and Directions:");
+		// System.out.println(path);
+		// System.out.println(testDirections);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = main_runner.getDirectionsList(path);
 		List<String> solution = new ArrayList<String>();
@@ -369,6 +374,9 @@ public class TestJunit {
 		path.add(n4);
 		path.add(n5);
 		path.add(n6);
+		// System.out.println("Path and Directions:");
+		// System.out.println(path);
+		// System.out.println(testDirections);
 		List<String> testDirections = new ArrayList<String>();
 		
 		testDirections = main_runner.getDirectionsList(path);
