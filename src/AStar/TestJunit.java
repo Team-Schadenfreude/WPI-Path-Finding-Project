@@ -6,6 +6,7 @@ import AStar.Settings;
 import AStar.AStar;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestJunit {
 
@@ -21,9 +22,9 @@ public class TestJunit {
 		Node n1 = new Node(0, 0, "A");
 		Node n2 = new Node(1, 0, "B");
 		Node n3 = new Node(2, 0, "C");
-		n1.neighbors = new Edge[] { new Edge(n3, AStar.getDistance(n1, n3)), };
-		n2.neighbors = new Edge[] { new Edge(n3, AStar.getDistance(n2, n3)) };
-		n3.neighbors = new Edge[] { new Edge(n2, AStar.getDistance(n2, n3)), new Edge(n1, AStar.getDistance(n1, n3)) };
+		n1.neighbors = new ArrayList<>(Arrays.asList(new Edge(n3, AStar.getDistance(n1, n3))));
+		n2.neighbors = new ArrayList<>(Arrays.asList(new Edge(n3, AStar.getDistance(n2, n3))));
+		n3.neighbors = new ArrayList<>(Arrays.asList(new Edge(n2, AStar.getDistance(n2, n3)), new Edge(n1, AStar.getDistance(n1, n3))));
 		map.add(n1);
 		map.add(n2);
 		map.add(n3);
@@ -49,13 +50,13 @@ public class TestJunit {
 		Node f = new Node(5, 0, "F");
 		Node g = new Node(6, 0, "G");
 		// Goal = g; Start = A
-		a.neighbors = new Edge[] { new Edge(b, 1), new Edge(c, 3) };
-		b.neighbors = new Edge[] { new Edge(a, 1), new Edge(d, 2), new Edge(e, 4) };
-		c.neighbors = new Edge[] { new Edge(a, 3), new Edge(e, 1) };
-		d.neighbors = new Edge[] { new Edge(b, 2) };
-		e.neighbors = new Edge[] { new Edge(b, 4), new Edge(c, 1), new Edge(f, 5), new Edge(g, 6) };
-		f.neighbors = new Edge[] { new Edge(e, 5) };
-		g.neighbors = new Edge[] { new Edge(g, 6) };
+		a.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 1), new Edge(c, 3)));
+		b.neighbors = new ArrayList<>(Arrays.asList(new Edge(a, 1), new Edge(d, 2), new Edge(e, 4)));
+		c.neighbors = new ArrayList<>(Arrays.asList(new Edge(a, 3), new Edge(e, 1)));
+		d.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 2)));
+		e.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 4), new Edge(c, 1), new Edge(f, 5), new Edge(g, 6)));
+		f.neighbors = new ArrayList<>(Arrays.asList(new Edge(e, 5)));
+		g.neighbors = new ArrayList<>(Arrays.asList(new Edge(g, 6)));
 		map.add(a);
 		map.add(b);
 		map.add(c);
@@ -85,14 +86,13 @@ public class TestJunit {
 		Node f = new Node(5, 0, "F");
 		Node g = new Node(6, 0, "G");
 		// Goal = g; Start = A
-		a.neighbors = new Edge[] { new Edge(b, 1) };
-		b.neighbors = new Edge[] { new Edge(a, 1), new Edge(d, 2), new Edge(e, 4) };
-		c.neighbors = new Edge[] { // C does not connect to any nodes
-		};
-		d.neighbors = new Edge[] { new Edge(b, 2) };
-		e.neighbors = new Edge[] { new Edge(b, 4), new Edge(f, 5), new Edge(g, 6) };
-		f.neighbors = new Edge[] { new Edge(e, 5) };
-		g.neighbors = new Edge[] { new Edge(g, 6) };
+		a.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 1)));
+		b.neighbors = new ArrayList<>(Arrays.asList(new Edge(a, 1), new Edge(d, 2), new Edge(e, 4)));
+		c.neighbors = new ArrayList<>(Arrays.asList()); // C does not connect to any nodes
+		d.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 2)));
+		e.neighbors = new ArrayList<>(Arrays.asList(new Edge(b, 4), new Edge(f, 5), new Edge(g, 6)));
+		f.neighbors = new ArrayList<>(Arrays.asList(new Edge(e, 5)));
+		g.neighbors = new ArrayList<>(Arrays.asList(new Edge(g, 6)));
 		map.add(a);
 		map.add(b);
 		map.add(c);
@@ -117,10 +117,8 @@ public class TestJunit {
 		Node a = new Node(0, 0, "A");
 		Node b = new Node(1, 0, "B");
 		// Goal = B; Start = A
-		a.neighbors = new Edge[] { // No connections
-		};
-		b.neighbors = new Edge[] { // No connections
-		};
+		a.neighbors = new ArrayList<>(Arrays.asList());//No connections
+		b.neighbors = new ArrayList<>(Arrays.asList());//No connections
 		map.add(a);
 		map.add(b);
 		List<Node> best_path = new ArrayList<Node>();
@@ -146,24 +144,24 @@ public class TestJunit {
 		Node n10 = new Node(0, 3, "Node 10");
 		Node n11 = new Node(1, 3, "Node 11");
 		Node n12 = new Node(2, 3, "Node 12");
-		n1.neighbors = new Edge[] { new Edge(n2, AStar.getDistance(n1, n2)), new Edge(n4, AStar.getDistance(n1, n4)) };
-		n2.neighbors = new Edge[] { new Edge(n1, AStar.getDistance(n1, n2)), new Edge(n5, AStar.getDistance(n2, n5)) };
-		n3.neighbors = new Edge[] { new Edge(n6, AStar.getDistance(n3, n6)), };
-		n4.neighbors = new Edge[] { new Edge(n1, AStar.getDistance(n1, n4)), new Edge(n7, AStar.getDistance(n4, n7)) };
-		n5.neighbors = new Edge[] { new Edge(n2, AStar.getDistance(n2, n5)), new Edge(n8, AStar.getDistance(n5, n8)) };
-		n6.neighbors = new Edge[] { new Edge(n3, AStar.getDistance(n3, n6)), new Edge(n9, AStar.getDistance(n6, n9)) };
-		n7.neighbors = new Edge[] { new Edge(n4, AStar.getDistance(n4, n7)),
-				new Edge(n10, AStar.getDistance(n7, n10)) };
-		n8.neighbors = new Edge[] { new Edge(n5, AStar.getDistance(n5, n8)),
-				new Edge(n11, AStar.getDistance(n8, n11)) };
-		n9.neighbors = new Edge[] { new Edge(n6, AStar.getDistance(n6, n9)),
-				new Edge(n12, AStar.getDistance(n9, n12)) };
-		n10.neighbors = new Edge[] { new Edge(n7, AStar.getDistance(n7, n10)),
-				new Edge(n11, AStar.getDistance(n10, n11)) };
-		n11.neighbors = new Edge[] { new Edge(n8, AStar.getDistance(n8, n11)),
-				new Edge(n10, AStar.getDistance(n10, n11)), new Edge(n12, AStar.getDistance(n11, n12)) };
-		n12.neighbors = new Edge[] { new Edge(n9, AStar.getDistance(n9, n12)),
-				new Edge(n11, AStar.getDistance(n11, n12)) };
+		n1.neighbors = new ArrayList<>(Arrays.asList(new Edge(n2, AStar.getDistance(n1, n2)), new Edge(n4, AStar.getDistance(n1, n4))));
+		n2.neighbors = new ArrayList<>(Arrays.asList(new Edge(n1, AStar.getDistance(n1, n2)), new Edge(n5, AStar.getDistance(n2, n5))));
+		n3.neighbors = new ArrayList<>(Arrays.asList(new Edge(n6, AStar.getDistance(n3, n6))));
+		n4.neighbors = new ArrayList<>(Arrays.asList(new Edge(n1, AStar.getDistance(n1, n4)), new Edge(n7, AStar.getDistance(n4, n7))));
+		n5.neighbors = new ArrayList<>(Arrays.asList(new Edge(n2, AStar.getDistance(n2, n5)), new Edge(n8, AStar.getDistance(n5, n8))));
+		n6.neighbors = new ArrayList<>(Arrays.asList(new Edge(n3, AStar.getDistance(n3, n6)), new Edge(n9, AStar.getDistance(n6, n9))));
+		n7.neighbors = new ArrayList<>(Arrays.asList(new Edge(n4, AStar.getDistance(n4, n7)),
+				new Edge(n10, AStar.getDistance(n7, n10))));
+		n8.neighbors = new ArrayList<>(Arrays.asList(new Edge(n5, AStar.getDistance(n5, n8)),
+				new Edge(n11, AStar.getDistance(n8, n11))));
+		n9.neighbors = new ArrayList<>(Arrays.asList(new Edge(n6, AStar.getDistance(n6, n9)),
+				new Edge(n12, AStar.getDistance(n9, n12))));
+		n10.neighbors = new ArrayList<>(Arrays.asList(new Edge(n7, AStar.getDistance(n7, n10)),
+				new Edge(n11, AStar.getDistance(n10, n11))));
+		n11.neighbors = new ArrayList<>(Arrays.asList(new Edge(n8, AStar.getDistance(n8, n11)),
+				new Edge(n10, AStar.getDistance(n10, n11)), new Edge(n12, AStar.getDistance(n11, n12))));
+		n12.neighbors = new ArrayList<>(Arrays.asList(new Edge(n9, AStar.getDistance(n9, n12)),
+				new Edge(n11, AStar.getDistance(n11, n12))));
 		map.add(n1);
 		map.add(n2);
 		map.add(n3);
@@ -186,10 +184,8 @@ public class TestJunit {
 		best_path.add(n9);
 		best_path.add(n6);
 		best_path.add(n3);
-		System.out.println(map);
 		AStar astar = new AStar(map, defaultSettings);
 		List<Node> path = astar.findPath(n1, n3);
-		System.out.println(path);
 		assertEquals(best_path, path);
 	}
 
@@ -197,35 +193,31 @@ public class TestJunit {
 	public void test_bg_1() {
 		Settings defaultSettings = new Settings(false, false, false);
 		List<Node> map = new ArrayList<Node>();
-		Node n1 = new Node(0, 0, "D");
-		Node n2 = new Node(1, 0, "E");
-		Node n3 = new Node(2, 0, "F");
-		Node n4 = new Node(2, 1, "G");
-		Node n5 = new Node(3, 1, "H");
-		Node n6 = new Node(1, -1, "I");
-		n1.neighbors = new Edge[] { new Edge(n3, AStar.getDistance(n1, n3)), new Edge(n2, AStar.getDistance(n2, n1)) };
-		n2.neighbors = new Edge[] { new Edge(n1, AStar.getDistance(n1, n2)), new Edge(n3, AStar.getDistance(n2, n3)) };
-		n3.neighbors = new Edge[] { new Edge(n2, AStar.getDistance(n2, n3)), new Edge(n5, AStar.getDistance(n5, n3)),
-				new Edge(n4, AStar.getDistance(n4, n3)) };
-		n4.neighbors = new Edge[] { new Edge(n3, AStar.getDistance(n3, n4)), new Edge(n5, AStar.getDistance(n5, n4)) };
-		n5.neighbors = new Edge[] { new Edge(n4, AStar.getDistance(n4, n5)), new Edge(n3, AStar.getDistance(n3, n5)) };
-		n6.neighbors = new Edge[] { new Edge(n2, AStar.getDistance(n2, n6)) };
-		map.add(n1);
-		map.add(n2);
-		map.add(n3);
-		map.add(n4);
-		map.add(n5);
-		map.add(n6);
+		Node d = new Node(0, 0, "D");
+		Node e = new Node(1, 0, "E");
+		Node f = new Node(2, 0, "F");
+		Node g = new Node(2, 1, "G");
+		Node h = new Node(3, 1, "H");
+		Node i = new Node(1, -1, "I");
+		d.neighbors = new ArrayList<>(Arrays.asList(new Edge(f, 2), new Edge(e, 1)));
+		e.neighbors = new ArrayList<>(Arrays.asList(new Edge(i, 1),new Edge(d, 1), new Edge(f, 1)));
+		f.neighbors = new ArrayList<>(Arrays.asList(new Edge(e, 1), new Edge(h, 2),new Edge(g,1), new Edge(d, 2)));
+		h.neighbors = new ArrayList<>(Arrays.asList(new Edge(g, 1), new Edge(f, 2)));
+		i.neighbors = new ArrayList<>(Arrays.asList(new Edge(e, 1)));
+		g.neighbors = new ArrayList<>(Arrays.asList(new Edge(h,1), new Edge(f,1)));
+		map.add(d);
+		map.add(e);
+		map.add(f);
+		map.add(g);
+		map.add(h);
+		map.add(i);
 		List<Node> best_path = new ArrayList<Node>();
-		best_path.add(n6);
-		best_path.add(n2);
-		best_path.add(n3);
-		best_path.add(n5);
-		System.out.println(map);
+		best_path.add(i);
+		best_path.add(e);
+		best_path.add(f);
+		best_path.add(h);
 		AStar astar = new AStar(map, defaultSettings);
-		List<Node> path = astar.findPath(n6, n5);
-		System.out.println("This is the path.");
-		System.out.println(path);
+		List<Node> path = astar.findPath(i, h);
 		assertEquals(best_path, path);
 	}
 	// @Test(expected = ValueOutOfBoundsException.class)

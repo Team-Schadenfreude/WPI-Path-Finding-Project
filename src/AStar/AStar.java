@@ -50,11 +50,11 @@ public class AStar{
 		}
 		if (path.size() <= 1)//If there is not path
 		{
+			System.out.println("EmptyPath");
 			return new ArrayList<Node>(); //Return empty list
 		}
 		//reverse the path as it goes from end to finish and we want start to finish
 		Collections.reverse(path);
-
 		return path;
 	}
 
@@ -101,7 +101,7 @@ public class AStar{
 		
 		//while our queue is not empty and we have not found a path, execute
 		while((!queue.isEmpty())&&(!found)){
-
+			//System.out.println(queue);
 			//define a new node named current that will be the current node we are processing
 			//set this equal to the top element of the queue for processing
 			Node current = queue.poll();
@@ -111,12 +111,16 @@ public class AStar{
 
 			//if the node name is equal to the node we are searching for, then we are done
 			//might change this so that it works off of something other than name
+			//System.out.println(checkedNodes);
+			//System.out.println(current);
+			//System.out.println(current.neighbors);
 			if(current.nodeName.equals(end.nodeName)){
 				found = true;
-				System.out.println("Found path");
+				//System.out.println(queue);
+				//System.out.println("Found path");
 			}
-
 			//here we are checking every edge of every neighboring node for the node we are searching for
+			
 			
 			for(Edge edge : current.neighbors){
 				Node neighbor = edge.connection;
