@@ -242,6 +242,44 @@ public class TestJunit {
 		assertEquals("Left", testDirection);
 	}
 	
+	@Test
+	public void getAngleTest1()
+	{
+		Node n1 = new Node(0, 0, "Node 1");
+		Node n2 = new Node(2, 2, "Node 2");
+		int testAngle = main_runner.getAngle(n1, n2);
+		assertEquals(45, testAngle);
+	}
+	
+	@Test
+	public void getAngleTest2()
+	{
+		Node n1 = new Node(0, 0, "Node 1");
+		Node n2 = new Node(12, 22, "Node 2");
+		int testAngle = main_runner.getAngle(n1, n2);
+		assertEquals(61, testAngle);
+	}
+	
+	@Test
+	public void getAngleTest3()
+	{
+		Node n1 = new Node(24, 5, "Node 1");
+		Node n2 = new Node(28, 25, "Node 2");
+		int testAngle = main_runner.getAngle(n1, n2);
+		assertEquals(78, testAngle);
+	}
+	
+	@Test
+	public void getAngleTest4()
+	{
+		Node n1 = new Node(3, 5, "Node 1");
+		Node n2 = new Node(17, 10, "Node 2");
+		int testAngle = main_runner.getAngle(n1, n2);
+		assertEquals(19, testAngle);
+	}
+	
+	
+	
 	// @Test(expected = ValueOutOfBoundsException.class)
 	// public void test10()throws ValueOutOfBoundsException{ //Test out of
 	// bounds execption where input is beyond maximum value
