@@ -324,7 +324,14 @@ public class TestJunit {
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = main_runner.getDirectionsList(path);
-		assertEquals(1, testDirections);
+		System.out.println("Path then directions");
+		System.out.println(path);
+		System.out.println(testDirections);
+		List<String> solution = new ArrayList<String>();
+		solution.add("Go Straight");
+		solution.add("Right turn");
+		solution.add("Continue straight until you've have reached your destination");
+		assertEquals(solution, testDirections);
 	}
 	
 	@Test
@@ -339,7 +346,11 @@ public class TestJunit {
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = main_runner.getDirectionsList(path);
-		assertEquals(1, testDirections);
+		List<String> solution = new ArrayList<String>();
+		solution.add("Go Straight");
+		solution.add("Left turn");
+		solution.add("Continue straight until you've have reached your destination");
+		assertEquals(solution, testDirections);
 	}
 	
 	@Test
@@ -359,8 +370,16 @@ public class TestJunit {
 		path.add(n5);
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
+		
 		testDirections = main_runner.getDirectionsList(path);
-		assertEquals(1, testDirections);
+		List<String> solution = new ArrayList<String>();
+		solution.add("Go Straight");
+		solution.add("Left turn");
+		solution.add("Right turn");
+		solution.add("Right turn");
+		solution.add("Right turn");
+		solution.add("Continue straight until you've have reached your destination");
+		assertEquals(solution, testDirections);
 	}
 	
 	/*

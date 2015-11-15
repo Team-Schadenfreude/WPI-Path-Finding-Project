@@ -195,7 +195,7 @@ public class main_runner {
 		{
 			if (i == path.size() - 1)
 			{
-				directions.add("You have reached your destination");
+				directions.add("Continue straight until you've have reached your destination");
 				break;
 			}
 			int newAngle = getAngle(path.get(i), path.get(i+1));
@@ -203,21 +203,24 @@ public class main_runner {
 			if (i != 0)
 			{
 				delta_angle = newAngle - prevAngle;
-				delta_angle = (int) Math.atan2(Math.sin(delta_angle), Math.cos(delta_angle));//Bind angle to range [-180,180]
+				double delta_angle_rad = (Math.PI / 180) * (double) delta_angle;
+				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
 			}
+			
+			System.out.println(delta_angle);
 			String direction = getDirectionFromAngle(delta_angle);
-			if (direction.equals("Go Straight") && direction.equals(prevDirection))
-			{
-				//Don't repeat straight directions
-			}
-			else
-			{
+//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
+//			{
+//				//Don't repeat straight directions
+//			}
+//			else
+//			{
 				directions.add(direction);
-			}
+			//}
 			prevAngle = newAngle;
 			prevDirection = direction;
 		}
-		return null;
+		return directions;
 	}
 	public static String getDirectionFromAngle(int angle)
 	{
