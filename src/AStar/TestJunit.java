@@ -183,6 +183,53 @@ public class TestJunit {
 		assertEquals(1, path);
 	}
 
+	@Test
+	   public void test_bg_1(){
+		   Settings defaultSettings = new Settings(false,false,false);
+		   List<Node> map = new ArrayList<Node>();
+		   Node n1 = new Node(0,0, "D");
+		   Node n2 = new Node(1,0, "E");
+		   Node n3 = new Node(2,0, "F");
+		   Node n4 = new Node(2,1, "G");
+		   Node n5 = new Node(3,1, "H");
+		   Node n6 = new Node(1,-1, "I");
+		   n1.neighbors = new Edge[]{
+					new Edge(n3,AStar.getDistance(n1,n3)),
+					new Edge(n2, AStar.getDistance(n2,n1))
+			};
+		   n2.neighbors = new Edge[]{
+				   new Edge(n1,AStar.getDistance(n1,n2)),
+					new Edge(n3,AStar.getDistance(n2,n3))
+			};
+		   n3.neighbors = new Edge[]{
+					new Edge(n2,AStar.getDistance(n2,n3)),
+					new Edge(n5,AStar.getDistance(n5,n3)),
+					new Edge(n4,AStar.getDistance(n4,n3))
+			};
+		   n4.neighbors = new Edge[] {
+				   new Edge(n3,AStar.getDistance(n3,n4)),
+				   new Edge(n5, AStar.getDistance(n5, n4))
+		   };
+		   n5.neighbors = new Edge[] {
+				   new Edge(n4, AStar.getDistance(n4, n5)),
+				   new Edge(n3, AStar.getDistance(n3,n5))
+		   };
+		   n6.neighbors = new Edge[] {
+				   new Edge(n2, AStar.getDistance(n2,n6))
+		   };
+		   map.add(n1);
+		   map.add(n2);
+		   map.add(n3);
+		   map.add(n4);
+		   map.add(n5);
+		   map.add(n6);
+		   System.out.println(map);
+		   AStar astar = new AStar(map,defaultSettings);
+		   List<Node> path = astar.findPath(n6, n5);
+		   System.out.println("This is the path.");
+		   System.out.println(path);
+		   assertEquals(1,path);
+	   }
 	// @Test(expected = ValueOutOfBoundsException.class)
 	// public void test10()throws ValueOutOfBoundsException{ //Test out of
 	// bounds execption where input is beyond maximum value
