@@ -29,7 +29,11 @@ public class NodeList {
 	}
 	
 	public Node findNode (int x, int y){
-			
+		for(Node n: nodes.values()){
+			if(n.xPos==x&&n.yPos==y){
+				return n;
+			}
+		}
 		return null;
 	}
 
