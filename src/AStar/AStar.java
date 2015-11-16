@@ -37,7 +37,7 @@ public class AStar{
     	this.settings = settings;
     }
 	//function to print out the path. Takes a node and will print the path if there is one to this node
-	public List<Node> printPath(Node end){
+	public List<Node> checkPath(Node end){
 		
 		//create a new array list of nodes
 		List<Node> path = new ArrayList<Node>();
@@ -158,7 +158,7 @@ public class AStar{
 			}
 
 		}
-		return printPath(end);
+		return checkPath(end);
 
 	}
 	

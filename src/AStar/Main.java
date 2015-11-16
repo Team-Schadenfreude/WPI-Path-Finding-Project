@@ -213,19 +213,27 @@ public class Main {
 		}
 		else if (30 <= angle && angle < 60)
 		{
-			return "Slight left";
+			return "Slight left turn";
 		}
-		else if (60 <= angle && angle < 180)
+		else if (60 <= angle && angle < 120)
 		{
 			return "Left turn";
 		}
+		else if (120 < angle && angle <= 180)
+		{
+			return "Sharp left turn";
+		}
 		else if (-60 < angle && angle <= -30)
 		{
-			return "Slight right";
+			return "Slight right turn";
 		}
-		else if (-180 < angle && angle <= -60)
+		else if (-120 < angle && angle <= -60)
 		{
 			return "Right turn";
+		}
+		else if (-180 < angle && angle <= -120)
+		{
+			return "Sharp right turn";
 		}
 		else
 		{

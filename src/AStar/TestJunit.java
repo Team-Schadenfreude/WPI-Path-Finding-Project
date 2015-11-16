@@ -346,11 +346,11 @@ public class TestJunit {
 		path.add(n1);
 		path.add(n2);
 		path.add(n3);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
-		List<String> testDirections = new ArrayList<String>();
-		testDirections = Main.getDirectionsList(path);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
 		solution.add("Left turn");
@@ -374,18 +374,48 @@ public class TestJunit {
 		path.add(n4);
 		path.add(n5);
 		path.add(n6);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
-		List<String> testDirections = new ArrayList<String>();
-		
-		testDirections = Main.getDirectionsList(path);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Left turn");
+		solution.add("Sharp left turn");
 		solution.add("Right turn");
 		solution.add("Right turn");
-		solution.add("Right turn");
+		solution.add("Sharp right turn");
+		solution.add("Continue straight until you've have reached your destination");
+		assertEquals(solution, testDirections);
+	}
+	
+	@Test
+	public void directionTest4()
+	{
+		List<Node> path = new ArrayList<Node>();
+		Node n1 = new Node(0, 0, "Node 1");
+		Node n2 = new Node(0, 3, "Node 2");
+		Node n3 = new Node(2, 5, "Node 3");
+		Node n4 = new Node(2, 3, "Node 4");
+		Node n5 = new Node(4, 0, "Node 5");
+		Node n6 = new Node(4, 3, "Node 6");
+		path.add(n1);
+		path.add(n2);
+		path.add(n3);
+		path.add(n4);
+		path.add(n5);
+		path.add(n6);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
+		System.out.println("Path and Directions:");
+		System.out.println(path);
+		System.out.println(testDirections);
+		List<String> solution = new ArrayList<String>();
+		solution.add("Go Straight");
+		solution.add("Slight right turn");
+		solution.add("Sharp right turn");
+		solution.add("Slight left turn");
+		solution.add("Sharp left turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
