@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,13 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
+import javax.swing.JTextArea;
+import java.awt.SystemColor;
+import javax.swing.DropMode;
+import javax.swing.JScrollBar;
 
 public class Window {
 
@@ -47,7 +54,9 @@ public class Window {
 	private JTextField txtEndX;
 	private JTextField txtEndY;
 	private String path;
+	private LinePanel linePanel;
 	private List<Node> nodeList = new ArrayList<Node>();
+	private JScrollPane scroll;
 
 	/**
 	 * Launch the application.
@@ -78,23 +87,24 @@ public class Window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setResizable(false);
+		frame.setBounds(100, 50, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.getContentPane().setLayout(null);
 
-		JLabel picLabel = new JLabel("");
-		picLabel.setBackground(Color.GRAY);
-		picLabel.setBounds(0, 63, 434, 199);
-		frame.getContentPane().add(picLabel);
-
+		linePanel = new LinePanel();
+		linePanel.setBounds(0, 63, 444, 208);
+		frame.getContentPane().add(linePanel);
+		
 		JButton btnLoadMap = new JButton("Load Map");
 		btnLoadMap.setBounds(12, 5, 94, 25);
 		btnLoadMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
+				
+				
 				int returnValue = fileChooser.showOpenDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
@@ -104,33 +114,37 @@ public class Window {
 						img = ImageIO.read(new File(Paths.get(path+"map.png").toString()));
 						System.out.println(path);
 						//contentPane.add(lblMap);
-						frame.setSize(img.getWidth()+16,img.getHeight()+101);
+						frame.setSize(img.getWidth()+8,img.getHeight()+93);
 
 						/*ImagePanel imgPanel = new ImagePanel(img);
 						imgPanel.setBounds(0, 63, 434, 199);
 						frame.getContentPane().add(imgPanel);
 						frame.setVisible(true);*/
-						picLabel.setIcon(new ImageIcon(img));
-						picLabel.setSize(img.getWidth(),img.getHeight());
-						frame.getContentPane().add(picLabel);
+						//picLabel.setIcon(new ImageIcon(img));
+						//picLabel.setSize(img.getWidth(),img.getHeight());
+						//frame.getContentPane().add(picLabel);
+						linePanel.addImage(img);
+						//linePanel.addPoint(100, 100);
+						//linePanel.addPoint(150, 100);
+						linePanel.repaint();
 
 					} catch (IOException ex) {
 
 					}
 					
-					nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
-					main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
+					//nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
+					//main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
 					
 				}
 			}
 		});
 		frame.getContentPane().add(btnLoadMap);
 		
-		LinePanel linePanel = new LinePanel();
-		linePanel.setBounds(0, 63, 434, 199);
-		frame.getContentPane().add(linePanel);
 
-		frame.getContentPane().add(txtStartX);
+		//linePanel.addPoint(100, 100);
+		//linePanel.addPoint(150, 100);
+
+		//frame.getContentPane().add(txtStartX);
 		
 		txtStartX = new JTextField();
 		txtStartX.setBounds(111, 6, 116, 22);
@@ -174,7 +188,13 @@ public class Window {
 	        		 {
 	        			 Node startNode = main_runner.findNodeByXY(nodeList, startX, startY);
 	        			 Node endNode = main_runner.findNodeByXY(nodeList, endX, endY);
-	        			 main_runner.getPathFromNode(startNode, endNode);
+	        			 List<Node> nodes = main_runner.getPathFromNode(startNode, endNode);
+	        			 Iterator<Node> nodePath = nodes.iterator();
+	        			 Node nodeHolder;
+	        			 for(int i = 0; i < nodes.size(); i++) {
+	        				 nodeHolder = nodePath.next();
+	        				 linePanel.addPoint(nodeHolder.xPos, nodeHolder.yPos);
+	        			 }
 	        			 System.out.println("A* Complete");
 	        		 }
 	        	 }
@@ -196,10 +216,6 @@ public class Window {
 		txtEndY.setText("End Y");
 		txtEndY.setColumns(10);
 		frame.getContentPane().add(txtEndY);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(334, 46, 0, 0);
-		frame.getContentPane().add(label);
 		
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.setBounds(360, 5, 65, 25);
