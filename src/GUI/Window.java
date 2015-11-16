@@ -45,6 +45,7 @@ public class Window {
 	private JTextField txtEndX;
 	private JTextField txtEndY;
 	private String path;
+	private List<Node> nodeList = new ArrayList<Node>();
 
 	/**
 	 * Launch the application.
@@ -124,13 +125,41 @@ public class Window {
 		JButton button = new JButton("Run");
 		button.setBounds(360, 34, 55, 25);
 		frame.getContentPane().add(button);
-		
 		button.addActionListener(new ActionListener() {
-	         public void actionPerformed(ActionEvent e) {
-	        	String nodePath = "src/res/Alonso_Node_Map.csv";
-	     		String edgePath = "src/res/Alonso_Edge_Map.csv";
-	     		List<Node> map = main_runner.readMap(nodePath, edgePath);
-	     		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1));
+	         public void actionPerformed(ActionEvent ae) {
+	        	 boolean goodToGo = true;
+	        	 int startX = 0;
+	        	 int startY = 0;
+	        	 int endX = 0;
+	        	 int endY = 0;
+	        	 // Try parsing int values from the coordinate text fields
+	        	 try {
+	        		 startX = Integer.parseInt(txtStartX.getText());
+	        		 startY = Integer.parseInt(txtStartY.getText());
+	        		 endX = Integer.parseInt(txtEndX.getText());
+	        		 endY = Integer.parseInt(txtEndY.getText());
+	        	 }
+	        	 catch (NumberFormatException e){
+	        		 goodToGo = false;
+	        	 }
+	        	 if (goodToGo)
+	        	 {
+	        		 if (nodeList.isEmpty())
+	        		 {
+	 					System.out.println("Must Load a Map First");
+	        		 }
+	        		 else
+	        		 {
+	        			 Node startNode = main_runner.findNodeByXY(nodeList, startX, startY);
+	        			 Node endNode = main_runner.findNodeByXY(nodeList, endX, endY);
+	        			 main_runner.getPathFromNode(startNode, endNode);
+	        			 System.out.println("A* Complete");
+	        		 }
+	        	 }
+	        	 else
+	        	 {
+	        		 System.out.println("Must Enter Valid Start/End Node Coordinates");
+	        	 }
 	          }          
 	       });
 		
@@ -153,7 +182,39 @@ public class Window {
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.setBounds(360, 5, 65, 25);
 		frame.getContentPane().add(btnSwap);
-		
+		btnSwap.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent ae) {
+	        	 String temp;
+	        	 temp = txtStartX.getText();
+	        	 if (!txtEndX.getText().equals("End X")) {
+	        		 txtStartX.setText(txtEndX.getText());
+	        	 }
+	        	 else {
+	        		 txtStartX.setText("Start X");
+	        	 }
+	        	 
+	        	 if (!temp.equals("Start X")) {
+	        		 txtEndX.setText(temp);
+	        	 }
+	        	 else {
+	        		 txtEndX.setText("End X");
+	        	 }
+	        	 
+	        	 temp = txtStartY.getText();
+	        	 if (!txtEndY.getText().equals("End Y")) {
+	        		 txtStartY.setText(txtEndY.getText());
+	        	 }
+	        	 else {
+	        		 txtStartY.setText("Start Y");
+	        	 }
+	        	 if (!temp.equals("Start Y")) {
+	        		 txtEndY.setText(temp);
+	        	 }
+	        	 else {
+	        		 txtEndY.setText("End Y");
+	        	 }
+	          }          
+	       });
 
 	}
 }
