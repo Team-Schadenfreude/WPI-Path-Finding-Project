@@ -3,12 +3,20 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
 import static org.junit.Assert.assertEquals;
@@ -17,19 +25,26 @@ import java.awt.BorderLayout;
 
 import AStar.Node;
 import AStar.main_runner;
+
+
 import java.awt.Canvas;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
-import javax.swing.JTextField;;
+import javax.swing.JTextField;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class Window {
 
 	private JFrame frame;
+	static BufferedImage img;
 	private JTextField txtStartX;
 	private JTextField txtStartY;
 	private JTextField txtEndX;
 	private JTextField txtEndY;
+	private String path;
 
 	/**
 	 * Launch the application.
@@ -62,15 +77,37 @@ public class Window {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Canvas canvas = new Canvas();
+		canvas.setBounds(0, 63, 434, 198);
+		frame.getContentPane().add(canvas);
 		
-		JButton btnNewButton = new JButton("Load Map");
-		btnNewButton.setBounds(12, 5, 94, 25);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton btnLoadMap = new JButton("Load Map");
+		btnLoadMap.setBounds(12, 5, 94, 25);
+		btnLoadMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+				int returnValue = fileChooser.showOpenDialog(null);
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fileChooser.getSelectedFile();
+					path = selectedFile.getAbsolutePath();
+					path = path+"\\";
+					try {
+						img = ImageIO.read(new File(Paths.get(path+"map.png").toString()));
+						System.out.println(path);
+						//contentPane.add(lblMap);
+						frame.setSize(img.getWidth(),img.getHeight()+63);
+						canvas.setSize(img.getWidth(),img.getHeight());
+					} catch (IOException ex) {
+						
+					}
+				}
 			}
 		});
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(btnLoadMap);
 		
 		txtStartX = new JTextField();
 		txtStartX.setBounds(111, 6, 116, 22);
@@ -113,13 +150,12 @@ public class Window {
 		label.setBounds(334, 46, 0, 0);
 		frame.getContentPane().add(label);
 		
-		Canvas canvas = new Canvas();
-		canvas.setBounds(339, 46, 0, 0);
-		frame.getContentPane().add(canvas);
-		
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.setBounds(360, 5, 65, 25);
 		frame.getContentPane().add(btnSwap);
+		
 
 	}
 }
+
+
