@@ -35,6 +35,8 @@ import javax.swing.JTextField;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import java.awt.Color;
 
 public class Window {
 
@@ -79,10 +81,13 @@ public class Window {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Canvas canvas = new Canvas();
-		canvas.setBounds(0, 63, 434, 198);
-		frame.getContentPane().add(canvas);
-		
+		frame.getContentPane().setLayout(null);
+
+		JLabel picLabel = new JLabel("");
+		picLabel.setBackground(Color.GRAY);
+		picLabel.setBounds(0, 63, 434, 199);
+		frame.getContentPane().add(picLabel);
+
 		JButton btnLoadMap = new JButton("Load Map");
 		btnLoadMap.setBounds(12, 5, 94, 25);
 		btnLoadMap.addActionListener(new ActionListener() {
@@ -100,14 +105,25 @@ public class Window {
 						System.out.println(path);
 						//contentPane.add(lblMap);
 						frame.setSize(img.getWidth(),img.getHeight()+63);
-						canvas.setSize(img.getWidth(),img.getHeight());
+
+						/*ImagePanel imgPanel = new ImagePanel(img);
+						imgPanel.setBounds(0, 63, 434, 199);
+						frame.getContentPane().add(imgPanel);
+						frame.setVisible(true);*/
+						picLabel.setIcon(new ImageIcon(img));
+						picLabel.setSize(img.getWidth(),img.getHeight());
+						frame.getContentPane().add(picLabel);
+
 					} catch (IOException ex) {
-						
+
 					}
+					
+					nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
+					main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
 				}
 			}
 		});
-		frame.getContentPane().setLayout(null);
+
 		frame.getContentPane().add(btnLoadMap);
 		
 		txtStartX = new JTextField();

@@ -32,7 +32,7 @@ public class main_runner {
 	      System.out.println(result.wasSuccessful());
 	      
 	}
-	private static List<Node> getNodesFromFile(String filePath)
+	public static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
 		BufferedReader br = null;
@@ -70,7 +70,7 @@ public class main_runner {
 		}
 		return nodeList;
 	}
-	private static void connectEdgesFromFile(List<Node> nodeList, String filePath)
+	public static void connectEdgesFromFile(List<Node> nodeList, String filePath)
 	{
 		BufferedReader br = null;
 		String line = "";
@@ -122,7 +122,7 @@ public class main_runner {
 			}
 		}
 	}
-	private static Node findNodeByXY(List<Node> nodeList, int x, int y)//Want to change this to throwing an exception when the node is not found
+	public static Node findNodeByXY(List<Node> nodeList, int x, int y)//Want to change this to throwing an exception when the node is not found
 	{
 		for(Node n : nodeList){
 			if(n.xPos == x && n.yPos == y)
