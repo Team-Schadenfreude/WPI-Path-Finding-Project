@@ -18,7 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-public class main_runner {
+public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
@@ -30,9 +30,7 @@ public class main_runner {
 	         System.out.println(failure.toString());
 	      }
 	      System.out.println(result.wasSuccessful());
-	      
 	}
-	
 	private static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
