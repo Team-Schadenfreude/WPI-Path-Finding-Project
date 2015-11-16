@@ -13,7 +13,7 @@ public class NodeList {
 		return nodes;
 	}
 
-	// right now very inefficient. We could use some sorting algorithm...
+	
 	public boolean addNode(String s, Node n) {
 		return (nodes.put(s,n)==n);		
 
