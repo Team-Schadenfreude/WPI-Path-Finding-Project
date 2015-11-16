@@ -30,26 +30,6 @@ public class main_runner {
 	         System.out.println(failure.toString());
 	      }
 	      System.out.println(result.wasSuccessful());
-	      
-<<<<<<< HEAD
-=======
-//	    Scanner reader = new Scanner(System.in);
-//		System.out.println("Enter your start location: ");
-//		String startLoc = reader.next();
-//		System.out.println("Enter your destinationn: ");
-//		String dest = reader.next();
-//		reader.close();
-		String nodePath = "src/res/BGreenlaw_Node_Map_2.csv";
-		String edgePath = "src/res/BGreenlaw_Edge_Map_2.csv";
-		map = readMap(nodePath, edgePath);
-		//getPathFromString(startLoc, dest);
-		System.out.println(map);
-		System.out.println(map.get(1));
-		System.out.println(map.get(6));
-		List<Node> path = getPathFromNode(map.get(1), map.get(6));
-		System.out.println("Solution");
-		System.out.println(path);
->>>>>>> 63bca0666583b4e031fee584ed75b016d185f6b0
 	}
 	private static List<Node> getNodesFromFile(String filePath)
 	{
