@@ -18,7 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-public class main_runner {
+public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
