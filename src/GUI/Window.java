@@ -104,7 +104,7 @@ public class Window {
 						img = ImageIO.read(new File(Paths.get(path+"map.png").toString()));
 						System.out.println(path);
 						//contentPane.add(lblMap);
-						frame.setSize(img.getWidth(),img.getHeight()+63);
+						frame.setSize(img.getWidth()+16,img.getHeight()+101);
 
 						/*ImagePanel imgPanel = new ImagePanel(img);
 						imgPanel.setBounds(0, 63, 434, 199);
@@ -120,11 +120,17 @@ public class Window {
 					
 					nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
 					main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
+					
 				}
 			}
 		});
-
 		frame.getContentPane().add(btnLoadMap);
+		
+		LinePanel linePanel = new LinePanel();
+		linePanel.setBounds(0, 63, 434, 199);
+		frame.getContentPane().add(linePanel);
+
+		frame.getContentPane().add(txtStartX);
 		
 		txtStartX = new JTextField();
 		txtStartX.setBounds(111, 6, 116, 22);
