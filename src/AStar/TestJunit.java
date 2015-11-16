@@ -407,9 +407,9 @@ public class TestJunit {
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = Main.getDirectionsList(path);
-		System.out.println("Path and Directions:");
-		System.out.println(path);
-		System.out.println(testDirections);
+//		System.out.println("Path and Directions:");
+//		System.out.println(path);
+//		System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
 		solution.add("Slight right turn");
