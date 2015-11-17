@@ -9,41 +9,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
-
-import static org.junit.Assert.assertEquals;
-
-import java.awt.BorderLayout;
-
 import AStar.Node;
 import AStar.Main;
-
-
-import java.awt.Canvas;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import java.awt.Color;
-import javax.swing.JTextArea;
-import java.awt.SystemColor;
-import javax.swing.DropMode;
-import javax.swing.JScrollBar;
+
 
 public class Window {
 
@@ -56,8 +33,6 @@ public class Window {
 	private String path;
 	private LinePanel linePanel;
 	private List<Node> nodeList = new ArrayList<Node>();
-	private Main main = new Main();
-	private JScrollPane scroll;
 	private int xScale = 1;
 	private int yScale = 1;
 
