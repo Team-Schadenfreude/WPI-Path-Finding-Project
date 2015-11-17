@@ -17,6 +17,8 @@ public class LinePanel extends JPanel {
 	private int[] xPoints;
 	private int[] yPoints;
 	private int nPoints;
+	private int xScale = 1;
+	private int yScale = 1;
 	private BufferedImage img;
 	private boolean imageLoaded;
 	
@@ -34,9 +36,14 @@ public class LinePanel extends JPanel {
 	}
 	
 	public void addPoint(int x, int y) {
-		this.xPoints[nPoints] = x;
-		this.yPoints[nPoints] = y;
+		this.xPoints[nPoints] = x * this.xScale;
+		this.yPoints[nPoints] = y * this.yScale;
 		this.nPoints++;
+	}
+	public void setScale(int xScale, int yScale)
+	{
+		this.xScale = xScale;
+		this.yScale = yScale;
 	}
 
     @Override

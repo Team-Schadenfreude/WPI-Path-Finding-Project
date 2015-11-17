@@ -138,6 +138,7 @@ public class Window {
 					List<Integer> scales = Main.getScaleFromFile(path + "mapScale.csv");
 					xScale = scales.get(0);
 					yScale = scales.get(1);
+					linePanel.setScale(xScale, yScale);
 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 				}
 			}
