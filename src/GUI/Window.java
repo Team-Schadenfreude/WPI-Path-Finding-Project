@@ -26,7 +26,7 @@ import java.awt.BorderLayout;
 
 import AStar.Node;
 import AStar.Main;
-
+import GUI.DirectionsBox;
 
 import java.awt.Canvas;
 import java.awt.GridLayout;
@@ -204,6 +204,8 @@ public class Window {
 	        			 {
 	        				 System.out.println(s);
 	        			 }
+	        			 DirectionsBox directionWindow = new DirectionsBox(directions); 
+	        			 
 	        		 }
 	        	 }
 	        	 else
