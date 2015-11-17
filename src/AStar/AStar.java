@@ -116,8 +116,7 @@ public class AStar{
 			//System.out.println(current.neighbors);
 			if(current.nodeName.equals(end.nodeName)){
 				found = true;
-				//System.out.println(queue);
-				//System.out.println("Found path");
+				break;
 			}
 			//here we are checking every edge of every neighboring node for the node we are searching for
 			
