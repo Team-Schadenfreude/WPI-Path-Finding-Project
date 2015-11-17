@@ -139,6 +139,7 @@ public class Window {
 					xScale = scales.get(0);
 					yScale = scales.get(1);
 					linePanel.setScale(xScale, yScale);
+
 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 				}
 			}
@@ -211,6 +212,8 @@ public class Window {
 	        			 {
 	        				 System.out.println(s);
 	        			 }
+	        			 DirectionsBox directionWindow = new DirectionsBox(directions); 
+	        			 
 	        		 }
 	        	 }
 	        	 else
