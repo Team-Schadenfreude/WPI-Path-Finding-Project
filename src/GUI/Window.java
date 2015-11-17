@@ -33,6 +33,8 @@ public class Window {
 	private String path;
 	private LinePanel linePanel;
 	private List<Node> nodeList = new ArrayList<Node>();
+	List<String> listOfNodes = new ArrayList<String>();
+
 	private int xScale = 1;
 	private int yScale = 1;
 	static boolean shouldDraw = false;
@@ -55,7 +57,7 @@ public class Window {
 			}
 		});
 	}
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -77,15 +79,15 @@ public class Window {
 		linePanel = new LinePanel();
 		linePanel.setBounds(0, 63, 444, 208);
 		frame.getContentPane().add(linePanel);
-		
+
 		JButton btnLoadMap = new JButton("Load Map");
 		btnLoadMap.setBounds(12, 5, 94, 25);
 		btnLoadMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				
-				
+
+
 				int returnValue = fileChooser.showOpenDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
@@ -107,153 +109,172 @@ public class Window {
 					linePanel.setScale(xScale, yScale);
 
 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
+
+					for(Node n: nodeList)
+					{
+						String nodeDialog = n.nodeName+", "+n.xPos+", "+n.yPos;
+						listOfNodes.add(nodeDialog);
+
+					}
+					NodeBox nodeBox = new NodeBox(listOfNodes);
+
+
+
 					linePanel.repaint();
 				}
 			}
 		});
 		frame.getContentPane().add(btnLoadMap);
-		
-		
+
+
 		txtStartX = new JTextField();
 		txtStartX.setBounds(111, 6, 116, 22);
 		txtStartX.setText("Start X");
 		frame.getContentPane().add(txtStartX);
 		txtStartX.setColumns(10);
-		
+
 		txtStartY = new JTextField();
 		txtStartY.setBounds(232, 6, 116, 22);
 		txtStartY.setText("Start Y");
 		txtStartY.setColumns(10);
 		frame.getContentPane().add(txtStartY);
-		
+
 		JButton button = new JButton("Run");
 		button.setBounds(360, 34, 65, 25);
 		frame.getContentPane().add(button);
+
+
+
+
+
 		button.addActionListener(new ActionListener() {
-	         public void actionPerformed(ActionEvent ae) {
-	        	 boolean validInputs = true;
-	        	 int startX = 0;
-	        	 int startY = 0;
-	        	 int endX = 0;
-	        	 int endY = 0;
-	        	 // Try parsing int values from the coordinate text fields
-	        	 try {
-	        		 startX = Integer.parseInt(txtStartX.getText());
-	        		 startY = Integer.parseInt(txtStartY.getText());
-	        		 endX = Integer.parseInt(txtEndX.getText());
-	        		 endY = Integer.parseInt(txtEndY.getText());
-	        	 }
-	        	 catch (NumberFormatException e){
-	        		 validInputs = false;
-	        	 }
-	        	 if (validInputs)
-	        	 {
-	        		 if (nodeList.isEmpty())
-	        		 {
-	 					System.out.println("Must Load a Map First");
-	        		 }
-	        		 else
-	        		 {
-	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
-	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
-	        			 if(startNode == null || endNode == null)
-	        			 {
-	        				 System.out.println("Those Nodes do not exist");
-	        			 }
-	        			 else
-	        			 {
-	        				 System.out.println("*************");
-	        				 System.out.println(startNode);
-	        				 System.out.println(endNode);
-	        				 System.out.println("*************");
+			public void actionPerformed(ActionEvent ae) {
+				boolean validInputs = true;
+				int startX = 0;
+				int startY = 0;
+				int endX = 0;
+				int endY = 0;
+				// Try parsing int values from the coordinate text fields
+				try {
+					startX = Integer.parseInt(txtStartX.getText());
+					startY = Integer.parseInt(txtStartY.getText());
+					endX = Integer.parseInt(txtEndX.getText());
+					endY = Integer.parseInt(txtEndY.getText());
+				}
+				catch (NumberFormatException e){
+					validInputs = false;
+				}
+				if (validInputs)
+				{
+					if (nodeList.isEmpty())
+					{
+						System.out.println("Must Load a Map First");
+					}
+					else
+					{
 
-	        				 nodes = Main.getPathFromNode(startNode, endNode, nodeList);
-		        			 if (nodes.isEmpty())
-		        			 {
-		        				 System.out.println("There is no path");
-		        			 }
-		        			 else
-		        			 {
-		        				 
-			        			 for(int i = 0; i < nodes.size(); i++) {
-			        				 linePanel.addPoint(nodes.get(i).xPos, nodes.get(i).yPos);
-			        			 }
-			        			 linePanel.repaint();
-			        			 System.out.println("A* Complete");
-			        			 List<String> directions = Main.getDirectionsList(nodes);
-			        			 for(Node n: nodes)
-			        			 {
-			        				 System.out.println(n.xPos + ", " + n.yPos);
-			        			 }
-			        			 for(String s: directions)
-			        			 {
-			        				 System.out.println(s);
-			        			 }
-			 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
+
+						Node startNode = Main.findNodeByXY(nodeList, startX, startY);
+						Node endNode = Main.findNodeByXY(nodeList, endX, endY);
+						if(startNode == null || endNode == null)
+						{
+							System.out.println("Those Nodes do not exist");
+						}
+						else
+						{
+							System.out.println("*************");
+							System.out.println(startNode);
+							System.out.println(endNode);
+							System.out.println("*************");
+
+							nodes = Main.getPathFromNode(startNode, endNode, nodeList);
+							if (nodes.isEmpty())
+							{
+								System.out.println("There is no path");
+							}
+							else
+							{
+
+								for(int i = 0; i < nodes.size(); i++) {
+									linePanel.addPoint(nodes.get(i).xPos, nodes.get(i).yPos);
+								}
+								linePanel.repaint();
+								System.out.println("A* Complete");
+								List<String> directions = Main.getDirectionsList(nodes);
+								for(Node n: nodes)
+								{
+									System.out.println(n.xPos + ", " + n.yPos);
+
+
+								}
+								for(String s: directions)
+								{
+									System.out.println(s);
+								}
+								nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 								shouldDraw = true;
+								DirectionsBox directionWindow = new DirectionsBox(directions);
+								linePanel.repaint();
+							}
+						}
 
-			        			 DirectionsBox directionWindow = new DirectionsBox(directions);
-			        			 linePanel.repaint();
-		        			 }
-	        			 }
-	        			 
-	        		 }
-	        	 }
-	        	 else
-	        	 {
-	        		 System.out.println("Must Enter Valid Start/End Node Coordinates");
-	        	 }
-	          }          
-	       });
-		
+					}
+				}
+				else
+				{
+					System.out.println("Must Enter Valid Start/End Node Coordinates");
+				}
+			}          
+		});
+
 		txtEndX = new JTextField();
 		txtEndX.setBounds(111, 35, 116, 22);
 		txtEndX.setText("End X");
 		txtEndX.setColumns(10);
 		frame.getContentPane().add(txtEndX);
-		
+
 		txtEndY = new JTextField();
 		txtEndY.setBounds(232, 35, 116, 22);
 		txtEndY.setText("End Y");
 		txtEndY.setColumns(10);
 		frame.getContentPane().add(txtEndY);
-		
+
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.setBounds(360, 5, 65, 25);
 		frame.getContentPane().add(btnSwap);
 		btnSwap.addActionListener(new ActionListener() {
-	         public void actionPerformed(ActionEvent ae) {
-	        	 String temp;
-	        	 temp = txtStartX.getText();
-	        	 if (!txtEndX.getText().equals("End X")) {
-	        		 txtStartX.setText(txtEndX.getText());
-	        	 }
-	        	 else {
-	        		 txtStartX.setText("Start X");
-	        	 }
-	        	 
-	        	 if (!temp.equals("Start X")) {
-	        		 txtEndX.setText(temp);
-	        	 }
-	        	 else {
-	        		 txtEndX.setText("End X");
-	        	 }
-	        	 
-	        	 temp = txtStartY.getText();
-	        	 if (!txtEndY.getText().equals("End Y")) {
-	        		 txtStartY.setText(txtEndY.getText());
-	        	 }
-	        	 else {
-	        		 txtStartY.setText("Start Y");
-	        	 }
-	        	 if (!temp.equals("Start Y")) {
-	        		 txtEndY.setText(temp);
-	        	 }
-	        	 else {
-	        		 txtEndY.setText("End Y");
-	        	 }
-	          }          
-	       });
+			public void actionPerformed(ActionEvent ae) {
+				String temp;
+				temp = txtStartX.getText();
+				if (!txtEndX.getText().equals("End X")) {
+					txtStartX.setText(txtEndX.getText());
+				}
+				else {
+					txtStartX.setText("Start X");
+				}
+
+				if (!temp.equals("Start X")) {
+					txtEndX.setText(temp);
+				}
+				else {
+					txtEndX.setText("End X");
+				}
+
+				temp = txtStartY.getText();
+				if (!txtEndY.getText().equals("End Y")) {
+					txtStartY.setText(txtEndY.getText());
+				}
+				else {
+					txtStartY.setText("Start Y");
+				}
+				if (!temp.equals("Start Y")) {
+					txtEndY.setText(temp);
+				}
+				else {
+					txtEndY.setText("End Y");
+				}
+			}          
+		});
 
 	}
 }
