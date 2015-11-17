@@ -234,7 +234,9 @@ public class Main {
 			double distance_x = ((double)(n2.xPos - n1.xPos) * .18) * 12;
 			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
 			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
-			direction = direction + " walk " + Double.toString(distance);
+			String dist = String.format("%.2f", distance);
+					
+			direction = direction + " walk " + dist + " ft";
 //			if (direction.equals("Go Straight") && direction.equals(prevDirection))
 //			{
 //				//Don't repeat straight directions
@@ -242,7 +244,7 @@ public class Main {
 //			else
 //			{
 				directions.add(direction);
-			//}
+		//}
 			prevAngle = newAngle;
 			prevDirection = direction;
 		}
