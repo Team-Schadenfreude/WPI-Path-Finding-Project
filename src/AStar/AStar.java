@@ -46,12 +46,14 @@ public class AStar{
 		//get the nodes in sequence from the end to the start
 		for(Node node = end; node!=null; node = node.parent){
 			path.add(node);
+			System.out.println(node);
 		}
 		if (path.size() <= 1)//If there is not path
 		{
 			return new ArrayList<Node>(); //Return empty list
 		}
 		//reverse the path as it goes from end to finish and we want start to finish
+		System.out.println("COLLECTIONS REVERSING");
 		Collections.reverse(path);
 		return path;
 	}
