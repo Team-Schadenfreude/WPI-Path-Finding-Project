@@ -26,7 +26,7 @@ import java.awt.BorderLayout;
 
 import AStar.Node;
 import AStar.Main;
-import GUI.DirectionsBox;
+
 
 import java.awt.Canvas;
 import java.awt.GridLayout;
@@ -186,7 +186,7 @@ public class Window {
 	        		 {
 	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
 	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
-	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode);
+	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
 	        			 Iterator<Node> nodePath = nodes.iterator();
 	        			 Node nodeHolder;
 	        			 for(int i = 0; i < nodes.size(); i++) {

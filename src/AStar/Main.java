@@ -22,15 +22,14 @@ public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
-	private static List<Node> map = new ArrayList<Node>();
 	
-	public static void main(String[] args){
-		Result result = JUnitCore.runClasses(TestJunit.class);
-	      for (Failure failure : result.getFailures()) {
-	         System.out.println(failure.toString());
-	      }
-	      System.out.println(result.wasSuccessful());
-	}
+//	public static void main(String[] args){
+//		Result result = JUnitCore.runClasses(TestJunit.class);
+//	      for (Failure failure : result.getFailures()) {
+//	         System.out.println(failure.toString());
+//	      }
+//	      System.out.println(result.wasSuccessful());
+//	}
 	private static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
@@ -121,6 +120,43 @@ public class Main {
 			}
 		}
 	}
+	public static List<Integer> getScaleFromFile(String filePath)
+	{
+		List<Integer> scaleList = new ArrayList<Integer>();
+		BufferedReader br = null;
+		String line = "";
+		String delimiter = ",";
+		try {
+
+			br = new BufferedReader(new FileReader(filePath));
+			while ((line = br.readLine()) != null) {
+
+			        // use comma as separator
+				String[] scaleData = line.split(delimiter);
+				System.out.println("ScaleSize");
+				System.out.println(scaleData);
+				String xScale_char = scaleData[0];
+				String yScale_char = scaleData[1];
+				int xScale = Integer.parseInt(xScale_char);
+				int yScale = Integer.parseInt(yScale_char);
+				scaleList.add(xScale);
+				scaleList.add(yScale);
+			}
+			System.out.println("Scale");
+			System.out.println(scaleList);
+
+		} 
+		catch (FileNotFoundException e) {e.printStackTrace();} 
+		catch (IOException e) {e.printStackTrace();} 
+		finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {e.printStackTrace();}
+			}
+		}
+		return scaleList;
+	}
 	public static Node findNodeByXY(List<Node> nodeList, int x, int y)//Want to change this to throwing an exception when the node is not found
 	{
 		for(Node n : nodeList){
@@ -138,17 +174,17 @@ public class Main {
 		return nodeList;
 	}
 	//Method to find the path given a start node and an end node.
-	public static List<Node> getPathFromNode(Node startNode, Node endNode)
+	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
 	{
 		AStar astar = new AStar(map, defaultSettings);
 		return astar.findPath(startNode, endNode);
 	}
 	//Method to find path when given a string 
-	public static List<Node> getPathFromString(String startName, String destName)
+	public static List<Node> getPathFromString(String startName, String destName, List<Node> map)
 	{
 		Node startNode = nlist.findNode(startName);
 		Node destNode = nlist.findNode(destName);
-		return getPathFromNode(startNode, destNode);
+		return getPathFromNode(startNode, destNode, map);
 		//drawPath(path);
 	}
 	
