@@ -133,6 +133,8 @@ public class Main {
 
 			        // use comma as separator
 				String[] scaleData = line.split(delimiter);
+				System.out.println("ScaleSize");
+				System.out.println(scaleData);
 				String xScale_char = scaleData[0];
 				String yScale_char = scaleData[1];
 				int xScale = Integer.parseInt(xScale_char);
@@ -140,6 +142,8 @@ public class Main {
 				scaleList.add(xScale);
 				scaleList.add(yScale);
 			}
+			System.out.println("Scale");
+			System.out.println(scaleList);
 
 		} 
 		catch (FileNotFoundException e) {e.printStackTrace();} 
