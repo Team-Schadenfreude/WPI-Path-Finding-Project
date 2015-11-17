@@ -32,7 +32,7 @@ public class main_runner {
 	      System.out.println(result.wasSuccessful());
 	      
 	}
-	public static List<Node> getNodesFromFile(String filePath)
+	private static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
 		BufferedReader br = null;
@@ -70,7 +70,7 @@ public class main_runner {
 		}
 		return nodeList;
 	}
-	public static void connectEdgesFromFile(List<Node> nodeList, String filePath)
+	private static void connectEdgesFromFile(List<Node> nodeList, String filePath)
 	{
 		BufferedReader br = null;
 		String line = "";
@@ -139,7 +139,7 @@ public class main_runner {
 		return nodeList;
 	}
 	//Method to find the path given a start node and an end node.
-	public static List<Node> getPathFromNode(Node startNode, Node endNode)
+	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
 	{
 		AStar astar = new AStar(map, defaultSettings);
 		return astar.findPath(startNode, endNode);
@@ -149,7 +149,7 @@ public class main_runner {
 	{
 		Node startNode = nlist.findNode(startName);
 		Node destNode = nlist.findNode(destName);
-		return getPathFromNode(startNode, destNode);
+		return getPathFromNode(startNode, destNode, map);
 		//drawPath(path);
 	}
 	

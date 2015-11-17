@@ -230,7 +230,7 @@ public class TestJunit {
 		String nodePath = "src/res/Alonso_Node_Map.csv";
 		String edgePath = "src/res/Alonso_Edge_Map.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1));
+		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1), map);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(3));
@@ -245,7 +245,7 @@ public class TestJunit {
 		String nodePath = "src/res/Node_Map_MARS.csv";
 		String edgePath = "src/res/Edge_Map_MARS.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(6), map.get(1));
+		List<Node> path = main_runner.getPathFromNode(map.get(6), map.get(1), map);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(6));
@@ -261,7 +261,7 @@ public class TestJunit {
 		String nodePath = "src/res/Node_Map_TSL.csv";
 		String edgePath = "src/res/Edge_Map_TSL.csv";
 		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(0), map.get(4));
+		List<Node> path = main_runner.getPathFromNode(map.get(0), map.get(4), map);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(0));

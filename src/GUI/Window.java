@@ -48,6 +48,8 @@ public class Window {
 	private JTextField txtEndY;
 	private String path;
 	private List<Node> nodeList = new ArrayList<Node>();
+	private List<Node> AStarPath = new ArrayList<Node>();
+	private main_runner main = new main_runner();
 
 	/**
 	 * Launch the application.
@@ -117,9 +119,7 @@ public class Window {
 					} catch (IOException ex) {
 
 					}
-					
-					nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
-					main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
+					nodeList = main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 				}
 			}
 		});
@@ -168,8 +168,18 @@ public class Window {
 	        		 {
 	        			 Node startNode = main_runner.findNodeByXY(nodeList, startX, startY);
 	        			 Node endNode = main_runner.findNodeByXY(nodeList, endX, endY);
-	        			 main_runner.getPathFromNode(startNode, endNode);
+	        			 AStarPath = main_runner.getPathFromNode(startNode, endNode, nodeList);
 	        			 System.out.println("A* Complete");
+	        			 List<String> directions = main_runner.getDirectionsList(AStarPath);
+	        			 System.out.println(AStarPath.size());
+	        			 for(Node n: AStarPath)
+	        			 {
+	        				 System.out.println(n.xPos + ", " + n.yPos);
+	        			 }
+	        			 for(String s: directions)
+	        			 {
+	        				 System.out.println(s);
+	        			 }
 	        		 }
 	        	 }
 	        	 else
