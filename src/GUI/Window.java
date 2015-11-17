@@ -105,16 +105,12 @@ public class Window {
 					linePanel.setScale(xScale, yScale);
 
 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
+					linePanel.repaint();
 				}
 			}
 		});
 		frame.getContentPane().add(btnLoadMap);
 		
-
-		//linePanel.addPoint(100, 100);
-		//linePanel.addPoint(150, 100);
-
-		//frame.getContentPane().add(txtStartX);
 		
 		txtStartX = new JTextField();
 		txtStartX.setBounds(111, 6, 116, 22);
@@ -156,9 +152,7 @@ public class Window {
 	        		 }
 	        		 else
 	        		 {
-	        			 System.out.println("before Start");
 	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
-	        			 System.out.println("before End");
 	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
 	        			 if(startNode == null || endNode == null)
 	        			 {
@@ -172,8 +166,6 @@ public class Window {
 	        				 System.out.println("*************");
 
 	        				 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
-		        			 System.out.println("Node List");
-		        			 System.out.println(nodes);
 		        			 if (nodes.isEmpty())
 		        			 {
 		        				 System.out.println("There is no path");
@@ -187,7 +179,6 @@ public class Window {
 			        			 linePanel.repaint();
 			        			 System.out.println("A* Complete");
 			        			 List<String> directions = Main.getDirectionsList(nodes);
-			        			 System.out.println(nodes.size());
 			        			 for(Node n: nodes)
 			        			 {
 			        				 System.out.println(n.xPos + ", " + n.yPos);
