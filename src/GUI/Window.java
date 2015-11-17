@@ -167,7 +167,7 @@ public class Window {
 		frame.getContentPane().add(button);
 		button.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent ae) {
-	        	 boolean goodToGo = true;
+	        	 boolean validInputs = true;
 	        	 int startX = 0;
 	        	 int startY = 0;
 	        	 int endX = 0;
@@ -180,9 +180,9 @@ public class Window {
 	        		 endY = Integer.parseInt(txtEndY.getText());
 	        	 }
 	        	 catch (NumberFormatException e){
-	        		 goodToGo = false;
+	        		 validInputs = false;
 	        	 }
-	        	 if (goodToGo)
+	        	 if (validInputs)
 	        	 {
 	        		 if (nodeList.isEmpty())
 	        		 {
