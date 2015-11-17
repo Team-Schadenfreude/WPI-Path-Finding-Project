@@ -330,9 +330,10 @@ public class TestJunit {
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight");
-		solution.add("Left turn");
+		solution.add("Go Straight walk 4.68 ft");
+		solution.add("Left turn walk 6.48 ft");
 		solution.add("Continue straight until you've have reached your destination");
+		
 		assertEquals(solution, testDirections);
 	}
 	
@@ -352,9 +353,10 @@ public class TestJunit {
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight");
-		solution.add("Right turn");
+		solution.add("Go Straight walk 4.68 ft");
+		solution.add("Right turn walk 6.48 ft");
 		solution.add("Continue straight until you've have reached your destination");
+		
 		assertEquals(solution, testDirections);
 	}
 	
@@ -380,11 +382,12 @@ public class TestJunit {
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight");
-		solution.add("Sharp right turn");
-		solution.add("Left turn");
-		solution.add("Left turn");
-		solution.add("Sharp left turn");
+		
+		solution.add("Go Straight walk 6.24 ft");
+		solution.add("Sharp right turn walk 7.99 ft");
+		solution.add("Left turn walk 7.99 ft");
+		solution.add("Left turn walk 19.65 ft");
+		solution.add("Sharp left turn walk 6.24 ft");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
@@ -411,11 +414,11 @@ public class TestJunit {
 //		System.out.println(path);
 //		System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight");
-		solution.add("Slight left turn");
-		solution.add("Sharp left turn");
-		solution.add("Slight right turn");
-		solution.add("Sharp right turn");
+		solution.add("Go Straight walk 4.68 ft");
+		solution.add("Slight left turn walk 5.33 ft");
+		solution.add("Sharp left turn walk 3.12 ft");
+		solution.add("Slight right turn walk 6.37 ft");
+		solution.add("Sharp right turn walk 4.68 ft");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}

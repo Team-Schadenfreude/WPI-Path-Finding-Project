@@ -192,7 +192,7 @@ public class Window {
 			 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 								shouldDraw = true;
 
-			        			 DirectionsBox directionWindow = new DirectionsBox(directions);  
+			        			 DirectionsBox directionWindow = new DirectionsBox(directions);
 			        			 linePanel.repaint();
 		        			 }
 	        			 }
