@@ -35,6 +35,8 @@ public class Window {
 	private List<Node> nodeList = new ArrayList<Node>();
 	private int xScale = 1;
 	private int yScale = 1;
+	static boolean shouldDraw = false;
+	static List<Node> nodes;
 
 	/**
 	 * Launch the application.
@@ -165,7 +167,7 @@ public class Window {
 	        				 System.out.println(endNode);
 	        				 System.out.println("*************");
 
-	        				 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
+	        				 nodes = Main.getPathFromNode(startNode, endNode, nodeList);
 		        			 if (nodes.isEmpty())
 		        			 {
 		        				 System.out.println("There is no path");
@@ -188,6 +190,7 @@ public class Window {
 			        				 System.out.println(s);
 			        			 }
 			 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
+								shouldDraw = true;
 
 			        			 DirectionsBox directionWindow = new DirectionsBox(directions);  
 			        			 linePanel.repaint();
