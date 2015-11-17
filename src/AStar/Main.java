@@ -18,7 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-public class main_runner {
+public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
@@ -30,7 +30,6 @@ public class main_runner {
 	         System.out.println(failure.toString());
 	      }
 	      System.out.println(result.wasSuccessful());
-	      
 	}
 	private static List<Node> getNodesFromFile(String filePath)
 	{
@@ -139,7 +138,7 @@ public class main_runner {
 		return nodeList;
 	}
 	//Method to find the path given a start node and an end node.
-	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
+	public static List<Node> getPathFromNode(Node startNode, Node endNode)
 	{
 		AStar astar = new AStar(map, defaultSettings);
 		return astar.findPath(startNode, endNode);
@@ -149,7 +148,7 @@ public class main_runner {
 	{
 		Node startNode = nlist.findNode(startName);
 		Node destNode = nlist.findNode(destName);
-		return getPathFromNode(startNode, destNode, map);
+		return getPathFromNode(startNode, destNode);
 		//drawPath(path);
 	}
 	
@@ -214,19 +213,27 @@ public class main_runner {
 		}
 		else if (30 <= angle && angle < 60)
 		{
-			return "Slight left";
+			return "Slight left turn";
 		}
-		else if (60 <= angle && angle < 180)
+		else if (60 <= angle && angle < 120)
 		{
 			return "Left turn";
 		}
+		else if (120 < angle && angle <= 180)
+		{
+			return "Sharp left turn";
+		}
 		else if (-60 < angle && angle <= -30)
 		{
-			return "Slight right";
+			return "Slight right turn";
 		}
-		else if (-180 < angle && angle <= -60)
+		else if (-120 < angle && angle <= -60)
 		{
 			return "Right turn";
+		}
+		else if (-180 < angle && angle <= -120)
+		{
+			return "Sharp right turn";
 		}
 		else
 		{

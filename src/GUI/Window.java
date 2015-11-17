@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 import java.awt.BorderLayout;
 
 import AStar.Node;
-import AStar.main_runner;
+import AStar.Main;
 
 
 import java.awt.Canvas;
@@ -56,7 +56,7 @@ public class Window {
 	private String path;
 	private LinePanel linePanel;
 	private List<Node> nodeList = new ArrayList<Node>();
-	private main_runner main = new main_runner();
+	private Main main = new Main();
 	private JScrollPane scroll;
 
 	/**
@@ -132,10 +132,7 @@ public class Window {
 					} catch (IOException ex) {
 
 					}
-					nodeList = main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
-					
-					//nodeList = main_runner.getNodesFromFile(path + "mapNodes.csv");
-					//main_runner.connectEdgesFromFile(nodeList, path + "mapEdges.csv");
+					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 				}
 			}
 		});
@@ -187,9 +184,9 @@ public class Window {
 	        		 }
 	        		 else
 	        		 {
-	        			 Node startNode = main_runner.findNodeByXY(nodeList, startX, startY);
-	        			 Node endNode = main_runner.findNodeByXY(nodeList, endX, endY);
-	        			 List<Node> nodes = main_runner.getPathFromNode(startNode, endNode, nodeList);
+	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
+	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
+	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode);
 	        			 Iterator<Node> nodePath = nodes.iterator();
 	        			 Node nodeHolder;
 	        			 for(int i = 0; i < nodes.size(); i++) {
@@ -197,7 +194,7 @@ public class Window {
 	        				 linePanel.addPoint(nodeHolder.xPos, nodeHolder.yPos);
 	        			 }
 	        			 System.out.println("A* Complete");
-	        			 List<String> directions = main_runner.getDirectionsList(nodes);
+	        			 List<String> directions = Main.getDirectionsList(nodes);
 	        			 System.out.println(nodes.size());
 	        			 for(Node n: nodes)
 	        			 {

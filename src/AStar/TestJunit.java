@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import AStar.Settings;
 import AStar.AStar;
-import AStar.main_runner;
+import AStar.Main;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -229,8 +229,8 @@ public class TestJunit {
 	{
 		String nodePath = "src/res/Alonso_Node_Map.csv";
 		String edgePath = "src/res/Alonso_Edge_Map.csv";
-		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(3), map.get(1), map);
+		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> path = Main.getPathFromNode(map.get(3), map.get(1));
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(3));
@@ -244,8 +244,8 @@ public class TestJunit {
 	{
 		String nodePath = "src/res/Node_Map_MARS.csv";
 		String edgePath = "src/res/Edge_Map_MARS.csv";
-		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(6), map.get(1), map);
+		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> path = Main.getPathFromNode(map.get(6), map.get(1));
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(6));
@@ -260,8 +260,8 @@ public class TestJunit {
 	{
 		String nodePath = "src/res/Node_Map_TSL.csv";
 		String edgePath = "src/res/Edge_Map_TSL.csv";
-		List<Node> map = main_runner.readMap(nodePath, edgePath);
-		List<Node> path = main_runner.getPathFromNode(map.get(0), map.get(4), map);
+		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> path = Main.getPathFromNode(map.get(0), map.get(4));
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
 		bestPath.add(map.get(0));
@@ -279,7 +279,7 @@ public class TestJunit {
 	{
 		Node n1 = new Node(0, 0, "Node 1");
 		Node n2 = new Node(2, 2, "Node 2");
-		int testAngle = main_runner.getAngle(n1, n2);
+		int testAngle = Main.getAngle(n1, n2);
 		assertEquals(45, testAngle);
 	}
 	
@@ -288,7 +288,7 @@ public class TestJunit {
 	{
 		Node n1 = new Node(0, 0, "Node 1");
 		Node n2 = new Node(12, 22, "Node 2");
-		int testAngle = main_runner.getAngle(n1, n2);
+		int testAngle = Main.getAngle(n1, n2);
 		assertEquals(61, testAngle);
 	}
 	
@@ -297,7 +297,7 @@ public class TestJunit {
 	{
 		Node n1 = new Node(24, 5, "Node 1");
 		Node n2 = new Node(28, 25, "Node 2");
-		int testAngle = main_runner.getAngle(n1, n2);
+		int testAngle = Main.getAngle(n1, n2);
 		assertEquals(78, testAngle);
 	}
 	
@@ -306,7 +306,7 @@ public class TestJunit {
 	{
 		Node n1 = new Node(3, 5, "Node 1");
 		Node n2 = new Node(17, 10, "Node 2");
-		int testAngle = main_runner.getAngle(n1, n2);
+		int testAngle = Main.getAngle(n1, n2);
 		assertEquals(19, testAngle);
 	}
 	
@@ -325,7 +325,7 @@ public class TestJunit {
 		path.add(n2);
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
-		testDirections = main_runner.getDirectionsList(path);
+		testDirections = Main.getDirectionsList(path);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
@@ -346,11 +346,11 @@ public class TestJunit {
 		path.add(n1);
 		path.add(n2);
 		path.add(n3);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
-		List<String> testDirections = new ArrayList<String>();
-		testDirections = main_runner.getDirectionsList(path);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
 		solution.add("Left turn");
@@ -374,18 +374,48 @@ public class TestJunit {
 		path.add(n4);
 		path.add(n5);
 		path.add(n6);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
-		List<String> testDirections = new ArrayList<String>();
-		
-		testDirections = main_runner.getDirectionsList(path);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Left turn");
+		solution.add("Sharp left turn");
 		solution.add("Right turn");
 		solution.add("Right turn");
-		solution.add("Right turn");
+		solution.add("Sharp right turn");
+		solution.add("Continue straight until you've have reached your destination");
+		assertEquals(solution, testDirections);
+	}
+	
+	@Test
+	public void directionTest4()
+	{
+		List<Node> path = new ArrayList<Node>();
+		Node n1 = new Node(0, 0, "Node 1");
+		Node n2 = new Node(0, 3, "Node 2");
+		Node n3 = new Node(2, 5, "Node 3");
+		Node n4 = new Node(2, 3, "Node 4");
+		Node n5 = new Node(4, 0, "Node 5");
+		Node n6 = new Node(4, 3, "Node 6");
+		path.add(n1);
+		path.add(n2);
+		path.add(n3);
+		path.add(n4);
+		path.add(n5);
+		path.add(n6);
+		List<String> testDirections = new ArrayList<String>();
+		testDirections = Main.getDirectionsList(path);
+//		System.out.println("Path and Directions:");
+//		System.out.println(path);
+//		System.out.println(testDirections);
+		List<String> solution = new ArrayList<String>();
+		solution.add("Go Straight");
+		solution.add("Slight right turn");
+		solution.add("Sharp right turn");
+		solution.add("Slight left turn");
+		solution.add("Sharp left turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
