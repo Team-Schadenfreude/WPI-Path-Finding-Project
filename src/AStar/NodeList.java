@@ -16,20 +16,17 @@ public class NodeList {
 	// right now very inefficient. We could use some sorting algorithm...
 	public boolean addNode(String s, Node n) {
 		return (nodes.put(s,n)==n);		
-
 	}
 
 	public boolean deleteNode(String name) {
 		return (nodes.remove(name) != null);
-
 	}
 	
 	public Node findNode(String name){
 		return nodes.get(name);
 	}
 	
-	public Node findNode (int x, int y){
-			
+	public Node findNode (int x, int y){	
 		return null;
 	}
 
