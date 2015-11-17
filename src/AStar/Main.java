@@ -6,6 +6,11 @@ import AStar.Node;
 import AStar.Edge;
 import AStar.AStar;
 import java.util.List;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import AStar.NodeList;
