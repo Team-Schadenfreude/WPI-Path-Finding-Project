@@ -331,7 +331,7 @@ public class TestJunit {
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Right turn");
+		solution.add("Left turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
@@ -353,7 +353,7 @@ public class TestJunit {
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Left turn");
+		solution.add("Right turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
@@ -381,10 +381,10 @@ public class TestJunit {
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Sharp left turn");
-		solution.add("Right turn");
-		solution.add("Right turn");
 		solution.add("Sharp right turn");
+		solution.add("Left turn");
+		solution.add("Left turn");
+		solution.add("Sharp left turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
@@ -412,10 +412,10 @@ public class TestJunit {
 //		System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Go Straight");
-		solution.add("Slight right turn");
-		solution.add("Sharp right turn");
 		solution.add("Slight left turn");
 		solution.add("Sharp left turn");
+		solution.add("Slight right turn");
+		solution.add("Sharp right turn");
 		solution.add("Continue straight until you've have reached your destination");
 		assertEquals(solution, testDirections);
 	}
