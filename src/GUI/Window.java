@@ -58,11 +58,14 @@ public class Window {
 	private List<Node> nodeList = new ArrayList<Node>();
 	private Main main = new Main();
 	private JScrollPane scroll;
+	private int xScale = 1;
+	private int yScale = 1;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		System.out.println("Yo we starting");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -132,6 +135,9 @@ public class Window {
 					} catch (IOException ex) {
 
 					}
+					List<Integer> scales = Main.getScaleFromFile(path + "mapScale.csv");
+					xScale = scales.get(0);
+					yScale = scales.get(1);
 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 				}
 			}
@@ -186,7 +192,7 @@ public class Window {
 	        		 {
 	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
 	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
-	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode);
+	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
 	        			 Iterator<Node> nodePath = nodes.iterator();
 	        			 Node nodeHolder;
 	        			 for(int i = 0; i < nodes.size(); i++) {
