@@ -69,7 +69,7 @@ public class Window {
 		frame.setResizable(false);
 		frame.setBounds(100, 50, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		frame.setTitle("Randy");
 		frame.getContentPane().setLayout(null);
 
 		linePanel = new LinePanel();
@@ -125,7 +125,7 @@ public class Window {
 		frame.getContentPane().add(txtStartY);
 		
 		JButton button = new JButton("Run");
-		button.setBounds(360, 34, 55, 25);
+		button.setBounds(360, 34, 65, 25);
 		frame.getContentPane().add(button);
 		button.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent ae) {
@@ -160,6 +160,11 @@ public class Window {
 	        			 }
 	        			 else
 	        			 {
+	        				 System.out.println("*************");
+	        				 System.out.println(startNode);
+	        				 System.out.println(endNode);
+	        				 System.out.println("*************");
+
 	        				 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
 		        			 if (nodes.isEmpty())
 		        			 {
@@ -167,11 +172,9 @@ public class Window {
 		        			 }
 		        			 else
 		        			 {
-		        				 Iterator<Node> nodePath = nodes.iterator();
-			        			 Node nodeHolder;
+		        				 
 			        			 for(int i = 0; i < nodes.size(); i++) {
-			        				 nodeHolder = nodePath.next();
-			        				 linePanel.addPoint(nodeHolder.xPos, nodeHolder.yPos);
+			        				 linePanel.addPoint(nodes.get(i).xPos, nodes.get(i).yPos);
 			        			 }
 			        			 linePanel.repaint();
 			        			 System.out.println("A* Complete");
@@ -184,7 +187,10 @@ public class Window {
 			        			 {
 			        				 System.out.println(s);
 			        			 }
+			 					nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
+
 			        			 DirectionsBox directionWindow = new DirectionsBox(directions);  
+			        			 linePanel.repaint();
 		        			 }
 	        			 }
 	        			 

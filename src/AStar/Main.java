@@ -177,6 +177,7 @@ public class Main {
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
 	{
 		AStar astar = new AStar(map, defaultSettings);
+		System.out.println(map);
 		return astar.findPath(startNode, endNode);
 	}
 	//Method to find path when given a string 
