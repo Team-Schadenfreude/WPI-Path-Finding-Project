@@ -92,19 +92,8 @@ public class Window {
 					try {
 						img = ImageIO.read(new File(Paths.get(path+"map.png").toString()));
 						System.out.println(path);
-						//contentPane.add(lblMap);
 						frame.setSize(img.getWidth()+8,img.getHeight()+93);
-
-						/*ImagePanel imgPanel = new ImagePanel(img);
-						imgPanel.setBounds(0, 63, 434, 199);
-						frame.getContentPane().add(imgPanel);
-						frame.setVisible(true);*/
-						//picLabel.setIcon(new ImageIcon(img));
-						//picLabel.setSize(img.getWidth(),img.getHeight());
-						//frame.getContentPane().add(picLabel);
 						linePanel.addImage(img);
-						//linePanel.addPoint(100, 100);
-						//linePanel.addPoint(150, 100);
 						linePanel.repaint();
 
 					} catch (IOException ex) {
