@@ -45,6 +45,8 @@ public class DirectionsBox extends JDialog {
 		getContentPane().add(scrollPane);
 		
 		JTextArea txtArea = new JTextArea();
+		txtArea.setWrapStyleWord(true);
+		txtArea.setLineWrap(true);
 		txtArea.setEditable(false);
 		for (String s: directions)
 		{

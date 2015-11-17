@@ -165,7 +165,7 @@ public class Main {
 				return n;
 			}
 		}
-		return new Node(x,y,"FAILURE");
+		return null;
 	}
 	public static List<Node> readMap(String nodeFilePath, String edgeFilePath)
 	{

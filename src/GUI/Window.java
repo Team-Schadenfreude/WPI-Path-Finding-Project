@@ -192,27 +192,46 @@ public class Window {
 	        		 }
 	        		 else
 	        		 {
+	        			 System.out.println("before Start");
 	        			 Node startNode = Main.findNodeByXY(nodeList, startX, startY);
+	        			 System.out.println("before End");
 	        			 Node endNode = Main.findNodeByXY(nodeList, endX, endY);
-	        			 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
-	        			 Iterator<Node> nodePath = nodes.iterator();
-	        			 Node nodeHolder;
-	        			 for(int i = 0; i < nodes.size(); i++) {
-	        				 nodeHolder = nodePath.next();
-	        				 linePanel.addPoint(nodeHolder.xPos, nodeHolder.yPos);
-	        			 }
-	        			 System.out.println("A* Complete");
-	        			 List<String> directions = Main.getDirectionsList(nodes);
-	        			 System.out.println(nodes.size());
-	        			 for(Node n: nodes)
+	        			 if(startNode == null || endNode == null)
 	        			 {
-	        				 System.out.println(n.xPos + ", " + n.yPos);
+	        				 System.out.println("Those Nodes do not exist");
 	        			 }
-	        			 for(String s: directions)
+	        			 else
 	        			 {
-	        				 System.out.println(s);
+	        				 List<Node> nodes = Main.getPathFromNode(startNode, endNode, nodeList);
+		        			 System.out.println("Node List");
+		        			 System.out.println(nodes);
+		        			 if (nodes.isEmpty())
+		        			 {
+		        				 System.out.println("There is no path");
+		        			 }
+		        			 else
+		        			 {
+		        				 Iterator<Node> nodePath = nodes.iterator();
+			        			 Node nodeHolder;
+			        			 for(int i = 0; i < nodes.size(); i++) {
+			        				 nodeHolder = nodePath.next();
+			        				 linePanel.addPoint(nodeHolder.xPos, nodeHolder.yPos);
+			        			 }
+			        			 linePanel.repaint();
+			        			 System.out.println("A* Complete");
+			        			 List<String> directions = Main.getDirectionsList(nodes);
+			        			 System.out.println(nodes.size());
+			        			 for(Node n: nodes)
+			        			 {
+			        				 System.out.println(n.xPos + ", " + n.yPos);
+			        			 }
+			        			 for(String s: directions)
+			        			 {
+			        				 System.out.println(s);
+			        			 }
+			        			 DirectionsBox directionWindow = new DirectionsBox(directions);  
+		        			 }
 	        			 }
-	        			 DirectionsBox directionWindow = new DirectionsBox(directions); 
 	        			 
 	        		 }
 	        	 }
