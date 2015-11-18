@@ -3,7 +3,7 @@ package AStar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import org.junit.Test;
 import junit.framework.TestCase;
 
 
@@ -11,13 +11,13 @@ public class TestAStar extends TestCase{
 	/*
 	 * Tests for running AStar.
 	 */
-	
+	@Test
 	public void testConstructorOfAStarWithNoParameters(){
 		AStar astar = new AStar();
 		assertEquals(astar.getMap(), null);
 		assertEquals(astar.getSettings(), null);
 	}
-	
+	@Test
 	public void testConstructorOfAStarWithParameters(){
 		AStar astar = new AStar();
 		List<Node> map = new ArrayList<Node>();
@@ -37,14 +37,8 @@ public class TestAStar extends TestCase{
 		assertEquals(astar.getMap(), astar_new.getMap());
 		assertEquals(astar.getSettings(), astar_new.getSettings());
 	}
-	
-	public void testBuildPath() {
-		
-	}
-	
-	public void testFindPath() {
-		
-	}
+
+
 
 
 	

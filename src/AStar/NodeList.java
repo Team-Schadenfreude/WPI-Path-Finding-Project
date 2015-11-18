@@ -12,6 +12,10 @@ public class NodeList {
 	public HashMap<String, Node> getListOfNodes(){
 		return nodes;
 	}
+	
+	public int getSize() {
+		return nodes.size();
+	}
 
 	// right now very inefficient. We could use some sorting algorithm...
 	public boolean addNode(String s, Node n) {
@@ -26,7 +30,7 @@ public class NodeList {
 		return nodes.get(name);
 	}
 	
-	public Node findNode (int x, int y){	
+/*	public Node findNode (int x, int y){	
 		return null;
 	}
 
@@ -37,5 +41,5 @@ public class NodeList {
 	public boolean deleteNodes(String... names) {
 		return false;
 	}
-
+*/
 }

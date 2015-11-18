@@ -145,8 +145,10 @@ public class Main {
 				scaleList.add(xScale);
 				scaleList.add(yScale);
 			}
+			System.out.println("================");
 			System.out.println("Scale");
 			System.out.println(scaleList);
+			System.out.println("================");
 
 		} 
 		catch (FileNotFoundException e) {e.printStackTrace();} 

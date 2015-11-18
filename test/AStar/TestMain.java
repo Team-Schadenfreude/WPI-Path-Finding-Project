@@ -20,13 +20,13 @@ public class TestMain {
 		assertEquals(true,l.isEmpty());
 		assertEquals("FileNotFound", Main.excmessage);
 	}
-	@Test
+/*	@Test
 	public void testGetNodesFromFileThatIsNotReadable(){
 		Main.excmessage="";
 		List<Node> l=Main.getNodesFromFile("./src/res/testfile.csv");
 		assertEquals(true,l.isEmpty());
 		assertEquals("IOException", Main.excmessage);
-	}
+	}*/
 	@Test
 	public void test_mcc_1() { // Test for horizontal nodes where path is curved
 		Settings defaultSettings = new Settings(false, false, false);
@@ -444,5 +444,15 @@ public class TestMain {
 	// bounds execption where input is beyond maximum value
 	//
 	// }
+	
+	@Test
+	public void testForGetScaleFromFile() {
+		List<Integer> n1 = Main.getScaleFromFile("./src/res/mapScale.csv");
+		List<Integer> n2 = new ArrayList<Integer>();
+		n2.add(18);
+		n2.add(13);
+		assertEquals(n1, n2);
+	}
+
 
 }
