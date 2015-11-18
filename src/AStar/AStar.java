@@ -31,10 +31,18 @@ public class AStar{
     {
     	this.map = map;
     }
+    
+    public List<Node> getMap(){
+    	return map;
+    }
     //Function to change the AStar settings
     public void setSettings(Settings settings)
     {
     	this.settings = settings;
+    }
+    
+    public Settings getSettings(){
+    	return settings;
     }
 	//function to print out the path. Takes a node and will print the path if there is one to this node
 	public List<Node> buildPath(Node end){

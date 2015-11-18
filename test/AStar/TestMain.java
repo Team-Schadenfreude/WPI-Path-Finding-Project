@@ -1,20 +1,32 @@
 package AStar;
 
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import AStar.Settings;
-import AStar.AStar;
-import AStar.Main;
-import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class TestJunit {
+import org.junit.Test;
+
+public class TestMain {
 	
 	/*
 	 * Tests for running AStar.
 	 */
+	@Test
+	public void testGetNodesFromFileWhenFileDoesNotExist(){
 
+		List<Node> l=Main.getNodesFromFile("");
+		assertEquals(true,l.isEmpty());
+		assertEquals("FileNotFound", Main.excmessage);
+	}
+	@Test
+	public void testGetNodesFromFileThatIsNotReadable(){
+		Main.excmessage="";
+		List<Node> l=Main.getNodesFromFile("./src/res/testfile.csv");
+		assertEquals(true,l.isEmpty());
+		assertEquals("IOException", Main.excmessage);
+	}
 	@Test
 	public void test_mcc_1() { // Test for horizontal nodes where path is curved
 		Settings defaultSettings = new Settings(false, false, false);

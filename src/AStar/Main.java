@@ -1,7 +1,7 @@
 package AStar;
 
 import AStar.Settings;
-import AStar.TestJunit;
+import AStar.TestMain;
 import AStar.Node;
 import AStar.Edge;
 import AStar.AStar;
@@ -22,6 +22,7 @@ public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
+	public static String excmessage;
 	
 //	public static void main(String[] args){
 //		Result result = JUnitCore.runClasses(TestJunit.class);
@@ -30,7 +31,7 @@ public class Main {
 //	      }
 //	      System.out.println(result.wasSuccessful());
 //	}
-	private static List<Node> getNodesFromFile(String filePath)
+	static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
 		BufferedReader br = null;
@@ -57,8 +58,10 @@ public class Main {
 			}
 
 		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
+		catch (FileNotFoundException e) {e.printStackTrace();
+		excmessage="FileNotFound";} 
+		catch (IOException e) {e.printStackTrace();
+		excmessage="IOException";} 
 		finally {
 			if (br != null) {
 				try {
