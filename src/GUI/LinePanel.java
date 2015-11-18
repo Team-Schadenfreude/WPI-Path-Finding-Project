@@ -71,10 +71,10 @@ public class LinePanel extends JPanel {
 
 
 
-				xPos1 = Window.nodes.get(i).xPos*this.xScale;
-				yPos1 = Window.nodes.get(i).yPos*this.yScale;
-				xPos2 = Window.nodes.get(i+1).xPos*this.xScale;
-				yPos2 = Window.nodes.get(i+1).yPos*this.yScale;
+				xPos1 = Window.nodes.get(i).xPos*this.xScale + (this.xScale / 2);
+				yPos1 = Window.nodes.get(i).yPos*this.yScale + (this.xScale / 2);
+				xPos2 = Window.nodes.get(i+1).xPos*this.xScale + (this.xScale / 2);
+				yPos2 = Window.nodes.get(i+1).yPos*this.yScale + (this.xScale / 2);
 				g.setColor(Color.red);
 				g.drawLine(xPos1, yPos1, xPos2, yPos2);
 			}
