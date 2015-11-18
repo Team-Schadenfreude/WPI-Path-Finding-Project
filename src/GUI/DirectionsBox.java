@@ -32,8 +32,7 @@ public class DirectionsBox extends JDialog {
 	 */
 	public DirectionsBox(List<String> directions) {
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(null);
-		contentPanel.setBounds(0, 0, 432, 1);
+		getContentPane().setLayout(new BorderLayout(0, 0));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
@@ -41,7 +40,6 @@ public class DirectionsBox extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(0, 0, 432, 253);
 		getContentPane().add(scrollPane);
 		
 		JTextArea txtArea = new JTextArea();
