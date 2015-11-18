@@ -22,14 +22,14 @@ public class Main {
 
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
-	
-//	public static void main(String[] args){
-//		Result result = JUnitCore.runClasses(TestJunit.class);
-//	      for (Failure failure : result.getFailures()) {
-//	         System.out.println(failure.toString());
-//	      }
-//	      System.out.println(result.wasSuccessful());
-//	}
+
+	//	public static void main(String[] args){
+	//		Result result = JUnitCore.runClasses(TestJunit.class);
+	//	      for (Failure failure : result.getFailures()) {
+	//	         System.out.println(failure.toString());
+	//	      }
+	//	      System.out.println(result.wasSuccessful());
+	//	}
 	private static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
@@ -46,7 +46,7 @@ public class Main {
 			br = new BufferedReader(new FileReader(filePath));
 			while ((line = br.readLine()) != null) {
 
-			        // use comma as separator
+				// use comma as separator
 				String[] nodeData = line.split(delimiter);
 				String name = nodeData[nodeNameIndex];
 				int x = Integer.parseInt(nodeData[nodeXIndex]);
@@ -68,6 +68,8 @@ public class Main {
 		}
 		return nodeList;
 	}
+
+
 	private static void connectEdgesFromFile(List<Node> nodeList, String filePath)
 	{
 		BufferedReader br = null;
@@ -83,7 +85,7 @@ public class Main {
 			br = new BufferedReader(new FileReader(filePath));
 			while ((line = br.readLine()) != null) {
 
-			        // use comma as separator
+				// use comma as separator
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
@@ -120,6 +122,8 @@ public class Main {
 			}
 		}
 	}
+
+
 	public static List<Integer> getScaleFromFile(String filePath)
 	{
 		List<Integer> scaleList = new ArrayList<Integer>();
@@ -131,7 +135,7 @@ public class Main {
 			br = new BufferedReader(new FileReader(filePath));
 			while ((line = br.readLine()) != null) {
 
-			        // use comma as separator
+				// use comma as separator
 				String[] scaleData = line.split(delimiter);
 				System.out.println("ScaleSize");
 				System.out.println(scaleData);
@@ -188,13 +192,13 @@ public class Main {
 		return getPathFromNode(startNode, destNode, map);
 		//drawPath(path);
 	}
-	
+
 	//Method to draw a path on a map, given said path.
 	public static void drawPath(List<Node> path)
 	{
-		
+
 	}
-	
+
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path)
 	{
@@ -228,23 +232,23 @@ public class Main {
 				double delta_angle_rad = (Math.PI / 180) * (double) delta_angle;
 				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
 			}
-			
+
 			// System.out.println(delta_angle);
 			String direction = getDirectionFromAngle(delta_angle);
 			double distance_x = ((double)(n2.xPos - n1.xPos) * .18) * 12;
 			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
 			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
 			String dist = String.format("%.2f", distance);
-					
+
 			direction = direction + " walk " + dist + " ft";
-//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
-//			{
-//				//Don't repeat straight directions
-//			}
-//			else
-//			{
-				directions.add(direction);
-		//}
+			//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
+			//			{
+			//				//Don't repeat straight directions
+			//			}
+			//			else
+			//			{
+			directions.add(direction);
+			//}
 			prevAngle = newAngle;
 			prevDirection = direction;
 		}
@@ -292,6 +296,6 @@ public class Main {
 		int dy = n2.yPos - n1.yPos;
 		return (int) ((180 / Math.PI) * Math.atan2(dy,dx));
 	}
-	
-	
+
+
 }
