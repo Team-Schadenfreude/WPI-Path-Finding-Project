@@ -3,7 +3,6 @@ package AStar;
 import AStar.Settings;
 import AStar.TestJunit;
 import AStar.Node;
-import AStar.Edge;
 import AStar.AStar;
 import java.util.List;
 
