@@ -27,6 +27,7 @@ public class TestNodeList extends TestCase{
 		assertEquals(nodes.getListOfNodes(), nhash);
 		Node n4 = nodes.findNode("B");
 		assertEquals(n4, n2);
-		
 	}
+	
+	
 }
