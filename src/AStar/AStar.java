@@ -13,23 +13,14 @@ import java.util.Set;
 import AStar.Settings;
 public class AStar{
 	//variable to see if we have found our node
-    private boolean found = false;
-    
-    private List<Node> map; //A list of nodes representing the accessible map
     private Settings settings; //The settings to be used for additional costs in AStar*
     //Default constructor
     public AStar()
     {}
     //AStar constructor that takes in a map and selections of settings to prepare for a new AStar search
-    public AStar(List<Node> map, Settings settings)
+    public AStar(Settings settings)
     {
-    	this.map = map;
     	this.settings = settings;
-    }
-    //Function to change the map for the astar search
-    public void setMap(List<Node> map)
-    {
-    	this.map = map;
     }
     //Function to change the AStar settings
     public void setSettings(Settings settings)
@@ -46,21 +37,26 @@ public class AStar{
 		//get the nodes in sequence from the end to the start
 		for(Node node = end; node!=null; node = node.parent){
 			path.add(node);
-			System.out.println(node);
 		}
 		if (path.size() <= 1)//If there is not path
 		{
 			return new ArrayList<Node>(); //Return empty list
 		}
 		//reverse the path as it goes from end to finish and we want start to finish
-		System.out.println("COLLECTIONS REVERSING");
 		Collections.reverse(path);
 		return path;
 	}
 
+	private void clearParents(List<Node> nodeList)
+	{
+		for(Node n : nodeList)
+		{
+			n.parent = null;
+		}
+	}
 
-	public List<Node> findPath(Node start, Node end){
-
+	public List<Node> findPath(Node start, Node end, List<Node> map){
+		this.clearParents(map);
 		
 		//create a new hashSet of nodes that we have already checked
 		Set<Node> checkedNodes = new HashSet<Node>();
@@ -100,13 +96,17 @@ public class AStar{
 		
 		
 		//while our queue is not empty and we have not found a path, execute
-		while((!queue.isEmpty())&&(!found)){
+		while(!queue.isEmpty()){
 			//System.out.println(queue);
 			//define a new node named current that will be the current node we are processing
 			//set this equal to the top element of the queue for processing
 			Node current = queue.poll();
 
 			//add our node to the checked nodes set so that we dont check it again
+			if (checkedNodes.contains(current))
+			{
+				current.parent = null;
+			}
 			checkedNodes.add(current);
 
 			//if the node name is equal to the node we are searching for, then we are done
@@ -114,47 +114,62 @@ public class AStar{
 			//System.out.println(checkedNodes);
 			//System.out.println(current);
 			//System.out.println(current.neighbors);
-			if(current.nodeName.equals(end.nodeName)){
-				found = true;
+			if(current.xPos == end.xPos && current.yPos == end.yPos){
 				break;
 			}
 			//here we are checking every edge of every neighboring node for the node we are searching for
 			
 			
-			for(Edge edge : current.neighbors){
-				Node neighbor = edge.connection;
-				double cost = edge.cost;
-				double gScoreTemp = current.gValue + cost;
-				double fScoreTemp = gScoreTemp + neighbor.hValue;
-
-
-				//if a child has already been checked and the fScore is greater, than we dont want to process that node
-				//since the node is further away from our end node
-				if((checkedNodes.contains(neighbor)) && 
-						(fScoreTemp >= neighbor.fValue)){
+			for(Node neighbor : current.neighbors){
+				
+				if(checkedNodes.contains(neighbor))
+				{
 					continue;
 				}
-
-				//if the queue does not contain the neighbor node and the new fValue
-				//is lower, then we DO want to process the node
-				else if((!queue.contains(neighbor)) || 
-						(fScoreTemp < neighbor.fValue)){
-
-					//set the parent node to the current node so that we evaluate this new node
-					neighbor.parent = current;
+				double gScoreTemp = current.gValue + getGValue(current, neighbor);
+				if(!queue.contains(neighbor))
+				{
 					neighbor.gValue = gScoreTemp;
-					neighbor.fValue = fScoreTemp;
-
-					
-					//if the queue already contains the neighbor node, then remove it
-					if(queue.contains(neighbor)){
-						queue.remove(neighbor);
-					}
-
-					//otherwise add the new neighbor to the queue
+					neighbor.hValue = getHValue(neighbor, end);
+					neighbor.fValue = neighbor.gValue + neighbor.hValue;
 					queue.add(neighbor);
-
 				}
+				else if(gScoreTemp > neighbor.gValue)
+				{
+					continue; //Bad path
+				}
+				neighbor.parent = current;
+
+				neighbor.gValue = gScoreTemp;
+				neighbor.hValue = getHValue(neighbor, end);
+				neighbor.fValue = neighbor.gValue + neighbor.hValue;
+				//if a child has already been checked and the fScore is greater, than we dont want to process that node
+				//since the node is further away from our end node
+//				if((checkedNodes.contains(neighbor)) && 
+//						(fScoreTemp >= neighbor.fValue)){
+//					continue;
+//				}
+//
+//				//if the queue does not contain the neighbor node and the new fValue
+//				//is lower, then we DO want to process the node
+//				else if((!queue.contains(neighbor)) || 
+//						(fScoreTemp < neighbor.fValue)){
+//
+//					//set the parent node to the current node so that we evaluate this new node
+//					neighbor.parent = current;
+//					neighbor.gValue = gScoreTemp;
+//					neighbor.fValue = fScoreTemp;
+//
+//					
+//					//if the queue already contains the neighbor node, then remove it
+//					if(queue.contains(neighbor)){
+//						queue.remove(neighbor);
+//					}
+//
+//					//otherwise add the new neighbor to the queue
+//					queue.add(neighbor);
+//
+//				}
 
 			}
 
@@ -163,6 +178,14 @@ public class AStar{
 
 	}
 	
+	public static double getGValue(Node node1, Node node2)
+	{
+		return getDistance(node1, node2);
+	}
+	public static double getHValue(Node node1, Node node2)
+	{
+		return 0;//getDistance(node1, node2);
+	}
 	//function gets the distance between two nodes. This will be used as the cost
 	public static double getDistance(Node one, Node two){
 

@@ -93,19 +93,19 @@ public class Main {
 				Node n2 = findNodeByXY(nodeList, x2, y2);
 				if (n1.neighbors == null)
 				{
-					n1.neighbors =  new ArrayList<>(Arrays.asList(new Edge(n2, AStar.getDistance(n1, n2))));
+					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));
 				}
 				else
 				{
-					n1.neighbors.add(new Edge(n2, AStar.getDistance(n1, n2)));
+					n1.neighbors.add(n2);
 				}
 				if (n2.neighbors == null)
 				{
-					n2.neighbors =  new ArrayList<>(Arrays.asList(new Edge(n1, AStar.getDistance(n1, n2))));
+					n2.neighbors =  new ArrayList<>(Arrays.asList(n1));
 				}
 				else
 				{
-					n2.neighbors.add(new Edge(n1, AStar.getDistance(n1, n2)));
+					n2.neighbors.add(n1);
 				}
 			}
 
@@ -176,9 +176,9 @@ public class Main {
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
 	{
-		AStar astar = new AStar(map, defaultSettings);
+		AStar astar = new AStar(defaultSettings);
 		System.out.println(map);
-		return astar.findPath(startNode, endNode);
+		return astar.findPath(startNode, endNode, map);
 	}
 	//Method to find path when given a string 
 	public static List<Node> getPathFromString(String startName, String destName, List<Node> map)
@@ -235,7 +235,6 @@ public class Main {
 			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
 			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
 			String dist = String.format("%.2f", distance);
-					
 			direction = direction + " walk " + dist + " ft";
 //			if (direction.equals("Go Straight") && direction.equals(prevDirection))
 //			{
