@@ -66,17 +66,34 @@ public class LinePanel extends JPanel {
 			int yPos2;
 
 			System.out.println("Running Paint");
-			System.out.println(Window.nodes);
+			System.out.println(Window.nodes.size());
+			
 			for(int i =0;i< Window.nodes.size()-1;i++){
 
-
-
-				xPos1 = Window.nodes.get(i).xPos*this.xScale;
-				yPos1 = Window.nodes.get(i).yPos*this.yScale;
-				xPos2 = Window.nodes.get(i+1).xPos*this.xScale;
-				yPos2 = Window.nodes.get(i+1).yPos*this.yScale;
+				
+				xPos1 = Window.nodes.get(i).xPos*this.xScale + (this.xScale / 2);
+				yPos1 = Window.nodes.get(i).yPos*this.yScale + (this.xScale / 2);
+				xPos2 = Window.nodes.get(i+1).xPos*this.xScale + (this.xScale / 2);
+				yPos2 = Window.nodes.get(i+1).yPos*this.yScale + (this.xScale / 2);
 				g.setColor(Color.red);
 				g.drawLine(xPos1, yPos1, xPos2, yPos2);
+				
+				System.out.println(i);
+				
+				if(i == 0){
+					g.setColor(Color.blue);
+					g.fillOval(Window.nodes.get(i).xPos*xScale,Window.nodes.get(i).yPos*yScale , 20, 20);
+					g.setColor(Color.white);
+					g.drawString("A", Window.nodes.get(i).xPos*xScale+xScale/2, Window.nodes.get(i).yPos*yScale+yScale);
+				}
+				else if(i == Window.nodes.size()-2){
+					System.out.println("Coloring End");
+					g.setColor(Color.green);
+					g.fillOval(Window.nodes.get(i+1).xPos*xScale,Window.nodes.get(i+1).yPos*yScale , 20, 20);
+					g.setColor(Color.white);
+					g.drawString("B", Window.nodes.get(i+1).xPos*xScale+xScale/2, Window.nodes.get(i+1).yPos*yScale+yScale);
+				}
+
 			}
 		}
 

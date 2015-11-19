@@ -195,9 +195,9 @@ public class Window {
 							else
 							{
 
-								for(int i = 0; i < nodes.size(); i++) {
-									linePanel.addPoint(nodes.get(i).xPos, nodes.get(i).yPos);
-								}
+								//for(int i = 0; i < nodes.size(); i++) {
+								//	linePanel.addPoint(nodes.get(i).xPos, nodes.get(i).yPos);
+								//}
 								linePanel.repaint();
 								System.out.println("A* Complete");
 								List<String> directions = Main.getDirectionsList(nodes);
