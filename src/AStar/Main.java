@@ -1,7 +1,7 @@
 package AStar;
 
 import AStar.Settings;
-import AStar.TestJunit;
+import AStar.TestMain;
 import AStar.Node;
 import AStar.AStar;
 import java.util.List;
@@ -22,14 +22,16 @@ public class Main {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
 
-	//	public static void main(String[] args){
-	//		Result result = JUnitCore.runClasses(TestJunit.class);
-	//	      for (Failure failure : result.getFailures()) {
-	//	         System.out.println(failure.toString());
-	//	      }
-	//	      System.out.println(result.wasSuccessful());
-	//	}
-	private static List<Node> getNodesFromFile(String filePath)
+	public static String excmessage;
+	
+//	public static void main(String[] args){
+//		Result result = JUnitCore.runClasses(TestJunit.class);
+//	      for (Failure failure : result.getFailures()) {
+//	         System.out.println(failure.toString());
+//	      }
+//	      System.out.println(result.wasSuccessful());
+//	}
+	static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
 		BufferedReader br = null;
@@ -56,8 +58,10 @@ public class Main {
 			}
 
 		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
+		catch (FileNotFoundException e) {e.printStackTrace();
+		excmessage="FileNotFound";} 
+		catch (IOException e) {e.printStackTrace();
+		excmessage="IOException";} 
 		finally {
 			if (br != null) {
 				try {
@@ -145,8 +149,10 @@ public class Main {
 				scaleList.add(xScale);
 				scaleList.add(yScale);
 			}
+			System.out.println("================");
 			System.out.println("Scale");
 			System.out.println(scaleList);
+			System.out.println("================");
 
 		} 
 		catch (FileNotFoundException e) {e.printStackTrace();} 

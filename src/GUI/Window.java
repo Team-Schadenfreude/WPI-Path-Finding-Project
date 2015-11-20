@@ -68,7 +68,7 @@ public class Window {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	 void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 50, 450, 300);
