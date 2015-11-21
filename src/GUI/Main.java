@@ -1,37 +1,20 @@
 package GUI;
  
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import AStar.Settings;
-import AStar.TestJunit;
 import AStar.Node;
 import AStar.AStar;
 import java.util.List;
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,18 +35,17 @@ public class Main extends Application {
     	FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(Main.class.getResource("Main.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
-        Scene scene = new Scene(root, 300, 275);
-    
+        Scene scene = new Scene(root, 500, 500);
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
         stage.show();
     }
    
-    	private static List<Node> getNodesFromFile(String filePath)
-    	{
-    		List<Node> nodeList = new ArrayList<Node>();
-    		BufferedReader br = null;
-    		String line = "";
+	private static List<Node> getNodesFromFile(String filePath)
+	{
+		List<Node> nodeList = new ArrayList<Node>();
+		BufferedReader br = null;
+		String line = "";
 		String delimiter = ",";
 		int nodeNameIndex = 0;
 		int nodeXIndex = 1;
