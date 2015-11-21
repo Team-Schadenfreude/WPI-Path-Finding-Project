@@ -23,7 +23,7 @@ public class MainController {
     protected void handleLoadMap(ActionEvent event) {
         System.out.println("ClickedTheButton");
         loadMapBtn.setText("YouClickedMe");
-        Image mapImage = new Image("res/Stratton 2 Building.png");
+        Image mapImage = new Image("stratton_2.png");
         mapView.setImage(mapImage);
     }
 
