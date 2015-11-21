@@ -39,7 +39,7 @@ public class Window {
 	static List<Node> nodes;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. 
 	 */
 	public static void main(String[] args) {
 		System.out.println("Yo we starting");
