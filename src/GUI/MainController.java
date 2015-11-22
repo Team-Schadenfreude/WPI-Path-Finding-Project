@@ -58,7 +58,7 @@ public class MainController implements Initializable{
     	//anchorPaneScroll.setPrefHeight(viewHeight);
     	System.out.println("X = " + scaleX);
     	System.out.println("Y = " + scaleY);
-        drawNodes(scaleX, scaleY, Main.testMap);
+        drawNodes(scaleX, scaleY, 30, Main.testMap);
     }
     @FXML 
     protected void handleRunAStar(ActionEvent event) {
@@ -72,17 +72,21 @@ public class MainController implements Initializable{
     		System.out.println(path);
     	}
     }
-    protected void drawNodes(double scaleX, double scaleY, List<Node> nodeList)
+    protected void drawNodes(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
     	Color color = Color.web("#3366cc");
     	for(Node node : nodeList)
     	{
 			//Circle c = new Circle(node.xPos * scaleX, node.yPos * scaleY, 10, color);
-			Circle circle = new Circle(0,0,10,color);
-			Button btn = new Button("",circle);
+			//Button btn = new Button("",circle);
+			Button btn = new Button("");
 			btn.setId(node.nodeName);
 			btn.setLayoutX(node.xPos * scaleX - 10);
 			btn.setLayoutY(node.yPos * scaleY - 10);
+			double r = btnRadius * scaleX;
+			btn.setShape(new Circle(r));
+			btn.setMinSize(2*r, 2*r);
+			btn.setMaxSize(2*r, 2*r);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				 
 			    @Override
@@ -92,6 +96,7 @@ public class MainController implements Initializable{
 			    	{
 			    		startNode = Main.findNodeByName(Main.testMap, btn.getId());
 			    		nodeSelect = true;
+			    	
 			    	}
 			    	else
 			    	{
