@@ -4,13 +4,14 @@ Alonso Martinez
 
 package AStar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //class for node. A node is a point on the grid that contains an x and y position
 public class Node{
 	public String nodeName; //every node has a name
     public Node parent; //node has a parent. the parent is where the current node came from
-    public List<Node> neighbors; //every node contains neighbors
+    public List<Node> neighbors = new ArrayList<Node>(); //every node contains neighbors
     public double gValue; //gValue is cost from current block
     public double hValue; //hValue is distance
     public double fValue; //fValue is overall cost

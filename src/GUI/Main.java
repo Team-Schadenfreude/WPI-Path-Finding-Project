@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,6 +29,7 @@ import java.io.IOException;
 public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
+	public static List<Node> testMap = new ArrayList<Node>();
     public static void main(String[] args) {
         launch(args);
     }
@@ -35,10 +38,38 @@ public class Main extends Application {
     	FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(Main.class.getResource("Main.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, root.getWidth(), root.getHeight());
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
+       
         stage.show();
+        //Image is 3300 1450
+        Node a = new Node(127, 807, "a");
+        Node b = new Node(1061, 807, "b");
+        Node c = new Node(1061, 612, "c");
+        Node d = new Node(3125, 612, "d");
+        Node e = new Node(1093, 945, "e");
+        Node f = new Node(1073, 293, "f");
+        Node g = new Node(3117, 317, "g");
+        a.neighbors.add(b);
+        b.neighbors.add(a);
+        b.neighbors.add(c);
+        b.neighbors.add(e);
+        c.neighbors.add(b);
+        c.neighbors.add(d);
+        c.neighbors.add(f);
+        d.neighbors.add(c);
+        d.neighbors.add(g);
+        e.neighbors.add(b);
+        f.neighbors.add(c);
+        g.neighbors.add(d);
+        testMap.add(a);
+        testMap.add(b);
+        testMap.add(c);
+        testMap.add(d);
+        testMap.add(e);
+        testMap.add(f);
+        testMap.add(g);
     }
    
 	private static List<Node> getNodesFromFile(String filePath)
