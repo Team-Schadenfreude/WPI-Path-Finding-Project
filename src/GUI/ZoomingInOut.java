@@ -1,10 +1,13 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -23,12 +26,12 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
 
-public class ZoomingInOut extends Application{
+public class ZoomingInOut extends Application {
     public void start(Stage primaryStage) throws Exception {
         WebView webView = new WebView();
         Slider slider = new Slider(0.5,2,1);
         ZoomingPane zoomingPane = new ZoomingPane(webView);
-        
+
         final ToggleGroup group = new ToggleGroup();
 
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -37,28 +40,28 @@ public class ZoomingInOut extends Application{
           }
         });
 
-        ZoomingInOut tb1 = new ZoomingInOut("A");
+        ToggleButton tb1 = new ToggleButton("A");
         tb1.setToggleGroup(group);
         tb1.setUserData(Color.LIGHTGREEN);
         tb1.setSelected(true);
 
 
-        ZoomingInOut tb2 = new ZoomingInOut("B");
+        ToggleButton tb2 = new ToggleButton("B");
         tb2.setToggleGroup(group);
         tb2.setUserData(Color.LIGHTBLUE);
-        ZoomingInOut tb3 = new ZoomingInOut("C");
+        ToggleButton tb3 = new ToggleButton("C");
         tb3.setToggleGroup(group);
         tb3.setUserData(Color.SALMON);
-        
+
 
         HBox hbox = new HBox();
 
         hbox.getChildren().add(tb1);
         hbox.getChildren().add(tb2);
         hbox.getChildren().add(tb3);
-        
+
         zoomingPane.zoomFactorProperty().bind(slider.valueProperty());
-        primaryStage.setScene(new Scene(new BorderPane(zoomingPane, null, null, zoom, null)));
+        primaryStage.setScene(new Scene(new BorderPane(zoomingPane, null, null, hbox, null)));
         webView.getEngine().load("http://www.google.com");
         primaryStage.setWidth(800);
         primaryStage.setHeight(600);
@@ -115,4 +118,6 @@ public class ZoomingInOut extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }
