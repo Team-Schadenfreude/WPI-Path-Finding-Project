@@ -16,6 +16,8 @@
                <children>
                   <Button fx:id="loadMapBtn" mnemonicParsing="false" onAction="#handleLoadMap" prefHeight="0.0" prefWidth="66.0" text="LoadMap" />
                   <Button fx:id="runAStarBtn" mnemonicParsing="false" onAction="#handleRunAStar" prefHeight="25.0" prefWidth="66.0" text="RunA*" />
+                  <Label text="Total Distance:" />
+                  <Label fx:id="totalDistanceLabel" />
                </children>
             </VBox>
           <AnchorPane fx:id="imageAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">

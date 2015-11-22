@@ -341,6 +341,32 @@ public class Main extends Application {
 		int dy = n2.yPos - n1.yPos;
 		return (int) ((180 / Math.PI) * Math.atan2(dy,dx));
 	}
+	
+	// Returns the total distance of the path.
+	public static double getTotalDistance(List<Node> path) {
+
+		double totalDist = 0;
+
+		if (path.size() == 0 || path.size() == 1) {
+			System.out.println("Cannot get total distance because path was not found.");
+			return -1;
+		}
+
+		for (int i = 0; i < path.size(); i++) {
+			if (i == path.size() - 1) {
+				break;
+			}
+
+			Node n1 = path.get(i);
+			Node n2 = path.get(i + 1);
+
+			double distance_x = ((double) (n2.xPos - n1.xPos) * .18) * 12;
+			double distance_y = ((double) (n2.yPos - n1.yPos) * .13) * 12;
+			totalDist = totalDist + Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
+		}
+
+		return totalDist;
+	}
 
 
 }

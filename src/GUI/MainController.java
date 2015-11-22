@@ -38,6 +38,9 @@ public class MainController implements Initializable{
     Node goalNode = null;
     private double scaleX = 1;
     private double scaleY = 1;
+    
+    @FXML private Label totalDistanceLabel;
+    
     public MainController(){
     	
     }
@@ -70,6 +73,16 @@ public class MainController implements Initializable{
     		goalNode = null;
     		System.out.println("The Path is");
     		System.out.println(path);
+    		
+    		/*
+    		 * Total distance contribution.
+    		 */
+    		double totalDistance = Main.getTotalDistance(path);
+    		String totalDistanceString = Double.toString(totalDistance);
+    		totalDistanceLabel.setText(totalDistanceString);
+    		System.out.println("The total distance of the path is");
+    		System.out.println(totalDistance);
+    		
     	}
     }
     protected void drawNodes(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
