@@ -16,18 +16,23 @@ public class Node{
     public double fValue; //fValue is overall cost
     public int xPos; //every Node has an X pos
     public int yPos; // y position of node
+    public int zPos;
+    public String map;
     public Boolean isObstacle; //variable to see if the node is an obstacle
     public String description;
     
     //constructor for node
-    public Node(String nodeName, double hValue,double gValue,double fValue, Boolean isObstacle, int xPos, int yPos, String description){
+    public Node(String nodeName, double hValue,double gValue,double fValue, Boolean isObstacle, int xPos, int yPos, int zPos, String map, String description){
             this.nodeName = nodeName;
     		this.hValue = hValue;
             this.gValue = gValue;
             this.isObstacle = isObstacle;
             this.xPos = xPos;
             this.yPos = yPos;
+            this.zPos = zPos;
+            this.map = map;
             this.description = description;
+           
     }
     public Node(int xPos, int yPos, String nodeName)
     {
@@ -37,6 +42,8 @@ public class Node{
         this.isObstacle = false;
         this.xPos = xPos;
         this.yPos = yPos;
+        this.zPos = 0;
+        this.map = "";
         this.description = "";
     }
 

@@ -78,6 +78,31 @@ public class TestJunit {
 		List<Node> path = astar.findPath(a, g, map);
 		assertEquals(best_path, path);
 	}
+	
+	@Test
+	public void superMapTest()
+	{
+		String nodePath = "src/res/superMapTestNodes.csv";
+		String edgePath = "src/res/superMapTestEdges.csv";
+		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> path = Main.getPathFromNode(map.get(0), map.get(15), map);
+		// System.out.println(path);
+		List<Node> bestPath = new ArrayList<Node>();
+		bestPath.add(map.get(0));
+		bestPath.add(map.get(2));
+		bestPath.add(map.get(3));
+		bestPath.add(map.get(4));
+		bestPath.add(map.get(5));
+		bestPath.add(map.get(10));
+		bestPath.add(map.get(11));
+		bestPath.add(map.get(16));
+		bestPath.add(map.get(15));
+		System.out.println("Best Expected Path:");
+		System.out.println(bestPath);
+		System.out.println("Best Actual Path:");
+		System.out.println(path);
+		assertEquals(bestPath, path);
+	}
 
 //	@Test
 //	public void test_mcc_3() { // Test for disconnected node

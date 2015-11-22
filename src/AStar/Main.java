@@ -29,6 +29,7 @@ public class Main {
 	//	      }
 	//	      System.out.println(result.wasSuccessful());
 	//	}
+	
 	private static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
@@ -38,7 +39,9 @@ public class Main {
 		int nodeNameIndex = 0;
 		int nodeXIndex = 1;
 		int nodeYIndex = 2;
-		int nodeDescIndex = 3;
+		int nodeZIndex = 3;
+		int nodeMapIndex = 4;
+		int nodeDescIndex = 5;
 
 		try {
 
@@ -50,8 +53,10 @@ public class Main {
 				String name = nodeData[nodeNameIndex];
 				int x = Integer.parseInt(nodeData[nodeXIndex]);
 				int y = Integer.parseInt(nodeData[nodeYIndex]);
+				int z = Integer.parseInt(nodeData[nodeZIndex]);
+				String map = nodeData[nodeMapIndex];
 				String description = nodeData[nodeDescIndex];
-				Node newNode = new Node(name,0,0,0,false, x, y, description);
+				Node newNode = new Node(name,0,0,0,false, x, y, z, map, description);
 				nodeList.add(newNode);
 			}
 
@@ -76,8 +81,12 @@ public class Main {
 		String delimiter = ",";
 		int edgeX1Index = 0;
 		int edgeY1Index = 1;
-		int edgeX2Index = 2;
-		int edgeY2Index = 3;
+		int edgeZ1Index = 2;
+		int edgeMap1Index = 3;
+		int edgeX2Index = 4;
+		int edgeY2Index = 5;
+		int edgeZ2Index = 6;
+		int edgeMap2Index = 7;
 
 		try {
 
@@ -88,10 +97,15 @@ public class Main {
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
+				int z1 = Integer.parseInt(edgeData[edgeZ1Index]);
+				String map1 = edgeData[edgeMap1Index];
 				int x2 = Integer.parseInt(edgeData[edgeX2Index]);
 				int y2 = Integer.parseInt(edgeData[edgeY2Index]);
-				Node n1 = findNodeByXY(nodeList, x1, y1);
-				Node n2 = findNodeByXY(nodeList, x2, y2);
+				int z2 = Integer.parseInt(edgeData[edgeZ2Index]);
+				String map2 = edgeData[edgeMap2Index];
+				Node n1 = findNodeByXYZMap(nodeList, x1, y1, z1, map1);
+				Node n2 = findNodeByXYZMap(nodeList, x2, y2, z2, map2);
+				
 				if (n1.neighbors == null)
 				{
 					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));
@@ -160,10 +174,10 @@ public class Main {
 		}
 		return scaleList;
 	}
-	public static Node findNodeByXY(List<Node> nodeList, int x, int y)//Want to change this to throwing an exception when the node is not found
+	public static Node findNodeByXYZMap(List<Node> nodeList, int x, int y, int z, String map)//Want to change this to throwing an exception when the node is not found
 	{
 		for(Node n : nodeList){
-			if(n.xPos == x && n.yPos == y)
+			if(n.xPos == x && n.yPos == y && n.zPos == z && n.map.equals(map))
 			{
 				return n;
 			}

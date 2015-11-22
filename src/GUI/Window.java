@@ -173,9 +173,12 @@ public class Window {
 					else
 					{
 
-
-						Node startNode = Main.findNodeByXY(nodeList, startX, startY);
-						Node endNode = Main.findNodeByXY(nodeList, endX, endY);
+						
+						/*
+						 * THESE SHOULD REQUIRE startZ AND map IN THE NEAR FUTURE.
+						 */
+						Node startNode = Main.findNodeByXYZMap(nodeList, startX, startY, 0, "");
+						Node endNode = Main.findNodeByXYZMap(nodeList, endX, endY, 0, "");
 						if(startNode == null || endNode == null)
 						{
 							System.out.println("Those Nodes do not exist");
