@@ -74,6 +74,7 @@ public class DropDownMenu {
                 for(String s: sRooms)
                 	System.out.println(s);
             	startR.setDisable(false);
+            	startR.getItems().removeAll(startR.getItems());
             	startR.getItems().addAll(sRooms);
             }
         });
@@ -106,6 +107,7 @@ public class DropDownMenu {
                 for(String s: eRooms)
                 	System.out.println(s);
             	endR.setDisable(false);
+            	endR.getItems().removeAll(endR.getItems());
             	endR.getItems().addAll(eRooms);
             }
         });
