@@ -30,7 +30,7 @@ public class DropDownMenu {
 		
 		StringBuilder start = new StringBuilder();
 		StringBuilder end = new StringBuilder();
-		
+		// construct a list with all the building names
 		List<String> buildings = Arrays.asList( 
 				"157 West Street",
 				"Alden Hall",
@@ -49,10 +49,10 @@ public class DropDownMenu {
 				"Stratton Hall",
 				"Washburn Shops"
 				);
-		
+		// Disable the drop down boxes for selecting rooms, enable them until the building is selected
 		startR.setDisable(true);
 		endR.setDisable(true);
-		
+		// Set properties for the Start Building drop down
         startB.getItems().addAll(buildings);
         startB.setPromptText("Start Building");
         startB.setEditable(true);
@@ -65,7 +65,7 @@ public class DropDownMenu {
             }
         });
         
-    	
+        // Set properties for the Start Room drop down
     	startR.getItems().addAll(buildings);
         startR.setPromptText("Start Room");
         startR.setEditable(true);
@@ -76,7 +76,7 @@ public class DropDownMenu {
             }
         });
         
-        
+        // Set properties for the End Building drop down
         endB.getItems().addAll(buildings);
         endB.setPromptText("End Building");
         endB.setEditable(true);
@@ -89,7 +89,7 @@ public class DropDownMenu {
             }
         });
         
-        
+        // Set properties for the End Room drop down
         endR.getItems().addAll(buildings);
         endR.setPromptText("End Room");
         endR.setEditable(true);
@@ -100,7 +100,7 @@ public class DropDownMenu {
             }
         });
         
-        
+        // Set on action when the submit button is pressed
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
