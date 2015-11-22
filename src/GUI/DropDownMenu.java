@@ -3,10 +3,12 @@ package GUI;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-import AStar.NodeList;
+import AStar.Node;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,21 +17,19 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 
 public class DropDownMenu {
-	NodeList nlist;
+	List<Node> nlist;
 	
 	public DropDownMenu() {
-		this.nlist = new NodeList();
+		this.nlist = Arrays.asList();
 	}
 	
-	public DropDownMenu(NodeList nlist) {
+	public DropDownMenu(List<Node> nlist) {
 		this.nlist = nlist;
 	}
 	
 	
 	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit) {
 		
-		StringBuilder start = new StringBuilder();
-		StringBuilder end = new StringBuilder();
 		// construct a list with all the building names
 		List<String> buildings = Arrays.asList( 
 				"157 West Street",
@@ -49,6 +49,13 @@ public class DropDownMenu {
 				"Stratton Hall",
 				"Washburn Shops"
 				);
+		
+		StringBuilder start = new StringBuilder();
+		StringBuilder end = new StringBuilder();
+		ListNodes allNodes = new ListNodes(this.nlist);
+		List<String> sRooms = new ArrayList<String>();
+		List<String> eRooms = new ArrayList<String>();
+		
 		// Disable the drop down boxes for selecting rooms, enable them until the building is selected
 		startR.setDisable(true);
 		endR.setDisable(true);
@@ -60,13 +67,25 @@ public class DropDownMenu {
             @Override public void changed(ObservableValue ov, String t, String t1) {
             	start.delete(0, start.length());
             	start.append(t1);
+            	sRooms.clear();
+            	for(Node n: allNodes.nlist) {
+                	if (n.nodeName.contains(start.toString())) {
+                		sRooms.add(n.nodeName.replace(start.toString() + " ", ""));
+//                		System.out.println(n.nodeName.replace(start.toString() + " ", ""));
+                	}
+                };
+                for(String s: sRooms)
+                	System.out.println(s);
             	startR.setDisable(false);
-            	System.out.println(start.toString());
+            	startR.getItems().addAll(sRooms);
             }
         });
         
+        
+        
+        
         // Set properties for the Start Room drop down
-    	startR.getItems().addAll(buildings);
+    	
         startR.setPromptText("Start Room");
         startR.setEditable(true);
         startR.valueProperty().addListener(new ChangeListener<String>() {
@@ -84,13 +103,24 @@ public class DropDownMenu {
             @Override public void changed(ObservableValue ov, String t, String t1) {
             	end.delete(0, end.length());
             	end.append(t1);
+            	eRooms.clear();
+            	for(Node n: allNodes.nlist) {
+                	if (n.nodeName.contains(end.toString())) {
+                		eRooms.add(n.nodeName.replace(end.toString() + " ", ""));
+//                		System.out.println(n.nodeName.replace(end.toString() + " ", ""));
+                	}
+                };
+                for(String s: eRooms)
+                	System.out.println(s);
             	endR.setDisable(false);
-            	System.out.println(end.toString());
+            	endR.getItems().addAll(eRooms);
             }
         });
         
+        
+        
         // Set properties for the End Room drop down
-        endR.getItems().addAll(buildings);
+        
         endR.setPromptText("End Room");
         endR.setEditable(true);
         endR.valueProperty().addListener(new ChangeListener<String>() {
@@ -107,5 +137,12 @@ public class DropDownMenu {
                
             }
         });
+	}
+}
+
+class ListNodes {
+	List<Node> nlist;
+	public ListNodes(List<Node> nlist) {
+		this.nlist = nlist;
 	}
 }
