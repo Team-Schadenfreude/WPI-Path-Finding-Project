@@ -213,6 +213,16 @@ public class Main extends Application {
 		}
 		return null;
 	}
+	public static Node findNodeByName(List<Node> nodeList, String name)//Want to change this to throwing an exception when the node is not found
+	{
+		for(Node n : nodeList){
+			if(n.nodeName.equals(name))
+			{
+				return n;
+			}
+		}
+		return null;
+	}
 	public static List<Node> readMap(String nodeFilePath, String edgeFilePath)
 	{
 		List<Node> nodeList = getNodesFromFile(nodeFilePath);

@@ -12,14 +12,16 @@
    <children>
       <SplitPane dividerPositions="0.11371237458193979" prefHeight="800.0" prefWidth="1376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <Button fx:id="loadMapBtn" mnemonicParsing="false" onAction="#handleLoadMap" prefHeight="0.0" prefWidth="66.0" text="LoadMap" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="loadMapBtn" mnemonicParsing="false" onAction="#handleLoadMap" prefHeight="0.0" prefWidth="66.0" text="LoadMap" />
+                  <Button fx:id="runAStarBtn" mnemonicParsing="false" onAction="#handleRunAStar" prefHeight="25.0" prefWidth="66.0" text="RunA*" />
+               </children>
+            </VBox>
           <AnchorPane fx:id="imageAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ScrollPane fx:id="imageScrollPane" hbarPolicy="ALWAYS" pannable="true" prefHeight="798.0" prefWidth="1302.0" vbarPolicy="ALWAYS">
-                     <content>
-                        <ImageView fx:id="mapView" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" />
-                     </content>
-                  </ScrollPane>
+                  <ImageView fx:id="mapView" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Canvas fx:id="imageCanvas" height="200.0" width="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </items>
