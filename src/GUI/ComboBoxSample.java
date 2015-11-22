@@ -37,14 +37,14 @@ public class ComboBoxSample extends Application {
         Node n6 = new Node(0, 6, "Fuller Labs 106");
         Node n7 = new Node(0, 7, "Fuller Labs 107");
         Node n8 = new Node(0, 8, "Fuller Labs 108");
-        Node n9 = new Node(1, 1, "Atwater Kent Labs 101");
-        Node n10 = new Node(1, 2, "Atwater Kent Labs 102");
-        Node n11 = new Node(1, 3, "Atwater Kent Labs 103");
-        Node n12 = new Node(1, 4, "Atwater Kent Labs 104");
-        Node n13 = new Node(1, 5, "Atwater Kent Labs 105");
-        Node n14 = new Node(1, 6, "Atwater Kent Labs 106");
-        Node n15 = new Node(1, 7, "Atwater Kent Labs 107");
-        Node n16 = new Node(1, 8, "Atwater Kent Labs 108");
+        Node n9 = new Node(1, 1, "Atwater Kent Labs 111");
+        Node n10 = new Node(1, 2, "Atwater Kent Labs 112");
+        Node n11 = new Node(1, 3, "Atwater Kent Labs 113");
+        Node n12 = new Node(1, 4, "Atwater Kent Labs 114");
+        Node n13 = new Node(1, 5, "Atwater Kent Labs 115");
+        Node n14 = new Node(1, 6, "Atwater Kent Labs 116");
+        Node n15 = new Node(1, 7, "Atwater Kent Labs 117");
+        Node n16 = new Node(1, 8, "Atwater Kent Labs 118");
         
         List<Node> map = new ArrayList<Node>();
         map.add(n1);
@@ -69,7 +69,6 @@ public class ComboBoxSample extends Application {
         ddm.setDropDownMenu(startB, startR, endB, endR, submit);
         
         
-
 
         GridPane grid = new GridPane();
         grid.setVgap(4);

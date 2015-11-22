@@ -1,11 +1,7 @@
 package GUI;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import AStar.Node;
@@ -59,6 +55,7 @@ public class DropDownMenu {
 		// Disable the drop down boxes for selecting rooms, enable them until the building is selected
 		startR.setDisable(true);
 		endR.setDisable(true);
+		
 		// Set properties for the Start Building drop down
         startB.getItems().addAll(buildings);
         startB.setPromptText("Start Building");
@@ -81,11 +78,7 @@ public class DropDownMenu {
             }
         });
         
-        
-        
-        
         // Set properties for the Start Room drop down
-    	
         startR.setPromptText("Start Room");
         startR.setEditable(true);
         startR.valueProperty().addListener(new ChangeListener<String>() {
@@ -117,10 +110,7 @@ public class DropDownMenu {
             }
         });
         
-        
-        
-        // Set properties for the End Room drop down
-        
+        // Set properties for the End Room drop down 
         endR.setPromptText("End Room");
         endR.setEditable(true);
         endR.valueProperty().addListener(new ChangeListener<String>() {
