@@ -1,23 +1,18 @@
 package GUI;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 
 import AStar.NodeList;
 
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class DropDownMenu {
 	NodeList nlist;
@@ -31,12 +26,10 @@ public class DropDownMenu {
 	}
 	
 	
-	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR) {
+	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit) {
 		
-		String sb = "";
-		String sr = "";
-		String eb = "";
-		String er = "";
+		StringBuilder start = new StringBuilder();
+		StringBuilder end = new StringBuilder();
 		
 		List<String> buildings = Arrays.asList( 
 				"157 West Street",
@@ -57,39 +50,62 @@ public class DropDownMenu {
 				"Washburn Shops"
 				);
 		
+		startR.setDisable(true);
+		endR.setDisable(true);
+		
         startB.getItems().addAll(buildings);
         startB.setPromptText("Start Building");
         startB.setEditable(true);
         startB.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-            	String ss = t1;
-                System.out.println(t);
-                System.out.println(t1);
+            	start.delete(0, start.length());
+            	start.append(t1);
+            	startR.setDisable(false);
+            	System.out.println(start.toString());
             }
         });
-
-        startR.getItems().addAll(
-                "jacob.smith@example.com",
-                "isabella.johnson@example.com",
-                "ethan.williams@example.com",
-                "emma.jones@example.com",
-                "michael.brown@example.com"
-            );
+        
+    	
+    	startR.getItems().addAll(buildings);
         startR.setPromptText("Start Room");
         startR.setEditable(true);
+        startR.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+            	start.append(" ").append(t1);
+            	System.out.println(start.toString());
+            }
+        });
+        
         
         endB.getItems().addAll(buildings);
         endB.setPromptText("End Building");
         endB.setEditable(true);
+        endB.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+            	end.delete(0, end.length());
+            	end.append(t1);
+            	endR.setDisable(false);
+            	System.out.println(end.toString());
+            }
+        });
         
-        endR.getItems().addAll(
-                "jacob.smith@example.com",
-                "isabella.johnson@example.com",
-                "ethan.williams@example.com",
-                "emma.jones@example.com",
-                "michael.brown@example.com"
-            );
+        
+        endR.getItems().addAll(buildings);
         endR.setPromptText("End Room");
         endR.setEditable(true);
+        endR.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+            	end.append(" ").append(t1);
+            	System.out.println(end.toString());
+            }
+        });
+        
+        
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+               
+            }
+        });
 	}
 }

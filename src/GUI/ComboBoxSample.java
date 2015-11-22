@@ -1,18 +1,12 @@
 package GUI;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class ComboBoxSample extends Application {
         public static void main(String[] args) {
@@ -27,9 +21,10 @@ public class ComboBoxSample extends Application {
         final ComboBox startR = new ComboBox();
         final ComboBox endB = new ComboBox();
         final ComboBox endR = new ComboBox();
+        final Button submit = new Button("Submit");
        
         DropDownMenu ddm = new DropDownMenu();
-        ddm.setDropDownMenu(startB, startR, endB, endR);
+        ddm.setDropDownMenu(startB, startR, endB, endR, submit);
         
         
 
@@ -46,6 +41,7 @@ public class ComboBoxSample extends Application {
         grid.add(endB, 1, 2);
         grid.add(new Label("End Room: "), 2, 2);
         grid.add(endR, 3, 2);
+        grid.add(submit, 0, 4);
 
         Group root = (Group)scene.getRoot();
         root.getChildren().add(grid);
