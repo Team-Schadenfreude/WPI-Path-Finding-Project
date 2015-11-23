@@ -19,7 +19,7 @@ public class DropDownMenuGUI extends Application {
     }
 
     @Override public void start(Stage stage) {
-        stage.setTitle("ComboBoxSample");
+        stage.setTitle("Drop Down Box Demo");
         Scene scene = new Scene(new Group(), 800, 200);
 
         final ComboBox startB = new ComboBox();
