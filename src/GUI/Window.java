@@ -95,7 +95,6 @@ public class Window {
 					path = path+"\\";
 					try {
 						img = ImageIO.read(new File(Paths.get(path+"map.png").toString()));
-						System.out.println(path);
 						frame.setSize(img.getWidth()+8,img.getHeight()+93);
 						linePanel.addImage(img);
 						linePanel.repaint();
@@ -201,16 +200,7 @@ public class Window {
 								linePanel.repaint();
 								System.out.println("A* Complete");
 								List<String> directions = Main.getDirectionsList(nodes);
-								for(Node n: nodes)
-								{
-									System.out.println(n.xPos + ", " + n.yPos);
-
-
-								}
-								for(String s: directions)
-								{
-									System.out.println(s);
-								}
+	
 								nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 								shouldDraw = true;
 								DirectionsBox directionWindow = new DirectionsBox(directions);

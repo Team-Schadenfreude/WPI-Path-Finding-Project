@@ -201,90 +201,166 @@ public class Main {
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path)
 	{
-		List<String> directions = new ArrayList<String>();
-		if(path.size() == 0 || path.size() == 1)
+		List<String> directionsList = new ArrayList<String>();
+		if(path.size() == 0)
 		{
-			directions.add("Can't Generate Directions as no path was found");
-			return directions;
+			directionsList.add("There is no path to follow");
 		}
-		else if(path.size() == 2)
+//		else if (path.size() <= 2)
+//		{
+//			directionsList.add("Proceed straight to your destination");
+//		}
+		else
 		{
-			directions.add("Proceed straight on path");
-			return directions;
-		}
-		int prevAngle = 0;
-		String prevDirection = "";
-		for(int i = 0; i < path.size(); i++)
-		{
-			if (i == path.size() - 1)
+			double totalDistance = 0;
+			double distance = 0;
+			int prevAngle = 0;
+			int currentAngle = 0;
+			int prevDirVal = 0;
+			int dirVal = 0;
+			int deltaAngle = 0;
+			System.out.println("DeltaAngle");
+			for(int i = 0; i < path.size() -1 ; i++)
 			{
-				directions.add("Continue straight until you've have reached your destination");
-				break;
+				Node n1 = path.get(i);
+				Node n2 = path.get(i+1);
+				currentAngle = getAngle(n1, n2);
+				deltaAngle = 0;
+				deltaAngle = currentAngle - prevAngle;
+				double delta_angle_rad = (Math.PI / 180) * (double) deltaAngle;
+				deltaAngle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
+				dirVal = getDirectionValueFromAngle(deltaAngle);
+				if (i == 0)
+				{
+					deltaAngle = 0;
+					dirVal = 0;
+				}
+				if (dirVal != 0)
+				{
+					//i--;
+					totalDistance += distance;
+					String direction = getStringFromDirectionValue(prevDirVal);
+					directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+					distance = 0;
+					prevDirVal = dirVal;
+				}
+				prevAngle = currentAngle;
+				
+				distance += AStar.getDistance(n1, n2);
+				
 			}
-			Node n1 = path.get(i);
-			Node n2 = path.get(i+1);
-			int newAngle = getAngle(path.get(i), path.get(i+1));
-			int delta_angle = 0;
-			if (i != 0)
-			{
-				delta_angle = newAngle - prevAngle;
-				double delta_angle_rad = (Math.PI / 180) * (double) delta_angle;
-				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
-			}
-
-			// System.out.println(delta_angle);
-			String direction = getDirectionFromAngle(delta_angle);
-			double distance_x = ((double)(n2.xPos - n1.xPos) * .18) * 12;
-			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
-			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
-			String dist = String.format("%.2f", distance);
-			direction = direction + " walk " + dist + " ft";
-			//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
-			//			{
-			//				//Don't repeat straight directions
-			//			}
-			//			else
-			//			{
-			directions.add(direction);
-			//}
-			prevAngle = newAngle;
-			prevDirection = direction;
+			totalDistance += distance;
+			String direction = getStringFromDirectionValue(prevDirVal);
+			directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+			directionsList.add("Total Distance is " + Integer.toString((int)totalDistance) + "ft");
 		}
-		return directions;
+		return directionsList;
+		
+//		List<String> directions = new ArrayList<String>();
+//		if(path.size() == 0 || path.size() == 1)
+//		{
+//			directions.add("Can't Generate Directions as no path was found");
+//			return directions;
+//		}
+//		else if(path.size() == 2)
+//		{
+//			directions.add("Proceed straight on path");
+//			return directions;
+//		}
+//		int prevAngle = 0;
+//		String prevDirection = "";
+//		for(int i = 0; i < path.size(); i++)
+//		{
+//			if (i == path.size() - 1)
+//			{
+//				directions.add("Continue straight until you've have reached your destination");
+//				break;
+//			}
+//			Node n1 = path.get(i);
+//			Node n2 = path.get(i+1);
+//			int newAngle = getAngle(path.get(i), path.get(i+1));
+//			int delta_angle = 0;
+//			if (i != 0)
+//			{
+//				delta_angle = newAngle - prevAngle;
+//				double delta_angle_rad = (Math.PI / 180) * (double) delta_angle;
+//				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
+//			}
+//
+//			// System.out.println(delta_angle);
+//			String direction = getDirectionFromAngle(delta_angle);
+//			double distance_x = ((double)(n2.xPos - n1.xPos) * .18) * 12;
+//			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
+//			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
+//			String dist = String.format("%.2f", distance);
+//			direction = direction + " walk " + dist + " ft";
+//			//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
+//			//			{
+//			//				//Don't repeat straight directions
+//			//			}
+//			//			else
+//			//			{
+//			directions.add(direction);
+//			//}
+//			prevAngle = newAngle;
+//			prevDirection = direction;
+//		}
 	}
-	public static String getDirectionFromAngle(int angle)
+	public static int getDirectionValueFromAngle(int angle)
 	{
-		if (-30 < angle && angle < 30)//Going Straight
+		if (-20 < angle && angle < 20)//Going Straight
 		{
-			return "Go Straight";
+			return 0;
 		}
-		else if (30 <= angle && angle < 60)
+		else if (20 <= angle && angle < 60)
 		{
-			return "Slight right turn";
+			return 1;
 		}
 		else if (60 <= angle && angle < 120)
 		{
-			return "Right turn";
+			return 2;
 		}
 		else if (120 < angle && angle <= 180)
 		{
-			return "Sharp right turn";
+			return 3;
 		}
-		else if (-60 < angle && angle <= -30)
+		else if (-60 < angle && angle <= -20)
 		{
-			return "Slight left turn";
+			return 4;
 		}
 		else if (-120 < angle && angle <= -60)
 		{
-			return "Left turn";
+			return 5;
 		}
 		else if (-180 < angle && angle <= -120)
 		{
-			return "Sharp left turn";
+			return 6;
 		}
 		else
 		{
+			return 0; //GoingStraight
+		}
+	}
+	public static String getStringFromDirectionValue(int val)
+	{
+		switch(val)
+		{
+		case 0:
 			return "Go Straight";
+		case 1:
+			return "Slight right turn";
+		case 2:
+			return "Right turn";
+		case 3:
+			return "Sharp right turn";
+		case 4:
+			return "Slight left turn";
+		case 5:
+			return "Left turn";
+		case 6:
+			return "Sharp left turn";
+		default:
+			return ""; //GoingStraight
 		}
 	}
 	//Returns the angle between two nodes in degrees
