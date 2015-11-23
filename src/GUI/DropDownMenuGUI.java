@@ -13,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class ComboBoxSample extends Application {
+public class DropDownMenuGUI extends Application {
         public static void main(String[] args) {
         launch(args);
     }

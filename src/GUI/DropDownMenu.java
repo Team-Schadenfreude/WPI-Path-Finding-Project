@@ -130,11 +130,13 @@ public class DropDownMenu {
             }
         });
 	}
-}
-
-class ListNodes {
-	List<Node> nlist;
-	public ListNodes(List<Node> nlist) {
-		this.nlist = nlist;
+	
+	private class ListNodes {
+		List<Node> nlist;
+		public ListNodes(List<Node> nlist) {
+			this.nlist = nlist;
+		}
 	}
 }
+
+
