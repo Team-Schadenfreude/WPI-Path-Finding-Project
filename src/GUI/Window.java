@@ -199,7 +199,7 @@ public class Window {
 								//}
 								linePanel.repaint();
 								System.out.println("A* Complete");
-								List<String> directions = Main.getDirectionsList(nodes);
+								List<String> directions = Main.getDirectionsList(nodes, 2.16, 1.56 );
 	
 								nodeList = Main.readMap(path + "mapNodes.csv", path + "mapEdges.csv");
 								shouldDraw = true;

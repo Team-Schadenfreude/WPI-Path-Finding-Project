@@ -199,17 +199,13 @@ public class Main {
 	}
 
 	//Method to provide a list of directions from a list of nodes.
-	public static List<String> getDirectionsList(List<Node> path)
+	public static List<String> getDirectionsList(List<Node> path, double xScale, double yScale)
 	{
 		List<String> directionsList = new ArrayList<String>();
 		if(path.size() == 0)
 		{
 			directionsList.add("There is no path to follow");
 		}
-//		else if (path.size() <= 2)
-//		{
-//			directionsList.add("Proceed straight to your destination");
-//		}
 		else
 		{
 			double totalDistance = 0;
@@ -219,7 +215,6 @@ public class Main {
 			int prevDirVal = 0;
 			int dirVal = 0;
 			int deltaAngle = 0;
-			System.out.println("DeltaAngle");
 			for(int i = 0; i < path.size() -1 ; i++)
 			{
 				Node n1 = path.get(i);
@@ -237,7 +232,6 @@ public class Main {
 				}
 				if (dirVal != 0)
 				{
-					//i--;
 					totalDistance += distance;
 					String direction = getStringFromDirectionValue(prevDirVal);
 					directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
@@ -245,8 +239,9 @@ public class Main {
 					prevDirVal = dirVal;
 				}
 				prevAngle = currentAngle;
-				
-				distance += AStar.getDistance(n1, n2);
+				double distance_x = (double)(n2.xPos - n1.xPos) * xScale;
+				double distance_y = (double)(n2.yPos - n1.yPos) * yScale;
+				distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
 				
 			}
 			totalDistance += distance;
