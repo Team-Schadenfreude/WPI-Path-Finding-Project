@@ -29,6 +29,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import AStar.Node;
 import DataAccess.Building;
 import DataAccess.Room;
@@ -43,8 +44,6 @@ public class MainController implements Initializable{
     @FXML private MenuButton destMenu;
     @FXML private Canvas imageCanvas;
     List<Building> buildingList;
-    File file = new File("src/res/stratton_2.jpg");
-    final Image mapImage = new Image(file.toURI().toString());
     private boolean nodeSelect = false;
     Node startNode = null;
     Node goalNode = null;
@@ -56,10 +55,22 @@ public class MainController implements Initializable{
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	System.out.println("BeforePath");
-    	setupDropDowns("C:/Users/Stonemotmot/Desktop/Rooms.csv");
+    	startMenu.getItems().clear();
+    	destMenu.getItems().clear();
 	}
     @FXML 
     protected void handleLoadMap(ActionEvent event) {
+    	
+    	DirectoryChooser chooser = new DirectoryChooser();
+    	chooser.setTitle("JavaFX Projects");
+    	File defaultDirectory = new File("c:/");
+    	chooser.setInitialDirectory(defaultDirectory);
+    	File selectedDirectory = chooser.showDialog(Main.primaryStage);
+    	
+    	setupDropDowns(selectedDirectory + "\\Rooms.csv");
+    	System.out.println(selectedDirectory + "\\Rooms.csv");
+    	File file = new File(selectedDirectory + "\\map.png");
+    	Image mapImage = new Image(file.toURI().toString());
         mapView.setImage(mapImage);
         //readin data
         double viewHeight = (int) mapView.getBoundsInLocal().getHeight();

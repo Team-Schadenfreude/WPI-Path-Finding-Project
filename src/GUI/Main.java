@@ -30,6 +30,7 @@ public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
 	public static List<Node> testMap = new ArrayList<Node>();
+	public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
     }
