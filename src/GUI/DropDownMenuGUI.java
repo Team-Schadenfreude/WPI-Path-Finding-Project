@@ -27,6 +27,8 @@ public class DropDownMenuGUI extends Application {
         final ComboBox endB = new ComboBox();
         final ComboBox endR = new ComboBox();
         final Button submit = new Button("Submit");
+        final Button imFeelingLucky = new Button("I'm Feeling Lucky");
+        final Label notification = new Label();
        
         
         Node n1 = new Node(0, 1, "Fuller Labs 101");
@@ -66,7 +68,8 @@ public class DropDownMenuGUI extends Application {
         
         
         DropDownMenu ddm = new DropDownMenu(map);
-        ddm.setDropDownMenu(startB, startR, endB, endR, submit);
+        ddm.setDropDownMenu(startB, startR, endB, endR, submit, notification);
+        ddm.setImFeelingLuckyButton(imFeelingLucky, endB, endR);
         
         
 
@@ -83,6 +86,8 @@ public class DropDownMenuGUI extends Application {
         grid.add(new Label("End Room: "), 2, 2);
         grid.add(endR, 3, 2);
         grid.add(submit, 0, 4);
+        grid.add(imFeelingLucky, 1, 4);
+        grid.add(notification, 0, 5, 4, 1);
 
         Group root = (Group)scene.getRoot();
         root.getChildren().add(grid);

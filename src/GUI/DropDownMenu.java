@@ -3,6 +3,7 @@ package GUI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import AStar.Node;
 
@@ -13,7 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 
 public class DropDownMenu {
-	List<Node> nlist;
+	final List<Node> nlist;
 	
 	public DropDownMenu() {
 		this.nlist = Arrays.asList();
@@ -24,7 +25,7 @@ public class DropDownMenu {
 	}
 	
 	
-	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit) {
+	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit, final Label notification) {
 		
 		// construct a list with all the building names
 		List<String> buildings = Arrays.asList( 
@@ -48,7 +49,6 @@ public class DropDownMenu {
 		
 		StringBuilder start = new StringBuilder();
 		StringBuilder end = new StringBuilder();
-		ListNodes allNodes = new ListNodes(this.nlist);
 		List<String> sRooms = new ArrayList<String>();
 		List<String> eRooms = new ArrayList<String>();
 		
@@ -59,21 +59,23 @@ public class DropDownMenu {
 		// Set properties for the Start Building drop down
         startB.getItems().addAll(buildings);
         startB.setPromptText("Start Building");
-        startB.setEditable(true);
+        startB.setEditable(false);
         startB.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
             	start.delete(0, start.length());
             	start.append(t1);
             	sRooms.clear();
-            	for(Node n: allNodes.nlist) {
+            	for(Node n: nlist) {
                 	if (n.nodeName.contains(start.toString())) {
                 		sRooms.add(n.nodeName.replace(start.toString() + " ", ""));
 //                		System.out.println(n.nodeName.replace(start.toString() + " ", ""));
                 	}
                 };
-                for(String s: sRooms)
-                	System.out.println(s);
+//                for(String s: sRooms)
+//                	System.out.println(s);
             	startR.setDisable(false);
+            	startR.setValue(null);
+            	startR.setPromptText("Start Room");
             	startR.getItems().removeAll(startR.getItems());
             	startR.getItems().addAll(sRooms);
             }
@@ -81,32 +83,37 @@ public class DropDownMenu {
         
         // Set properties for the Start Room drop down
         startR.setPromptText("Start Room");
-        startR.setEditable(true);
+        startR.setEditable(false);
         startR.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-            	start.append(" ").append(t1);
-            	System.out.println(start.toString());
+            	start.delete(0, start.length());
+            	if (t1 != null && !t1.isEmpty()) {
+            		start.append(startB.getValue()).append(" ").append(t1);
+            		System.out.println(start.toString());
+            	}
             }
         });
         
         // Set properties for the End Building drop down
         endB.getItems().addAll(buildings);
         endB.setPromptText("End Building");
-        endB.setEditable(true);
+        endB.setEditable(false);
         endB.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
             	end.delete(0, end.length());
             	end.append(t1);
             	eRooms.clear();
-            	for(Node n: allNodes.nlist) {
+            	for(Node n: nlist) {
                 	if (n.nodeName.contains(end.toString())) {
                 		eRooms.add(n.nodeName.replace(end.toString() + " ", ""));
 //                		System.out.println(n.nodeName.replace(end.toString() + " ", ""));
                 	}
                 };
-                for(String s: eRooms)
-                	System.out.println(s);
+//                for(String s: eRooms)
+//                	System.out.println(s);
             	endR.setDisable(false);
+            	endR.setValue(null);
+            	endR.setPromptText("End Room");
             	endR.getItems().removeAll(endR.getItems());
             	endR.getItems().addAll(eRooms);
             }
@@ -114,11 +121,14 @@ public class DropDownMenu {
         
         // Set properties for the End Room drop down 
         endR.setPromptText("End Room");
-        endR.setEditable(true);
+        endR.setEditable(false);
         endR.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String t, String t1) {
-            	end.append(" ").append(t1);
-            	System.out.println(end.toString());
+            	end.delete(0, end.length());
+            	if (t1 != null && !t1.isEmpty()) {
+            		end.append(endB.getValue()).append(" ").append(t1);
+            		System.out.println(end.toString());
+            	}
             }
         });
         
@@ -126,16 +136,37 @@ public class DropDownMenu {
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-               
+               if (start.toString().equals(end.toString())) {
+            	   notification.setText("Please enter a different destination!");
+               }
+               else {
+            	   notification.setText("");
+               }
             }
         });
 	}
 	
-	private class ListNodes {
-		List<Node> nlist;
-		public ListNodes(List<Node> nlist) {
-			this.nlist = nlist;
-		}
+	
+	public void setImFeelingLuckyButton(final Button imFeelingLucky, final ComboBox endB, final ComboBox endR) {
+		
+		imFeelingLucky.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+            	Random random = new Random();
+            	int index = random.nextInt(nlist.size() - 1);
+            	String randEndLoc = nlist.get(index).nodeName;
+            	String delims = "[ ]+";
+            	String[] tokens = randEndLoc.split(delims);
+            	
+            	String randEndB = randEndLoc.replace(" " + tokens[tokens.length - 1], "");;
+            	String randEndR = tokens[tokens.length - 1];
+            	
+            	endB.setValue(randEndB);
+            	endB.setPromptText(randEndB);
+            	endR.setValue(randEndR);
+            	endR.setPromptText(randEndR);
+            }
+		});
 	}
 }
 
