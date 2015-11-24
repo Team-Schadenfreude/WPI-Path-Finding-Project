@@ -66,8 +66,6 @@ public class MainController implements Initializable{
     	double viewWidth = (int) mapView.getBoundsInLocal().getWidth();
     	scaleX = viewWidth / mapImage.getWidth();
     	scaleY = viewHeight / mapImage.getHeight();
-    	//anchorPaneScroll.setPrefWidth(viewWidth);
-    	//anchorPaneScroll.setPrefHeight(viewHeight);
     	System.out.println("X = " + scaleX);
     	System.out.println("Y = " + scaleY);
         drawNodeBtns(scaleX, scaleY, 30, Main.testMap);
@@ -86,7 +84,6 @@ public class MainController implements Initializable{
     }
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
-    	Color color = Color.web("#3366cc");
     	for(Node node : nodeList)
     	{
 			//Circle c = new Circle(node.xPos * scaleX, node.yPos * scaleY, 10, color);
@@ -128,7 +125,7 @@ public class MainController implements Initializable{
     	{
     		Node n1 = path.get(i);
     		Node n2 = path.get(i+1);
-    		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX - 10, n1.yPos * scaleY - 10, n2.xPos * scaleX - 10, n2.yPos * scaleY - 10);
+    		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX, n1.yPos * scaleY, n2.xPos * scaleX, n2.yPos * scaleY);
     	}
     }
     private void setupDropDowns(String path)
@@ -149,11 +146,13 @@ public class MainController implements Initializable{
     			mi1.setOnAction(new EventHandler<ActionEvent>() {
     			    @Override public void handle(ActionEvent e) {
     			    	startNode = Main.findNodeByName(Main.testMap, mi1.getText());
+    			    	System.out.println("Start Node Selected");
     			    }
     			});
     			mi2.setOnAction(new EventHandler<ActionEvent>() {
     			    @Override public void handle(ActionEvent e) {
     			        goalNode = Main.findNodeByName(Main.testMap, mi2.getText());
+    			        System.out.println("Goal Node Selected");
     			    }
     			});
     			rooms.getItems().add(mi1);
