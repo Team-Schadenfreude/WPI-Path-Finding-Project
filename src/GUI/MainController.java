@@ -11,7 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,15 +27,22 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import AStar.Node;
+import DataAccess.Building;
+import DataAccess.Room;
+import DataAccess.RoomReader;
 
 public class MainController implements Initializable{
     @FXML private AnchorPane anchorPane;
     @FXML private Button loadMapBtn;
+    @FXML private Button goBtn;
     @FXML private ImageView mapView;
-    @FXML private AnchorPane imageAnchorPane;
+    @FXML private MenuButton startMenu;
+    @FXML private MenuButton destMenu;
     @FXML private Canvas imageCanvas;
+    List<Building> buildingList;
     File file = new File("src/res/stratton_2.jpg");
     final Image mapImage = new Image(file.toURI().toString());
     private boolean nodeSelect = false;
@@ -43,8 +55,8 @@ public class MainController implements Initializable{
     }
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+    	System.out.println("BeforePath");
+    	setupDropDowns("C:/Users/Stonemotmot/Desktop/Rooms.csv");
 	}
     @FXML 
     protected void handleLoadMap(ActionEvent event) {
@@ -58,7 +70,7 @@ public class MainController implements Initializable{
     	//anchorPaneScroll.setPrefHeight(viewHeight);
     	System.out.println("X = " + scaleX);
     	System.out.println("Y = " + scaleY);
-        drawNodes(scaleX, scaleY, 30, Main.testMap);
+        drawNodeBtns(scaleX, scaleY, 30, Main.testMap);
     }
     @FXML 
     protected void handleRunAStar(ActionEvent event) {
@@ -72,7 +84,7 @@ public class MainController implements Initializable{
     		System.out.println(path);
     	}
     }
-    protected void drawNodes(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
+    protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
     	Color color = Color.web("#3366cc");
     	for(Node node : nodeList)
@@ -88,7 +100,6 @@ public class MainController implements Initializable{
 			btn.setMinSize(2*r, 2*r);
 			btn.setMaxSize(2*r, 2*r);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
-				 
 			    @Override
 			    public void handle(ActionEvent e) {
 			    	System.out.println("You Clicked Node " + btn.getId());
@@ -105,20 +116,53 @@ public class MainController implements Initializable{
 			    	}
 			    }
 			});
-			imageAnchorPane.getChildren().add(btn);
+			anchorPane.getChildren().add(btn);
     	}
     }
     protected void drawPath(double scaleX, double scaleY, List<Node> path)
     {	
     	imageCanvas.getGraphicsContext2D().clearRect(0, 0, imageCanvas.getWidth(), imageCanvas.getHeight());
-    	imageCanvas.setWidth(imageAnchorPane.getWidth());
-    	imageCanvas.setHeight(imageAnchorPane.getHeight());
+    	imageCanvas.setWidth(anchorPane.getWidth());
+    	imageCanvas.setHeight(anchorPane.getHeight());
     	for(int i = 0; i < path.size() - 1; i++)
     	{
     		Node n1 = path.get(i);
     		Node n2 = path.get(i+1);
     		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX - 10, n1.yPos * scaleY - 10, n2.xPos * scaleX - 10, n2.yPos * scaleY - 10);
     	}
+    }
+    private void setupDropDowns(String path)
+    {
+    	buildingList = RoomReader.getBuildingList(path);
+    	startMenu.getItems().clear();
+    	destMenu.getItems().clear();
+    	for (Building b : buildingList)
+    	{
+    		Menu rooms = new Menu();
+    		Menu rooms2 = new Menu();
+    		rooms.setText(b.getName());
+    		rooms2.setText(b.getName());
+    		for (Room r : b.getRooms())
+    		{
+    			MenuItem mi1 = new MenuItem(r.getName());
+    			MenuItem mi2 = new MenuItem(r.getName());
+    			mi1.setOnAction(new EventHandler<ActionEvent>() {
+    			    @Override public void handle(ActionEvent e) {
+    			    	startNode = Main.findNodeByName(Main.testMap, mi1.getText());
+    			    }
+    			});
+    			mi2.setOnAction(new EventHandler<ActionEvent>() {
+    			    @Override public void handle(ActionEvent e) {
+    			        goalNode = Main.findNodeByName(Main.testMap, mi2.getText());
+    			    }
+    			});
+    			rooms.getItems().add(mi1);
+    			rooms2.getItems().add(mi2);
+    		}
+    		startMenu.getItems().add(rooms);
+    		destMenu.getItems().add(rooms2);
+    	}
+    	
     }
 
 }

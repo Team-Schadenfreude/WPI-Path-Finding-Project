@@ -70,6 +70,7 @@ public class Main extends Application {
         testMap.add(e);
         testMap.add(f);
         testMap.add(g);
+        
     }
    
 	private static List<Node> getNodesFromFile(String filePath)
