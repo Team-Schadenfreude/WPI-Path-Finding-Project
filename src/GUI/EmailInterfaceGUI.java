@@ -1,3 +1,8 @@
+
+
+/* Need to Install JavaMail API on your local machine in order to use this functionality */
+
+
 package GUI;
 
 import javafx.application.Application;
@@ -25,7 +30,7 @@ public class EmailInterfaceGUI extends Application{
 	    final Button send = new Button ("Send");
 	    final Label notification = new Label ();
 	    
-	    SendingEmail.generateAndSendEmail(toAddr, ccAddr, subject, content, send, notification);	    
+	    EmailSending.generateAndSendEmail(toAddr, ccAddr, subject, content, send, notification);	    
 	
 	    GridPane grid = new GridPane();
 	    grid.setVgap(4);
