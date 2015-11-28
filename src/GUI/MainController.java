@@ -36,6 +36,7 @@ import DataAccess.Room;
 import DataAccess.RoomReader;
 
 public class MainController implements Initializable{
+	//FXML Layout Objects
     @FXML private AnchorPane anchorPane;
     @FXML private Button loadMapBtn;
     @FXML private Button goBtn;
@@ -43,21 +44,28 @@ public class MainController implements Initializable{
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
     @FXML private Canvas imageCanvas;
+    //The list of all buildings on Campus
     List<Building> buildingList;
+    //Boolean marking a node as selected
     private boolean nodeSelect = false;
+    //The start and end nodes for AStar
     Node startNode = null;
     Node goalNode = null;
+    //Global Scale Values
     private double scaleX = 1;
     private double scaleY = 1;
+    //Default constructor for the Main Controller
     public MainController(){
     	
     }
+    //Function called on initialization of a Main Controller object
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
 	}
+    //Action handler for the load map button
     @FXML 
     protected void handleLoadMap(ActionEvent event) {
     	
@@ -81,6 +89,7 @@ public class MainController implements Initializable{
     	System.out.println("Y = " + scaleY);
         drawNodeBtns(scaleX, scaleY, 30, Main.testMap);
     }
+    //Action Handler for the Run AStar (GO) Button
     @FXML 
     protected void handleRunAStar(ActionEvent event) {
     	if (startNode != null && goalNode != null)
@@ -93,6 +102,7 @@ public class MainController implements Initializable{
     		System.out.println(path);
     	}
     }
+    //Function to generate buttons at each accessible node on the map
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
     	for(Node node : nodeList)
@@ -127,6 +137,8 @@ public class MainController implements Initializable{
 			anchorPane.getChildren().add(btn);
     	}
     }
+    
+    //Function to draw the Path from Node to Node
     protected void drawPath(double scaleX, double scaleY, List<Node> path)
     {	
     	imageCanvas.getGraphicsContext2D().clearRect(0, 0, imageCanvas.getWidth(), imageCanvas.getHeight());
@@ -139,6 +151,7 @@ public class MainController implements Initializable{
     		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX, n1.yPos * scaleY, n2.xPos * scaleX, n2.yPos * scaleY);
     	}
     }
+    //Function to setup the draw down menus for node selection
     private void setupDropDowns(String path)
     {
     	buildingList = RoomReader.getBuildingList(path);
@@ -146,7 +159,7 @@ public class MainController implements Initializable{
     	destMenu.getItems().clear();
     	for (Building b : buildingList)
     	{
-    		Menu rooms = new Menu();
+    		Menu rooms = new Menu();//Need to use two distinct objects otherwise conflicts occur
     		Menu rooms2 = new Menu();
     		rooms.setText(b.getName());
     		rooms2.setText(b.getName());

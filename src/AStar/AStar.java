@@ -120,56 +120,29 @@ public class AStar{
 			//here we are checking every edge of every neighboring node for the node we are searching for
 			
 			
-			for(Node neighbor : current.neighbors){
+			for(Node neighbor : current.neighbors){ //Check the neighbor nodes
 				
-				if(checkedNodes.contains(neighbor))
+				if(checkedNodes.contains(neighbor)) //If neighbor has already been checked
 				{
 					continue;
 				}
-				double gScoreTemp = current.gValue + getGValue(current, neighbor);
-				if(!queue.contains(neighbor))
+				double gScoreTemp = current.gValue + getGValue(current, neighbor); //Get the tentative G-Value
+				if(!queue.contains(neighbor)) //If not in the que add the neighbor to the queue
 				{
 					neighbor.gValue = gScoreTemp;
 					neighbor.hValue = getHValue(neighbor, end);
 					neighbor.fValue = neighbor.gValue + neighbor.hValue;
 					queue.add(neighbor);
 				}
-				else if(gScoreTemp > neighbor.gValue)
+				else if(gScoreTemp > neighbor.gValue) 
 				{
 					continue; //Bad path
 				}
-				neighbor.parent = current;
+				neighbor.parent = current; //Update the neighbors values
 
 				neighbor.gValue = gScoreTemp;
 				neighbor.hValue = getHValue(neighbor, end);
 				neighbor.fValue = neighbor.gValue + neighbor.hValue;
-				//if a child has already been checked and the fScore is greater, than we dont want to process that node
-				//since the node is further away from our end node
-//				if((checkedNodes.contains(neighbor)) && 
-//						(fScoreTemp >= neighbor.fValue)){
-//					continue;
-//				}
-//
-//				//if the queue does not contain the neighbor node and the new fValue
-//				//is lower, then we DO want to process the node
-//				else if((!queue.contains(neighbor)) || 
-//						(fScoreTemp < neighbor.fValue)){
-//
-//					//set the parent node to the current node so that we evaluate this new node
-//					neighbor.parent = current;
-//					neighbor.gValue = gScoreTemp;
-//					neighbor.fValue = fScoreTemp;
-//
-//					
-//					//if the queue already contains the neighbor node, then remove it
-//					if(queue.contains(neighbor)){
-//						queue.remove(neighbor);
-//					}
-//
-//					//otherwise add the new neighbor to the queue
-//					queue.add(neighbor);
-//
-//				}
 
 			}
 
