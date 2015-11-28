@@ -100,6 +100,7 @@ public class MainController implements Initializable{
     		goalNode = null;
     		System.out.println("The Path is");
     		System.out.println(path);
+    		
     	}
     }
     //Function to generate buttons at each accessible node on the map
