@@ -74,9 +74,8 @@ public class MainController implements Initializable{
     	File defaultDirectory = new File("c:/");
     	chooser.setInitialDirectory(defaultDirectory);
     	File selectedDirectory = chooser.showDialog(Main.primaryStage);
-    	
-    	setupDropDowns(selectedDirectory + "\\Rooms.csv");
     	System.out.println(selectedDirectory + "\\Rooms.csv");
+    	setupDropDowns(selectedDirectory + "\\Rooms.csv");
     	File file = new File(selectedDirectory + "\\map.png");
     	Image mapImage = new Image(file.toURI().toString());
         mapView.setImage(mapImage);
@@ -160,31 +159,37 @@ public class MainController implements Initializable{
     	destMenu.getItems().clear();
     	for (Building b : buildingList)
     	{
-    		Menu rooms = new Menu();//Need to use two distinct objects otherwise conflicts occur
-    		Menu rooms2 = new Menu();
-    		rooms.setText(b.getName());
-    		rooms2.setText(b.getName());
-    		for (Room r : b.getRooms())
+    		if (b.getRooms() != null) //This needs to be here
     		{
-    			MenuItem mi1 = new MenuItem(r.getName());
-    			MenuItem mi2 = new MenuItem(r.getName());
-    			mi1.setOnAction(new EventHandler<ActionEvent>() {
-    			    @Override public void handle(ActionEvent e) {
-    			    	startNode = Main.findNodeByName(Main.testMap, mi1.getText());
-    			    	System.out.println("Start Node Selected");
-    			    }
-    			});
-    			mi2.setOnAction(new EventHandler<ActionEvent>() {
-    			    @Override public void handle(ActionEvent e) {
-    			        goalNode = Main.findNodeByName(Main.testMap, mi2.getText());
-    			        System.out.println("Goal Node Selected");
-    			    }
-    			});
-    			rooms.getItems().add(mi1);
-    			rooms2.getItems().add(mi2);
+    			Menu rooms = new Menu();//Need to use two distinct objects otherwise conflicts occur
+        		Menu rooms2 = new Menu();
+        		rooms.setText(b.getName());
+        		rooms2.setText(b.getName());
+    			for (Room r : b.getRooms())
+        		{
+        			MenuItem mi1 = new MenuItem(r.getName());
+        			MenuItem mi2 = new MenuItem(r.getName());
+        			mi1.setOnAction(new EventHandler<ActionEvent>() {
+        			    @Override public void handle(ActionEvent e) {
+        			    	startNode = Main.findNodeByName(Main.testMap, mi1.getText());
+        			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+        			    	System.out.println("Start Node Selected");
+        			    }
+        			});
+        			mi2.setOnAction(new EventHandler<ActionEvent>() {
+        			    @Override public void handle(ActionEvent e) {
+        			        goalNode = Main.findNodeByName(Main.testMap, mi2.getText());
+        			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+        			        System.out.println("Goal Node Selected");
+        			    }
+        			});
+        			rooms.getItems().add(mi1);
+        			rooms2.getItems().add(mi2);
+        		}
+        		startMenu.getItems().add(rooms);
+        		destMenu.getItems().add(rooms2);
     		}
-    		startMenu.getItems().add(rooms);
-    		destMenu.getItems().add(rooms2);
+    		
     	}
     	
     }

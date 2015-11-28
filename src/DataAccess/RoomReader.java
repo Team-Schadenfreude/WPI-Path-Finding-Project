@@ -22,6 +22,12 @@ public class RoomReader {
 			br = new BufferedReader(new FileReader(path));
 			int i = 0;
 			while ((line = br.readLine()) != null) {
+				System.out.println(i);
+				if (i == 179)
+				{
+					int a = 0;
+					System.out.println(a);
+				}
 				// use comma as separator
 				String[] buildingData = line.split(delimiter);
 				if (i == buildingLineNum)
@@ -37,7 +43,7 @@ public class RoomReader {
 					{
 						for (int j = 0; j < buildingData.length; j++)
 						{
-							if (buildingData[j] != " " &&  buildingData[j].length() != 0 && j < buildingList.size())
+							if (buildingData[j] != " " &&  buildingData[j].length() != 0 && buildingData[j] != "" && j < buildingList.size())
 							{
 								if (buildingList.get(j).getRooms() == null)
 								{
