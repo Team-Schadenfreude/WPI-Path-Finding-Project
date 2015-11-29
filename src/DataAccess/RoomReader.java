@@ -22,7 +22,6 @@ public class RoomReader {
 			br = new BufferedReader(new FileReader(path));
 			int i = 0;
 			while ((line = br.readLine()) != null) {
-				System.out.println(i);
 				if (i == 179)
 				{
 					int a = 0;

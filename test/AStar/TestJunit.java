@@ -19,9 +19,9 @@ public class TestJunit {
 	public void test_mcc_1() { // Test for horizontal nodes where path is curved
 		Settings defaultSettings = new Settings(false, false, false);
 		List<Node> map = new ArrayList<Node>();
-		Node a = new Node(0, 0, "A");
-		Node b = new Node(1, 0, "B");
-		Node c = new Node(2, 0, "C");
+		Node a = new Node("A", 0, 0,0, "test");
+		Node b = new Node("B", 1, 0,0, "test");
+		Node c = new Node("C", 2, 0,0, "test");
 		a.neighbors = new ArrayList<>(Arrays.asList(c));
 		b.neighbors = new ArrayList<>(Arrays.asList(c));
 		c.neighbors = new ArrayList<>(Arrays.asList(b, a));
@@ -48,13 +48,13 @@ public class TestJunit {
 		Settings defaultSettings = new Settings(false, false, false);
 		List<Node> map = new ArrayList<Node>();
 
-		Node a = new Node(0, 0, "A");
-		Node b = new Node(-1, 1, "B");
-		Node c = new Node(0, 1, "C");
-		Node d = new Node(1, 0, "D");
-		Node e = new Node(2, 1, "E");
-		Node f = new Node(-1, 2, "F");
-		Node g = new Node(0, 3, "G");
+		Node a = new Node("A", 0, 0,0, "test");
+		Node b = new Node("B",-1, 1,0, "test");
+		Node c = new Node("C", 0, 1,0, "test");
+		Node d = new Node("D",1, 0,0, "test");
+		Node e = new Node("E",2, 1,0, "test");
+		Node f = new Node("F",-1, 2,0, "test");
+		Node g = new Node("G",0, 3,0, "test");
 		// Goal = g; Start = A
 		a.neighbors = new ArrayList<>(Arrays.asList(b, c));
 		b.neighbors = new ArrayList<>(Arrays.asList(a, f, g));

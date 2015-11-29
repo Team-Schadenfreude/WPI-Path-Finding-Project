@@ -30,6 +30,7 @@ public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
 	public static List<Node> testMap = new ArrayList<Node>();
+	public static List<Node> mainMap = new ArrayList<Node>();
 	public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
@@ -45,13 +46,13 @@ public class Main extends Application {
        
         stage.show();
         //Image is 3300 1450
-        Node a = new Node(127, 807, "a");
-        Node b = new Node(1061, 807, "b");
-        Node c = new Node(1061, 612, "c");
-        Node d = new Node(3125, 612, "d");
-        Node e = new Node(1093, 945, "e");
-        Node f = new Node(1073, 293, "f");
-        Node g = new Node(3117, 317, "g");
+        Node a = new Node("a",127, 807,0, "test");
+        Node b = new Node("b",1061, 807,0, "test");
+        Node c = new Node("c",1061, 612,0, "test");
+        Node d = new Node("d",3125, 612,0, "test");
+        Node e = new Node("e",1093, 945,0, "test");
+        Node f = new Node("f",1073, 293,0, "test");
+        Node g = new Node("g",3117, 317,0, "test");
         a.neighbors.add(b);
         b.neighbors.add(a);
         b.neighbors.add(c);
@@ -74,7 +75,7 @@ public class Main extends Application {
         
     }
    
-	private static List<Node> getNodesFromFile(String filePath)
+	public static List<Node> getNodesFromFile(String filePath)
 	{
 		List<Node> nodeList = new ArrayList<Node>();
 		BufferedReader br = null;
@@ -83,8 +84,10 @@ public class Main extends Application {
 		int nodeNameIndex = 0;
 		int nodeXIndex = 1;
 		int nodeYIndex = 2;
-		int nodeDescIndex = 3;
-
+		int nodeZIndex = 3;
+		int nodeMapIndex = 4;
+		int nodeDescIndex = 5;
+		int nodeTransferIndex = 6;
 		try {
 
 			br = new BufferedReader(new FileReader(filePath));
@@ -95,8 +98,11 @@ public class Main extends Application {
 				String name = nodeData[nodeNameIndex];
 				int x = Integer.parseInt(nodeData[nodeXIndex]);
 				int y = Integer.parseInt(nodeData[nodeYIndex]);
+				int z = Integer.parseInt(nodeData[nodeZIndex]);
+				String mapName = nodeData[nodeMapIndex];
 				String description = nodeData[nodeDescIndex];
-				Node newNode = new Node(name,0,0,0,false, x, y, description);
+				boolean transferNode = nodeData[nodeTransferIndex] == "TRUE" ? true : false;
+				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
 				nodeList.add(newNode);
 			}
 
@@ -114,15 +120,19 @@ public class Main extends Application {
 	}
 
 
-	private static void connectEdgesFromFile(List<Node> nodeList, String filePath)
+	public static void connectEdgesFromFile(List<Node> nodeList, String filePath)
 	{
 		BufferedReader br = null;
 		String line = "";
 		String delimiter = ",";
 		int edgeX1Index = 0;
 		int edgeY1Index = 1;
-		int edgeX2Index = 2;
-		int edgeY2Index = 3;
+		int edgeZ1Index = 2;
+		int edgeMap1Index = 3;
+		int edgeX2Index = 4;
+		int edgeY2Index = 5;
+		int edgeZ2Index = 6;
+		int edgeMap2Index = 7;
 
 		try {
 
@@ -133,10 +143,14 @@ public class Main extends Application {
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
+				int z1 = Integer.parseInt(edgeData[edgeZ1Index]);
+				String nodeMap1 = edgeData[edgeMap1Index];
 				int x2 = Integer.parseInt(edgeData[edgeX2Index]);
 				int y2 = Integer.parseInt(edgeData[edgeY2Index]);
-				Node n1 = findNodeByXY(nodeList, x1, y1);
-				Node n2 = findNodeByXY(nodeList, x2, y2);
+				int z2 = Integer.parseInt(edgeData[edgeZ2Index]);
+				String nodeMap2 = edgeData[edgeMap2Index];
+				Node n1 = findNodeByXYZinMap(nodeList, x1, y1, z1, nodeMap1);
+				Node n2 = findNodeByXYZinMap(nodeList, x2, y2, z2, nodeMap2);
 				if (n1.neighbors == null)
 				{
 					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));
@@ -181,8 +195,6 @@ public class Main extends Application {
 
 				// use comma as separator
 				String[] scaleData = line.split(delimiter);
-				System.out.println("ScaleSize");
-				System.out.println(scaleData);
 				String xScale_char = scaleData[0];
 				String yScale_char = scaleData[1];
 				int xScale = Integer.parseInt(xScale_char);
@@ -190,8 +202,6 @@ public class Main extends Application {
 				scaleList.add(xScale);
 				scaleList.add(yScale);
 			}
-			System.out.println("Scale");
-			System.out.println(scaleList);
 
 		} 
 		catch (FileNotFoundException e) {e.printStackTrace();} 
@@ -205,10 +215,10 @@ public class Main extends Application {
 		}
 		return scaleList;
 	}
-	public static Node findNodeByXY(List<Node> nodeList, int x, int y)//Want to change this to throwing an exception when the node is not found
+	public static Node findNodeByXYZinMap(List<Node> nodeList, int x, int y, int z, String nodeMap)//Want to change this to throwing an exception when the node is not found
 	{
 		for(Node n : nodeList){
-			if(n.xPos == x && n.yPos == y)
+			if(n.xPos == x && n.yPos == y && n.zPos == z && n.map.equals(nodeMap))
 			{
 				return n;
 			}
