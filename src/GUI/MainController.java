@@ -167,15 +167,11 @@ public class MainController implements Initializable{
 				imageCanvas.setHeight(height);
 				firstRun = false;
 			}
-			System.out.println(width);
-			System.out.println(height);
-			System.out.println(image.getX());
-			System.out.println(image.getY());
-			System.out.println(image.getAngle());
 			GraphicsContext gc = imageCanvas.getGraphicsContext2D();
 			Rotate r = new Rotate(image.getAngle(), image.getX(), image.getY());
 	        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 			gc.drawImage(image, image.getX(), image.getY(), width, height);
+			scrollAnchorPane.
 			gc.restore();
     	}
     }
