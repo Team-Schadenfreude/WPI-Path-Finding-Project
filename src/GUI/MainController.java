@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,12 +38,14 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Scale;
 import javafx.stage.DirectoryChooser;
 import AStar.Node;
 import DataAccess.AngledImage;
 import DataAccess.Building;
 import DataAccess.Room;
 import DataAccess.RoomReader;
+import GUI.ZoomingPane;
 
 public class MainController implements Initializable{
 	//FXML Layout Objects
@@ -53,7 +56,9 @@ public class MainController implements Initializable{
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
     @FXML private Canvas imageCanvas;
-    @FXML private AnchorPane scrollAnchorPane;
+    @FXML private ScrollPane imageScrollPane;
+    //Scale s = new Scale(2,2);
+    private ZoomingPane imageZoomPane;
     //The list of all buildings on Campus
     List<Building> buildingList;
     //List of Map Images with index 0 being the primary map
@@ -76,6 +81,8 @@ public class MainController implements Initializable{
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
+    	//imageCanvas.getTransforms().add(s);
+    	//imageScrollPane.setContent(scrollAnchorPane);
 	}
     
     private File getDirectoryFromDialog()
@@ -91,7 +98,6 @@ public class MainController implements Initializable{
     protected void handleLoadMap(ActionEvent event) {
     	
     	File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
-    	
     	setupDropDowns(selectedDirectory + "\\Rooms.csv"); //Read in list of all rooms on campus
     	
     	for (File file : selectedDirectory.listFiles()) //Find each sub map in supermap and read in nodes
@@ -127,27 +133,10 @@ public class MainController implements Initializable{
     			}
     		}
     	}
-    	
-    	drawMap(mapImages);   	
-    	
-    	
-//    	String mapPath = selectedDirectory + "\\map.png";
-//    	
-//    	File file = new File(mapPath);
-//    	Image mapImage = new Image(file.toURI().toString());
-//        mapView.setImage(mapImage);
-//        //readin data
-//        double viewHeight = (int) mapView.getBoundsInLocal().getHeight();
-//    	double viewWidth = (int) mapView.getBoundsInLocal().getWidth();
-//    	scaleX = viewWidth / mapImage.getWidth();
-//    	scaleY = viewHeight / mapImage.getHeight();
-//    	System.out.println("X = " + scaleX);
-//    	System.out.println("Y = " + scaleY);
-//        
-//        Main.mainMap = Main.readMap(nodePath, edgePath);
-//        
-//        drawNodeBtns(scaleX, scaleY, 30, Main.mainMap);
-        //mapView.setRotate(40);
+    	  	
+    	imageZoomPane = new ZoomingPane(imageCanvas);
+    	imageScrollPane.setContent(imageZoomPane);
+    	drawMap(mapImages); 
     }
     
     public void drawMap(List<AngledImage> images)
@@ -159,21 +148,38 @@ public class MainController implements Initializable{
 			int height = (int) (image.getScaleY() * image.getHeight());
 			if (firstRun)
 			{
-				scrollAnchorPane.setMaxWidth(width);
-				scrollAnchorPane.setPrefWidth(width);
-				scrollAnchorPane.setMaxHeight(height);
-				scrollAnchorPane.setPrefHeight(height);
 				imageCanvas.setWidth(width);
 				imageCanvas.setHeight(height);
+				imageScrollPane.setMaxSize(width, height);
 				firstRun = false;
 			}
 			GraphicsContext gc = imageCanvas.getGraphicsContext2D();
 			Rotate r = new Rotate(image.getAngle(), image.getX(), image.getY());
 	        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 			gc.drawImage(image, image.getX(), image.getY(), width, height);
-			scrollAnchorPane.
 			gc.restore();
     	}
+    }
+    boolean first = true;
+  //Action handler for the zooming in of the map
+    @FXML 
+    protected void handleZoomIn(ActionEvent event) {
+    	double value = imageZoomPane.getZoomFactor() + .1;
+    	if (value > 4)
+    	{
+    		value = 4;
+    	}
+    	imageZoomPane.setZoomFactor(value);
+    }
+    //Action handler for the zooming out of the map
+    @FXML 
+    protected void handleZoomOut(ActionEvent event) {
+    	double value = imageZoomPane.getZoomFactor() - .1;
+    	if (value < 1)
+    	{
+    		value = 1;
+    	}
+    	imageZoomPane.setZoomFactor(value);
     }
     private void updateImageValuesFromFile(AngledImage img, String path)
     {
