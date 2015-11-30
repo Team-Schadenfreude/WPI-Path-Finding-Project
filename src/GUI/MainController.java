@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -28,8 +30,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -39,6 +43,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
 import javafx.stage.DirectoryChooser;
 import AStar.Node;
 import DataAccess.AngledImage;
@@ -57,7 +62,10 @@ public class MainController implements Initializable{
     @FXML private MenuButton destMenu;
     @FXML private Canvas imageCanvas;
     @FXML private ScrollPane imageScrollPane;
+    private List<Group> displayGroups = new LinkedList<Group>();
+    private Group mainGroup = new Group();
     //Scale s = new Scale(2,2);
+    private StackPane imageStackPane = new StackPane();
     private ZoomingPane imageZoomPane;
     //The list of all buildings on Campus
     List<Building> buildingList;
@@ -133,10 +141,14 @@ public class MainController implements Initializable{
     			}
     		}
     	}
-    	  	
-    	imageZoomPane = new ZoomingPane(imageCanvas);
+    	
+    	drawMap(mapImages);
+    	Collections.reverse(displayGroups);
+    	imageStackPane.getChildren().addAll(displayGroups);
+    	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
-    	drawMap(mapImages); 
+    	//Canvas tmp = (Canvas) ((Group)mainGroup.getChildren().get(1)).getChildren().get(1);
+    	//tmp.getGraphicsContext2D().rect(20, 20, 600, 600);
     }
     
     public void drawMap(List<AngledImage> images)
@@ -146,25 +158,42 @@ public class MainController implements Initializable{
     	{
 			int width = (int) (image.getScaleX() * image.getWidth());
 			int height = (int) (image.getScaleY() * image.getHeight());
+			Canvas c = new Canvas(image.getWidth(), image.getHeight());
+			
 			if (firstRun)
 			{
 				imageCanvas.setWidth(width);
 				imageCanvas.setHeight(height);
-				imageScrollPane.setMaxSize(width, height);
 				firstRun = false;
 			}
-			GraphicsContext gc = imageCanvas.getGraphicsContext2D();
-			Rotate r = new Rotate(image.getAngle(), image.getX(), image.getY());
-	        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-			gc.drawImage(image, image.getX(), image.getY(), width, height);
-			gc.restore();
+			else
+			{
+				c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						//mainGroup.setRotate(c.getParent().getRotate());
+						//System.out.println(c.getParent().getRotate());
+					}});
+			}
+			ImageView im = new ImageView(image);
+			Rotate r = new Rotate(image.getAngle());
+			Group g = new Group();
+			g.getChildren().add(im);
+			g.getChildren().add(c);
+			g.getTransforms().add(r);
+			//g.setRotate(image.getAngle());
+			g.getTransforms().add(new Scale(image.getScaleX(), image.getScaleY()));
+			g.setTranslateX(image.getX());
+			g.setTranslateY(image.getY());
+			mainGroup.getChildren().add(g);
     	}
+    	System.out.println("Here");
+    	System.out.println(displayGroups);
     }
-    boolean first = true;
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() + .1;
+    	double value = imageZoomPane.getZoomFactor() + .5;
     	if (value > 4)
     	{
     		value = 4;
@@ -174,7 +203,7 @@ public class MainController implements Initializable{
     //Action handler for the zooming out of the map
     @FXML 
     protected void handleZoomOut(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() - .1;
+    	double value = imageZoomPane.getZoomFactor() - .5;
     	if (value < 1)
     	{
     		value = 1;
