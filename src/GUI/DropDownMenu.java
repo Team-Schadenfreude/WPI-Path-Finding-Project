@@ -14,18 +14,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 
 public class DropDownMenu {
-	final List<Node> nlist;
-	
-	public DropDownMenu() {
-		this.nlist = Arrays.asList();
-	}
-	
-	public DropDownMenu(List<Node> nlist) {
-		this.nlist = nlist;
-	}
-	
-	
-	public void setDropDownMenu(final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit, final Label notification) {
+
+	public static void setDropDownMenu(final List<Node> nlist, final ComboBox startB, final ComboBox startR, final ComboBox endB, final ComboBox endR, final Button submit, final Label notification) {
 		
 		// construct a list with all the building names
 		List<String> buildings = Arrays.asList( 
@@ -144,29 +134,6 @@ public class DropDownMenu {
                }
             }
         });
-	}
-	
-	
-	public void setImFeelingLuckyButton(final Button imFeelingLucky, final ComboBox endB, final ComboBox endR) {
-		
-		imFeelingLucky.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-            	Random random = new Random();
-            	int index = random.nextInt(nlist.size() - 1);
-            	String randEndLoc = nlist.get(index).nodeName;
-            	String delims = "[ ]+";
-            	String[] tokens = randEndLoc.split(delims);
-            	
-            	String randEndB = randEndLoc.replace(" " + tokens[tokens.length - 1], "");;
-            	String randEndR = tokens[tokens.length - 1];
-            	
-            	endB.setValue(randEndB);
-            	endB.setPromptText(randEndB);
-            	endR.setValue(randEndR);
-            	endR.setPromptText(randEndR);
-            }
-		});
 	}
 }
 

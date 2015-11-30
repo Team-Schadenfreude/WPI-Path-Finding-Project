@@ -66,10 +66,9 @@ public class DropDownMenuGUI extends Application {
         map.add(n15);
         map.add(n16);
         
-        
-        DropDownMenu ddm = new DropDownMenu(map);
-        ddm.setDropDownMenu(startB, startR, endB, endR, submit, notification);
-        ddm.setImFeelingLuckyButton(imFeelingLucky, endB, endR);
+
+        DropDownMenu.setDropDownMenu(map, startB, startR, endB, endR, submit, notification);
+        ImFeelingLuckyButton.setImFeelingLuckyButton(map, imFeelingLucky, endB, endR);
         
         
 
