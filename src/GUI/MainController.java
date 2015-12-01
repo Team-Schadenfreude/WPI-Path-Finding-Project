@@ -47,6 +47,7 @@ public class MainController implements Initializable{
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
     @FXML private ScrollPane imageScrollPane;
+    @FXML private MenuButton floorSelectionMenu;
     private List<Group> displayGroups = new LinkedList<Group>();
     private Group mainGroup = new Group();
     //Scale s = new Scale(2,2);
@@ -69,6 +70,7 @@ public class MainController implements Initializable{
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
+    	floorSelectionMenu.getItems().clear();
     	//imageCanvas.getTransforms().add(s);
     	//imageScrollPane.setContent(scrollAnchorPane);
 	}
@@ -178,12 +180,17 @@ public class MainController implements Initializable{
 			buildGroup.setTranslateX(b.getX());
 			buildGroup.setTranslateY(b.getY());
 			buildGroup.setId(b.getName());
+			if (!buildGroup.getId().equals("Campus"))
+    		{
+    			buildGroup.setOpacity(0);
+    		}
 			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
 					//mainGroup.setRotate(- image.getAngle());
+					buildGroup.setOpacity(1);
 					imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
-
+					setupFloorSelection(buildGroup);
 					centerNodeInScrollPane(imageScrollPane, buildGroup);
 					double minX =buildGroup.getBoundsInParent().getMinX();
 					double maxX = buildGroup.getBoundsInParent().getMaxX();
@@ -217,7 +224,29 @@ public class MainController implements Initializable{
         double hor = scrollPane.getViewportBounds().getWidth();
         scrollPane.setHvalue(scrollPane.getHmax() * ((x - 0.5 * hor) / (w - hor)));
     }
-    
+    private void setupFloorSelection(Group g)
+    {
+    	floorSelectionMenu.getItems().clear();
+    	for(javafx.scene.Node f : g.getChildren())
+    	{
+    		MenuItem mi = new MenuItem(f.getId());
+    		mi.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			    	setNodesVisible(g.getChildren(), 0);
+			    	f.setOpacity(1);
+			    	floorSelectionMenu.setText(mi.getText());
+			    }
+			});
+    		floorSelectionMenu.getItems().add(mi);
+    	}
+    }
+    private void setNodesVisible(List<javafx.scene.Node> nodes, double oppacity)
+    {
+    	for (javafx.scene.Node n : nodes)
+    	{
+    		n.setOpacity(oppacity);
+    	}
+    }
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
@@ -335,31 +364,38 @@ public class MainController implements Initializable{
     //Function to draw the Path from Node to Node
     protected void drawPath(List<Node> path)
     {
-    	Canvas activeCanvas = findMapCanvas(path.get(0).map);
-    	clearAllCanvas();
-    	boolean first = true;
-    	Node prevNode = null;
-    	for(Node node : path)
+    	if (path.size() > 0)
     	{
-    		if (first)
-    		{
-    			first = false;
-    			//do nothing
-    		}
-    		else if (node.isTransitionNode && prevNode.isTransitionNode)
-    		{
-    			System.out.println("Map name is : " + node.map);
-    			activeCanvas = findMapCanvas(node.map);
-    	    	activeCanvas.getGraphicsContext2D().clearRect(0, 0, activeCanvas.getWidth(), activeCanvas.getHeight());
-    		}
-    		else
-    		{
-    			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-    			gc.setLineWidth(4);
-    			gc.setStroke(Color.RED);
-    			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
-    		}
-    		prevNode = node;
+    		Canvas activeCanvas = findMapCanvas(path.get(0).map);
+        	clearAllCanvas();
+        	boolean first = true;
+        	Node prevNode = null;
+        	for(Node node : path)
+        	{
+        		if (first)
+        		{
+        			first = false;
+        			//do nothing
+        		}
+        		else if (node.isTransitionNode && prevNode.isTransitionNode)
+        		{
+        			System.out.println("Map name is : " + node.map);
+        			activeCanvas = findMapCanvas(node.map);
+        	    	activeCanvas.getGraphicsContext2D().clearRect(0, 0, activeCanvas.getWidth(), activeCanvas.getHeight());
+        		}
+        		else
+        		{
+        			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
+        			gc.setLineWidth(4);
+        			gc.setStroke(Color.RED);
+        			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
+        		}
+        		prevNode = node;
+        	}
+    	}
+    	else
+    	{
+    		System.out.println("No Path");
     	}
     }
     private void clearAllCanvas()

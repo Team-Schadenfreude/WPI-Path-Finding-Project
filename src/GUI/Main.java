@@ -138,8 +138,7 @@ public class Main extends Application {
 		try {
 
 			br = new BufferedReader(new FileReader(filePath));
-			while ((line = br.readLine()) != null) {
-
+			while ((line = br.readLine()) != null && line.length() > 0) {
 				// use comma as separator
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
