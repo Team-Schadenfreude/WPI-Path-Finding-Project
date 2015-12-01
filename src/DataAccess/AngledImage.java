@@ -12,7 +12,7 @@ public class AngledImage extends Image {
 	int y = 0;
 	double scaleX = 0;
 	double scaleY = 0;
-	public AngledImage(String url, String name) {
+	public AngledImage(String url, String name, String building) {
 		super(url);
 		this.name = name;
 	}

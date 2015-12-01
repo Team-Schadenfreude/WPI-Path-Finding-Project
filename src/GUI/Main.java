@@ -29,7 +29,7 @@ import java.io.IOException;
 public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
-	public static List<Node> testMap = new ArrayList<Node>();
+	//public static List<Node> testMap = new ArrayList<Node>();
 	public static List<Node> mainMap = new ArrayList<Node>();
 	public static Stage primaryStage;
     public static void main(String[] args) {
@@ -46,32 +46,32 @@ public class Main extends Application {
        
         stage.show();
         //Image is 3300 1450
-        Node a = new Node("a",127, 807,0, "test");
-        Node b = new Node("b",1061, 807,0, "test");
-        Node c = new Node("c",1061, 612,0, "test");
-        Node d = new Node("d",3125, 612,0, "test");
-        Node e = new Node("e",1093, 945,0, "test");
-        Node f = new Node("f",1073, 293,0, "test");
-        Node g = new Node("g",3117, 317,0, "test");
-        a.neighbors.add(b);
-        b.neighbors.add(a);
-        b.neighbors.add(c);
-        b.neighbors.add(e);
-        c.neighbors.add(b);
-        c.neighbors.add(d);
-        c.neighbors.add(f);
-        d.neighbors.add(c);
-        d.neighbors.add(g);
-        e.neighbors.add(b);
-        f.neighbors.add(c);
-        g.neighbors.add(d);
-        testMap.add(a);
-        testMap.add(b);
-        testMap.add(c);
-        testMap.add(d);
-        testMap.add(e);
-        testMap.add(f);
-        testMap.add(g);
+//        Node a = new Node("a",127, 807,0, "test");
+//        Node b = new Node("b",1061, 807,0, "test");
+//        Node c = new Node("c",1061, 612,0, "test");
+//        Node d = new Node("d",3125, 612,0, "test");
+//        Node e = new Node("e",1093, 945,0, "test");
+//        Node f = new Node("f",1073, 293,0, "test");
+//        Node g = new Node("g",3117, 317,0, "test");
+//        a.neighbors.add(b);
+//        b.neighbors.add(a);
+//        b.neighbors.add(c);
+//        b.neighbors.add(e);
+//        c.neighbors.add(b);
+//        c.neighbors.add(d);
+//        c.neighbors.add(f);
+//        d.neighbors.add(c);
+//        d.neighbors.add(g);
+//        e.neighbors.add(b);
+//        f.neighbors.add(c);
+//        g.neighbors.add(d);
+//        testMap.add(a);
+//        testMap.add(b);
+//        testMap.add(c);
+//        testMap.add(d);
+//        testMap.add(e);
+//        testMap.add(f);
+//        testMap.add(g);
         
     }
    
