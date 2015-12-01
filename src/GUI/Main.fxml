@@ -12,11 +12,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="1376.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
    <children>
-      <ScrollPane fx:id="imageScrollPane" hbarPolicy="ALWAYS" pannable="true" prefHeight="800.0" prefWidth="1376.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <content>
-            <Canvas fx:id="imageCanvas" height="200.0" width="200.0" />
-         </content>
-      </ScrollPane>
+      <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefHeight="800.0" prefWidth="1376.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <GridPane centerShape="false" layoutY="15.0" prefHeight="60.0" prefWidth="408.0" vgap="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />

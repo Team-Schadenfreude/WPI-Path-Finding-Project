@@ -60,7 +60,6 @@ public class MainController implements Initializable{
     @FXML private ImageView mapView;
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
-    @FXML private Canvas imageCanvas;
     @FXML private ScrollPane imageScrollPane;
     private List<Group> displayGroups = new LinkedList<Group>();
     private Group mainGroup = new Group();
@@ -142,7 +141,7 @@ public class MainController implements Initializable{
     		}
     	}
     	startNode = Main.mainMap.get(0);
-    	goalNode = Main.mainMap.get(7);
+    	goalNode = Main.mainMap.get(4);
     	
     	drawMap(mapImages);
     	Collections.reverse(displayGroups);
@@ -158,31 +157,31 @@ public class MainController implements Initializable{
     	boolean firstRun = true;
     	for (AngledImage image : images)
     	{
-			int width = (int) (image.getScaleX() * image.getWidth());
-			int height = (int) (image.getScaleY() * image.getHeight());
 			Canvas c = new Canvas(image.getWidth(), image.getHeight());
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
-					
-					mainGroup.setRotate(- image.getAngle());
-					//mainGroup.getTransforms().add(new Rotate(- image.getAngle(), c.getParent().getTranslateX(), c.getParent().getTranslateY()));
-					double x = c.getParent().getBoundsInParent().getMinX() +  (.5 * imageScrollPane.getWidth()) + (c.getParent().getBoundsInParent().getWidth() / 2);
-					double y = c.getParent().getBoundsInParent().getMinY() +  (.5 * imageScrollPane.getHeight()) + (c.getParent().getBoundsInParent().getHeight() / 2);
-					double x_width = mainGroup.getBoundsInParent().getWidth();
-					double y_width = mainGroup.getBoundsInParent().getHeight();
-					imageScrollPane.setHvalue(x / x_width);
-					imageScrollPane.setVvalue(y / y_width);
-					imageZoomPane.setPivot(x, y);
-					imageZoomPane.setZoomFactor(1 - image.getScaleX());
-					System.out.println(c.getParent().getBoundsInParent().getMinX());
-					System.out.println(c.getParent().getTranslateX());
-					System.out.println(mainGroup.getBoundsInParent().getWidth());
+					//mainGroup.setRotate(- image.getAngle());
+					System.out.println(c.getParent().getLayoutBounds().getMinX());
+					imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
+
+					centerNodeInScrollPane(imageScrollPane, c.getParent());
+					double minX = c.getParent().getBoundsInParent().getMinX();
+					double maxX = c.getParent().getBoundsInParent().getMaxX();
+					double minY = c.getParent().getBoundsInParent().getMinY();
+					double maxY = c.getParent().getBoundsInParent().getMaxY();
+					double pivotX = (minX + maxX)/2;
+					double pivotY = (minY + maxY)/2;
+					((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
+					((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
+					((Rotate) mainGroup.getTransforms().get(0)).setAngle(- image.getAngle());
+					imageZoomPane.setPivot(pivotX, pivotY);
+					double zoom = imageScrollPane.getWidth() / c.getParent().getBoundsInParent().getWidth();
+					imageZoomPane.setZoomFactor(zoom * .5);
 				}});
 			if (firstRun)
 			{
-				imageCanvas.setWidth(width);
-				imageCanvas.setHeight(height);
+				mainGroup.getTransforms().add(new Rotate(image.getAngle()));
 				firstRun = false;
 			}
 			ImageView im = new ImageView(image);
@@ -200,6 +199,19 @@ public class MainController implements Initializable{
     	System.out.println("Here");
     	System.out.println(displayGroups);
     }
+    public void centerNodeInScrollPane(ScrollPane scrollPane, javafx.scene.Node node) {
+        double h = scrollPane.getContent().getBoundsInLocal().getHeight();
+        double y = (node.getBoundsInParent().getMaxY() + 
+                    node.getBoundsInParent().getMinY()) / 2.0;
+        double v = scrollPane.getViewportBounds().getHeight();
+        scrollPane.setVvalue(scrollPane.getVmax() * ((y - 0.5 * v) / (h - v)));
+        double w = scrollPane.getContent().getBoundsInLocal().getWidth();
+        double x = (node.getBoundsInParent().getMaxX() + 
+                    node.getBoundsInParent().getMinX()) / 2.0;
+        double hor = scrollPane.getViewportBounds().getWidth();
+        scrollPane.setHvalue(scrollPane.getHmax() * ((x - 0.5 * hor) / (w - hor)));
+    }
+    
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
@@ -208,6 +220,7 @@ public class MainController implements Initializable{
     	{
     		value = 8;
     	}
+    	imageZoomPane.setPivot(imageScrollPane.getHvalue() * imageZoomPane.getWidth(), imageScrollPane.getVvalue() * imageZoomPane.getHeight());
     	imageZoomPane.setZoomFactor(value);
     }
     //Action handler for the zooming out of the map
@@ -315,18 +328,6 @@ public class MainController implements Initializable{
     }
     
     //Function to draw the Path from Node to Node
-    protected void drawPath(double scaleX, double scaleY, List<Node> path)
-    {	
-    	imageCanvas.getGraphicsContext2D().clearRect(0, 0, imageCanvas.getWidth(), imageCanvas.getHeight());
-    	imageCanvas.setWidth(anchorPane.getWidth());
-    	imageCanvas.setHeight(anchorPane.getHeight());
-    	for(int i = 0; i < path.size() - 1; i++)
-    	{
-    		Node n1 = path.get(i);
-    		Node n2 = path.get(i+1);
-    		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX, n1.yPos * scaleY, n2.xPos * scaleX, n2.yPos * scaleY);
-    	}
-    }
     protected void drawPath(List<Node> path)
     {
     	System.out.println("DrawingPath");
