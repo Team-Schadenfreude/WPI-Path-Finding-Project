@@ -13,22 +13,13 @@ import javafx.scene.transform.Scale;
 
 public class ZoomingPane extends Pane {
     Node content;
-    private DoubleProperty zoomFactor = new SimpleDoubleProperty(1);
-
+    private double zoomFactor = 1;
+    Scale scale;
     ZoomingPane(Node content) {
         this.content = content;
         getChildren().add(content);
-        Scale scale = new Scale(1, 1);
+        scale = new Scale(1, 1, content.getLayoutX(), content.getLayoutY());
         content.getTransforms().add(scale);
-        
-        zoomFactor.addListener(new ChangeListener<Number>() {
-            @Override public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                scale.setX(newValue.doubleValue());
-                scale.setY(newValue.doubleValue());
-                setMinSize(content.getBoundsInLocal().getWidth() * scale.getX(), content.getBoundsInLocal().getHeight() * scale.getY());
-                requestLayout();
-            }
-        });
     }
 
     protected void layoutChildren() {
@@ -39,8 +30,8 @@ public class ZoomingPane extends Pane {
         double right = getInsets().getRight();
         double left = getInsets().getLeft();
         double bottom = getInsets().getBottom();
-        double contentWidth = (width - left - right)/zoomFactor.get();
-        double contentHeight = (height - top - bottom)/zoomFactor.get();
+        double contentWidth = (width - left - right)/zoomFactor;
+        double contentHeight = (height - top - bottom)/zoomFactor;
         layoutInArea(content, left, top,
                 contentWidth, contentHeight,
                 0, null,
@@ -48,13 +39,19 @@ public class ZoomingPane extends Pane {
                 pos.getVpos());
     }
 
-    public final Double getZoomFactor() {
-        return zoomFactor.get();
-    }
-    public final void setZoomFactor(Double zoomFactor) {
-        this.zoomFactor.set(zoomFactor);
-    }
-    public final DoubleProperty zoomFactorProperty() {
+    public double getZoomFactor() {
         return zoomFactor;
+    }
+    public void setZoomFactor(double zoomFactor) {
+    	this.zoomFactor = zoomFactor;
+    	scale.setX(zoomFactor);
+        scale.setY(zoomFactor);
+        setMinSize(content.getBoundsInLocal().getWidth() * scale.getX(), content.getBoundsInLocal().getHeight() * scale.getY());
+        requestLayout();
+    }
+    public void setPivot(double pivotX, double pivotY)
+    {
+    	this.scale.setPivotX(pivotX);
+    	this.scale.setPivotY(pivotY);
     }
 }

@@ -159,21 +159,29 @@ public class MainController implements Initializable{
 			int width = (int) (image.getScaleX() * image.getWidth());
 			int height = (int) (image.getScaleY() * image.getHeight());
 			Canvas c = new Canvas(image.getWidth(), image.getHeight());
-			
+			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					
+					mainGroup.setRotate(- image.getAngle());
+					//mainGroup.getTransforms().add(new Rotate(- image.getAngle(), c.getParent().getTranslateX(), c.getParent().getTranslateY()));
+					double x = c.getParent().getBoundsInParent().getMinX() +  (.5 * imageScrollPane.getWidth()) + (c.getParent().getBoundsInParent().getWidth() / 2);
+					double y = c.getParent().getBoundsInParent().getMinY() +  (.5 * imageScrollPane.getHeight()) + (c.getParent().getBoundsInParent().getHeight() / 2);
+					double x_width = mainGroup.getBoundsInParent().getWidth();
+					double y_width = mainGroup.getBoundsInParent().getHeight();
+					imageScrollPane.setHvalue(x / x_width);
+					imageScrollPane.setVvalue(y / y_width);
+					imageZoomPane.setPivot(x, y);
+					imageZoomPane.setZoomFactor(1 - image.getScaleX());
+					System.out.println(c.getParent().getBoundsInParent().getMinX());
+					System.out.println(c.getParent().getTranslateX());
+					System.out.println(mainGroup.getBoundsInParent().getWidth());
+				}});
 			if (firstRun)
 			{
 				imageCanvas.setWidth(width);
 				imageCanvas.setHeight(height);
 				firstRun = false;
-			}
-			else
-			{
-				c.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						//mainGroup.setRotate(c.getParent().getRotate());
-						//System.out.println(c.getParent().getRotate());
-					}});
 			}
 			ImageView im = new ImageView(image);
 			Rotate r = new Rotate(image.getAngle());
@@ -181,7 +189,6 @@ public class MainController implements Initializable{
 			g.getChildren().add(im);
 			g.getChildren().add(c);
 			g.getTransforms().add(r);
-			//g.setRotate(image.getAngle());
 			g.getTransforms().add(new Scale(image.getScaleX(), image.getScaleY()));
 			g.setTranslateX(image.getX());
 			g.setTranslateY(image.getY());
@@ -317,6 +324,18 @@ public class MainController implements Initializable{
     		Node n2 = path.get(i+1);
     		imageCanvas.getGraphicsContext2D().strokeLine(n1.xPos * scaleX, n1.yPos * scaleY, n2.xPos * scaleX, n2.yPos * scaleY);
     	}
+    }
+    protected void drawPath(List<Node> path)
+    {
+//    	Canvas activeCanvas = findMapCanvas(path.get(0).map);
+//    	boolean first = true;
+//    	for(Node n : path)
+//    	{
+//    		if (n.isTransitionNode && !first)
+//    		{
+//    			activeCanvas.getA
+//    		}
+//    	}
     }
     //Function to setup the draw down menus for node selection
     private void setupDropDowns(String path)
