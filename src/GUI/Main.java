@@ -101,7 +101,8 @@ public class Main extends Application {
 				int z = Integer.parseInt(nodeData[nodeZIndex]);
 				String mapName = nodeData[nodeMapIndex];
 				String description = nodeData[nodeDescIndex];
-				boolean transferNode = nodeData[nodeTransferIndex] == "TRUE" ? true : false;
+				boolean transferNode = nodeData[nodeTransferIndex].equals("TRUE") ? true : false;
+				System.out.println("Is transfer : " + transferNode);
 				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
 				nodeList.add(newNode);
 			}

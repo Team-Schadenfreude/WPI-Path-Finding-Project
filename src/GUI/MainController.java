@@ -141,6 +141,8 @@ public class MainController implements Initializable{
     			}
     		}
     	}
+    	startNode = Main.mainMap.get(0);
+    	goalNode = Main.mainMap.get(7);
     	
     	drawMap(mapImages);
     	Collections.reverse(displayGroups);
@@ -192,6 +194,7 @@ public class MainController implements Initializable{
 			g.getTransforms().add(new Scale(image.getScaleX(), image.getScaleY()));
 			g.setTranslateX(image.getX());
 			g.setTranslateY(image.getY());
+			g.setId(image.getName());
 			mainGroup.getChildren().add(g);
     	}
     	System.out.println("Here");
@@ -200,17 +203,17 @@ public class MainController implements Initializable{
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() + .5;
-    	if (value > 4)
+    	double value = imageZoomPane.getZoomFactor() + 1;
+    	if (value > 8)
     	{
-    		value = 4;
+    		value = 8;
     	}
     	imageZoomPane.setZoomFactor(value);
     }
     //Action handler for the zooming out of the map
     @FXML 
     protected void handleZoomOut(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() - .5;
+    	double value = imageZoomPane.getZoomFactor() - 1;
     	if (value < 1)
     	{
     		value = 1;
@@ -264,12 +267,11 @@ public class MainController implements Initializable{
     	if (startNode != null && goalNode != null)
     	{
     		List<Node> path = Main.getPathFromNode(startNode, goalNode, Main.testMap);
-    		drawPath(scaleX, scaleY, path);
-    		startNode = null;
-    		goalNode = null;
+    		drawPath(path);
     		System.out.println("The Path is");
     		System.out.println(path);
-    		
+//    		startNode = null;
+//    		goalNode = null;
     	}
     }
     //Function to generate buttons at each accessible node on the map
@@ -327,15 +329,42 @@ public class MainController implements Initializable{
     }
     protected void drawPath(List<Node> path)
     {
-//    	Canvas activeCanvas = findMapCanvas(path.get(0).map);
-//    	boolean first = true;
-//    	for(Node n : path)
-//    	{
-//    		if (n.isTransitionNode && !first)
-//    		{
-//    			activeCanvas.getA
-//    		}
-//    	}
+    	System.out.println("DrawingPath");
+    	Canvas activeCanvas = findMapCanvas(path.get(0).map);
+    	boolean first = true;
+    	Node prevNode = null;
+    	for(Node node : path)
+    	{
+    		if (first)
+    		{
+    			first = false;
+    			//do nothing
+    		}
+    		else if (node.isTransitionNode && prevNode.isTransitionNode)
+    		{
+    			System.out.println("Map name is : " + node.map);
+    			activeCanvas = findMapCanvas(node.map);
+    		}
+    		else
+    		{
+    			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
+    			gc.setLineWidth(4);
+    			gc.setStroke(Color.RED);
+    			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
+    		}
+    		prevNode = node;
+    	}
+    }
+    private Canvas findMapCanvas(String map)
+    {
+    	for (javafx.scene.Node g : mainGroup.getChildren())
+    	{
+    		if(g.getId().equals(map))
+    		{
+    			return (Canvas) ((Group) g).getChildren().get(1);
+    		}
+    	}
+		return null;
     }
     //Function to setup the draw down menus for node selection
     private void setupDropDowns(String path)
