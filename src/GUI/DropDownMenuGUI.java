@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class DropDownMenuGUI extends Application {
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 

@@ -28,9 +28,7 @@ public class EmailInterfaceGUI extends Application{
 	    final TextField subject = new TextField();
 	    final TextArea content = new TextArea();
 	    final Button send = new Button ("Send");
-	    final Label notification = new Label ();
-	    
-	    EmailSending.generateAndSendEmail(toAddr, ccAddr, subject, content, send, notification);	    
+	    final Label notification = new Label ();	    
 	
 	    GridPane grid = new GridPane();
 	    grid.setVgap(4);
