@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
@@ -188,6 +189,13 @@ public class MainController implements Initializable{
 				@Override
 				public void handle(MouseEvent event) {
 					//mainGroup.setRotate(- image.getAngle());
+					for (javafx.scene.Node n : mainGroup.getChildren())
+					{
+						if (!n.getId().equals("Campus"))
+						{
+							n.setOpacity(0);
+						}
+					}
 					buildGroup.setOpacity(1);
 					imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
 					setupFloorSelection(buildGroup);
@@ -392,11 +400,21 @@ public class MainController implements Initializable{
         		}
         		prevNode = node;
         	}
+        	
+        	drawCircleOnNode(path.get(0), 20, Color.GREEN);
+        	drawCircleOnNode(path.get(path.size() - 1), 20, Color.BLUE);
     	}
     	else
     	{
     		System.out.println("No Path");
     	}
+    }
+    private void drawCircleOnNode(Node n, int radius, Paint p)
+    {
+    	Canvas activeCanvas = findMapCanvas(n.map);
+    	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
+    	gc.setFill(p);
+    	gc.fillOval(n.xPos - (radius /2), n.yPos - (radius / 2), radius, radius);
     }
     private void clearAllCanvas()
     {
