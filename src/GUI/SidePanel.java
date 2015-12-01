@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 
 public class SidePanel {
 	
@@ -30,27 +29,17 @@ public class SidePanel {
 		final Label notificationSMS = new Label();
 		final HBox hbEmail = new HBox();
 		final HBox hbSMS = new HBox();
-		final VBox vb = new VBox();
 		final String emailContent = String.join("<br>", directions);
 		final String txtContent = String.join("\r\n", directions);
 		
 		
-		notificationEmail.setMinWidth(grid.getPrefWidth()/5*2);
 	    notificationEmail.setWrapText(true);
-	    notificationSMS.setMinWidth(grid.getPrefWidth()/5*2);
 	    notificationSMS.setWrapText(true);
 		
 		hbEmail.getChildren().addAll(new Label("Email directions: "), emailAddrInput);
 		hbSMS.getChildren().addAll(new Label("SMS directions: "), SMSNumInput);
 		HBox.setHgrow(emailAddrInput, Priority.ALWAYS);
 		HBox.setHgrow(SMSNumInput, Priority.ALWAYS);
-		
-		vb.getChildren().addAll(hbEmail, notificationEmail, hbSMS, notificationSMS, send);
-		VBox.setMargin(hbEmail, new Insets(5, 0, 5, 0));
-		VBox.setMargin(notificationEmail, new Insets(5, 0, 5, 0));
-		VBox.setMargin(hbSMS, new Insets(5, 0, 5, 0));
-		VBox.setMargin(notificationSMS, new Insets(5, 0, 5, 0));
-		VBox.setMargin(send, new Insets(5, 0, 5, 0));
 
 		
 		send.setOnAction(new EventHandler<ActionEvent>() {
@@ -70,20 +59,21 @@ public class SidePanel {
 							notificationSMS.setText("SMS has sent to " + smsNum + "!");
 						else
 							notificationSMS.setText("Texting failed!");
-					} catch (TwilioRestException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					} catch (TwilioRestException e1) {}
             	}
             }
 		});
 		
-		grid.setVgap(14);
+		grid.setVgap(13);
         grid.setHgap(4);
         grid.setPadding(new Insets(5, 5, 5, 5));
         grid.add(new Label("YOUR DIRECTIONS: "), 0, 1);
         grid.add(dList, 0, 2, 4, 5);
-        grid.add(vb, 0, 8, 4, 7);
+        grid.add(hbEmail, 0, 8);
+        grid.add(notificationEmail, 0, 9);
+        grid.add(hbSMS, 0, 10);
+        grid.add(notificationSMS, 0, 11);
+        grid.add(send, 0, 12);
 
 		
 		dList.getItems().addAll(directions);
