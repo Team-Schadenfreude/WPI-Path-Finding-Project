@@ -98,6 +98,7 @@ public class MainController implements Initializable{
     		if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
     		{
     			Building b = new Building(dir.getName().substring(1));
+    			System.out.println("Reading " + b.getName());
     			updateBuildingValuesFromFile(b, dir + "\\scale.csv");
     			for (File subDir : dir.listFiles())
     			{
@@ -126,7 +127,6 @@ public class MainController implements Initializable{
     			{
     				buildingList.add(b);
     			}
-    			System.out.println("Past add");
     		}
     	}
     	System.out.println("Done");
@@ -265,13 +265,14 @@ public class MainController implements Initializable{
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() + 1;
-    	if (value > 8)
-    	{
-    		value = 8;
-    	}
-    	imageZoomPane.setPivot(imageScrollPane.getHvalue() * imageZoomPane.getWidth(), imageScrollPane.getVvalue() * imageZoomPane.getHeight());
-    	imageZoomPane.setZoomFactor(value);
+    	imageZoomPane.setZoomFactor(1);
+//    	double value = imageZoomPane.getZoomFactor() + 1;
+//    	if (value > 8)
+//    	{
+//    		value = 8;
+//    	}
+//    	imageZoomPane.setPivot(imageScrollPane.getHvalue() * imageZoomPane.getWidth(), imageScrollPane.getVvalue() * imageZoomPane.getHeight());
+//    	imageZoomPane.setZoomFactor(value);
     }
     //Action handler for the zooming out of the map
     @FXML 
@@ -342,6 +343,13 @@ public class MainController implements Initializable{
     private void showDirections(List<String> directions)
     {
     	GridPane grid = SidePanel.setUpSidePanel("FL", "AK", directions);
+    	Button closeBtn = new Button("Close");
+    	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	((GridPane)primarySplitPane.getItems().get(1)).getChildren().clear();
+		    	//primarySplitPane.getItems().add(1, new GridPane());
+		    	primarySplitPane.setDividerPositions(1.0);}});
+    	grid.add(closeBtn, 0, 13);
         primarySplitPane.getItems().set(1, grid);
         primarySplitPane.setDividerPositions(0.66);
     }
@@ -397,8 +405,14 @@ public class MainController implements Initializable{
 
         	boolean first = true;
         	Node prevNode = null;
+        	System.out.println("CanvasEditing");
         	for(Node node : path)
         	{
+        		if (node.isTransitionNode)
+        		{
+        			System.out.println("TNode " + node.nodeName);
+        			System.out.println("Map " + node.map);
+        		}
         		if (first)
         		{
         			first = false;
@@ -416,7 +430,6 @@ public class MainController implements Initializable{
         			gc.setLineWidth(4);
         			gc.setStroke(Color.RED);
         			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
-        			System.out.println(node);
         		}
         		prevNode = node;
         	}

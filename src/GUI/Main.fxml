@@ -49,7 +49,7 @@
                            </items>
                         </MenuButton>
                         <Button fx:id="zoomInBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleZoomIn" text="+" GridPane.columnIndex="3" />
-                        <Button fx:id="zoomOutBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleZoomOut" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Button fx:id="zoomOutBtn" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleZoomOut" text="-" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <MenuButton fx:id="floorSelectionMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Active Floor" GridPane.columnIndex="4">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Action 1" />

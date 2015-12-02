@@ -74,9 +74,14 @@ public class Main extends Application {
 				int z = Integer.parseInt(nodeData[nodeZIndex]);
 				String mapName = nodeData[nodeMapIndex];
 				String description = nodeData[nodeDescIndex];
-				boolean transferNode = nodeData[nodeTransferIndex].equals("TRUE") ? true : false;
-				System.out.println("Is transfer : " + transferNode);
+				boolean transferNode = false;
+				if (nodeData[nodeTransferIndex].contains("TRUE") || nodeData[nodeTransferIndex].contains("true"))
+				{
+					transferNode = true;
+				}
+				
 				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
+				System.out.println("Is transfer : " + newNode.isTransitionNode);
 				nodeList.add(newNode);
 			}
 
@@ -111,6 +116,7 @@ public class Main extends Application {
 		try {
 
 			br = new BufferedReader(new FileReader(filePath));
+			int i = 0;
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				// use comma as separator
 				String[] edgeData = line.split(delimiter);
@@ -140,6 +146,7 @@ public class Main extends Application {
 				{
 					n2.neighbors.add(n1);
 				}
+				i++;
 			}
 
 		} 
@@ -221,6 +228,11 @@ public class Main extends Application {
 					directionsList.add("Procede into " + n2.map);
 					distance = 0;
 					prevDirVal = 0;
+					prevAngle = 0;
+					currentAngle = 0;
+					prevDirVal = 0;
+					dirVal = 0;
+					deltaAngle = 0;
 					mapChange = true;
 					
 				}
@@ -257,6 +269,7 @@ public class Main extends Application {
 			totalDistance += distance;
 			String direction = getStringFromDirectionValue(prevDirVal);
 			directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+			directionsList.add("Procede to Destination");
 			directionsList.add("Total Distance is " + Integer.toString((int)totalDistance) + "ft");
 		}
 		return directionsList;
