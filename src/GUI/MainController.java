@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -179,14 +180,10 @@ public class MainController implements Initializable{
 			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleY()));
 			buildGroup.setTranslateX(b.getX());
 			buildGroup.setTranslateY(b.getY());
-			System.out.println("MinX " + buildGroup.getBoundsInParent().getMinX());
-			System.out.println("MinY " + buildGroup.getBoundsInParent().getMinY());
-			System.out.println("MaxX " + buildGroup.getBoundsInParent().getMaxX());
-			System.out.println("MaxY " + buildGroup.getBoundsInParent().getMaxY());
 			buildGroup.setId(b.getName());
 			if (!buildGroup.getId().equals("Campus"))
     		{
-    			buildGroup.setOpacity(0);
+    			buildGroup.setOpacity(0);//0 _a
     		}
 			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
@@ -198,7 +195,7 @@ public class MainController implements Initializable{
 						{
 							if (!n.getId().equals("Campus"))
 							{
-								n.setOpacity(0);
+								n.setOpacity(0);//0 _b
 							}
 						}
 						buildGroup.setOpacity(1);
@@ -211,12 +208,36 @@ public class MainController implements Initializable{
 						double maxY = buildGroup.getBoundsInParent().getMaxY();
 						double pivotX = (minX + maxX)/2;
 						double pivotY = (minY + maxY)/2;
+						if (buildGroup.getId().equals("Campus"))
+						{
+							System.out.println("Pivot");
+							pivotX = event.getX();
+							System.out.println(pivotX);
+							pivotY = event.getY();
+							System.out.println(pivotY);
+						}
 						((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
 						((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
 						((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
-						imageZoomPane.setPivot(pivotX, pivotY);
+						Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
+						if (buildGroup.getId().equals("Campus"))
+						{
+							imageZoomPane.setPivot(pt.getX(), pt.getY());
+						}
+						else
+						{
+							imageZoomPane.setPivot(pivotX, pivotY);
+						}
 						double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
-						imageZoomPane.setZoomFactor(zoom * .5);
+						if (buildGroup.getId().equals("Campus"))
+						{
+							imageZoomPane.setZoomFactor(1);
+						}
+						else
+						{
+							imageZoomPane.setZoomFactor(zoom * .5);
+						}
+						
 						lastBuilding = buildGroup.getId();
 					}
 					

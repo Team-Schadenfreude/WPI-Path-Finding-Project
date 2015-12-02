@@ -81,7 +81,7 @@ public class Main extends Application {
 				}
 				
 				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
-				System.out.println("Is transfer : " + newNode.isTransitionNode);
+				//System.out.println("Is transfer : " + newNode.isTransitionNode);
 				nodeList.add(newNode);
 			}
 
@@ -112,13 +112,14 @@ public class Main extends Application {
 		int edgeY2Index = 5;
 		int edgeZ2Index = 6;
 		int edgeMap2Index = 7;
-
+		System.out.println("Edges From " + filePath);
 		try {
 
 			br = new BufferedReader(new FileReader(filePath));
 			int i = 0;
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				// use comma as separator
+				System.out.println("i = " + i);
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
