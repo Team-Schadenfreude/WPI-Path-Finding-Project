@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,9 +23,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -49,7 +52,9 @@ public class MainController implements Initializable{
     @FXML private MenuButton destMenu;
     @FXML private ScrollPane imageScrollPane;
     @FXML private MenuButton floorSelectionMenu;
+    @FXML private SplitPane primarySplitPane;
     private Group mainGroup = new Group();
+    private String lastBuilding;
     //Scale s = new Scale(2,2);
     private StackPane imageStackPane = new StackPane();
     private ZoomingPane imageZoomPane;
@@ -71,8 +76,7 @@ public class MainController implements Initializable{
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
     	floorSelectionMenu.getItems().clear();
-    	//imageCanvas.getTransforms().add(s);
-    	//imageScrollPane.setContent(scrollAnchorPane);
+    	primarySplitPane.setDividerPositions(1.0);
 	}
     
     private File getDirectoryFromDialog()
@@ -139,7 +143,6 @@ public class MainController implements Initializable{
     			}
     		}
     	}
-    	System.out.println(buildingList);
     	startNode = Main.mainMap.get(0);
     	goalNode = Main.mainMap.get(4);
     	
@@ -147,8 +150,6 @@ public class MainController implements Initializable{
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
-    	//Canvas tmp = (Canvas) ((Group)mainGroup.getChildren().get(1)).getChildren().get(1);
-    	//tmp.getGraphicsContext2D().rect(20, 20, 600, 600);
     }
     
     public void drawMap(List<Building> buildings)
@@ -160,6 +161,7 @@ public class MainController implements Initializable{
     		if (firstRun)
 			{
 				mainGroup.getTransforms().add(new Rotate(b.getAngle()));
+				lastBuilding = b.getName();
 				firstRun = false;
 			}
     		for (Floor f : b.getFloors())
@@ -190,29 +192,34 @@ public class MainController implements Initializable{
 				@Override
 				public void handle(MouseEvent event) {
 					//mainGroup.setRotate(- image.getAngle());
-					for (javafx.scene.Node n : mainGroup.getChildren())
+					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
-						if (!n.getId().equals("Campus"))
+						for (javafx.scene.Node n : mainGroup.getChildren())
 						{
-							n.setOpacity(0);
+							if (!n.getId().equals("Campus"))
+							{
+								n.setOpacity(0);
+							}
 						}
+						buildGroup.setOpacity(1);
+						imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
+						setupFloorSelection(buildGroup);
+						centerNodeInScrollPane(imageScrollPane, buildGroup);
+						double minX = buildGroup.getBoundsInParent().getMinX();
+						double maxX = buildGroup.getBoundsInParent().getMaxX();
+						double minY = buildGroup.getBoundsInParent().getMinY();
+						double maxY = buildGroup.getBoundsInParent().getMaxY();
+						double pivotX = (minX + maxX)/2;
+						double pivotY = (minY + maxY)/2;
+						((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
+						((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
+						((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
+						imageZoomPane.setPivot(pivotX, pivotY);
+						double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
+						imageZoomPane.setZoomFactor(zoom * .5);
+						lastBuilding = buildGroup.getId();
 					}
-					buildGroup.setOpacity(1);
-					imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
-					setupFloorSelection(buildGroup);
-					centerNodeInScrollPane(imageScrollPane, buildGroup);
-					double minX = buildGroup.getBoundsInParent().getMinX();
-					double maxX = buildGroup.getBoundsInParent().getMaxX();
-					double minY = buildGroup.getBoundsInParent().getMinY();
-					double maxY = buildGroup.getBoundsInParent().getMaxY();
-					double pivotX = (minX + maxX)/2;
-					double pivotY = (minY + maxY)/2;
-					((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
-					((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
-					((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
-					imageZoomPane.setPivot(pivotX, pivotY);
-					double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
-					imageZoomPane.setZoomFactor(zoom * .5);
+					
 				}});
 			
 			mainGroup.getChildren().add(buildGroup);
@@ -326,9 +333,17 @@ public class MainController implements Initializable{
     		drawPath(path);
     		System.out.println("The Path is");
     		System.out.println(path);
+            List<String> directions = Main.getDirectionsList(path, 1, 1);
+            showDirections(directions);
 //    		startNode = null;
 //    		goalNode = null;
     	}
+    }
+    private void showDirections(List<String> directions)
+    {
+    	GridPane grid = SidePanel.setUpSidePanel("FL", "AK", directions);
+        primarySplitPane.getItems().set(1, grid);
+        primarySplitPane.setDividerPositions(0.66);
     }
     //Function to generate buttons at each accessible node on the map
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
@@ -389,7 +404,7 @@ public class MainController implements Initializable{
         			first = false;
         			//do nothing
         		}
-        		else if (node.isTransitionNode && prevNode.isTransitionNode)
+        		else if (node.isTransitionNode && prevNode.isTransitionNode && !node.map.equals(prevNode.map))
         		{
         			System.out.println("Map name is : " + node.map);
         			activeCanvas = findMapCanvas(node.map);

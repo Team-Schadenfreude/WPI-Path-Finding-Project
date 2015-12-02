@@ -45,33 +45,6 @@ public class Main extends Application {
         stage.setScene(scene);
        
         stage.show();
-        //Image is 3300 1450
-//        Node a = new Node("a",127, 807,0, "test");
-//        Node b = new Node("b",1061, 807,0, "test");
-//        Node c = new Node("c",1061, 612,0, "test");
-//        Node d = new Node("d",3125, 612,0, "test");
-//        Node e = new Node("e",1093, 945,0, "test");
-//        Node f = new Node("f",1073, 293,0, "test");
-//        Node g = new Node("g",3117, 317,0, "test");
-//        a.neighbors.add(b);
-//        b.neighbors.add(a);
-//        b.neighbors.add(c);
-//        b.neighbors.add(e);
-//        c.neighbors.add(b);
-//        c.neighbors.add(d);
-//        c.neighbors.add(f);
-//        d.neighbors.add(c);
-//        d.neighbors.add(g);
-//        e.neighbors.add(b);
-//        f.neighbors.add(c);
-//        g.neighbors.add(d);
-//        testMap.add(a);
-//        testMap.add(b);
-//        testMap.add(c);
-//        testMap.add(d);
-//        testMap.add(e);
-//        testMap.add(f);
-//        testMap.add(g);
         
     }
    
@@ -181,40 +154,6 @@ public class Main extends Application {
 		}
 	}
 
-
-	public static List<Integer> getScaleFromFile(String filePath)
-	{
-		List<Integer> scaleList = new ArrayList<Integer>();
-		BufferedReader br = null;
-		String line = "";
-		String delimiter = ",";
-		try {
-
-			br = new BufferedReader(new FileReader(filePath));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] scaleData = line.split(delimiter);
-				String xScale_char = scaleData[0];
-				String yScale_char = scaleData[1];
-				int xScale = Integer.parseInt(xScale_char);
-				int yScale = Integer.parseInt(yScale_char);
-				scaleList.add(xScale);
-				scaleList.add(yScale);
-			}
-
-		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
-		finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {e.printStackTrace();}
-			}
-		}
-		return scaleList;
-	}
 	public static Node findNodeByXYZinMap(List<Node> nodeList, int x, int y, int z, String nodeMap)//Want to change this to throwing an exception when the node is not found
 	{
 		for(Node n : nodeList){
@@ -235,17 +174,10 @@ public class Main extends Application {
 		}
 		return null;
 	}
-	public static List<Node> readMap(String nodeFilePath, String edgeFilePath)
-	{
-		List<Node> nodeList = getNodesFromFile(nodeFilePath);
-		connectEdgesFromFile(nodeList, edgeFilePath);
-		return nodeList;
-	}
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, List<Node> map)
 	{
-		AStar astar = new AStar(defaultSettings);
-		System.out.println(map);
+		AStar astar = new AStar(defaultSettings);;
 		return astar.findPath(startNode, endNode, map);
 	}
 	//Method to find path when given a string 
@@ -258,92 +190,132 @@ public class Main extends Application {
 	}
 
 	//Method to provide a list of directions from a list of nodes.
-	public static List<String> getDirectionsList(List<Node> path)
+	public static List<String> getDirectionsList(List<Node> path, double xScale, double yScale)
 	{
-		List<String> directions = new ArrayList<String>();
-		if(path.size() == 0 || path.size() == 1)
+		List<String> directionsList = new ArrayList<String>();
+		if(path.size() == 0)
 		{
-			directions.add("Can't Generate Directions as no path was found");
-			return directions;
-		}
-		else if(path.size() == 2)
-		{
-			directions.add("Proceed straight on path");
-			return directions;
-		}
-		int prevAngle = 0;
-		String prevDirection = "";
-		for(int i = 0; i < path.size(); i++)
-		{
-			if (i == path.size() - 1)
-			{
-				directions.add("Continue straight until you've have reached your destination");
-				break;
-			}
-			Node n1 = path.get(i);
-			Node n2 = path.get(i+1);
-			int newAngle = getAngle(path.get(i), path.get(i+1));
-			int delta_angle = 0;
-			if (i != 0)
-			{
-				delta_angle = newAngle - prevAngle;
-				double delta_angle_rad = (Math.PI / 180) * (double) delta_angle;
-				delta_angle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
-			}
-
-			// System.out.println(delta_angle);
-			String direction = getDirectionFromAngle(delta_angle);
-			double distance_x = ((double)(n2.xPos - n1.xPos) * .18) * 12;
-			double distance_y = ((double)(n2.yPos - n1.yPos) * .13) * 12;
-			double distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
-			String dist = String.format("%.2f", distance);
-			direction = direction + " walk " + dist + " ft";
-			//			if (direction.equals("Go Straight") && direction.equals(prevDirection))
-			//			{
-			//				//Don't repeat straight directions
-			//			}
-			//			else
-			//			{
-			directions.add(direction);
-			//}
-			prevAngle = newAngle;
-			prevDirection = direction;
-		}
-		return directions;
-	}
-	public static String getDirectionFromAngle(int angle)
-	{
-		if (-30 < angle && angle < 30)//Going Straight
-		{
-			return "Go Straight";
-		}
-		else if (30 <= angle && angle < 60)
-		{
-			return "Slight right turn";
-		}
-		else if (60 <= angle && angle < 120)
-		{
-			return "Right turn";
-		}
-		else if (120 < angle && angle <= 180)
-		{
-			return "Sharp right turn";
-		}
-		else if (-60 < angle && angle <= -30)
-		{
-			return "Slight left turn";
-		}
-		else if (-120 < angle && angle <= -60)
-		{
-			return "Left turn";
-		}
-		else if (-180 < angle && angle <= -120)
-		{
-			return "Sharp left turn";
+			directionsList.add("There is no path to follow");
 		}
 		else
 		{
+			double totalDistance = 0;
+			double distance = 0;
+			int prevAngle = 0;
+			int currentAngle = 0;
+			int prevDirVal = 0;
+			int dirVal = 0;
+			int deltaAngle = 0;
+			boolean mapChange = false;
+			System.out.println(path);
+			for(int i = 0; i < path.size() -1 ; i++)
+			{
+				Node n1 = path.get(i);
+				Node n2 = path.get(i+1);
+				if (n1.isTransitionNode && n2.isTransitionNode && !n1.map.equals(n2.map))
+				{
+					//String direction = "Procede into " + n2.map;
+					totalDistance += distance;
+					String direction = getStringFromDirectionValue(prevDirVal);
+					directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+					directionsList.add("Procede into " + n2.map);
+					distance = 0;
+					prevDirVal = 0;
+					mapChange = true;
+					
+				}
+				else
+				{
+					currentAngle = getAngle(n1, n2);
+					deltaAngle = 0;
+					deltaAngle = currentAngle - prevAngle;
+					double delta_angle_rad = (Math.PI / 180) * (double) deltaAngle;
+					deltaAngle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
+					dirVal = getDirectionValueFromAngle(deltaAngle);
+					if (i == 0 || mapChange)
+					{
+						deltaAngle = 0;
+						dirVal = 0;
+						mapChange = false;
+					}
+					if (dirVal != 0)
+					{
+						totalDistance += distance;
+						String direction = getStringFromDirectionValue(prevDirVal);
+						directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+						distance = 0;
+						prevDirVal = dirVal;
+					}
+					prevAngle = currentAngle;
+					double distance_x = (double)(n2.xPos - n1.xPos) * xScale;
+					double distance_y = (double)(n2.yPos - n1.yPos) * yScale;
+					distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
+				}
+				
+				
+			}
+			totalDistance += distance;
+			String direction = getStringFromDirectionValue(prevDirVal);
+			directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
+			directionsList.add("Total Distance is " + Integer.toString((int)totalDistance) + "ft");
+		}
+		return directionsList;
+	}
+	public static int getDirectionValueFromAngle(int angle)
+	{
+		if (-20 < angle && angle < 20)//Going Straight
+		{
+			return 0;
+		}
+		else if (20 <= angle && angle < 60)
+		{
+			return 1;
+		}
+		else if (60 <= angle && angle < 120)
+		{
+			return 2;
+		}
+		else if (120 < angle && angle <= 180)
+		{
+			return 3;
+		}
+		else if (-60 < angle && angle <= -20)
+		{
+			return 4;
+		}
+		else if (-120 < angle && angle <= -60)
+		{
+			return 5;
+		}
+		else if (-180 < angle && angle <= -120)
+		{
+			return 6;
+		}
+		else
+		{
+			return 0; //GoingStraight
+		}
+	}
+	public static String getStringFromDirectionValue(int val)
+	{
+		switch(val)
+		{
+		case 0:
 			return "Go Straight";
+		case 1:
+			return "Slight right turn";
+		case 2:
+			return "Right turn";
+		case 3:
+			return "Sharp right turn";
+		case 4:
+			return "Slight left turn";
+		case 5:
+			return "Left turn";
+		case 6:
+			return "Sharp left turn";
+		default:
+			return ""; //GoingStraight
 		}
 	}
 	//Returns the angle between two nodes in degrees
@@ -353,32 +325,4 @@ public class Main extends Application {
 		int dy = n2.yPos - n1.yPos;
 		return (int) ((180 / Math.PI) * Math.atan2(dy,dx));
 	}
-	
-	// Returns the total distance of the path.
-	public static double getTotalDistance(List<Node> path) {
-
-		double totalDist = 0;
-
-		if (path.size() == 0 || path.size() == 1) {
-			System.out.println("Cannot get total distance because path was not found.");
-			return -1;
-		}
-
-		for (int i = 0; i < path.size(); i++) {
-			if (i == path.size() - 1) {
-				break;
-			}
-
-			Node n1 = path.get(i);
-			Node n2 = path.get(i + 1);
-
-			double distance_x = ((double) (n2.xPos - n1.xPos) * .18) * 12;
-			double distance_y = ((double) (n2.yPos - n1.yPos) * .13) * 12;
-			totalDist = totalDist + Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
-		}
-
-		return totalDist;
-	}
-
-
 }
