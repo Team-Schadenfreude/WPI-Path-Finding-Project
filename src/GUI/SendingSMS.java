@@ -23,8 +23,10 @@ public class SendingSMS {
 			 List<NameValuePair> params = new ArrayList<NameValuePair>();  
 			 params.add(new BasicNameValuePair("From", "+13478365454"));
 			 params.add(new BasicNameValuePair("To", smsNum));   
-			 params.add(new BasicNameValuePair("Body", "Directions from " + from + " to " + to + ": \r\n\r\n" + content + "\r\n\r\nRegards, \r\nRandy App")); 
-	//		 params.add(new BasicNameValuePair("MediaUrl", "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg"));  	 
+			 //params.add(new BasicNameValuePair("Body", "Directions from " + from + " to " + to + ": \r\n\r\n" + content + "\r\n\r\nRegards, \r\nRandy App")); 
+			 params.add(new BasicNameValuePair("Body", "Directions \r\n\r\n" + content + "\r\n\r\nRegards, \r\nRandy App")); 
+
+			 //		 params.add(new BasicNameValuePair("MediaUrl", "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg"));  	 
 		
 			 MessageFactory messageFactory = client.getAccount().getMessageFactory(); 
 			 Message message = messageFactory.create(params); 
