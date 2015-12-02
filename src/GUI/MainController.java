@@ -49,7 +49,6 @@ public class MainController implements Initializable{
     @FXML private MenuButton destMenu;
     @FXML private ScrollPane imageScrollPane;
     @FXML private MenuButton floorSelectionMenu;
-    private List<Group> displayGroups = new LinkedList<Group>();
     private Group mainGroup = new Group();
     //Scale s = new Scale(2,2);
     private StackPane imageStackPane = new StackPane();
@@ -145,8 +144,6 @@ public class MainController implements Initializable{
     	goalNode = Main.mainMap.get(4);
     	
     	drawMap(buildingList);
-    	Collections.reverse(displayGroups);
-    	imageStackPane.getChildren().addAll(displayGroups);
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
@@ -159,6 +156,7 @@ public class MainController implements Initializable{
     	boolean firstRun = true;
     	for (Building b : buildings)
     	{
+    		System.out.println("Building " + b.getName());
     		Group buildGroup = new Group();
     		if (firstRun)
 			{
@@ -180,6 +178,10 @@ public class MainController implements Initializable{
 			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleY()));
 			buildGroup.setTranslateX(b.getX());
 			buildGroup.setTranslateY(b.getY());
+			System.out.println("MinX " + buildGroup.getBoundsInParent().getMinX());
+			System.out.println("MinY " + buildGroup.getBoundsInParent().getMinY());
+			System.out.println("MaxX " + buildGroup.getBoundsInParent().getMaxX());
+			System.out.println("MaxY " + buildGroup.getBoundsInParent().getMaxY());
 			buildGroup.setId(b.getName());
 			if (!buildGroup.getId().equals("Campus"))
     		{
@@ -217,9 +219,8 @@ public class MainController implements Initializable{
 			mainGroup.getChildren().add(buildGroup);
 			
     	}
-    	System.out.println("Here");
-    	System.out.println(displayGroups);
     }
+    
     public void centerNodeInScrollPane(ScrollPane scrollPane, javafx.scene.Node node) {
         double h = scrollPane.getContent().getBoundsInLocal().getHeight();
         double y = (node.getBoundsInParent().getMaxY() + 
@@ -372,10 +373,14 @@ public class MainController implements Initializable{
     //Function to draw the Path from Node to Node
     protected void drawPath(List<Node> path)
     {
+    	System.out.println(path);
     	if (path.size() > 0)
     	{
     		Canvas activeCanvas = findMapCanvas(path.get(0).map);
+    		System.out.println(path.get(0).map);
         	clearAllCanvas();
+    		drawCircleOnNode(new Node("h",(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(),0, path.get(0).map), 100, Color.GREEN);
+
         	boolean first = true;
         	Node prevNode = null;
         	for(Node node : path)
@@ -397,6 +402,7 @@ public class MainController implements Initializable{
         			gc.setLineWidth(4);
         			gc.setStroke(Color.RED);
         			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
+        			System.out.println(node);
         		}
         		prevNode = node;
         	}

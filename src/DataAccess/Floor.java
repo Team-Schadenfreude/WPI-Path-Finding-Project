@@ -38,5 +38,8 @@ public class Floor {
 	{
 		return this.rooms;
 	}
-
+	public String toString()
+	{
+		return this.name + " : Rooms [ " + rooms.toString() + " ] ";
+	}
 }
