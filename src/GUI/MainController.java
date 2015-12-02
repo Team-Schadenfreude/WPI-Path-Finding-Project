@@ -156,7 +156,6 @@ public class MainController implements Initializable{
     	boolean firstRun = true;
     	for (Building b : buildings)
     	{
-    		System.out.println("Building " + b.getName());
     		Group buildGroup = new Group();
     		if (firstRun)
 			{
@@ -202,7 +201,7 @@ public class MainController implements Initializable{
 					imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
 					setupFloorSelection(buildGroup);
 					centerNodeInScrollPane(imageScrollPane, buildGroup);
-					double minX =buildGroup.getBoundsInParent().getMinX();
+					double minX = buildGroup.getBoundsInParent().getMinX();
 					double maxX = buildGroup.getBoundsInParent().getMaxX();
 					double minY = buildGroup.getBoundsInParent().getMinY();
 					double maxY = buildGroup.getBoundsInParent().getMaxY();
