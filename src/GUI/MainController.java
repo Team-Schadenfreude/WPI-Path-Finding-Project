@@ -39,7 +39,6 @@ import javafx.stage.DirectoryChooser;
 import AStar.Node;
 import DataAccess.Building;
 import DataAccess.Floor;
-import DataAccess.Room;
 //import DataAccess.RoomReader;
 import GUI.ZoomingPane;
 
@@ -109,14 +108,6 @@ public class MainController implements Initializable{
     					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
     					List<Node> floorNodes = Main.getNodesFromFile(subDir + "\\mapNodes.csv");
     					Main.mainMap.addAll(floorNodes);
-    					for (Node n : floorNodes)
-    					{
-    						if (!n.nodeName.equals("node"))
-    						{
-    							Room r = new Room(n.nodeName, n);
-    							floor.getRoomList().add(r);
-    						}
-    					}
     					b.getFloors().add(floor);
     				}
     			}
@@ -422,8 +413,8 @@ public class MainController implements Initializable{
     		Canvas activeCanvas = findMapCanvas(path.get(0).map);
     		System.out.println(path.get(0).map);
         	clearAllCanvas();
-    		drawCircleOnNode(new Node("h",(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(),0, path.get(0).map), 100, Color.GREEN);
-
+    		drawCircleOnNode(path.get(0).map,(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(), 100, Color.GREEN);
+    		
         	boolean first = true;
         	Node prevNode = null;
         	System.out.println("CanvasEditing");
@@ -470,13 +461,20 @@ public class MainController implements Initializable{
     		System.out.println("No Path");
     	}
     }
-    private void drawCircleOnNode(Node n, int radius, Paint p)
+    
+    private void drawCircleOnNode(String map, int xPos, int yPos, int radius, Paint p)
     {
-    	Canvas activeCanvas = findMapCanvas(n.map);
+    	Canvas activeCanvas = findMapCanvas(map);
     	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
     	gc.setFill(p);
-    	gc.fillOval(n.xPos - (radius /2), n.yPos - (radius / 2), radius, radius);
+    	gc.fillOval(xPos - (radius /2), yPos - (radius / 2), radius, radius);
     }
+    
+    private void drawCircleOnNode(Node n, int radius, Paint p)
+    {
+    	drawCircleOnNode(n.map, n.xPos, n.yPos, radius, p);
+    }
+    
     private void clearAllCanvas()
     {
     	for (javafx.scene.Node g : mainGroup.getChildren())
@@ -522,26 +520,29 @@ public class MainController implements Initializable{
         			Menu floors2 = new Menu();
         			floors.setText(f.getName());
         			floors2.setText(f.getName());
-        			for (Room r : f.getRoomList())
+        			for (Node n : f.getNodes())
         			{
-        				MenuItem mi1 = new MenuItem(r.getName());
-        				MenuItem mi2 = new MenuItem(r.getName());
-        				mi1.setOnAction(new EventHandler<ActionEvent>() {
-            			    @Override public void handle(ActionEvent e) {
-            			    	startNode = Main.findNodeByName(Main.mainMap, mi1.getText());
-            			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
-            			    	System.out.println("Start Node Selected");
-            			    }
-            			});
-            			mi2.setOnAction(new EventHandler<ActionEvent>() {
-            			    @Override public void handle(ActionEvent e) {
-            			        goalNode = Main.findNodeByName(Main.mainMap, mi2.getText());
-            			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
-            			        System.out.println("Goal Node Selected");
-            			    }
-            			});
-            			floors.getItems().add(mi1);
-            			floors2.getItems().add(mi2);
+        				if (n.type.equals("Room"))
+        				{
+        					MenuItem mi1 = new MenuItem(n.nodeName);
+        					MenuItem mi2 = new MenuItem(n.nodeName);
+        					mi1.setOnAction(new EventHandler<ActionEvent>() {
+        						@Override public void handle(ActionEvent e) {
+        							startNode = Main.findNodeByName(Main.mainMap, mi1.getText());
+        							startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+        							System.out.println("Start Node Selected");
+        						}
+        					});
+        					mi2.setOnAction(new EventHandler<ActionEvent>() {
+        						@Override public void handle(ActionEvent e) {
+        							goalNode = Main.findNodeByName(Main.mainMap, mi2.getText());
+        							destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+        							System.out.println("Goal Node Selected");
+        						}
+        					});
+        					floors.getItems().add(mi1);
+        					floors2.getItems().add(mi2);
+        				}
         			}
         			building.getItems().add(floors);
         			building2.getItems().add(floors2);

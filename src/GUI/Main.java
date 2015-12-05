@@ -29,7 +29,7 @@ import java.io.IOException;
 public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
-	public static Map mainMap = new Map()
+	public static Map mainMap = new Map();
 	public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
