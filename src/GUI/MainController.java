@@ -448,7 +448,14 @@ public class MainController implements Initializable{
         		else
         		{
         			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-        			gc.setLineWidth(4);
+        			if (node.map.equals("Campus"))
+        			{
+        				gc.setLineWidth(4);
+        			}
+        			else
+        			{
+        				gc.setLineWidth(8);
+        			}
         			gc.setStroke(Color.RED);
         			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
         		}

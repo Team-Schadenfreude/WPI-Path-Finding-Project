@@ -3,13 +3,15 @@ package DataAccess;
 import java.util.LinkedList;
 import java.util.List;
 
+import AStar.Node;
 import javafx.scene.image.Image;
 
 public class Floor {
 
 	String name;
 	Image mapImage;
-	List<Room> rooms = new LinkedList<Room>();
+	List<Node> nodes = new LinkedList<Node>();
+	
 	public Floor(String path, String name) {
 		this.mapImage = new Image(path);
 		this.name = name;
@@ -22,9 +24,9 @@ public class Floor {
 	{
 		this.mapImage = image;
 	}
-	public void setRoomList(List<Room> rooms)
+	public void setNodes(List<Node> nodes)
 	{
-		this.rooms = rooms;
+		this.nodes = nodes;
 	}
 	public String getName()
 	{
@@ -34,12 +36,12 @@ public class Floor {
 	{
 		return this.mapImage;
 	}
-	public List<Room> getRoomList()
+	public List<Node> getNodes()
 	{
-		return this.rooms;
+		return this.nodes;
 	}
 	public String toString()
 	{
-		return this.name + " : Rooms [ " + rooms.toString() + " ] ";
+		return this.name + " : Rooms [ " + nodes.toString() + " ] ";
 	}
 }

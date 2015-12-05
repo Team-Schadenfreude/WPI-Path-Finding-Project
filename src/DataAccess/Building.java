@@ -2,7 +2,6 @@ package DataAccess;
 
 import java.util.LinkedList;
 import java.util.List;
-import DataAccess.Room;
 public class Building {
 	String name;
 	int angle = 0;
