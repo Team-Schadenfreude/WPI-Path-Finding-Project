@@ -36,10 +36,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
 import javafx.stage.DirectoryChooser;
+import AStar.AStar;
 import AStar.Node;
+import AStar.Settings;
 import DataAccess.Building;
+import DataAccess.DirectionBuilder;
 import DataAccess.Floor;
-import DataAccess.Room;
+import DataAccess.Map;
 //import DataAccess.RoomReader;
 import GUI.ZoomingPane;
 
@@ -54,6 +57,8 @@ public class MainController implements Initializable{
     @FXML private ScrollPane imageScrollPane;
     @FXML private MenuButton floorSelectionMenu;
     @FXML private SplitPane primarySplitPane;
+	private static Settings defaultSettings = new Settings(false, false, false);
+	public static Map mainMap = new Map();
     private Group mainGroup = new Group();
     private String lastBuilding;
     //Scale s = new Scale(2,2);
@@ -92,67 +97,17 @@ public class MainController implements Initializable{
     @FXML 
     protected void handleLoadMap(ActionEvent event) {
     	
-    	File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
-    	//setupDropDowns(selectedDirectory + "\\Rooms.csv"); //Read in list of all rooms on campus
-    	for (File dir : selectedDirectory.listFiles()) //Draw the super map
-    	{
-    		if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
-    		{
-    			Building b = new Building(dir.getName().substring(1));
-    			System.out.println("Reading " + b.getName());
-    			updateBuildingValuesFromFile(b, dir + "\\scale.csv");
-    			for (File subDir : dir.listFiles())
-    			{
-    				if (subDir.isDirectory()) //The file is a directory and a floor plan
-    				{
-    					File file = new File(subDir + "\\map.png");
-    					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
-    					List<Node> floorNodes = Main.getNodesFromFile(subDir + "\\mapNodes.csv");
-    					Main.mainMap.addAll(floorNodes);
-    					for (Node n : floorNodes)
-    					{
-    						if (!n.nodeName.equals("node"))
-    						{
-    							Room r = new Room(n.nodeName, n);
-    							floor.getRoomList().add(r);
-    						}
-    					}
-    					b.getFloors().add(floor);
-    				}
-    			}
-    			if (b.getName().equals("Campus") && buildingList.size() > 0)
-    			{
-    				buildingList.add(0,b);
-    			}
-    			else
-    			{
-    				buildingList.add(b);
-    			}
-    		}
-    	}
-    	System.out.println("Done");
-    	for (File dir : selectedDirectory.listFiles()) //Draw the super map
-    	{
-    		if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
-    		{
-    			for (File subDir : dir.listFiles())
-    			{
-    				if (subDir.isDirectory()) //The file is a directory and a floor plan
-    				{
-    					Main.connectEdgesFromFile(Main.mainMap, subDir + "\\mapEdges.csv");
-    				}
-    			}
-    		}
-    	}
-    	startNode = Main.mainMap.get(0);
-    	goalNode = Main.mainMap.get(4);
-    	
     	drawMap(buildingList);
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
     }
-    
+	//Method to find the path given a start node and an end node.
+	public static List<Node> getPathFromNode(Node startNode, Node endNode, Map map)
+	{
+		AStar astar = new AStar(defaultSettings);;
+		return astar.findPath(startNode, endNode, map.toNodeList());
+	}
     public void drawMap(List<Building> buildings)
     {
     	boolean firstRun = true;
@@ -305,57 +260,18 @@ public class MainController implements Initializable{
     	}
     	imageZoomPane.setZoomFactor(value);
     }
-    private void updateBuildingValuesFromFile(Building b, String path)
-    {
-		BufferedReader br = null;
-		String line = "";
-		String delimiter = ",";
-		int imageXIndex = 0;
-		int imageYIndex = 1;
-		int imageAngleIndex = 2;
-		int imageScaleXIndex = 3;
-		int imageScaleYIndex = 4;
-		try {
-
-			br = new BufferedReader(new FileReader(path));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] imageData = line.split(delimiter);
-				int x = Integer.parseInt(imageData[imageXIndex]);
-				int y = Integer.parseInt(imageData[imageYIndex]);
-				int angle = Integer.parseInt(imageData[imageAngleIndex]);
-				double scaleX = Double.parseDouble(imageData[imageScaleXIndex]);
-				double scaleY = Double.parseDouble(imageData[imageScaleYIndex]);
-				b.setX(x);
-				b.setY(y);
-				b.setAngle(angle);
-				b.setScaleX(scaleX);
-				b.setScaleY(scaleY);
-			}
-
-		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
-		finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {e.printStackTrace();}
-			}
-		}
-    }
+   
     
     //Action Handler for the Run AStar (GO) Button
     @FXML 
     protected void handleRunAStar(ActionEvent event) {
     	if (startNode != null && goalNode != null)
     	{
-    		List<Node> path = Main.getPathFromNode(startNode, goalNode, Main.mainMap);
+    		List<Node> path = getPathFromNode(startNode, goalNode, mainMap);
     		drawPath(path);
     		System.out.println("The Path is");
     		System.out.println(path);
-            List<String> directions = Main.getDirectionsList(path, 1, 1);
+            List<String> directions = DirectionBuilder.getDirectionsList(path, 1, 1);
             showDirections(directions);
 //    		startNode = null;
 //    		goalNode = null;
@@ -377,7 +293,6 @@ public class MainController implements Initializable{
     //Function to generate buttons at each accessible node on the map
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
-    	System.out.println("Shouldn't be here");
     	for(Node node : nodeList)
     	{
     		if (node.map == "Campus")

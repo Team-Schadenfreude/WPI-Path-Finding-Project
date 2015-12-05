@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
 
 public class Floor {
 
-	String name;
-	Image mapImage;
-	List<Node> nodes = new LinkedList<Node>();
+	private String name;
+	private Image mapImage;
+	private List<Node> nodes = new LinkedList<Node>();
 	
 	public Floor(String path, String name) {
 		this.mapImage = new Image(path);
@@ -39,6 +39,10 @@ public class Floor {
 	public List<Node> getNodes()
 	{
 		return this.nodes;
+	}
+	public void addNode(Node node)
+	{
+		this.nodes.add(node);
 	}
 	public String toString()
 	{

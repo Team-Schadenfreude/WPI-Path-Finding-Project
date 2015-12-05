@@ -7,15 +7,15 @@ import AStar.Node;
 
 public class Map {
 
-	private List<Building> buildings;
+	private List<Building> buildings = new LinkedList<Building>();
 	private List<Node> nodes;
 	private String name;
+	private String baseMap;
 	public Map() {
 	}
-	public Map(String name, List<Building> buildings){
-		this.buildings = buildings;
+	public Map(String name, String baseMap){
 		this.name = name;
-		getNodesFromBuildings();
+		this.baseMap = baseMap;
 	}
 	private void getNodesFromBuildings()
 	{
@@ -35,7 +35,7 @@ public class Map {
 	{
 		return this.buildings;
 	}
-	public List<Node> toNodeList()
+	public List<Node> toNodeList() //Be extremely careful using this function
 	{
 		return this.nodes;
 	}
@@ -51,5 +51,47 @@ public class Map {
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	public void addBuilding(Building building)
+	{
+		this.buildings.add(building);
+		addNodesFromBuilding(building);
+	}
+	private void addNodesFromBuilding(Building b)
+	{
+		for (Floor f : b.getFloors())
+		{
+			nodes.addAll(f.getNodes());
+		}
+	}
+	public int getBuildingCount()
+	{
+		return this.buildings.size();
+	}
+	public int getNodeCount()
+	{
+		return this.nodes.size();
+	}
+	public static Node findNodeByName(List<Node> nodeList, String name)//Want to change this to throwing an exception when the node is not found
+	{
+		for(Node n : nodeList)
+		{
+			if(n.nodeName.equals(name))
+			{
+				return n;
+			}
+		}
+		return null;
+	}
+	 public Node findNodeByXYZinMap(int x, int y, int z, String nodeMap)//Want to change this to throwing an exception when the node is not found
+	{
+		for(Node n : nodes)
+		{
+			if(n.xPos == x && n.yPos == y && n.zPos == z && n.map.equals(nodeMap))
+			{
+				return n;
+			}
+		}
+		return null;
 	}
 }

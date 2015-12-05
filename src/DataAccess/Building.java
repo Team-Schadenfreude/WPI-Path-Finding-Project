@@ -70,6 +70,10 @@ public class Building {
 	{
 		return this.scaleY;
 	}
+	public void addFloor(Floor floor)
+	{
+		this.floors.add(floor);
+	}
 	public String toString(){
         return this.name + " : floors[ " + this.floors.toString() + " ] ";
 }
