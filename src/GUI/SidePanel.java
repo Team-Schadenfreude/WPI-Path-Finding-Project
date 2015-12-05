@@ -1,6 +1,7 @@
 package GUI;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.twilio.sdk.TwilioRestException;
@@ -12,34 +13,104 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 
 public class SidePanel {
 	
 	public static GridPane setUpSidePanel(String from, String to, List<String> directions) {
 		
 		final GridPane grid = new GridPane();
-		final ListView<String> dList = new ListView<String>();
+		final ListView<HBox> dList = new ListView<HBox>();
 		final TextField emailAddrInput = new TextField();
 		final TextField SMSNumInput = new TextField();
-		final Button send = new Button("Send");
-		final Label notificationEmail = new Label();
-		final Label notificationSMS = new Label();
+		final Button send = new Button();
 		final HBox hbEmail = new HBox();
 		final HBox hbSMS = new HBox();
+		final List<HBox> hbList = new ArrayList<HBox>();
 		final String emailContent = String.join("<br>", directions);
 		final String txtContent = String.join("\r\n", directions);
+		HBox hbItem;
+		Label label;
 		
+		send.setGraphic(new ImageView(new Image("/res/icons/send.png", 50, 50, true, true)));
+		send.setStyle("-fx-background-color: #FFFFF0;");
 		
-	    notificationEmail.setWrapText(true);
-	    notificationSMS.setWrapText(true);
-		
-		hbEmail.getChildren().addAll(new Label("Email directions: "), emailAddrInput);
-		hbSMS.getChildren().addAll(new Label("SMS directions: "), SMSNumInput);
+	    label = new Label("Email Directions: ");
+	    label.setTextFill(Color.web("#FFFFF0"));
+		hbEmail.getChildren().addAll(label, emailAddrInput);
+		label = new Label("SMS Directions:  ");
+		label.setTextFill(Color.web("#FFFFF0"));
+		hbSMS.getChildren().addAll(label, SMSNumInput);
 		HBox.setHgrow(emailAddrInput, Priority.ALWAYS);
 		HBox.setHgrow(SMSNumInput, Priority.ALWAYS);
+		
+		for(String s: directions) {
+			
+			if(s.toLowerCase().contains("straight")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("turn right")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("turn left")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("slightly right")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_right.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("slightly left")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("arrive")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+		}
+		dList.getItems().addAll(hbList);
+		dList.setStyle("-fx-background-color: #334C5D;");
+		
+//		dList.setCellFactory(new Callback<ListView<HBox>, ListCell<HBox>>(){
+// 
+//            @Override
+//            public ListCell<HBox> call(ListView<HBox> p) {
+//                 
+//                ListCell<HBox> cell = new ListCell<HBox>(){
+// 
+//                    @Override
+//                    protected void updateItem(HBox t, boolean bln) {
+//                        super.updateItem(t, bln);
+//                        if (t.getChildren() != null) {
+//                            
+//                        }
+//                    }
+// 
+//                };
+//                 
+//                return cell;
+//            }
+//        });
 
 		
 		send.setOnAction(new EventHandler<ActionEvent>() {
@@ -48,35 +119,43 @@ public class SidePanel {
                 String emailAddr = emailAddrInput.getText();
                 String smsNum = SMSNumInput.getText();
             	if (emailAddr != null && !emailAddr.isEmpty()){  
-            		if (SendingEmail.generateAndSendEmail(emailAddr, emailContent, from, to))
-            			notificationEmail.setText("Email has sent to " + emailAddr + "!");
-            		else
-            			notificationEmail.setText("Emailing failed!");
+            		if (SendingEmail.generateAndSendEmail(emailAddr, emailContent, from, to)) {
+            			emailAddrInput.clear();
+            			emailAddrInput.setPromptText("Emailed to " + emailAddr);
+            		}
+            		else {
+            			emailAddrInput.clear();
+            			emailAddrInput.setPromptText("Emailing Failed!");
+            		}
             	}
             	if (smsNum != null && !smsNum.isEmpty()){  
             		try {
-						if (SendingSMS.generateAndSendSMS(smsNum, txtContent, from, to))
-							notificationSMS.setText("SMS has sent to " + smsNum + "!");
-						else
-							notificationSMS.setText("Texting failed!");
+						if (SendingSMS.generateAndSendSMS(smsNum, txtContent, from, to)) {
+							SMSNumInput.clear();
+							SMSNumInput.setPromptText("Texted to " + smsNum);
+						}
+						else {
+							SMSNumInput.clear();
+							SMSNumInput.setPromptText("Texting Failed!");
+						}
 					} catch (TwilioRestException e1) {}
             	}
             }
 		});
 		
-		grid.setVgap(13);
-        grid.setHgap(4);
+		grid.setVgap(14);
+        grid.setHgap(5);
+        grid.setStyle("-fx-background-color: #334C5D;");
         grid.setPadding(new Insets(5, 5, 5, 5));
-        grid.add(new Label("YOUR DIRECTIONS: "), 0, 1);
-        grid.add(dList, 0, 2, 4, 5);
-        grid.add(hbEmail, 0, 8);
-        grid.add(notificationEmail, 0, 9);
-        grid.add(hbSMS, 0, 10);
-        grid.add(notificationSMS, 0, 11);
-        grid.add(send, 0, 12);
-
-		
-		dList.getItems().addAll(directions);
+        label = new Label("YOUR DIRECTIONS: ");
+	    label.setTextFill(Color.web("#FFFFF0"));
+	    label.setStyle("-fx-font-weight: bolder; -fx-font-size: 24px;");
+        grid.add(label, 0, 1);
+        grid.add(dList, 0, 2, 5, 10);
+        grid.add(hbEmail, 0, 12, 4, 1);
+        grid.add(hbSMS, 0, 13, 4, 1);
+        grid.add(send, 4, 12, 1, 2);
+        
 		
 		return grid;
 	}
