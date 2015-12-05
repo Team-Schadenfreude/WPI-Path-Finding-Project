@@ -1,6 +1,6 @@
 package DataAccess;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
@@ -15,7 +15,7 @@ public class DirectionBuilder {
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path, double xScale, double yScale)
 	{
-		List<String> directionsList = new ArrayList<String>();
+		List<String> directionsList = new LinkedList<String>();
 		if(path.size() == 0)
 		{
 			directionsList.add("There is no path to follow");

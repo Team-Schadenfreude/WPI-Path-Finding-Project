@@ -1,31 +1,12 @@
 package GUI;
  
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import AStar.Settings;
-import DataAccess.Map;
-import AStar.Node;
-import AStar.AStar;
-import java.util.List;
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import AStar.NodeList;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
  
 public class Main extends Application {
 

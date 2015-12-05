@@ -1,13 +1,8 @@
 package GUI;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.transform.Scale;
 
 

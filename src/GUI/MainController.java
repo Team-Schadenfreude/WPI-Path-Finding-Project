@@ -1,13 +1,6 @@
 package GUI;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -43,6 +36,7 @@ import DataAccess.Building;
 import DataAccess.DirectionBuilder;
 import DataAccess.Floor;
 import DataAccess.Map;
+import DataAccess.MapBuilder;
 import GUI.ZoomingPane;
 
 public class MainController implements Initializable{
@@ -61,10 +55,8 @@ public class MainController implements Initializable{
     private Group mainGroup = new Group();
     private String lastBuilding;
     //Scale s = new Scale(2,2);
-    private StackPane imageStackPane = new StackPane();
     private ZoomingPane imageZoomPane;
     //The list of all buildings on Campus
-    List<Building> buildingList = new LinkedList<Building>();
     //Boolean marking a node as selected
     private boolean nodeSelect = false;
     //The start and end nodes for AStar
@@ -83,7 +75,7 @@ public class MainController implements Initializable{
     	floorSelectionMenu.getItems().clear();
     	primarySplitPane.setDividerPositions(1.0);
 	}
-    
+    @Deprecated
     private File getDirectoryFromDialog()
     {
     	DirectoryChooser chooser = new DirectoryChooser();
@@ -95,8 +87,9 @@ public class MainController implements Initializable{
     //Action handler for the load map button
     @FXML 
     protected void handleLoadMap(ActionEvent event) {
-    	
-    	drawMap(buildingList);
+    	MapBuilder mapBuilder = new MapBuilder("res/SuperMap", "Campus");
+    	mainMap = mapBuilder.buildMap();
+    	drawMap(mainMap.getBuildings());
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
@@ -127,6 +120,7 @@ public class MainController implements Initializable{
     			g.getChildren().add(im);
     			g.getChildren().add(c);
     			g.setId(f.getName());
+    			System.out.println("-" + g.getId() + "-");
     			buildGroup.getChildren().add(g);
     		}
     		Rotate r = new Rotate(b.getAngle());
@@ -135,7 +129,7 @@ public class MainController implements Initializable{
 			buildGroup.setTranslateX(b.getX());
 			buildGroup.setTranslateY(b.getY());
 			buildGroup.setId(b.getName());
-			if (!buildGroup.getId().equals("Campus"))
+			if (!buildGroup.getId().equals(mainMap.getBaseMapName()))
     		{
     			buildGroup.setOpacity(0);//0 _a
     		}
@@ -147,7 +141,7 @@ public class MainController implements Initializable{
 					{
 						for (javafx.scene.Node n : mainGroup.getChildren())
 						{
-							if (!n.getId().equals("Campus"))
+							if (!n.getId().equals(mainMap.getBaseMapName()))
 							{
 								n.setOpacity(0);//0 _b
 							}
@@ -162,7 +156,7 @@ public class MainController implements Initializable{
 						double maxY = buildGroup.getBoundsInParent().getMaxY();
 						double pivotX = (minX + maxX)/2;
 						double pivotY = (minY + maxY)/2;
-						if (buildGroup.getId().equals("Campus"))
+						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
 						{
 							System.out.println("Pivot");
 							pivotX = event.getX();
@@ -174,7 +168,7 @@ public class MainController implements Initializable{
 						((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
 						((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
 						Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
-						if (buildGroup.getId().equals("Campus"))
+						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
 						{
 							imageZoomPane.setPivot(pt.getX(), pt.getY());
 						}
@@ -183,7 +177,7 @@ public class MainController implements Initializable{
 							imageZoomPane.setPivot(pivotX, pivotY);
 						}
 						double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
-						if (buildGroup.getId().equals("Campus"))
+						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
 						{
 							imageZoomPane.setZoomFactor(1);
 						}
@@ -294,7 +288,7 @@ public class MainController implements Initializable{
     {
     	for(Node node : nodeList)
     	{
-    		if (node.map == "Campus")
+    		if (node.map == mainMap.getBaseMapName())
     		{
     			Button btn = new Button("");
     			btn.setId(node.nodeName);
@@ -355,6 +349,7 @@ public class MainController implements Initializable{
         		}
         		else if (node.isTransitionNode && prevNode.isTransitionNode && !node.map.equals(prevNode.map))
         		{
+        			System.out.println("CHANGING CANVAS");
         			System.out.println("Map name is : " + node.map);
         			activeCanvas = findMapCanvas(node.map);
         	    	activeCanvas.getGraphicsContext2D().clearRect(0, 0, activeCanvas.getWidth(), activeCanvas.getHeight());
@@ -362,7 +357,7 @@ public class MainController implements Initializable{
         		else
         		{
         			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-        			if (node.map.equals("Campus"))
+        			if (node.map.equals(mainMap.getBaseMapName()))
         			{
         				gc.setLineWidth(4);
         			}
@@ -429,7 +424,7 @@ public class MainController implements Initializable{
     {
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
-    	for (Building b : buildingList)
+    	for (Building b : mainMap.getBuildings())
     	{
     		if (b.getFloors() != null) //This needs to be here
     		{
@@ -445,24 +440,27 @@ public class MainController implements Initializable{
         			floors2.setText(f.getName());
         			for (Node n : f.getNodes())
         			{
-        				MenuItem mi1 = new MenuItem(n.getName());
-        				MenuItem mi2 = new MenuItem(n.getName());
-        				mi1.setOnAction(new EventHandler<ActionEvent>() {
-            			    @Override public void handle(ActionEvent e) {
-            			    	startNode = mainMap.findNodeByName(mi1.getText());
-            			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
-            			    	System.out.println("Start Node Selected");
-            			    }
-            			});
-            			mi2.setOnAction(new EventHandler<ActionEvent>() {
-            			    @Override public void handle(ActionEvent e) {
-            			        goalNode = mainMap.findNodeByName(mi2.getText());
-            			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
-            			        System.out.println("Goal Node Selected");
-            			    }
-            			});
-            			floors.getItems().add(mi1);
-            			floors2.getItems().add(mi2);
+        				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
+        				{
+        					MenuItem mi1 = new MenuItem(n.nodeName);
+            				MenuItem mi2 = new MenuItem(n.nodeName);
+            				mi1.setOnAction(new EventHandler<ActionEvent>() {
+                			    @Override public void handle(ActionEvent e) {
+                			    	startNode = mainMap.findNodeByName(mi1.getText());
+                			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+                			    	System.out.println("Start Node Selected");
+                			    }
+                			});
+                			mi2.setOnAction(new EventHandler<ActionEvent>() {
+                			    @Override public void handle(ActionEvent e) {
+                			        goalNode = mainMap.findNodeByName(mi2.getText());
+                			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+                			        System.out.println("Goal Node Selected");
+                			    }
+                			});
+                			floors.getItems().add(mi1);
+                			floors2.getItems().add(mi2);
+        				}
         			}
         			building.getItems().add(floors);
         			building2.getItems().add(floors2);

@@ -3,10 +3,10 @@
  */
 package AStar;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class AStar{
 	public List<Node> buildPath(Node end){
 		
 		//create a new array list of nodes
-		List<Node> path = new ArrayList<Node>();
+		List<Node> path = new LinkedList<Node>();
 		
 		
 		//get the nodes in sequence from the end to the start
@@ -40,7 +40,7 @@ public class AStar{
 		}
 		if (path.size() <= 1)//If there is not path
 		{
-			return new ArrayList<Node>(); //Return empty list
+			return new LinkedList<Node>(); //Return empty list
 		}
 		//reverse the path as it goes from end to finish and we want start to finish
 		Collections.reverse(path);

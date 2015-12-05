@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/tbopes/Downloads/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/tbopes/Downloads/twilio-java-sdk-6.0.1-edge-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Stonemotmot/Downloads/javamail-1.4.5/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Stonemotmot/Downloads/twilio-java-sdk-6.0.1-edge-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -8,7 +8,7 @@ import AStar.Node;
 public class Map {
 
 	private List<Building> buildings = new LinkedList<Building>();
-	private List<Node> nodes;
+	private List<Node> nodes = new LinkedList<Node>();
 	private String name;
 	private String baseMap;
 	public Map() {
@@ -17,9 +17,16 @@ public class Map {
 		this.name = name;
 		this.baseMap = baseMap;
 	}
+	public String getBaseMapName()
+	{
+		return this.baseMap;
+	}
+	public void setBaseMapName(String baseMap)
+	{
+		this.baseMap = baseMap;
+	}
 	private void getNodesFromBuildings()
 	{
-		nodes = new LinkedList<Node>();
 		for(Building b : this.buildings)
 		{
 			for (Floor f : b.getFloors())

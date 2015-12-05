@@ -5,14 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 
 public class MapBuilder {
 
@@ -79,9 +76,27 @@ public class MapBuilder {
 		return map;
 	}
 	
-	public static List<Node> getNodesFromFile(String filePath)
+	private Node.Type nodeTypeFromString(String type)
 	{
-		List<Node> nodeList = new ArrayList<Node>();
+		switch(type)
+		{
+		case "ROOM":
+			return Node.Type.ROOM;
+		case "STAIRS":
+			return Node.Type.STAIRS;
+		case "BATHROOM_M":
+			return Node.Type.BATHROOM_M;
+		case "BATHROOM_F":
+			return Node.Type.BATHROOM_F;
+		case "ENTRANCE":
+			return Node.Type.ENTRANCE;
+		default:
+			return Node.Type.NONE;
+		}
+	}
+	public List<Node> getNodesFromFile(String filePath)
+	{
+		List<Node> nodeList = new LinkedList<Node>();
 		BufferedReader br = null;
 		String line = "";
 		String delimiter = ",";
@@ -92,6 +107,7 @@ public class MapBuilder {
 		int nodeMapIndex = 4;
 		int nodeDescIndex = 5;
 		int nodeTransferIndex = 6;
+		int nodeTypeIndex = 7;
 		try {
 
 			br = new BufferedReader(new FileReader(filePath));
@@ -105,14 +121,15 @@ public class MapBuilder {
 				int z = Integer.parseInt(nodeData[nodeZIndex]);
 				String mapName = nodeData[nodeMapIndex];
 				String description = nodeData[nodeDescIndex];
+				Node.Type nodeType = nodeTypeFromString(nodeData[nodeTypeIndex]);
 				boolean transferNode = false;
+				System.out.println("Transfer Node is -" + nodeData[nodeTransferIndex] + "-");
 				if (nodeData[nodeTransferIndex].contains("TRUE") || nodeData[nodeTransferIndex].contains("true"))
 				{
 					transferNode = true;
 				}
-				
-				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
-				//System.out.println("Is transfer : " + newNode.isTransitionNode);
+				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);
+				System.out.println("Node transfer = " + newNode.isTransitionNode);
 				nodeList.add(newNode);
 			}
 
@@ -130,7 +147,7 @@ public class MapBuilder {
 	}
 
 
-	private static void connectEdgesFromFile(Map map, String filePath)
+	private void connectEdgesFromFile(Map map, String filePath)
 	{
 		BufferedReader br = null;
 		String line = "";
@@ -150,7 +167,7 @@ public class MapBuilder {
 			int i = 0;
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				// use comma as separator
-				System.out.println("i = " + i);
+				//System.out.println("i = " + i);
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
@@ -164,7 +181,7 @@ public class MapBuilder {
 				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
 				if (n1.neighbors == null)
 				{
-					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));
+					n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
 				}
 				else
 				{
@@ -172,7 +189,7 @@ public class MapBuilder {
 				}
 				if (n2.neighbors == null)
 				{
-					n2.neighbors =  new ArrayList<>(Arrays.asList(n1));
+					n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
 				}
 				else
 				{
