@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import AStar.Settings;
+import DataAccess.Map;
 import AStar.Node;
 import AStar.AStar;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.io.IOException;
 public class Main extends Application {
 	private static Settings defaultSettings = new Settings(false, false, false);
 	private static NodeList nlist = new NodeList();
-	public static Map mainMap = new Map()
+	public static Map mainMap = new Map();
 	public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
@@ -47,119 +48,7 @@ public class Main extends Application {
         
     }
    
-	public static List<Node> getNodesFromFile(String filePath)
-	{
-		List<Node> nodeList = new ArrayList<Node>();
-		BufferedReader br = null;
-		String line = "";
-		String delimiter = ",";
-		int nodeNameIndex = 0;
-		int nodeXIndex = 1;
-		int nodeYIndex = 2;
-		int nodeZIndex = 3;
-		int nodeMapIndex = 4;
-		int nodeDescIndex = 5;
-		int nodeTransferIndex = 6;
-		try {
-
-			br = new BufferedReader(new FileReader(filePath));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] nodeData = line.split(delimiter);
-				String name = nodeData[nodeNameIndex];
-				int x = Integer.parseInt(nodeData[nodeXIndex]);
-				int y = Integer.parseInt(nodeData[nodeYIndex]);
-				int z = Integer.parseInt(nodeData[nodeZIndex]);
-				String mapName = nodeData[nodeMapIndex];
-				String description = nodeData[nodeDescIndex];
-				boolean transferNode = false;
-				if (nodeData[nodeTransferIndex].contains("TRUE") || nodeData[nodeTransferIndex].contains("true"))
-				{
-					transferNode = true;
-				}
-				
-				Node newNode = new Node(name,0,0,0,false, x, y, z, mapName, transferNode, description);
-				//System.out.println("Is transfer : " + newNode.isTransitionNode);
-				nodeList.add(newNode);
-			}
-
-		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
-		finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {e.printStackTrace();}
-			}
-		}
-		return nodeList;
-	}
-
-
-	public static void connectEdgesFromFile(List<Node> nodeList, String filePath)
-	{
-		BufferedReader br = null;
-		String line = "";
-		String delimiter = ",";
-		int edgeX1Index = 0;
-		int edgeY1Index = 1;
-		int edgeZ1Index = 2;
-		int edgeMap1Index = 3;
-		int edgeX2Index = 4;
-		int edgeY2Index = 5;
-		int edgeZ2Index = 6;
-		int edgeMap2Index = 7;
-		System.out.println("Edges From " + filePath);
-		try {
-
-			br = new BufferedReader(new FileReader(filePath));
-			int i = 0;
-			while ((line = br.readLine()) != null && line.length() > 0) {
-				// use comma as separator
-				System.out.println("i = " + i);
-				String[] edgeData = line.split(delimiter);
-				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
-				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
-				int z1 = Integer.parseInt(edgeData[edgeZ1Index]);
-				String nodeMap1 = edgeData[edgeMap1Index];
-				int x2 = Integer.parseInt(edgeData[edgeX2Index]);
-				int y2 = Integer.parseInt(edgeData[edgeY2Index]);
-				int z2 = Integer.parseInt(edgeData[edgeZ2Index]);
-				String nodeMap2 = edgeData[edgeMap2Index];
-				Node n1 = findNodeByXYZinMap(nodeList, x1, y1, z1, nodeMap1);
-				Node n2 = findNodeByXYZinMap(nodeList, x2, y2, z2, nodeMap2);
-				if (n1.neighbors == null)
-				{
-					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));
-				}
-				else
-				{
-					n1.neighbors.add(n2);
-				}
-				if (n2.neighbors == null)
-				{
-					n2.neighbors =  new ArrayList<>(Arrays.asList(n1));
-				}
-				else
-				{
-					n2.neighbors.add(n1);
-				}
-				i++;
-			}
-
-		} 
-		catch (FileNotFoundException e) {e.printStackTrace();} 
-		catch (IOException e) {e.printStackTrace();} 
-		finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {e.printStackTrace();}
-			}
-		}
-	}
+	
 
 	public static Node findNodeByXYZinMap(List<Node> nodeList, int x, int y, int z, String nodeMap)//Want to change this to throwing an exception when the node is not found
 	{
