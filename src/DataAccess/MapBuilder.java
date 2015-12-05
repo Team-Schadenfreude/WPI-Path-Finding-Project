@@ -160,8 +160,8 @@ public class MapBuilder {
 				int y2 = Integer.parseInt(edgeData[edgeY2Index]);
 				int z2 = Integer.parseInt(edgeData[edgeZ2Index]);
 				String nodeMap2 = edgeData[edgeMap2Index];
-				Node n1 = findNodeByXYZinMap(map.toNodeList(),x1, y1, z1, nodeMap1);
-				Node n2 = findNodeByXYZinMap(map.toNodeList(), x2, y2, z2, nodeMap2);
+				Node n1 = map.findNodeByXYZinMap(x1, y1, z1, nodeMap1);
+				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
 				if (n1.neighbors == null)
 				{
 					n1.neighbors =  new ArrayList<>(Arrays.asList(n2));

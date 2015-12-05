@@ -311,13 +311,13 @@ public class MainController implements Initializable{
     			    	System.out.println("You Clicked Node " + btn.getId());
     			    	if (nodeSelect == false)
     			    	{
-    			    		startNode = Main.findNodeByName(Main.mainMap, btn.getId());
+    			    		startNode = mainMap.findNodeByName(btn.getId());
     			    		nodeSelect = true;
     			    	
     			    	}
     			    	else
     			    	{
-    			    		goalNode = Main.findNodeByName(Main.mainMap, btn.getId());
+    			    		goalNode = mainMap.findNodeByName(btn.getId());
     			    		nodeSelect = false;
     			    	}
     			    }
@@ -443,14 +443,14 @@ public class MainController implements Initializable{
         				MenuItem mi2 = new MenuItem(r.getName());
         				mi1.setOnAction(new EventHandler<ActionEvent>() {
             			    @Override public void handle(ActionEvent e) {
-            			    	startNode = Main.findNodeByName(Main.mainMap, mi1.getText());
+            			    	startNode = mainMap.findNodeByName(mi1.getText());
             			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
             			    	System.out.println("Start Node Selected");
             			    }
             			});
             			mi2.setOnAction(new EventHandler<ActionEvent>() {
             			    @Override public void handle(ActionEvent e) {
-            			        goalNode = Main.findNodeByName(Main.mainMap, mi2.getText());
+            			        goalNode = mainMap.findNodeByName(mi2.getText());
             			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
             			        System.out.println("Goal Node Selected");
             			    }

@@ -72,9 +72,9 @@ public class Map {
 	{
 		return this.nodes.size();
 	}
-	public static Node findNodeByName(List<Node> nodeList, String name)//Want to change this to throwing an exception when the node is not found
+	public Node findNodeByName( String name)//Want to change this to throwing an exception when the node is not found
 	{
-		for(Node n : nodeList)
+		for(Node n : nodes)
 		{
 			if(n.nodeName.equals(name))
 			{
