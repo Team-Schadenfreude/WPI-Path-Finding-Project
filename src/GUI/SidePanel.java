@@ -22,9 +22,9 @@ import javafx.scene.paint.Color;
 
 public class SidePanel {
 	
-	public static GridPane setUpSidePanel(String from, String to, List<String> directions) {
+	public static void setUpSidePanel(GridPane grid, String from, String to, List<String> directions) {
 		
-		final GridPane grid = new GridPane();
+		grid.getChildren().clear();
 		final ListView<HBox> dList = new ListView<HBox>();
 		final TextField emailAddrInput = new TextField();
 		final TextField SMSNumInput = new TextField();
@@ -156,7 +156,5 @@ public class SidePanel {
         grid.add(hbSMS, 0, 13, 4, 1);
         grid.add(send, 4, 12, 1, 2);
         
-		
-		return grid;
 	}
 }
