@@ -1,6 +1,5 @@
 package GUI;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class SidePanel {
 		Label label;
 		
 		send.setGraphic(new ImageView(new Image("/res/icons/send.png", 50, 50, true, true)));
-		send.setStyle("-fx-background-color: #FFFFF0;");
+		send.setStyle("-fx-background-color: #DEDEDE;");
 		
 	    label = new Label("Email Directions: ");
 	    label.setTextFill(Color.web("#FFFFF0"));
@@ -90,27 +89,6 @@ public class SidePanel {
 		}
 		dList.getItems().addAll(hbList);
 		dList.setStyle("-fx-background-color: #334C5D;");
-		
-//		dList.setCellFactory(new Callback<ListView<HBox>, ListCell<HBox>>(){
-// 
-//            @Override
-//            public ListCell<HBox> call(ListView<HBox> p) {
-//                 
-//                ListCell<HBox> cell = new ListCell<HBox>(){
-// 
-//                    @Override
-//                    protected void updateItem(HBox t, boolean bln) {
-//                        super.updateItem(t, bln);
-//                        if (t.getChildren() != null) {
-//                            
-//                        }
-//                    }
-// 
-//                };
-//                 
-//                return cell;
-//            }
-//        });
 
 		
 		send.setOnAction(new EventHandler<ActionEvent>() {
