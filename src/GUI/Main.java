@@ -28,6 +28,7 @@ import java.io.FileReader;
 import java.io.IOException;
  
 public class Main extends Application {
+
 	public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);

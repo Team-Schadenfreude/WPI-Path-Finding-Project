@@ -43,7 +43,6 @@ import DataAccess.Building;
 import DataAccess.DirectionBuilder;
 import DataAccess.Floor;
 import DataAccess.Map;
-//import DataAccess.RoomReader;
 import GUI.ZoomingPane;
 
 public class MainController implements Initializable{
@@ -337,8 +336,8 @@ public class MainController implements Initializable{
     		Canvas activeCanvas = findMapCanvas(path.get(0).map);
     		System.out.println(path.get(0).map);
         	clearAllCanvas();
-    		drawCircleOnNode(new Node("h",(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(),0, path.get(0).map), 100, Color.GREEN);
-
+    		drawCircleOnNode(path.get(0).map,(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(), 100, Color.GREEN);
+    		
         	boolean first = true;
         	Node prevNode = null;
         	System.out.println("CanvasEditing");
@@ -385,13 +384,20 @@ public class MainController implements Initializable{
     		System.out.println("No Path");
     	}
     }
-    private void drawCircleOnNode(Node n, int radius, Paint p)
+    
+    private void drawCircleOnNode(String map, int xPos, int yPos, int radius, Paint p)
     {
-    	Canvas activeCanvas = findMapCanvas(n.map);
+    	Canvas activeCanvas = findMapCanvas(map);
     	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
     	gc.setFill(p);
-    	gc.fillOval(n.xPos - (radius /2), n.yPos - (radius / 2), radius, radius);
+    	gc.fillOval(xPos - (radius /2), yPos - (radius / 2), radius, radius);
     }
+    
+    private void drawCircleOnNode(Node n, int radius, Paint p)
+    {
+    	drawCircleOnNode(n.map, n.xPos, n.yPos, radius, p);
+    }
+    
     private void clearAllCanvas()
     {
     	for (javafx.scene.Node g : mainGroup.getChildren())
@@ -437,10 +443,10 @@ public class MainController implements Initializable{
         			Menu floors2 = new Menu();
         			floors.setText(f.getName());
         			floors2.setText(f.getName());
-        			for (Room r : f.getRoomList())
+        			for (Node n : f.getNodes())
         			{
-        				MenuItem mi1 = new MenuItem(r.getName());
-        				MenuItem mi2 = new MenuItem(r.getName());
+        				MenuItem mi1 = new MenuItem(n.getName());
+        				MenuItem mi2 = new MenuItem(n.getName());
         				mi1.setOnAction(new EventHandler<ActionEvent>() {
             			    @Override public void handle(ActionEvent e) {
             			    	startNode = mainMap.findNodeByName(mi1.getText());

@@ -7,10 +7,10 @@ package AStar;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.shape.Circle;
-
 //class for node. A node is a point on the grid that contains an x and y position
 public class Node{
+	public enum Type { ROOM, STAIRS, BATHROOM, NONE }; // an Enumeration to represent the different types of nodes
+	
 	public String nodeName; //every node has a name
     public Node parent; //node has a parent. the parent is where the current node came from
     public double gValue; //gValue is cost from current block
@@ -24,10 +24,9 @@ public class Node{
 	public List<Node> neighbors = new ArrayList<Node>();
 	public String map;
 	public boolean isTransitionNode = false;
-	public Circle circle = new Circle(xPos,yPos,100);
-    
+	public Type type;
     //constructor for node
-    public Node(String nodeName, double hValue,double gValue,double fValue, Boolean isObstacle, int xPos, int yPos,int zPos, String map,boolean transfer,String description){
+    public Node(String nodeName, double hValue,double gValue,double fValue, Boolean isObstacle, int xPos, int yPos, int zPos, String map, boolean isTransitionNode, String description){
             this.nodeName = nodeName;
     		this.hValue = hValue;
             this.gValue = gValue;
@@ -37,9 +36,9 @@ public class Node{
             this.description = description;
             this.map = map;
             this.zPos = zPos;
-            this.isTransitionNode = transfer;
     }
-    public Node(String nodeName,int xPos, int yPos,int zpos, String map)
+    
+    public Node(String nodeName, int xPos, int yPos, int zpos, String map, String description, Type type)
     {
     	this.nodeName = nodeName;
     	this.hValue = 0;
@@ -48,18 +47,26 @@ public class Node{
         this.xPos = xPos;
         this.yPos = yPos;
         this.map = map;
-        this.circle=circle;
+        this.description=  description;
+        this.type = type;
+    }
+    
+    public Node(String nodeName, int xPos, int yPos, int zPos, String map)
+    {
+    	this.nodeName = nodeName;
+    	this.hValue = 0;
+        this.gValue = 0;
+        this.isObstacle = false;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.map = map;
+        this.description = "";
+        this.type = Type.NONE;
     }
 
     //function to turn stringName into an actual string name.
     //Why do we have to do this? Because Java is stupid. JK, Java Master Race
     public String toString(){
-            return nodeName;
+            return description;
     }
-    
-    
-    
-    
-    
-
 }
