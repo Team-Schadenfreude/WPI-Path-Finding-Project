@@ -4,6 +4,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -50,6 +54,7 @@ public class MainController implements Initializable{
     @FXML private ScrollPane imageScrollPane;
     @FXML private MenuButton floorSelectionMenu;
     @FXML private SplitPane primarySplitPane;
+    SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
 	public static Map mainMap = new Map();
     private Group mainGroup = new Group();
@@ -74,6 +79,11 @@ public class MainController implements Initializable{
     	destMenu.getItems().clear();
     	floorSelectionMenu.getItems().clear();
     	primarySplitPane.setDividerPositions(1.0);
+    	loadMap();
+    	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
+            @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            	runAStar();
+            }});
 	}
     @Deprecated
     private File getDirectoryFromDialog()
@@ -84,9 +94,8 @@ public class MainController implements Initializable{
     	chooser.setInitialDirectory(defaultDirectory);
     	return chooser.showDialog(Main.primaryStage);
     }
-    //Action handler for the load map button
-    @FXML 
-    protected void handleLoadMap(ActionEvent event) {
+    //Action handler for the load map button 
+    private void loadMap() {
     	MapBuilder mapBuilder = new MapBuilder("res/SuperMap", "Campus");
     	mainMap = mapBuilder.buildMap();
     	drawMap(mainMap.getBuildings());
@@ -253,11 +262,8 @@ public class MainController implements Initializable{
     	}
     	imageZoomPane.setZoomFactor(value);
     }
-   
     
-    //Action Handler for the Run AStar (GO) Button
-    @FXML 
-    protected void handleRunAStar(ActionEvent event) {
+    private void runAStar() {
     	if (startNode != null && goalNode != null)
     	{
     		List<Node> path = getPathFromNode(startNode, goalNode, mainMap);
@@ -448,6 +454,7 @@ public class MainController implements Initializable{
                 			    @Override public void handle(ActionEvent e) {
                 			    	startNode = mainMap.findNodeByName(mi1.getText());
                 			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+                			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			    	System.out.println("Start Node Selected");
                 			    }
                 			});
@@ -455,6 +462,7 @@ public class MainController implements Initializable{
                 			    @Override public void handle(ActionEvent e) {
                 			        goalNode = mainMap.findNodeByName(mi2.getText());
                 			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
+                			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			        System.out.println("Goal Node Selected");
                 			    }
                 			});

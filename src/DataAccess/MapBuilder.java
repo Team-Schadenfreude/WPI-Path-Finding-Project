@@ -123,14 +123,11 @@ public class MapBuilder {
 				String description = nodeData[nodeDescIndex];
 				Node.Type nodeType = nodeTypeFromString(nodeData[nodeTypeIndex]);
 				boolean transferNode = false;
-				System.out.println("Transfer Node is -" + nodeData[nodeTransferIndex] + "-");
 				if (nodeData[nodeTransferIndex].contains("TRUE") || nodeData[nodeTransferIndex].contains("true"))
 				{
 					transferNode = true;
 				}
-				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);
-				System.out.println("Node transfer = " + newNode.isTransitionNode);
-				nodeList.add(newNode);
+				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);				nodeList.add(newNode);
 			}
 
 		} 
