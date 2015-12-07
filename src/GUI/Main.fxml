@@ -35,7 +35,7 @@
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Swap" />
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#swapDirections" text="Swap" />
                </children>
             </VBox>
          </children>

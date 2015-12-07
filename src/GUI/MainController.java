@@ -56,6 +56,7 @@ public class MainController implements Initializable{
     @FXML private MenuButton floorSelectionMenu;
     @FXML private SplitPane primarySplitPane;
     @FXML private VBox controlVBox;
+    
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
 	public static Map mainMap = new Map();
