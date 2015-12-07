@@ -94,7 +94,7 @@ public class MainController implements Initializable{
     @FXML 
     protected void swapDirections(ActionEvent event) {
        //swaps the start and goal node
-        Node tempNode = startNode;
+        Node tempNode = goalNode;
        goalNode = startNode;
        startNode= tempNode;
        
