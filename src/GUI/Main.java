@@ -32,6 +32,7 @@ public class Main extends Application {
 	//public static List<Node> testMap = new ArrayList<Node>();
 	public static List<Node> mainMap = new ArrayList<Node>();
 	public static Stage primaryStage;
+	
     public static void main(String[] args) {
         launch(args);
     }
@@ -47,6 +48,9 @@ public class Main extends Application {
         stage.show();
         
     }
+    
+    
+    
    
 	public static List<Node> getNodesFromFile(String filePath)
 	{

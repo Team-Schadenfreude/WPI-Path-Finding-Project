@@ -7,6 +7,7 @@ package AStar;
 import java.util.ArrayList;
 import java.util.List;
 
+import DataAccess.Building;
 import javafx.scene.shape.Circle;
 
 //class for node. A node is a point on the grid that contains an x and y position
@@ -19,6 +20,7 @@ public class Node{
     public int xPos; //every Node has an X pos
     public int yPos; // y position of node
 	public int zPos;
+	public Building building;
     public Boolean isObstacle; //variable to see if the node is an obstacle
     public String description;
 	public List<Node> neighbors = new ArrayList<Node>();

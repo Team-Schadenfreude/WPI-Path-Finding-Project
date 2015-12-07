@@ -1,10 +1,12 @@
 package DataAccess;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import DataAccess.Room;
 public class Building {
 	String name;
+	String description;
+	List<String> times = new ArrayList<String>();
 	int angle = 0;
 	int x = 0;
 	int y = 0;
@@ -14,6 +16,11 @@ public class Building {
 	public Building(String name)
 	{
 		this.name = name;
+	}
+	public Building (String name, String desc, String times){
+		this.name = name;
+		this.description = desc;
+		//not processing the times right now
 	}
 	public void setFloors(List<Floor> floors)
 	{
@@ -47,9 +54,15 @@ public class Building {
 	{
 		this.name = name;
 	}
+	public String getDesc(){
+		return description;
+	}
 	public String getName()
 	{
 		return this.name;
+	}
+	public String getTimes(){
+		return null;
 	}
 	public int getAngle()
 	{
