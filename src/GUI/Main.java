@@ -20,6 +20,7 @@ public class Main extends Application {
     	loader.setLocation(Main.class.getResource("Main.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
         Scene scene = new Scene(root, root.getWidth(), root.getHeight());
+        scene.getStylesheets().add("GUI/application.css");
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
        

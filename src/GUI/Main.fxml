@@ -15,16 +15,7 @@
     <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefHeight="800.0" prefWidth="629.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <GridPane centerShape="false" prefHeight="60.0" prefWidth="456.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="195.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="27.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox fx:id="controlVBox" prefWidth="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <MenuButton fx:id="startMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Start">
                     <items>
@@ -32,22 +23,20 @@
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
-                  <MenuButton fx:id="destMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Destination" GridPane.rowIndex="1">
+                  <MenuButton fx:id="destMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Destination">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
                         <MenuItem mnemonicParsing="false" text="Action 2" />
                      </items>
                   </MenuButton>
-                  <Button fx:id="zoomInBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleZoomIn" text="+" GridPane.columnIndex="1" />
-                  <Button fx:id="zoomOutBtn" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleZoomOut" text="-" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <MenuButton fx:id="floorSelectionMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Active Floor" GridPane.columnIndex="2">
+                  <MenuButton fx:id="floorSelectionMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Active Floor">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
                </children>
-            </GridPane>
+            </VBox>
          </children>
       </AnchorPane>
       <SplitPane fx:id="primarySplitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -54,6 +55,7 @@ public class MainController implements Initializable{
     @FXML private ScrollPane imageScrollPane;
     @FXML private MenuButton floorSelectionMenu;
     @FXML private SplitPane primarySplitPane;
+    @FXML private VBox controlVBox;
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
 	public static Map mainMap = new Map();
@@ -84,6 +86,7 @@ public class MainController implements Initializable{
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	runAStar();
             }});
+    	controlVBox.getStyleClass().add("vbox");
 	}
     @Deprecated
     private File getDirectoryFromDialog()
@@ -102,6 +105,7 @@ public class MainController implements Initializable{
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
+    	imageZoomPane.setZoomFactor(1);
     }
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, Map map)
@@ -282,11 +286,22 @@ public class MainController implements Initializable{
     	Button closeBtn = new Button("Close");
     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	((GridPane)primarySplitPane.getItems().get(1)).getChildren().clear();
+		    	controlVBox.getChildren().remove(3);
+		    	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+		    	//((GridPane)primarySplitPane.getItems().get(1)).getChildren().clear();
 		    	//primarySplitPane.getItems().add(1, new GridPane());
 		    	primarySplitPane.setDividerPositions(1.0);}});
     	grid.add(closeBtn, 0, 13);
-        primarySplitPane.getItems().set(1, grid);
+    	//controlVBox.setPrefWidth(grid.getPrefWidth());
+    	controlVBox.setPrefHeight(imageScrollPane.getHeight());
+    	if (controlVBox.getChildren().size() > 3)
+    	{
+    		controlVBox.getChildren().set(3, grid);
+    	}
+    	else
+    	{
+    		controlVBox.getChildren().add(grid);
+    	}
         primarySplitPane.setDividerPositions(0.66);
     }
     //Function to generate buttons at each accessible node on the map

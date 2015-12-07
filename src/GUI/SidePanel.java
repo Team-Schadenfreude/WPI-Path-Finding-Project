@@ -36,8 +36,8 @@ public class SidePanel {
 	    notificationEmail.setWrapText(true);
 	    notificationSMS.setWrapText(true);
 		
-		hbEmail.getChildren().addAll(new Label("Email directions: "), emailAddrInput);
-		hbSMS.getChildren().addAll(new Label("SMS directions: "), SMSNumInput);
+		hbEmail.getChildren().addAll(new Label("Email: "), emailAddrInput);
+		hbSMS.getChildren().addAll(new Label("Text: "), SMSNumInput);
 		HBox.setHgrow(emailAddrInput, Priority.ALWAYS);
 		HBox.setHgrow(SMSNumInput, Priority.ALWAYS);
 
@@ -67,7 +67,7 @@ public class SidePanel {
 		grid.setVgap(13);
         grid.setHgap(4);
         grid.setPadding(new Insets(5, 5, 5, 5));
-        grid.add(new Label("YOUR DIRECTIONS: "), 0, 1);
+        grid.add(new Label("Your Directions: "), 0, 1);
         grid.add(dList, 0, 2, 4, 5);
         grid.add(hbEmail, 0, 8);
         grid.add(notificationEmail, 0, 9);
@@ -77,7 +77,6 @@ public class SidePanel {
 
 		
 		dList.getItems().addAll(directions);
-		
 		return grid;
 	}
 }
