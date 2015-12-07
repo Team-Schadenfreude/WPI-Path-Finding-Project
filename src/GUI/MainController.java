@@ -94,17 +94,19 @@ public class MainController implements Initializable{
     @FXML 
     protected void swapDirections(ActionEvent event) {
        //swaps the start and goal node
-        Node tempNode = goalNode;
-       goalNode = startNode;
-       startNode= tempNode;
-       
-       //displays new node information in the appropriate text box
-       
-       
-       //runs A* with the new path
-       getDirectionsProperty.set(!getDirectionsProperty.get());
-       
-    
+    	if (startNode != null && goalNode != null)
+    	{
+    		Node tempNode = goalNode;
+	       goalNode = startNode;
+	       startNode= tempNode;
+	       
+	       //displays new node information in the appropriate text box
+	       startMenu.setText(startNode.map +" " + startNode.nodeName);
+	       destMenu.setText(goalNode.map +" " + goalNode.nodeName);
+	       
+	       //runs A* with the new path
+	       getDirectionsProperty.set(!getDirectionsProperty.get());
+    	}
     }
     
     @Deprecated
