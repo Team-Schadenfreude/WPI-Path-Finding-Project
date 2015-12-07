@@ -88,6 +88,24 @@ public class MainController implements Initializable{
             }});
     	controlVBox.getStyleClass().add("vbox");
 	}
+    
+  //Function swaps the ending node with the starting node and triggers a new path to be created
+    @FXML 
+    protected void swapDirections(ActionEvent event) {
+       //swaps the start and goal node
+        Node tempNode = startNode;
+       goalNode = startNode;
+       startNode= tempNode;
+       
+       //displays new node information in the appropriate text box
+       
+       
+       //runs A* with the new path
+       getDirectionsProperty.set(!getDirectionsProperty.get());
+       
+    
+    }
+    
     @Deprecated
     private File getDirectoryFromDialog()
     {
@@ -294,9 +312,9 @@ public class MainController implements Initializable{
     	grid.add(closeBtn, 0, 13);
     	//controlVBox.setPrefWidth(grid.getPrefWidth());
     	controlVBox.setPrefHeight(imageScrollPane.getHeight());
-    	if (controlVBox.getChildren().size() > 3)
+    	if (controlVBox.getChildren().size() > 4)
     	{
-    		controlVBox.getChildren().set(3, grid);
+    		controlVBox.getChildren().set(4, grid);
     	}
     	else
     	{
