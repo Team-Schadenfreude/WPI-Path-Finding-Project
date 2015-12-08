@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 public class Building {
 	String name;
+	String description = "";
+	String hours = "";
 	int angle = 0;
 	int x = 0;
 	int y = 0;
@@ -14,9 +16,25 @@ public class Building {
 	{
 		this.name = name;
 	}
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+	public void setHours(String hours)
+	{
+		this.hours = hours;
+	}
 	public void setFloors(List<Floor> floors)
 	{
 		this.floors = floors;
+	}
+	public String getDescription()
+	{
+		return this.description;
+	}
+	public String getHours()
+	{
+		return this.hours;
 	}
 	public List<Floor> getFloors()
 	{

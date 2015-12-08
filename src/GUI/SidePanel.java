@@ -15,12 +15,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 public class SidePanel {
-	
-	public static GridPane setUpSidePanel(String from, String to, List<String> directions) {
+	private static GridPane grid = new GridPane();
+	public static GridPane getGridPane()
+	{
+		return grid;
+	}
+	public static void setGridPane(GridPane newGrid)
+	{
+		grid = newGrid;
+	}
+	public static void setUpSidePanel(String from, String to, List<String> directions, VBox boxToControl) {
 		
-		final GridPane grid = new GridPane();
+		//final GridPane grid = new GridPane();
+		grid.getChildren().clear();
 		final ListView<String> dList = new ListView<String>();
 		final TextField emailAddrInput = new TextField();
 		final TextField SMSNumInput = new TextField();
@@ -74,9 +84,15 @@ public class SidePanel {
         grid.add(hbSMS, 0, 10);
         grid.add(notificationSMS, 0, 11);
         grid.add(send, 0, 12);
-
+        Button closeBtn = new Button("Close");
+     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+ 		    @Override public void handle(ActionEvent e) {
+ 		    	grid.getChildren().clear();
+ 		    	boxToControl.getChildren().clear();
+ 		    	}});
+     	grid.add(closeBtn, 0, 13);
 		
 		dList.getItems().addAll(directions);
-		return grid;
+		//return grid;
 	}
 }

@@ -88,7 +88,23 @@ public class MainController implements Initializable{
             	runAStar();
             }});
     	controlVBox.getStyleClass().add("vbox");
+    	controlVBox.getChildren().add(BuildingPopUp.getPopUp());
+    	controlVBox.getChildren().add(SidePanel.getGridPane());
 	}
+    
+    private void setupCloseBtn()
+    {
+    	Button closeBtn = new Button("Close");
+    	closeBtn.setMaxWidth(Double.MAX_VALUE);
+    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
+     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+ 		    @Override public void handle(ActionEvent e) {
+ 		    	BuildingPopUp.getPopUp().getChildren().clear();
+ 		    	SidePanel.getGridPane().getChildren().clear();
+ 		    	}});
+     	controlVBox.getChildren().add(closeBtn);
+
+    }
     
   //Function swaps the ending node with the starting node and triggers a new path to be created
     @FXML 
@@ -126,7 +142,7 @@ public class MainController implements Initializable{
     	imageZoomPane = new ZoomingPane(mainGroup);
     	imageScrollPane.setContent(imageZoomPane);
     	setupDropDowns();
-    	imageZoomPane.setZoomFactor(1);
+    	imageZoomPane.setZoomFactor(.8);
     }
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, Map map)
@@ -153,7 +169,29 @@ public class MainController implements Initializable{
     			ImageView im = new ImageView(f.getImage());
     			g.getChildren().add(im);
     			g.getChildren().add(c);
+    			//Add buttons to nodes
+    			for (Node n : f.getNodes())
+    			{
+    				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
+    				{
+    					Button btn;
+    					if(n.map.equals(mainMap.getBaseMapName()))
+    					{
+    						btn = getButtonForNode(n, 10);
+    					}
+    					else
+    					{
+    						btn = getButtonForNode(n, 60);
+    					}
+        				g.getChildren().add(btn);
+    				}
+    			}
     			g.setId(f.getName());
+    			g.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    				@Override
+    				public void handle(MouseEvent event) {
+    					System.out.println("GroupClicked");
+    				}});
     			System.out.println("-" + g.getId() + "-");
     			buildGroup.getChildren().add(g);
     		}
@@ -170,6 +208,7 @@ public class MainController implements Initializable{
 			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
+					System.out.println("BuildGroup");
 					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
@@ -179,8 +218,11 @@ public class MainController implements Initializable{
 							{
 								n.setOpacity(0);//0 _b
 							}
+							//n.setPickOnBounds(true);
 						}
 						buildGroup.setOpacity(1);
+						BuildingPopUp.setupPopUp(b);
+						//buildGroup.setPickOnBounds(false);
 						imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
 						setupFloorSelection(buildGroup);
 						centerNodeInScrollPane(imageScrollPane, buildGroup);
@@ -303,27 +345,41 @@ public class MainController implements Initializable{
     }
     private void showDirections(List<String> directions)
     {
-    	GridPane grid = SidePanel.setUpSidePanel("FL", "AK", directions);
-    	Button closeBtn = new Button("Close");
-    	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	controlVBox.getChildren().remove(3);
-		    	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
-		    	//((GridPane)primarySplitPane.getItems().get(1)).getChildren().clear();
-		    	//primarySplitPane.getItems().add(1, new GridPane());
-		    	primarySplitPane.setDividerPositions(1.0);}});
-    	grid.add(closeBtn, 0, 13);
-    	//controlVBox.setPrefWidth(grid.getPrefWidth());
-    	controlVBox.setPrefHeight(imageScrollPane.getHeight());
-    	if (controlVBox.getChildren().size() > 4)
-    	{
-    		controlVBox.getChildren().set(4, grid);
-    	}
-    	else
-    	{
-    		controlVBox.getChildren().add(grid);
-    	}
-        primarySplitPane.setDividerPositions(0.66);
+    	SidePanel.setUpSidePanel("FL", "AK", directions, BuildingPopUp.getPopUp());
+    	controlVBox.setMaxHeight(imageScrollPane.getHeight());
+    	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+    }
+    private Button getButtonForNode(Node node, double btnRadius)
+    {
+    	Button btn = new Button("");
+		btn.setId(node.nodeName);
+		btn.setTranslateX(node.xPos - btnRadius);
+		btn.setTranslateY(node.yPos - btnRadius);
+		//btn.setLayoutX(node.xPos);
+		//btn.setLayoutY(node.yPos);
+		double r = btnRadius;
+		btn.setShape(new Circle(r));
+		btn.setMinSize(2*r, 2*r);
+		btn.setMaxSize(2*r, 2*r);
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+		    	System.out.println("ClickedNode");
+		    	System.out.println("You Clicked Node " + btn.getId());
+		    	if (getDirectionsProperty.get() == false)
+		    	{
+		    		startNode = node;
+		    		getDirectionsProperty.set(!getDirectionsProperty.get());
+		    	
+		    	}
+		    	else
+		    	{
+		    		goalNode = node;
+		    		getDirectionsProperty.set(!getDirectionsProperty.get());
+		    	}
+		    }
+		});
+		return btn;
     }
     //Function to generate buttons at each accessible node on the map
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)

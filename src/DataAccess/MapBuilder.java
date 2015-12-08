@@ -38,7 +38,7 @@ public class MapBuilder {
     		{
     			Building b = new Building(dir.getName().substring(1));
     			System.out.println("Reading " + b.getName());
-    			updateBuildingValuesFromFile(b, dir + "\\scale.csv");
+    			updateBuildingValuesFromFile(b, dir + "\\info.csv");
     			for (File subDir : dir.listFiles())
     			{
     				if (subDir.isDirectory()) //The file is a directory and a floor plan
@@ -217,6 +217,9 @@ public class MapBuilder {
 			int imageAngleIndex = 2;
 			int imageScaleXIndex = 3;
 			int imageScaleYIndex = 4;
+			int hoursIndex = 5;
+			int descripIndex = 6;
+			
 			try {
 
 				br = new BufferedReader(new FileReader(path));
@@ -229,11 +232,15 @@ public class MapBuilder {
 					int angle = Integer.parseInt(imageData[imageAngleIndex]);
 					double scaleX = Double.parseDouble(imageData[imageScaleXIndex]);
 					double scaleY = Double.parseDouble(imageData[imageScaleYIndex]);
+					String hours = imageData[hoursIndex];
+					String description = imageData[descripIndex];
 					b.setX(x);
 					b.setY(y);
 					b.setAngle(angle);
 					b.setScaleX(scaleX);
 					b.setScaleY(scaleY);
+					b.setHours(hours);
+					b.setDescription(description);
 				}
 
 			} 
@@ -247,5 +254,4 @@ public class MapBuilder {
 				}
 			}
 	    }
-	
 }
