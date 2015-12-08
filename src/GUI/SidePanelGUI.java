@@ -19,7 +19,7 @@ public class SidePanelGUI extends Application {
     @Override public void start(Stage stage) {
         
         GridPane grid = new GridPane();
-        List<String> directions = Arrays.asList("Go \nStraight", "Turn \nLeft", "Turn \nSlightly Right", "Keep \nStraight", "Turn \nSlightly Left", "Turn \nRight", "Keep \nStraight", "Turn \nLeft", "Turn \nSlightly Right", "Keep \nStraight", "Turn \nSlightly Left", "Turn \nRight", "Keep \nStraight", "Turn \nLeft", "Turn \nSlightly Right", "Keep \nStraight", "Turn \nSlightly Left", "Turn \nRight", "Keep \nStraight", "Turn \nLeft", "Turn \nSlightly Right", "Keep \nStraight", "Turn \nSlightly Left", "Turn \nRight", "Keep \nStraight", "Turn \nLeft", "Turn \nSlightly Right", "Keep \nStraight", "Turn \nSlightly Left", "Turn \nRight", "Keep \nStraight", "You \nHave Arrived");
+        List<String> directions = Arrays.asList("Go Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "You Have Arrived");
         
         SidePanel.setUpSidePanel(grid, "FL", "AK", directions);
 

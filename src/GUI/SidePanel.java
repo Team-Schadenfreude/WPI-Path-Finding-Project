@@ -97,7 +97,7 @@ public class SidePanel {
                 String emailAddr = emailAddrInput.getText();
                 String smsNum = SMSNumInput.getText();
             	if (emailAddr != null && !emailAddr.isEmpty()){  
-            		if (SendingEmail.generateAndSendEmail(emailAddr, emailContent, from, to)) {
+            		if (SendingEmail.generateAndSendEmail(emailAddr, directions, from, to)) {
             			emailAddrInput.clear();
             			emailAddrInput.setPromptText("Emailed to " + emailAddr);
             		}
@@ -108,7 +108,7 @@ public class SidePanel {
             	}
             	if (smsNum != null && !smsNum.isEmpty()){  
             		try {
-						if (SendingSMS.generateAndSendSMS(smsNum, txtContent, from, to)) {
+						if (SendingSMS.generateAndSendSMS(smsNum, directions, from, to)) {
 							SMSNumInput.clear();
 							SMSNumInput.setPromptText("Texted to " + smsNum);
 						}

@@ -9,6 +9,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
  
 
 
@@ -18,8 +23,40 @@ public class SendingEmail {
 	static Session getMailSession;
 	static MimeMessage generateMailMessage;
 
-	public static boolean generateAndSendEmail(String emailAddr, String content, String from, String to) {
+	public static boolean generateAndSendEmail(String emailAddr, List<String> directions, String from, String to) {
+			
+		String content = "";
 		
+		for(String s: directions) {
+			
+			if(s.toLowerCase().contains("straight")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/go_straight.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("turn right")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_right.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("turn left")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_left.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("slightly turn right")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_slightly_right.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("slightly turn left")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_slightly_left.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("sharp turn right")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_sharp_right.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("sharp turn left")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_sharp_left.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("proceed")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/proceed.png' height='30' width='30'>" + s + "</p>";
+			}
+			else if(s.toLowerCase().contains("arrive")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/arrive.png' height='30' width='30'>" + s + "</p>";
+			}
+		}
 
     		// Step1
         	// System.out.println("\n 1st ===> setup Mail Server Properties..");
@@ -36,7 +73,8 @@ public class SendingEmail {
         		generateMailMessage = new MimeMessage(getMailSession);
         		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddr));
         		generateMailMessage.setSubject("Your Directions from Randy");
-        		String emailBody = "Directions from " + from + " to " + to + ": <br><br>" + content + "<br><br>Regards, <br>Randy App";
+        		String emailBody = "<html style=\"background-image: url('https://www.wpi.edu/Images/CMS/Wallpaper/salisbury1024x768.jpg'); background-size: cover;\"><body><h1 style=\"color: ivory; font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 3em; text-align: center;\">Directions from " + from + " to " + to + ": </h1><p>" + content + "</p></body><foot><br>Regards, <br>Randy App</foot></html>";
+        		
         		generateMailMessage.setContent(emailBody, "text/html");
         		System.out.println("Mail session has been created successfully..");
          

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="res1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/res/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/res/twilio-java-sdk-6.0.1-edge-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

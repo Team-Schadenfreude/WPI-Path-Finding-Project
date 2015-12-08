@@ -16,7 +16,8 @@ public class SendingSMS {
 	public static final String ACCOUNT_SID = "AC50a233b06eb4afa3c3c127a63175166b"; 
 	public static final String AUTH_TOKEN = "e546ed2bd4b6fcaf816440402093eb93"; 
 	
-	public static boolean generateAndSendSMS(String smsNum, String content, String from, String to) throws TwilioRestException { 
+	public static boolean generateAndSendSMS(String smsNum, List<String> directions, String from, String to) throws TwilioRestException { 
+		final String content = String.join("\r\n", directions);
 		try {
 			TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN); 
 		
