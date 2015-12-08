@@ -89,22 +89,17 @@ public class MainController implements Initializable{
             }});
     	nextDirectionProperty.addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	System.out.println("String Changed to -" + newValue + "-");
             	for (javafx.scene.Node node : mainGroup.getChildren())
             	{
             		for (javafx.scene.Node n : ((Group) node).getChildren())
             		{
-            			if(n.getId().equals(newValue))
-            			{
-            				Building b = new Building("");
-            				for(Building b2 : mainMap.getBuildings())
-            				{
-            					if (b2.getName().equals(node))
-            					{
-            						b = b2;
-            					}
-            				}
-            				setUpGroupOnClick((Group)node, b, 0, 0);
-            			}
+						if (n.getId().equals(newValue))
+    					{
+							double angle = ((Rotate) node.getTransforms().get(0)).getAngle();
+    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+    						break;
+    					}
             		}
             	}
             	//setUpGroupOnClick(Group buildGroup, Building b, int x, int y)
@@ -203,7 +198,7 @@ public class MainController implements Initializable{
     					}
     					else
     					{
-    						btn = getButtonForNode(n, 60);
+    						btn = getButtonForNode(n, 10);
     					}
         				g.getChildren().add(btn);
     				}
@@ -234,7 +229,8 @@ public class MainController implements Initializable{
 					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
-						setUpGroupOnClick(buildGroup, b, event.getX(), event.getY());
+						BuildingPopUp.setupPopUp(b);
+						setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
 					}
 					
 				}});
@@ -244,9 +240,9 @@ public class MainController implements Initializable{
     	}
     }
     
-    void setUpGroupOnClick(Group buildGroup, Building b, double x, double y)
+    void setUpGroupOnClick(Group buildGroup, double bAngle, double bScaleX, double x, double y)
     {
-    	System.out.println("BuildGroup");
+    	System.out.println("MainGroup has " + mainGroup.getChildren().size() + "  Buildings");
 		for (javafx.scene.Node n : mainGroup.getChildren())
 		{
 			if (!n.getId().equals(mainMap.getBaseMapName()))
@@ -256,7 +252,6 @@ public class MainController implements Initializable{
 			//n.setPickOnBounds(true);
 		}
 		buildGroup.setOpacity(1);
-		BuildingPopUp.setupPopUp(b);
 		//buildGroup.setPickOnBounds(false);
 		imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
 		setupFloorSelection(buildGroup);
@@ -275,12 +270,13 @@ public class MainController implements Initializable{
 			pivotY = y;
 			System.out.println(pivotY);
 		}
+		System.out.println("Building Angle = " + bAngle);
 		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
 		((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
-		((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
-		Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
+		((Rotate) mainGroup.getTransforms().get(0)).setAngle(- bAngle);
 		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
 		{
+			Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
 			imageZoomPane.setPivot(pt.getX(), pt.getY());
 		}
 		else
@@ -294,7 +290,7 @@ public class MainController implements Initializable{
 		}
 		else
 		{
-			imageZoomPane.setZoomFactor(zoom * .5);
+			imageZoomPane.setZoomFactor(zoom * (.5 + bScaleX));
 		}
 		
 		lastBuilding = buildGroup.getId();
@@ -333,7 +329,6 @@ public class MainController implements Initializable{
     	for (javafx.scene.Node n : nodes)
     	{
     		n.setVisible(isVisible);
-    		//n.setOpacity(oppacity);
     	}
     }
   //Action handler for the zooming in of the map
@@ -371,6 +366,10 @@ public class MainController implements Initializable{
     		System.out.println(path);
             List<String> directions = DirectionBuilder.getDirectionsList(path, 1, 1);
             showDirections(directions);
+            if (!path.isEmpty())
+            {
+            	nextDirectionProperty.set(path.get(0).map);
+            }
 //    		startNode = null;
 //    		goalNode = null;
     	}

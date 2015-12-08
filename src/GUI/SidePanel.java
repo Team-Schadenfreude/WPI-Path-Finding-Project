@@ -141,14 +141,18 @@ for(String s: directions) {
 				hbList.add(hbItem);
 			}
 			else if (s.toLowerCase().contains("proceed into")){
+				System.out.println("In Procees");
 				label = new Label(s);
 				label.setStyle("-fx-font-size: 16px;");
 				label.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override public void handle(MouseEvent e) {
+				    	System.out.println("Clicked Label");
 				    	String s2 = s;
-				    	s2.replace("Procede into ", "");
+				    	s2 = s2.replace("Proceed into ", "");
 				    	stringProperty.set(s2);
 				    }});
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
+				hbList.add(hbItem);
 			}
 		}
 	

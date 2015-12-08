@@ -41,7 +41,7 @@ public class DirectionBuilder {
 					totalDistance += distance;
 					String direction = getStringFromDirectionValue(prevDirVal);
 					directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
-					directionsList.add("Procede into " + n2.map);
+					directionsList.add("Proceed into " + n2.map);
 					distance = 0;
 					prevDirVal = 0;
 					prevAngle = 0;
