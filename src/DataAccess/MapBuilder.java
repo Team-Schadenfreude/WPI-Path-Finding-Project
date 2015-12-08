@@ -53,6 +53,7 @@ public class MapBuilder {
     						file = new File(subDir + "\\map.png");
     					}
     					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
+    					System.out.println("Current Floor --" + floor.getName() + "-----------");
     					floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
     					b.addFloor(floor);
     				}
@@ -86,6 +87,7 @@ public class MapBuilder {
 	
 	private Node.Type nodeTypeFromString(String type)
 	{
+		type = type.toUpperCase();
 		switch(type)
 		{
 		case "ROOM":
@@ -135,6 +137,7 @@ public class MapBuilder {
 				{
 					transferNode = true;
 				}
+				System.out.println("Node Type = " + nodeType);
 				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);				nodeList.add(newNode);
 			}
 
@@ -184,22 +187,27 @@ public class MapBuilder {
 				String nodeMap2 = edgeData[edgeMap2Index];
 				Node n1 = map.findNodeByXYZinMap(x1, y1, z1, nodeMap1);
 				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
-				if (n1.neighbors == null)
+				if (n1 != null && n2 != null)
 				{
-					n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
+					if (n1.neighbors == null)
+					{
+						n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
+					}
+					else
+					{
+						n1.neighbors.add(n2);
+					}
+
+					if (n2.neighbors == null)
+					{
+						n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
+					}
+					else
+					{
+						n2.neighbors.add(n1);
+					}
 				}
-				else
-				{
-					n1.neighbors.add(n2);
-				}
-				if (n2.neighbors == null)
-				{
-					n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
-				}
-				else
-				{
-					n2.neighbors.add(n1);
-				}
+				
 				i++;
 			}
 
