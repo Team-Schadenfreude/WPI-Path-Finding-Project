@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class SidePanel {
 	private static GridPane grid = new GridPane();
@@ -38,6 +39,11 @@ public class SidePanel {
 		final ListView<HBox> dList = new ListView<HBox>();
 		final TextField emailAddrInput = new TextField();
 		final TextField SMSNumInput = new TextField();
+		emailAddrInput.setPromptText("Email");
+		SMSNumInput.setPromptText("SMS");
+		emailAddrInput.setStyle("-fx-text-color: #606060;");
+		SMSNumInput.setStyle("-fx-text-color: #606060;");
+
 		final Button send = new Button();
 		final Label notificationEmail = new Label();
 		final Label notificationSMS = new Label();
@@ -55,7 +61,8 @@ public class SidePanel {
 
 		notificationEmail.setWrapText(true);
 		notificationSMS.setWrapText(true);
-		label = new Label("Email Directions: ");
+		label = new Label("");
+		label.setWrapText(true);
 		label.setTextFill(Color.web("#FFFFF0"));
 		//	hbEmail.getChildren().addAll(new Label("Email: "), emailAddrInput);
 		//hbSMS.getChildren().addAll(new Label("Text: "), SMSNumInput);
@@ -65,7 +72,7 @@ public class SidePanel {
 		int iconSize = 30;
 
 		hbEmail.getChildren().addAll(label, emailAddrInput);
-		label = new Label("SMS Directions:  ");
+		label = new Label("");
 		label.setTextFill(Color.web("#FFFFF0"));
 		hbSMS.getChildren().addAll(label, SMSNumInput);
 		HBox.setHgrow(emailAddrInput, Priority.ALWAYS);
@@ -133,30 +140,10 @@ for(String s: directions) {
 				hbList.add(hbItem);
 			}
 		}
-
+	
+		
 		dList.getItems().addAll(hbList);
-		//dList.setStyle("-fx-background-color: #334C5D;");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		dList.setStyle("-fx-background-color: #606060;");
 
 		send.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -194,11 +181,12 @@ for(String s: directions) {
 		
 		grid.setVgap(14);
         grid.setHgap(5);
-        grid.setStyle("-fx-background-color: #334C5D;");
+        grid.setStyle("-fx-background-color: #606060;");
         grid.setPadding(new Insets(5, 5, 5, 5));
         label = new Label("YOUR DIRECTIONS: ");
         label.setTextFill(Color.web("#FFFFF0"));
-	    label.setStyle("-fx-font-weight: bolder; -fx-font-size: 24px;");
+	    label.setStyle("-fx-font-weight: bolder; -fx-font-size: 12px;");
+	    label.setWrapText(true);
         grid.add(label, 0, 1);
         grid.add(dList, 0, 2, 5, 10);
         grid.add(hbEmail, 0, 12, 4, 1);
