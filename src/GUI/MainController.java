@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -56,7 +56,7 @@ public class MainController implements Initializable{
     @FXML private MenuButton floorSelectionMenu;
     @FXML private SplitPane primarySplitPane;
     @FXML private VBox controlVBox;
-    
+    SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
 	public static Map mainMap = new Map();
@@ -86,6 +86,28 @@ public class MainController implements Initializable{
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	runAStar();
+            }});
+    	nextDirectionProperty.addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	for (javafx.scene.Node node : mainGroup.getChildren())
+            	{
+            		for (javafx.scene.Node n : ((Group) node).getChildren())
+            		{
+            			if(n.getId().equals(newValue))
+            			{
+            				Building b = new Building("");
+            				for(Building b2 : mainMap.getBuildings())
+            				{
+            					if (b2.getName().equals(node))
+            					{
+            						b = b2;
+            					}
+            				}
+            				setUpGroupOnClick((Group)node, b, 0, 0);
+            			}
+            		}
+            	}
+            	//setUpGroupOnClick(Group buildGroup, Building b, int x, int y)
             }});
     	controlVBox.getStyleClass().add("vbox");
     	controlVBox.getChildren().add(BuildingPopUp.getPopUp());
@@ -212,57 +234,7 @@ public class MainController implements Initializable{
 					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
-						for (javafx.scene.Node n : mainGroup.getChildren())
-						{
-							if (!n.getId().equals(mainMap.getBaseMapName()))
-							{
-								n.setOpacity(0);;;//0 _b
-							}
-							//n.setPickOnBounds(true);
-						}
-						buildGroup.setOpacity(1);
-						BuildingPopUp.setupPopUp(b);
-						//buildGroup.setPickOnBounds(false);
-						imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
-						setupFloorSelection(buildGroup);
-						centerNodeInScrollPane(imageScrollPane, buildGroup);
-						double minX = buildGroup.getBoundsInParent().getMinX();
-						double maxX = buildGroup.getBoundsInParent().getMaxX();
-						double minY = buildGroup.getBoundsInParent().getMinY();
-						double maxY = buildGroup.getBoundsInParent().getMaxY();
-						double pivotX = (minX + maxX)/2;
-						double pivotY = (minY + maxY)/2;
-						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
-						{
-							System.out.println("Pivot");
-							pivotX = event.getX();
-							System.out.println(pivotX);
-							pivotY = event.getY();
-							System.out.println(pivotY);
-						}
-						((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
-						((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
-						((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
-						Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
-						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
-						{
-							imageZoomPane.setPivot(pt.getX(), pt.getY());
-						}
-						else
-						{
-							imageZoomPane.setPivot(pivotX, pivotY);
-						}
-						double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
-						if (buildGroup.getId().equals(mainMap.getBaseMapName()))
-						{
-							imageZoomPane.setZoomFactor(1);
-						}
-						else
-						{
-							imageZoomPane.setZoomFactor(zoom * .5);
-						}
-						
-						lastBuilding = buildGroup.getId();
+						setUpGroupOnClick(buildGroup, b, event.getX(), event.getY());
 					}
 					
 				}});
@@ -270,6 +242,62 @@ public class MainController implements Initializable{
 			mainGroup.getChildren().add(buildGroup);
 			
     	}
+    }
+    
+    void setUpGroupOnClick(Group buildGroup, Building b, double x, double y)
+    {
+    	System.out.println("BuildGroup");
+		for (javafx.scene.Node n : mainGroup.getChildren())
+		{
+			if (!n.getId().equals(mainMap.getBaseMapName()))
+			{
+				n.setOpacity(0);//0 _b
+			}
+			//n.setPickOnBounds(true);
+		}
+		buildGroup.setOpacity(1);
+		BuildingPopUp.setupPopUp(b);
+		//buildGroup.setPickOnBounds(false);
+		imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
+		setupFloorSelection(buildGroup);
+		centerNodeInScrollPane(imageScrollPane, buildGroup);
+		double minX = buildGroup.getBoundsInParent().getMinX();
+		double maxX = buildGroup.getBoundsInParent().getMaxX();
+		double minY = buildGroup.getBoundsInParent().getMinY();
+		double maxY = buildGroup.getBoundsInParent().getMaxY();
+		double pivotX = (minX + maxX)/2;
+		double pivotY = (minY + maxY)/2;
+		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
+		{
+			System.out.println("Pivot");
+			pivotX = x;
+			System.out.println(pivotX);
+			pivotY = y;
+			System.out.println(pivotY);
+		}
+		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
+		((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
+		((Rotate) mainGroup.getTransforms().get(0)).setAngle(- b.getAngle());
+		Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
+		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
+		{
+			imageZoomPane.setPivot(pt.getX(), pt.getY());
+		}
+		else
+		{
+			imageZoomPane.setPivot(pivotX, pivotY);
+		}
+		double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
+		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
+		{
+			imageZoomPane.setZoomFactor(.8);
+		}
+		else
+		{
+			imageZoomPane.setZoomFactor(zoom * .5);
+		}
+		
+		lastBuilding = buildGroup.getId();
     }
     
     public void centerNodeInScrollPane(ScrollPane scrollPane, javafx.scene.Node node) {
@@ -332,6 +360,9 @@ public class MainController implements Initializable{
     }
     
     private void runAStar() {
+    	System.out.println("Nodes");
+    	System.out.println(startNode);
+    	System.out.println(goalNode);
     	if (startNode != null && goalNode != null)
     	{
     		List<Node> path = getPathFromNode(startNode, goalNode, mainMap);
@@ -346,7 +377,7 @@ public class MainController implements Initializable{
     }
     private void showDirections(List<String> directions)
     {
-    	SidePanel.setUpSidePanel("FL", "AK", directions, BuildingPopUp.getPopUp());
+    	SidePanel.setUpSidePanel("FL", "AK", directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
     	controlVBox.setMaxHeight(imageScrollPane.getHeight());
     	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
     }
@@ -546,7 +577,7 @@ public class MainController implements Initializable{
             				MenuItem mi2 = new MenuItem(n.nodeName);
             				mi1.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			    	startNode = mainMap.findNodeByName(mi1.getText());
+                			    	startNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
                 			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			    	System.out.println("Start Node Selected");
@@ -554,7 +585,7 @@ public class MainController implements Initializable{
                 			});
                 			mi2.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			        goalNode = mainMap.findNodeByName(mi2.getText());
+                			        goalNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
                 			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			        System.out.println("Goal Node Selected");

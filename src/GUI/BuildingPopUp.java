@@ -2,9 +2,7 @@ package GUI;
 
 import DataAccess.Building;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 
 public class BuildingPopUp {
 	private static VBox vbox =  new VBox();

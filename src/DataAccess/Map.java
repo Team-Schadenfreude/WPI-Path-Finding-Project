@@ -61,7 +61,14 @@ public class Map {
 	}
 	public void addBuilding(Building building)
 	{
-		this.buildings.add(building);
+		if (building.getName().equals(baseMap) && this.getBuildingCount() > 0)
+		{
+			this.buildings.add(0,building);
+		}
+		else
+		{
+			this.buildings.add(building);
+		}
 		addNodesFromBuilding(building);
 	}
 	private void addNodesFromBuilding(Building b)

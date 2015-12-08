@@ -15,13 +15,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
+import javafx.beans.property.SimpleStringProperty;
 public class SidePanel {
 	private static GridPane grid = new GridPane();
 	public static GridPane getGridPane()
@@ -32,7 +33,7 @@ public class SidePanel {
 	{
 		grid = newGrid;
 	}
-	public static void setUpSidePanel(String from, String to, List<String> directions, VBox boxToControl) {
+	public static void setUpSidePanel(String from, String to, List<String> directions, VBox boxToControl, SimpleStringProperty stringProperty) {
 
 		//final GridPane grid = new GridPane();
 		grid.getChildren().clear();
@@ -138,6 +139,16 @@ for(String s: directions) {
 				label.setStyle("-fx-font-size: 16px;");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
 				hbList.add(hbItem);
+			}
+			else if (s.toLowerCase().contains("proceed into")){
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 16px;");
+				label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				    @Override public void handle(MouseEvent e) {
+				    	String s2 = s;
+				    	s2.replace("Procede into ", "");
+				    	stringProperty.set(s2);
+				    }});
 			}
 		}
 	

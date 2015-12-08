@@ -59,14 +59,7 @@ public class MapBuilder {
     				}
     			}
     			
-    			if (b.getName().equals(baseMap) && map.getBuildingCount() > 0)
-    			{
-    				map.getBuildings().add(0,b);
-    			}
-    			else
-    			{
-    				map.addBuilding(b);
-    			}
+    			map.addBuilding(b);
     		}
     	}
     	for (File dir : selectedDirectory.listFiles()) //Draw the super map
@@ -138,7 +131,8 @@ public class MapBuilder {
 					transferNode = true;
 				}
 				System.out.println("Node Type = " + nodeType);
-				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);				nodeList.add(newNode);
+				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);				
+				nodeList.add(newNode);
 			}
 
 		} 
@@ -175,7 +169,7 @@ public class MapBuilder {
 			int i = 0;
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				// use comma as separator
-				//System.out.println("i = " + i);
+				System.out.println("i = " + i);
 				String[] edgeData = line.split(delimiter);
 				int x1 = Integer.parseInt(edgeData[edgeX1Index]);
 				int y1 = Integer.parseInt(edgeData[edgeY1Index]);
@@ -185,10 +179,13 @@ public class MapBuilder {
 				int y2 = Integer.parseInt(edgeData[edgeY2Index]);
 				int z2 = Integer.parseInt(edgeData[edgeZ2Index]);
 				String nodeMap2 = edgeData[edgeMap2Index];
+				System.out.println("X1= " + x1 + " Y1= " + y1 + " Z1= "+ z1 + " map1= -" + nodeMap1 +"-");
+				System.out.println("X2= " + x2 + " Y2= " + y2 + " Z2= "+ z2 + " map2= -" + nodeMap2 +"-");
+
 				Node n1 = map.findNodeByXYZinMap(x1, y1, z1, nodeMap1);
 				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
-				if (n1 != null && n2 != null)
-				{
+//				if (n1 != null && n2 != null)
+//				{
 					if (n1.neighbors == null)
 					{
 						n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
@@ -206,7 +203,7 @@ public class MapBuilder {
 					{
 						n2.neighbors.add(n1);
 					}
-				}
+				//}
 				
 				i++;
 			}
