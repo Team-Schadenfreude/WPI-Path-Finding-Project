@@ -43,7 +43,15 @@ public class MapBuilder {
     			{
     				if (subDir.isDirectory()) //The file is a directory and a floor plan
     				{
-    					File file = new File(subDir + "\\map.png");
+    					File file = new File(subDir + "\\map.svg");
+    					if (file.exists())
+    					{
+    						System.out.println("OpenedVector");
+    					}
+    					else
+    					{
+    						file = new File(subDir + "\\map.png");
+    					}
     					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
     					floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
     					b.addFloor(floor);

@@ -203,7 +203,7 @@ public class MainController implements Initializable{
 			buildGroup.setId(b.getName());
 			if (!buildGroup.getId().equals(mainMap.getBaseMapName()))
     		{
-    			buildGroup.setOpacity(0);//0 _a
+    			buildGroup.setOpacity(0);;//0 _a
     		}
 			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
@@ -216,7 +216,7 @@ public class MainController implements Initializable{
 						{
 							if (!n.getId().equals(mainMap.getBaseMapName()))
 							{
-								n.setOpacity(0);//0 _b
+								n.setOpacity(0);;;//0 _b
 							}
 							//n.setPickOnBounds(true);
 						}
@@ -292,19 +292,20 @@ public class MainController implements Initializable{
     		MenuItem mi = new MenuItem(f.getId());
     		mi.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
-			    	setNodesVisible(g.getChildren(), 0);
-			    	f.setOpacity(1);
+			    	setNodesVisible(g.getChildren(), false);
+			    	f.setVisible(true);
 			    	floorSelectionMenu.setText(mi.getText());
 			    }
 			});
     		floorSelectionMenu.getItems().add(mi);
     	}
     }
-    private void setNodesVisible(List<javafx.scene.Node> nodes, double oppacity)
+    private void setNodesVisible(List<javafx.scene.Node> nodes, boolean isVisible)
     {
     	for (javafx.scene.Node n : nodes)
     	{
-    		n.setOpacity(oppacity);
+    		n.setVisible(isVisible);
+    		//n.setOpacity(oppacity);
     	}
     }
   //Action handler for the zooming in of the map
@@ -382,6 +383,7 @@ public class MainController implements Initializable{
 		return btn;
     }
     //Function to generate buttons at each accessible node on the map
+    @Deprecated
     protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
     {
     	for(Node node : nodeList)
