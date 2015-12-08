@@ -85,7 +85,7 @@ public class DirectionBuilder {
 			totalDistance += distance;
 			String direction = getStringFromDirectionValue(prevDirVal);
 			directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
-			directionsList.add("Procede to Destination");
+			directionsList.add("Proceed to Destination");
 			directionsList.add("Total Distance is " + Integer.toString((int)totalDistance) + "ft");
 		}
 		return directionsList;
