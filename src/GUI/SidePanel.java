@@ -38,7 +38,7 @@ public class SidePanel {
 		final ListView<HBox> dList = new ListView<HBox>();
 		final TextField emailAddrInput = new TextField();
 		final TextField SMSNumInput = new TextField();
-		final Button send = new Button("Send");
+		final Button send = new Button();
 		final Label notificationEmail = new Label();
 		final Label notificationSMS = new Label();
 		final HBox hbEmail = new HBox();
@@ -62,7 +62,7 @@ public class SidePanel {
 
 
 
-
+		int iconSize = 30;
 
 		hbEmail.getChildren().addAll(label, emailAddrInput);
 		label = new Label("SMS Directions:  ");
@@ -80,39 +80,56 @@ for(String s: directions) {
 				System.out.println("Straight");
 
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("right turn")) {
 				label = new Label(s);
 				System.out.println("Straight");
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			
+			else if(s.toLowerCase().contains("sharp right turn")) {
+				label = new Label(s);
+				System.out.println("Straight");
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("left turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			
+			else if(s.toLowerCase().contains("sharp left turn")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("slight right turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_right.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
+			
+			
 			else if(s.toLowerCase().contains("slight left turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("proceed to destination")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 18px;");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", 80, 80, true, true)), label);
+				label.setStyle("-fx-font-size: 16px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
 				hbList.add(hbItem);
 			}
 		}
@@ -163,23 +180,37 @@ for(String s: directions) {
 			}
 		});
 
-		grid.setVgap(13);
-		grid.setHgap(4);
-		grid.setPadding(new Insets(5, 5, 5, 5));
-		grid.add(new Label("Your Directions: "), 0, 1);
-		grid.add(dList, 0, 2, 4, 5);
-		grid.add(hbEmail, 0, 8);
-		grid.add(notificationEmail, 0, 9);
-		grid.add(hbSMS, 0, 10);
-		grid.add(notificationSMS, 0, 11);
-		grid.add(send, 0, 12);
-		Button closeBtn = new Button("Close");
+//		grid.setVgap(13);
+//		grid.setHgap(4);
+//		grid.setPadding(new Insets(5, 5, 5, 5));
+//		grid.add(new Label("Your Directions: "), 0, 1);
+//		grid.add(dList, 0, 2, 4, 5);
+//		grid.add(hbEmail, 0, 8);
+//		grid.add(notificationEmail, 0, 9);
+//		grid.add(hbSMS, 0, 10);
+//		grid.add(notificationSMS, 0, 11);
+//		grid.add(send, 0, 12);
+		
+		
+		grid.setVgap(14);
+        grid.setHgap(5);
+        grid.setStyle("-fx-background-color: #334C5D;");
+        grid.setPadding(new Insets(5, 5, 5, 5));
+        label = new Label("YOUR DIRECTIONS: ");
+        label.setTextFill(Color.web("#FFFFF0"));
+	    label.setStyle("-fx-font-weight: bolder; -fx-font-size: 24px;");
+        grid.add(label, 0, 1);
+        grid.add(dList, 0, 2, 5, 10);
+        grid.add(hbEmail, 0, 12, 4, 1);
+        grid.add(hbSMS, 0, 13, 4, 1);
+        grid.add(send, 4, 12, 1, 2);
+        Button closeBtn = new Button("Close");
 		closeBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				grid.getChildren().clear();
 				boxToControl.getChildren().clear();
 			}});
-		grid.add(closeBtn, 0, 13);
+		grid.add(closeBtn, 0, 15);
 
 		//return grid;
 	}
