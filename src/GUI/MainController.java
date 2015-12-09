@@ -114,12 +114,14 @@ public class MainController implements Initializable{
 	    								BuildingPopUp.setupPopUp(b);
 	    							}
 	    						}
+	    						
 							}
     						floorNum = i;
     						updateFloor(n,((Group)node).getChildren(), newValue);
     						lastBuilding = node.getId();
     						break;
     					}
+						
 						i++;
             		}
             	}
@@ -324,6 +326,7 @@ public class MainController implements Initializable{
 			ImageView v = (ImageView) f.getChildren().get(0);
 			v.setImage(new Image(file.toURI().toString()));
 			setButtonsVisibleForGroup(f, true);
+			b.setOpacity(1);
 		}
 		else
 		{
@@ -333,6 +336,8 @@ public class MainController implements Initializable{
 			ImageView v = (ImageView) f.getChildren().get(0);
 			v.setImage(new Image(file.toURI().toString()));
 			setButtonsVisibleForGroup(f, false);
+			b.setOpacity(0);
+			
 		}
 		System.out.println("Building Angle = " + bAngle);
 		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
@@ -407,7 +412,7 @@ public class MainController implements Initializable{
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
-    	imageZoomPane.setZoomFactor(1);
+    	imageZoomPane.setZoomFactor(.8);
 //    	double value = imageZoomPane.getZoomFactor() + 1;
 //    	if (value > 8)
 //    	{
