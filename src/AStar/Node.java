@@ -9,7 +9,7 @@ import java.util.List;
 
 //class for node. A node is a point on the grid that contains an x and y position
 public class Node{
-	public enum Type { ROOM, STAIRS, BATHROOM_M, BATHROOM_F, ENTRANCE, NONE }; // an Enumeration to represent the different types of nodes
+	public enum Type { ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE, NONE }; // an Enumeration to represent the different types of nodes
 	
 	private String nodeName; //every node has a name
     private Node parent; //node has a parent. the parent is where the current node came from
@@ -24,6 +24,7 @@ public class Node{
 	private String map;
 	private boolean isTransitionNode = false;
 	private Type type;
+	private double pxPerFt = 1;
     //constructor for node
     public Node(String nodeName, double hValue,double gValue,double fValue, int xPos, int yPos, int zPos, String map, boolean isTransitionNode, String description, Type nodeType){
             this.nodeName = nodeName;
@@ -37,7 +38,6 @@ public class Node{
             this.type = nodeType;
             this.isTransitionNode = isTransitionNode;
     }
-    
     public Node(String nodeName, int xPos, int yPos, int zpos, String map, String description, Type type)
     {
     	this.nodeName = nodeName;
@@ -61,6 +61,10 @@ public class Node{
         this.map = map;
         this.description = "";
         this.type = Type.NONE;
+    }
+    public double getPxPerFt()
+    {
+    	return this.pxPerFt;
     }
     public String getName()
     {
@@ -115,6 +119,10 @@ public class Node{
     	return this.parent;
     }
     
+    public void setPxPerFt(double val)
+    {
+    	this.pxPerFt = val;
+    }
     public void setName(String name)
     {
     	this.nodeName = name;
@@ -166,6 +174,29 @@ public class Node{
     public void setParent(Node n)
     {
     	this.parent = n;
+    }
+    public double distanceTo(Node node)
+    {
+//    	if (this.type == Type.ELEVATOR &&  node.type == Type.ELEVATOR)
+//    	{
+//    		return 40;
+//    	}
+//    	else if (this.type == Type.STAIRS &&  node.type == Type.STAIRS)
+//    	{
+//    		return 20;
+//    	}
+    	if (this.isTransition() && node.isTransition())
+    	{
+    		return 10000;
+    	}
+    	double x1 = this.getX() * this.pxPerFt;
+    	double y1 = this.getY() * this.pxPerFt;
+    	double x2 = node.getX() * node.pxPerFt;
+    	double y2 = node.getY() * node.pxPerFt;
+    	double dx = x2 - x1;
+		double dy = y2 - y1;
+		double distance = Math.sqrt(dx*dx + dy*dy);
+		return distance;
     }
     //function to turn stringName into an actual string name.
     //Why do we have to do this? Because Java is stupid. JK, Java Master Race

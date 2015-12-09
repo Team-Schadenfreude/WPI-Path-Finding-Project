@@ -28,43 +28,49 @@ public class BuildingPopUp {
 		case "AtwaterKent":
 			Image image2 = new Image("/res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
 			image.setImage(image2);
+			image.getStyleClass().add("image_display");
 			break;
-			
 			
 		case "Fuller Labs":
 			Image image3 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
 			image.setImage(image3);
+			image.getStyleClass().add("image_display");
 			break;
 			
 		case "CampusCenter":
 			Image image4 = new Image("/res/BuildingImages/CampusCenter.jpg",210,200,true,true);
 			image.setImage(image4);
+			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Boynton Hall":
 			Image image5 = new Image("/res/BuildingImages/BoyntonHall.jpg",210,200,true,true);
 			image.setImage(image5);
+			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Salisbury":
 			Image image6 = new Image("/res/BuildingImages/SalisburyLabs.jpg",210,200,true,true);
 			image.setImage(image6);
+			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Project Center":
 			Image image7 = new Image("/res/BuildingImages/ProjectCenter.jpg",210,200,true,true);
 			image.setImage(image7);
+			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Library":
 			Image image8 = new Image("/res/BuildingImages/GordonLibrary.jpg",210,200,true,true);
 			image.setImage(image8);
+			image.getStyleClass().add("image_display");
 			break;
 
-			
 		case "Stratton":
-			Image image9 = new Image("/res/BuildingImages/Stratton.jpg",210,200,true,true);
+			Image image9 = new Image("/res/BuildingImages/StrattonHall.jpg",210,200,true,true);
 			image.setImage(image9);
+			image.getStyleClass().add("image_display");
 			break;
 		default:
 			System.out.println("default");

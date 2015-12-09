@@ -238,7 +238,7 @@ public class MainController implements Initializable{
     		}
     		Rotate r = new Rotate(b.getAngle());
 			buildGroup.getTransforms().add(r);
-			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleY()));
+			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleX()));
 			buildGroup.setTranslateX(b.getX());
 			buildGroup.setTranslateY(b.getY());
 			buildGroup.setId(b.getName());
@@ -259,6 +259,7 @@ public class MainController implements Initializable{
 							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
 							floorNum = 0;
 							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+							lastBuilding = buildGroup.getId();
 						}
 						else
 						{
@@ -268,6 +269,7 @@ public class MainController implements Initializable{
 							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
 							floorNum = 0;
 							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+							lastBuilding = buildGroup.getId();
 						}
 					}
 					
@@ -347,7 +349,6 @@ public class MainController implements Initializable{
 		{
 			imageZoomPane.setZoomFactor(zoom * (.5 + bScaleX));
 		}
-		lastBuilding = buildGroup.getId();
     }
     
     public void centerNodeInScrollPane(ScrollPane scrollPane, javafx.scene.Node node) {

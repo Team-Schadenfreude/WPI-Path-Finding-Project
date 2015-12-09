@@ -75,9 +75,7 @@ public class DirectionBuilder {
 						prevDirVal = dirVal;
 					}
 					prevAngle = currentAngle;
-					double distance_x = (double)(n2.getX() - n1.getX()) * xScale;
-					double distance_y = (double)(n2.getY() - n1.getY()) * yScale;
-					distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
+					distance = n1.distanceTo(n2);
 				}
 				
 				

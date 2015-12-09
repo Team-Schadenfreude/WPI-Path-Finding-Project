@@ -153,23 +153,11 @@ public class AStar{
 	
 	public static double getGValue(Node node1, Node node2)
 	{
-		return getDistance(node1, node2);
+		return node1.distanceTo(node2);
 	}
 	public static double getHValue(Node node1, Node node2)
 	{
 		return 0;//getDistance(node1, node2);
-	}
-	//function gets the distance between two nodes. This will be used as the cost
-	public static double getDistance(Node one, Node two){
-
-		double dx = one.getX() - two.getX();
-
-		double dy = one.getX() - two.getY();
-
-		double distance = Math.sqrt(dx*dx + dy*dy);
-
-
-		return distance;
 	}
 	
 }

@@ -107,6 +107,8 @@ public class MapBuilder {
 			return Node.Type.BATHROOM_F;
 		case "ENTRANCE":
 			return Node.Type.ENTRANCE;
+		case "ELEVATOR":
+			return Node.Type.ELEVATOR;
 		default:
 			return Node.Type.NONE;
 		}
@@ -145,7 +147,7 @@ public class MapBuilder {
 					transferNode = true;
 				}
 				//System.out.println("Node Type = " + nodeType);
-				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);				
+				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);
 				nodeList.add(newNode);
 			}
 
@@ -256,14 +258,14 @@ public class MapBuilder {
 				int y = Integer.parseInt(imageData[imageYIndex]);
 				int angle = Integer.parseInt(imageData[imageAngleIndex]);
 				double scaleX = Double.parseDouble(imageData[imageScaleXIndex]);
-				double scaleY = Double.parseDouble(imageData[imageScaleYIndex]);
+				double pxPerFt = Double.parseDouble(imageData[imageScaleYIndex]);
 				String hours = imageData[hoursIndex];
 				String description = imageData[descripIndex];
 				b.setX(x);
 				b.setY(y);
 				b.setAngle(angle);
 				b.setScaleX(scaleX);
-				b.setScaleY(scaleY);
+				b.setPxPerFt(1 / pxPerFt);
 				b.setHours(hours);
 				b.setDescription(description);
 			}
@@ -279,7 +281,8 @@ public class MapBuilder {
 			}
 		}
 	}
-
+	
+	
 
 
 

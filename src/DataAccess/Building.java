@@ -2,6 +2,8 @@ package DataAccess;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import AStar.Node;
 public class Building {
 	private String name;
 	private String description = "";
@@ -10,7 +12,7 @@ public class Building {
 	private int x = 0;
 	private int y = 0;
 	private double scaleX = 0;
-	private double scaleY = 0;
+	private double pxPerFt = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{
@@ -56,9 +58,16 @@ public class Building {
 	{
 		this.scaleX = scaleX;
 	}
-	public void setScaleY(double scaleY)
+	public void setPxPerFt(double pxPerFt)
 	{
-		this.scaleY = scaleY;
+		this.pxPerFt = pxPerFt;
+		for (Floor f : this.getFloors())
+		{
+			for (Node n : f.getNodes())
+			{
+				n.setPxPerFt(this.pxPerFt);
+			}
+		}
 	}
 	public void setName(String name)
 	{
@@ -84,14 +93,15 @@ public class Building {
 	{
 		return this.scaleX;
 	}
-	public double getScaleY()
+	public double getPxPerFt()
 	{
-		return this.scaleY;
+		return this.pxPerFt;
 	}
 	public void addFloor(Floor floor)
 	{
 		this.floors.add(floor);
 	}
+
 	public String toString(){
         return this.name + " : floors[ " + this.floors.toString() + " ] ";
 }
