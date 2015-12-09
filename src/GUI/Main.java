@@ -23,7 +23,7 @@ public class Main extends Application {
         AnchorPane root = (AnchorPane) loader.load();
         Scene scene = new Scene(root, root.getWidth(), root.getHeight());
         scene.getStylesheets().add("GUI/application.css");
-        stage.setTitle("FXML Welcome");
+        stage.setTitle("Randy Path Planner");
         stage.setScene(scene);
        
         stage.show();

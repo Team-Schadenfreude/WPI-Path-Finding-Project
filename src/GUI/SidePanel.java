@@ -88,14 +88,14 @@ for(String s: directions) {
 				System.out.println("Straight");
 
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("right turn")) {
 				label = new Label(s);
 				System.out.println("Straight");
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
@@ -103,26 +103,26 @@ for(String s: directions) {
 			else if(s.toLowerCase().contains("sharp right turn")) {
 				label = new Label(s);
 				System.out.println("Straight");
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("left turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			
 			else if(s.toLowerCase().contains("sharp left turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("slight right turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
@@ -130,20 +130,20 @@ for(String s: directions) {
 			
 			else if(s.toLowerCase().contains("slight left turn")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("proceed to destination")) {
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if (s.toLowerCase().contains("proceed into")){
 				System.out.println("In Procees");
 				label = new Label(s);
-				label.setStyle("-fx-font-size: 16px;");
+				label.getStyleClass().add("direction_label");
 				label.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override public void handle(MouseEvent e) {
 				    	System.out.println("Clicked Label");
