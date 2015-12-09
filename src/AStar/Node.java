@@ -11,19 +11,19 @@ import java.util.List;
 public class Node{
 	public enum Type { ROOM, STAIRS, BATHROOM_M, BATHROOM_F, ENTRANCE, NONE }; // an Enumeration to represent the different types of nodes
 	
-	public String nodeName; //every node has a name
-    public Node parent; //node has a parent. the parent is where the current node came from
-    public double gValue; //gValue is cost from current block
-    public double hValue; //hValue is distance
-    public double fValue; //fValue is overall cost
-    public int xPos; //every Node has an X pos
-    public int yPos; // y position of node
-	public int zPos;
-    public String description;
-	public List<Node> neighbors = new LinkedList<Node>();
-	public String map;
-	public boolean isTransitionNode = false;
-	public Type type;
+	private String nodeName; //every node has a name
+    private Node parent; //node has a parent. the parent is where the current node came from
+    private double gValue; //gValue is cost from current block
+    private double hValue; //hValue is distance
+    private double fValue; //fValue is overall cost
+    private int xPos; //every Node has an X pos
+    private int yPos; // y position of node
+	private int zPos;
+    private String description;
+	private List<Node> neighbors = new LinkedList<Node>();
+	private String map;
+	private boolean isTransitionNode = false;
+	private Type type;
     //constructor for node
     public Node(String nodeName, double hValue,double gValue,double fValue, int xPos, int yPos, int zPos, String map, boolean isTransitionNode, String description, Type nodeType){
             this.nodeName = nodeName;
@@ -62,7 +62,111 @@ public class Node{
         this.description = "";
         this.type = Type.NONE;
     }
-
+    public String getName()
+    {
+    	return this.nodeName;
+    }
+    public double getHVal()
+    {
+    	return this.hValue;
+    }
+    public double getGVal()
+    {
+    	return this.gValue;
+    }
+    public double getFVal()
+    {
+    	return this.fValue;
+    }
+    public int getX()
+    {
+    	return this.xPos;
+    }
+    public int getY()
+    {
+    	return this.yPos;
+    }
+    public int getZ()
+    {
+    	return this.zPos;
+    }
+    public String getMap()
+    {
+    	return this.map;
+    }
+    public String getDescription()
+    {
+    	return this.description;
+    }
+    public boolean isTransition()
+    {
+    	return this.isTransitionNode;
+    }
+    public List<Node> getNeighbors()
+    {
+    	return this.neighbors;
+    }
+    public Type getType()
+    {
+    	return this.type;
+    }
+    public Node getParent()
+    {
+    	return this.parent;
+    }
+    
+    public void setName(String name)
+    {
+    	this.nodeName = name;
+    }
+    public void setHVal(double hVal)
+    {
+    	this.hValue = hVal;
+    }
+    public void setGVal(double gVal)
+    {
+    	this.gValue = gVal;
+    }
+    public void setFVal(double fVal)
+    {
+    	this.fValue = fVal;
+    }
+    public void setX(int x)
+    {
+    	this.xPos = x;
+    }
+    public void setY(int y)
+    {
+    	this.yPos = y;
+    }
+    public void setZ(int z)
+    {
+    	this.zPos = z;
+    }
+    public void setMap(String map)
+    {
+    	this.map = map;
+    }
+    public void setDescription(String descrip)
+    {
+    	this.description = descrip;
+    }
+    public void setIsTransition(boolean transition)
+    {
+    	this.isTransitionNode = transition;
+    }
+    public void setNeighbors(List<Node> list)
+    {
+    	this.neighbors = list;
+    }
+    public void setType(Type t)
+    {
+    	this.type = t;
+    }
+    public void setParent(Node n)
+    {
+    	this.parent = n;
+    }
     //function to turn stringName into an actual string name.
     //Why do we have to do this? Because Java is stupid. JK, Java Master Race
     public String toString(){

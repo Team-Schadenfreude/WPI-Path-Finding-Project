@@ -35,7 +35,7 @@ public class AStar{
 		
 		
 		//get the nodes in sequence from the end to the start
-		for(Node node = end; node!=null; node = node.parent){
+		for(Node node = end; node!=null; node = node.getParent()){
 			path.add(node);
 		}
 		if (path.size() <= 1)//If there is not path
@@ -51,7 +51,7 @@ public class AStar{
 	{
 		for(Node n : nodeList)
 		{
-			n.parent = null;
+			n.setParent(null);
 		}
 	}
 
@@ -71,11 +71,11 @@ public class AStar{
 			//we need this compare method to compare the costs of the nodes so that we can
 			//sort our queue based on the closest node
 			public int compare(Node i, Node j){
-				if(i.fValue > j.fValue){
+				if(i.getFVal()> j.getFVal()){
 					return 1;
 				}
 
-				else if (i.fValue < j.fValue){
+				else if (i.getFVal() < j.getFVal()){
 					return -1;
 				}
 
@@ -88,7 +88,7 @@ public class AStar{
 				);
 
 		//set our first gValue to 0 since it is the start
-		start.gValue = 0;
+		start.setGVal(0);
 
 		//add our start node to the queue
 		
@@ -105,7 +105,7 @@ public class AStar{
 			//add our node to the checked nodes set so that we dont check it again
 			if (checkedNodes.contains(current))
 			{
-				current.parent = null;
+				current.setParent(null);
 			}
 			checkedNodes.add(current);
 
@@ -114,35 +114,35 @@ public class AStar{
 			//System.out.println(checkedNodes);
 			//System.out.println(current);
 			//System.out.println(current.neighbors);
-			if(current.xPos == end.xPos && current.yPos == end.yPos){
+			if(current.getX() == end.getY() && current.getY() == end.getY() && current.getMap().equals(end.getMap())){ //Possible Bug
 				break;
 			}
 			//here we are checking every edge of every neighboring node for the node we are searching for
 			
 			
-			for(Node neighbor : current.neighbors){ //Check the neighbor nodes
+			for(Node neighbor : current.getNeighbors()){ //Check the neighbor nodes
 				
 				if(checkedNodes.contains(neighbor)) //If neighbor has already been checked
 				{
 					continue;
 				}
-				double gScoreTemp = current.gValue + getGValue(current, neighbor); //Get the tentative G-Value
+				double gScoreTemp = current.getGVal() + getGValue(current, neighbor); //Get the tentative G-Value
 				if(!queue.contains(neighbor)) //If not in the que add the neighbor to the queue
 				{
-					neighbor.gValue = gScoreTemp;
-					neighbor.hValue = getHValue(neighbor, end);
-					neighbor.fValue = neighbor.gValue + neighbor.hValue;
+					neighbor.setGVal(gScoreTemp);
+					neighbor.setHVal(getHValue(neighbor, end));
+					neighbor.setFVal(neighbor.getGVal() + neighbor.getHVal());
 					queue.add(neighbor);
 				}
-				else if(gScoreTemp > neighbor.gValue) 
+				else if(gScoreTemp > neighbor.getGVal()) 
 				{
 					continue; //Bad path
 				}
-				neighbor.parent = current; //Update the neighbors values
+				neighbor.setParent(current); //Update the neighbors values
 
-				neighbor.gValue = gScoreTemp;
-				neighbor.hValue = getHValue(neighbor, end);
-				neighbor.fValue = neighbor.gValue + neighbor.hValue;
+				neighbor.setGVal(gScoreTemp);
+				neighbor.setHVal(getHValue(neighbor, end));
+				neighbor.setFVal(neighbor.getGVal() + neighbor.getHVal());
 
 			}
 
@@ -162,9 +162,9 @@ public class AStar{
 	//function gets the distance between two nodes. This will be used as the cost
 	public static double getDistance(Node one, Node two){
 
-		double dx = one.xPos - two.xPos;
+		double dx = one.getX() - two.getX();
 
-		double dy = one.yPos - two.yPos;
+		double dy = one.getX() - two.getY();
 
 		double distance = Math.sqrt(dx*dx + dy*dy);
 

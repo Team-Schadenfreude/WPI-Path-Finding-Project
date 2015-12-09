@@ -203,22 +203,22 @@ public class MapBuilder {
 				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
 				//				if (n1 != null && n2 != null)
 				//				{
-				if (n1.neighbors == null)
+				if (n1.getNeighbors() == null)
 				{
-					n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
+					n1.setNeighbors(new LinkedList<>(Arrays.asList(n2)));
 				}
 				else
 				{
-					n1.neighbors.add(n2);
+					n1.getNeighbors().add(n2);
 				}
 
-				if (n2.neighbors == null)
+				if (n2.getNeighbors() == null)
 				{
-					n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
+					n2.setNeighbors(new LinkedList<>(Arrays.asList(n1)));
 				}
 				else
 				{
-					n2.neighbors.add(n1);
+					n2.getNeighbors().add(n1);
 				}
 				//}
 

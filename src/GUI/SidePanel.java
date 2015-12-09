@@ -125,11 +125,19 @@ for(String s: directions) {
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("proceed into")) {
-				label = new Label(s);
-				label.getStyleClass().add("direction_label");
+				System.out.println("Yo Im in Here");
+ 				label = new Label(s);
+ 				label.getStyleClass().add("direction_label");
+				label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				    @Override public void handle(MouseEvent e) {
+				    	System.out.println("Clicked Label");
+				    	String s2 = s;
+				    	s2 = s2.replace("Proceed into ", "");
+				    	stringProperty.set(s2);
+				    }});
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)), label);
-				hbList.add(hbItem);
-			}
+ 				hbList.add(hbItem);
+ 			}
 		}
 	
 		

@@ -90,7 +90,7 @@ public class Map {
 	{
 		for(Node n : nodes)
 		{
-			if(n.nodeName.equals(name))
+			if(n.getName().equals(name))
 			{
 				return n;
 			}
@@ -101,7 +101,7 @@ public class Map {
 	{
 		for(Node n : nodes)
 		{
-			if(n.xPos == x && n.yPos == y && n.zPos == z && n.map.equals(nodeMap))
+			if(n.getX() == x && n.getY() == y && n.getZ() == z && n.getMap().equals(nodeMap))
 			{
 				return n;
 			}

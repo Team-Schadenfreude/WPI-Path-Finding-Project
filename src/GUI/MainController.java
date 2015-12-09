@@ -154,8 +154,8 @@ public class MainController implements Initializable{
 	       startNode= tempNode;
 	       
 	       //displays new node information in the appropriate text box
-	       startMenu.setText(startNode.map +" " + startNode.nodeName);
-	       destMenu.setText(goalNode.map +" " + goalNode.nodeName);
+	       startMenu.setText(startNode.getMap() +" " + startNode.getName());
+	       destMenu.setText(goalNode.getMap()+" " + goalNode.getName());
 	       
 	       //runs A* with the new path
 	       getDirectionsProperty.set(!getDirectionsProperty.get());
@@ -209,10 +209,10 @@ public class MainController implements Initializable{
     			//Add buttons to nodes
     			for (Node n : f.getNodes())
     			{
-    				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
+    				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
     				{
     					Button btn;
-    					if(n.map.equals(mainMap.getBaseMapName()))
+    					if(n.getMap().equals(mainMap.getBaseMapName()))
     					{
     						btn = getButtonForNode(n, 10);
     					}
@@ -416,7 +416,7 @@ public class MainController implements Initializable{
             showDirections(directions);
             if (!path.isEmpty())
             {
-            	nextDirectionProperty.set(path.get(0).map);
+            	nextDirectionProperty.set(path.get(0).getMap());
             }
 //    		startNode = null;
 //    		goalNode = null;
@@ -424,16 +424,16 @@ public class MainController implements Initializable{
     }
     private void showDirections(List<String> directions)
     {
-    	SidePanel.setUpSidePanel(startNode.nodeName,goalNode.nodeName , directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
+    	SidePanel.setUpSidePanel(startNode.getName(),goalNode.getName() , directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
     	controlVBox.setMaxHeight(imageScrollPane.getHeight());
     	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
     }
     private Button getButtonForNode(Node node, double btnRadius)
     {
     	Button btn = new Button("");
-		btn.setId(node.nodeName);
-		btn.setTranslateX(node.xPos - btnRadius);
-		btn.setTranslateY(node.yPos - btnRadius);
+		btn.setId(node.getName());
+		btn.setTranslateX(node.getX() - btnRadius);
+		btn.setTranslateY(node.getY() - btnRadius);
 		//btn.setLayoutX(node.xPos);
 		//btn.setLayoutY(node.yPos);
 		double r = btnRadius;
@@ -466,12 +466,12 @@ public class MainController implements Initializable{
     {
     	for(Node node : nodeList)
     	{
-    		if (node.map == mainMap.getBaseMapName())
+    		if (node.getMap() == mainMap.getBaseMapName())
     		{
     			Button btn = new Button("");
-    			btn.setId(node.nodeName);
-    			btn.setLayoutX(node.xPos * scaleX - 10);
-    			btn.setLayoutY(node.yPos * scaleY - 10);
+    			btn.setId(node.getName());
+    			btn.setLayoutX(node.getX() * scaleX - 10);
+    			btn.setLayoutY(node.getY() * scaleY - 10);
     			double r = btnRadius * scaleX;
     			btn.setShape(new Circle(r));
     			btn.setMinSize(2*r, 2*r);
@@ -505,8 +505,8 @@ public class MainController implements Initializable{
     	System.out.println(path);
     	if (path.size() > 0)
     	{
-    		Canvas activeCanvas = findMapCanvas(path.get(0).map);
-    		System.out.println(path.get(0).map);
+    		Canvas activeCanvas = findMapCanvas(path.get(0).getMap());
+    		System.out.println(path.get(0).getMap());
         	clearAllCanvas();
     		
         	boolean first = true;
@@ -514,27 +514,27 @@ public class MainController implements Initializable{
         	System.out.println("CanvasEditing");
         	for(Node node : path)
         	{
-        		if (node.isTransitionNode)
+        		if (node.isTransition())
         		{
-        			System.out.println("TNode " + node.nodeName);
-        			System.out.println("Map " + node.map);
+        			System.out.println("TNode " + node.getName());
+        			System.out.println("Map " + node.getMap());
         		}
         		if (first)
         		{
         			first = false;
         			//do nothing
         		}
-        		else if (node.isTransitionNode && prevNode.isTransitionNode && !node.map.equals(prevNode.map))
+        		else if (node.isTransition() && prevNode.isTransition() && !node.getMap().equals(prevNode.getMap()))
         		{
         			System.out.println("CHANGING CANVAS");
-        			System.out.println("Map name is : " + node.map);
-        			activeCanvas = findMapCanvas(node.map);
+        			System.out.println("Map name is : " + node.getMap());
+        			activeCanvas = findMapCanvas(node.getMap());
         	    	activeCanvas.getGraphicsContext2D().clearRect(0, 0, activeCanvas.getWidth(), activeCanvas.getHeight());
         		}
         		else
         		{
         			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-        			if (node.map.equals(mainMap.getBaseMapName()))
+        			if (node.getMap().equals(mainMap.getBaseMapName()))
         			{
         				gc.setLineWidth(4);
         			}
@@ -543,7 +543,7 @@ public class MainController implements Initializable{
         				gc.setLineWidth(8);
         			}
         			gc.setStroke(Color.RED);
-        			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
+        			gc.strokeLine(prevNode.getX(), prevNode.getY(), node.getX(), node.getY());
         		}
         		prevNode = node;
         	}
@@ -567,7 +567,7 @@ public class MainController implements Initializable{
     
     private void drawCircleOnNode(Node n, int radius, Paint p)
     {
-    	drawCircleOnNode(n.map, n.xPos, n.yPos, radius, p);
+    	drawCircleOnNode(n.getMap(), n.getX(), n.getY(), radius, p);
     }
     
     private void clearAllCanvas()
@@ -617,13 +617,13 @@ public class MainController implements Initializable{
         			floors2.setText(f.getName());
         			for (Node n : f.getNodes())
         			{
-        				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
+        				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
         				{
-        					MenuItem mi1 = new MenuItem(n.nodeName);
-            				MenuItem mi2 = new MenuItem(n.nodeName);
+        					MenuItem mi1 = new MenuItem(n.getName());
+            				MenuItem mi2 = new MenuItem(n.getName());
             				mi1.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			    	startNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
+                			    	startNode = mainMap.findNodeByXYZinMap(n.getX(), n.getY(), n.getZ(), n.getMap());
                 			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			    	System.out.println("Start Node Selected");
@@ -631,7 +631,7 @@ public class MainController implements Initializable{
                 			});
                 			mi2.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			        goalNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
+                			        goalNode = mainMap.findNodeByXYZinMap(n.getX(), n.getY(), n.getZ(), n.getMap());
                 			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			        System.out.println("Goal Node Selected");
