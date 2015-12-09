@@ -207,22 +207,22 @@ public class MainController implements Initializable{
     			g.getChildren().add(im);
     			g.getChildren().add(c);
     			//Add buttons to nodes
-    			for (Node n : f.getNodes())
-    			{
-    				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
-    				{
-    					Button btn;
-    					if(n.getMap().equals(mainMap.getBaseMapName()))
-    					{
-    						btn = getButtonForNode(n, 10);
-    					}
-    					else
-    					{
-    						btn = getButtonForNode(n, 10);
-    					}
-        				g.getChildren().add(btn);
-    				}
-    			}
+//    			for (Node n : f.getNodes())
+//    			{
+//    				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
+//    				{
+//    					Button btn;
+//    					if(n.getMap().equals(mainMap.getBaseMapName()))
+//    					{
+//    						btn = getButtonForNode(n, 10);
+//    					}
+//    					else
+//    					{
+//    						btn = getButtonForNode(n, 10);
+//    					}
+//        				g.getChildren().add(btn);
+//    				}
+//    			}
     			g.setId(f.getName());
     			g.setOnMouseClicked(new EventHandler<MouseEvent>() {
     				@Override
@@ -432,8 +432,8 @@ public class MainController implements Initializable{
     {
     	Button btn = new Button("");
 		btn.setId(node.getName());
-		btn.setTranslateX(node.getX() - btnRadius);
-		btn.setTranslateY(node.getY() - btnRadius);
+		btn.setTranslateX(node.getX() - btnRadius+5);
+		btn.setTranslateY(node.getY() - btnRadius+5);
 		//btn.setLayoutX(node.xPos);
 		//btn.setLayoutY(node.yPos);
 		double r = btnRadius;
@@ -543,8 +543,7 @@ public class MainController implements Initializable{
         				gc.setLineWidth(8);
         			}
         			gc.setStroke(Color.RED);
-        			gc.strokeLine(prevNode.getX(), prevNode.getY(), node.getX(), node.getY());
-        		}
+        			gc.strokeLine(prevNode.getX()+5, prevNode.getY()+5, node.getX()+5, node.getY()+5);        		}
         		prevNode = node;
         	}
         	
@@ -562,7 +561,7 @@ public class MainController implements Initializable{
     	Canvas activeCanvas = findMapCanvas(map);
     	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
     	gc.setFill(p);
-    	gc.fillOval(xPos - (radius /2), yPos - (radius / 2), radius, radius);
+    	gc.fillOval(xPos - (radius /2)+5, yPos - (radius / 2)+5, radius, radius);
     }
     
     private void drawCircleOnNode(Node n, int radius, Paint p)
