@@ -72,6 +72,17 @@ public class BuildingPopUp {
 			image.setImage(image9);
 			image.getStyleClass().add("image_display");
 			break;
+			
+			
+			
+			
+		case "Higgins House":
+			Image image10 = new Image("/res/BuildingImages/HigginsHouse.jpg",210,200,true,true);
+			image.setImage(image10);
+			image.getStyleClass().add("image_display");
+			break;
+			
+			
 		default:
 			System.out.println("default");
 		}
