@@ -74,9 +74,8 @@ node,495,377,0,Library B,,false,None
 node,568,377,0,Library B,,false,None
 node,568,377,0,Library B,,false,None
 node,420,355,0,Library B,Gordon Library stairs up to the first floor from the basement.,true,Stairs
-node,374,355,0,Library B,,false,None
-node,374,355,0,Library B,Gordon Library basement elevator.,true,Elevator
 node,420,377,0,Library B,,false,None
 node,374,377,0,Library B,,false,None
 GL-009,357,86,0,Library B,,false,Room
 node,357,62,0,Library B,,false,None
+node,374,355,0,Library B,Gordon Library THIS ELEVATOR IS TERRIBLE basement floor.,true,Elevator
