@@ -424,7 +424,7 @@ public class MainController implements Initializable{
     }
     private void showDirections(List<String> directions)
     {
-    	SidePanel.setUpSidePanel("FL", "AK", directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
+    	SidePanel.setUpSidePanel(startNode.nodeName,goalNode.nodeName , directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
     	controlVBox.setMaxHeight(imageScrollPane.getHeight());
     	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
     }
