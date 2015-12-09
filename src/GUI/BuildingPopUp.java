@@ -24,26 +24,26 @@ public class BuildingPopUp {
 		ImageView image = new ImageView();
 		switch(bName){
 		
-		case "AtwaterKent":
-			Image image2 = new Image("/res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-			image.setImage(image2);
-			break;
-			
-			
-		case "FullerLabs":
-			Image image3 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
-			image.setImage(image3);
-			break;
-			
-		case "CampusCenter":
-			Image image4 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
-			image.setImage(image4);
-			break;
-			
-		case "BoyntonHall":
-			Image image5 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
-			image.setImage(image5);
-			break;
+//		case "AtwaterKent":
+//			Image image2 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
+//			image.setImage(image2);
+//			break;
+//			
+//			
+//		case "FullerLabs":
+//			Image image3 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
+//			image.setImage(image3);
+//			break;
+//			
+//		case "CampusCenter":
+//			Image image4 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
+//			image.setImage(image4);
+//			break;
+//			
+//		case "BoyntonHall":
+//			Image image5 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
+//			image.setImage(image5);
+//			break;
 
 		default:
 			System.out.println("default");

@@ -1,0 +1,67 @@
+node,159,66,0,Library 1,Gordon Library back left stairs.,true,Stairs
+GL-116,963,132,0,Library 1,,false,Room
+node,431,365,0,Library 1,,false,None
+node,382,365,0,Library 1,,false,None
+node,339,365,0,Library 1,,false,None
+node,551,304,0,Library 1,,false,None
+node,551,274,0,Library 1,,false,None
+node,551,227,0,Library 1,,false,None
+node,255,66,0,Library 1,,false,None
+node,255,111,0,Library 1,,false,None
+node,255,365,0,Library 1,,false,None
+node,255,236,0,Library 1,,false,None
+GL-106,409,111,0,Library 1,,false,Room
+GL-104,318,111,0,Library 1,,false,Room
+node,255,175,0,Library 1,,false,None
+GL-103,318,175,0,Library 1,,false,Room
+node,409,66,0,Library 1,,false,None
+node,551,66,0,Library 1,,false,None
+GL-108,511,227,0,Library 1,,false,Room
+GL-110,511,304,0,Library 1,,false,Room
+GL-109,511,274,0,Library 1,,false,Room
+node,339,334,0,Library 1,Gordon Library stairs to the basement from the first floor.,true,Stairs
+node,382,334,0,Library 1,Gordon Library first floor elevator.,true,Elevator
+node,431,334,0,Library 1,Gordon Library stairs to the second floor from the first floor.,true,Stairs
+node,533,508,0,Library 1,,false,None
+node,564,508,0,Library 1,,false,None
+node,533,537,0,Library 1,GL-111,false,Room
+node,564,537,0,Library 1,GL-111A,false,Room
+node,255,436,0,Library 1,,false,None
+node,339,436,0,Library 1,,false,None
+node,431,436,0,Library 1,,false,None
+node,431,508,0,Library 1,,false,None
+node,339,508,0,Library 1,,false,None
+node,255,508,0,Library 1,,false,None
+node,551,365,0,Library 1,,false,None
+node,688,508,0,Library 1,,false,None
+node,688,508,0,Library 1,,false,None
+node,722,508,0,Library 1,,false,None
+GL-112A,722,537,0,Library 1,,false,Room
+node,688,537,0,Library 1,GL-112,false,Room
+node,551,365,0,Library 1,,false,None
+node,564,365,0,Library 1,,false,None
+node,963,66,0,Library 1,Gordon Library back right stairs on the first floor.,true,Stairs
+node,843,66,0,Library 1,,false,None
+node,843,66,0,Library 1,,false,None
+GL-115,843,118,0,Library 1,,false,Room
+node,688,365,0,Library 1,,false,None
+node,722,365,0,Library 1,,false,None
+node,533,365,0,Library 1,,false,None
+node,688,66,0,Library 1,,false,None
+node,722,66,0,Library 1,,false,None
+node,963,223,0,Library 1,,false,None
+node,963,440,0,Library 1,,false,None
+node,799,365,0,Library 1,,false,None
+GL-117A,963,343,0,Library 1,,false,None
+GL-119,963,529,0,Library 1,,false,Room
+GL-100F,1049,496,0,Library 1,,false,Room
+GL-118,1018,529,0,Library 1,,false,Room
+node,1018,496,0,Library 1,,false,None
+node,963,496,0,Library 1,,false,None
+GL-120,912,529,0,Library 1,,false,Room
+node,912,496,0,Library 1,,false,None
+node,912,440,0,Library 1,,false,None
+node,835,496,0,Library 1,,false,None
+GL-121,835,529,0,Library 1,,false,Room
+node,835,440,0,Library 1,,false,None
+GL-117,835,365,0,Library 1,,false,Room
