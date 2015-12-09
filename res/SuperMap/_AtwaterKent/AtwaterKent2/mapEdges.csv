@@ -134,6 +134,7 @@
 795,137,0,AtwaterKent2,784,137,0,AtwaterKent2
 795,137,0,AtwaterKent2,857,137,0,AtwaterKent2
 833,103,0,AtwaterKent2,795,103,0,AtwaterKent2
+833,103,0,AtwaterKent2,799,88,0,AtwaterKent3
 857,137,0,AtwaterKent2,795,137,0,AtwaterKent2
 857,137,0,AtwaterKent2,857,173,0,AtwaterKent2
 857,173,0,AtwaterKent2,857,137,0,AtwaterKent2
@@ -161,7 +162,6 @@
 985,464,0,AtwaterKent2,950,464,0,AtwaterKent2
 985,464,0,AtwaterKent2,985,508,0,AtwaterKent2
 950,464,0,AtwaterKent2,985,464,0,AtwaterKent2
-950,464,0,AtwaterKent2,106,458,0,AtwaterKent3
 1030,464,0,AtwaterKent2,985,464,0,AtwaterKent2
 1030,430,0,AtwaterKent2,985,430,0,AtwaterKent2
 985,508,0,AtwaterKent2,915,508,0,AtwaterKent2
@@ -268,7 +268,6 @@
 281,463,0,AtwaterKent2,245,500,0,AtwaterKent2
 245,463,0,AtwaterKent2,281,463,0,AtwaterKent2
 245,463,0,AtwaterKent2,245,500,0,AtwaterKent2
-245,463,0,AtwaterKent2,899,447,0,AtwaterKent3
 245,500,0,AtwaterKent2,116,500,0,AtwaterKent2
 245,500,0,AtwaterKent2,281,463,0,AtwaterKent2
 245,500,0,AtwaterKent2,245,463,0,AtwaterKent2
