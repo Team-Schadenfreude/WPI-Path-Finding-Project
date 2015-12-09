@@ -104,9 +104,13 @@ public class MainController implements Initializable{
 							double angle = ((Rotate) node.getTransforms().get(0)).getAngle();
 //							double x = (node.getBoundsInParent().getMaxX() - node.getBoundsInParent().getMinX()) / 2;
 //							double y = (node.getBoundsInParent().getMaxY() - node.getBoundsInParent().getMinY()) / 2;
-    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+							if (!node.getId().equals(lastBuilding))
+							{
+	    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+							}
     						floorNum = i;
     						updateFloor(n,((Group)node).getChildren(), newValue);
+    						lastBuilding = node.getId();
     						break;
     					}
 						i++;
@@ -169,7 +173,7 @@ public class MainController implements Initializable{
     	chooser.setTitle("JavaFX Projects");
     	File defaultDirectory = new File("c:/");
     	chooser.setInitialDirectory(defaultDirectory);
-    	return chooser.showDialog(Main.primaryStage);
+    	return chooser.showDialog(Main.getStage());
     }
     //Action handler for the load map button 
     private void loadMap() {

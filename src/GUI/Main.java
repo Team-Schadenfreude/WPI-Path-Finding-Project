@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  
 public class Main extends Application {
 
-	public static Stage primaryStage;
+	private static Stage primaryStage;
     public static void main(String[] args) {
     	//SvgImageLoaderFactory.install();
         launch(args);
@@ -28,5 +28,9 @@ public class Main extends Application {
        
         stage.show();
         
+    }
+    public static Stage getStage()
+    {
+    	return primaryStage;
     }
 }

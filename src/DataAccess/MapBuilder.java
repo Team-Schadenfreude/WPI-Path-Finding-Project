@@ -14,7 +14,7 @@ import AStar.Node;
 public class MapBuilder {
 
 	private String mapPath;
-	String baseMap;
+	private String baseMap;
 	private List<Floor> sortedFloor = new LinkedList<Floor>();
 
 	public MapBuilder(String mapPath, String baseMap) {
