@@ -1,39 +1,51 @@
+/********************* Colour reference chart****************
+*************************** comment ********* colour ******** 
+
+box background colour       bbg              #415A69
+box border colour           bb               #FF530D
+box text colour             bt               #F7F7F7
+box text pressed color		btp				 #B64926
+box hover color				bh				 #91A3AB
+box click color				bc				 #253138
+
+*/
+
 .vbox {
-    -fx-background-color: #606060;
+    -fx-background-color: /*bbg*/#415A69; /* Side panel background */
 }
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .background {
-    -fx-background-color: #606060;
+    -fx-background-color: /*bbg*/#415A69;
 }
 
 .label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: /*bt*/#F7F7F7; /* Main Text Color */
     -fx-opacity: 0.6;
 }
 
 .label-bright {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: /*bt*/#F7F7F7;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: /*bt*/#F7F7F7;
     -fx-opacity: 1;
 }
 
 .direction_label {
 	-fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: grey;
+    -fx-text-fill: /*bt*/#F7F7F7;
     -fx-opacity: 1;
     -fx-font-size: 16px;
 }
 
 
 .context-menu {
-    -fx-background-color: #606060;
+    -fx-background-color: /*bbg*/#415A69;
 }
 
 
@@ -47,22 +59,22 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {   
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: /*bb*/#FF530D; /* The Border on any Buttons */
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #606060;
+    -fx-background-color: /*bbg*/#415A69; /* The Background of the Button and Nodes */
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: /*bt*/#F7F7F7; /* The Text color */
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: /*bh*/#91A3AB; /* Button and Node hover color */
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #606060;
+  -fx-background-color: /*bc*/#253138; /* Color of button when pressed */
+  -fx-text-fill: /*btp*/#B64926; /* Color of text when button is pressed */
 }
 
 /* .button:focused {
@@ -75,13 +87,13 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #606060;
-    -fx-text-fill: white;
+    -fx-background-color: /*bbg*/#415A69;
+    -fx-text-fill: /*bt*/#F7F7F7;
 }
 
 .button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: /*bt*/#F7F7F7;
 }
 
 .button:default:hover {
@@ -91,19 +103,19 @@
     /*-fx-border-color: #e2e2e2;*/
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #606060;
+    -fx-background-color: /*bbg*/#415A69;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: /*bt*/#F7F7F7;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .menu-button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: /*bh*/#91A3AB; /* When hovering over the list of places menu */
 }
 
 .menu-button:pressed, .menu-button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #606060;
+  -fx-background-color: /*bc*/#253138; /* When holding down on the list of places menu */
+  -fx-text-fill: /*btp*/#B64926; /* The text color when the list of places menu is clicked */
 }
 
 /* .menu-button:focused {
@@ -116,13 +128,13 @@
 
 .menu-button:disabled, .menu-button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #606060;
-    -fx-text-fill: white;
+    -fx-background-color: /*bbg*/#415A69;
+    -fx-text-fill: /*bt*/#F7F7F7;
 }
 
 .menu-button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: /*bt*/#F7F7F7;
 }
 
 .menu-button:default:hover {
