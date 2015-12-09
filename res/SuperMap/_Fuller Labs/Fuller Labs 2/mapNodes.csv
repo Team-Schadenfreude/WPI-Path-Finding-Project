@@ -1,0 +1,73 @@
+node,189,313,0,Fuller Labs 2,The office stairwell on the second floor.,true,Stairs
+node,150,313,0,Fuller Labs 2,,false,None
+node,150,349,0,Fuller Labs 2,,false,None
+FL-238,115,349,0,Fuller Labs 2,,false,Room
+node,150,284,0,Fuller Labs 2,,false,None
+FL-237,115,284,0,Fuller Labs 2,,false,Room
+FL-239,187,258,0,Fuller Labs 2,,false,Room
+node,150,258,0,Fuller Labs 2,,false,None
+node,150,221,0,Fuller Labs 2,,false,None
+FL-236,115,221,0,Fuller Labs 2,,false,Room
+node,150,162,0,Fuller Labs 2,,false,None
+FL-235,115,162,0,Fuller Labs 2,,false,Room
+FL-240,187,162,0,Fuller Labs 2,,false,Room
+node,150,122,0,Fuller Labs 2,,false,None
+FL-234,178,84,0,Fuller Labs 2,,false,Room
+node,178,122,0,Fuller Labs 2,,false,None
+node,178,57,0,Fuller Labs 2,,false,None
+node,218,57,0,Fuller Labs 2,,false,None
+FL-233,385,56,0,Fuller Labs 2,,false,Room
+node,266,122,0,Fuller Labs 2,,false,None
+node,352,122,0,Fuller Labs 2,,false,None
+FL-242,352,160,0,Fuller Labs 2,,false,Room
+FL-241,266,160,0,Fuller Labs 2,,false,Room
+node,385,122,0,Fuller Labs 2,,false,None
+node,415,122,0,Fuller Labs 2,,false,None
+FL-243,415,160,0,Fuller Labs 2,,false,Room
+node,478,122,0,Fuller Labs 2,,false,None
+node,478,56,0,Fuller Labs 2,,false,None
+node,503,122,0,Fuller Labs 2,,false,None
+FL-244,503,160,0,Fuller Labs 2,,false,Room
+node,563,122,0,Fuller Labs 2,,false,None
+FL-232,563,56,0,Fuller Labs 2,,false,Room
+node,595,122,0,Fuller Labs 2,,false,None
+FL-231,595,56,0,Fuller Labs 2,,false,Room
+FL-245,595,160,0,Fuller Labs 2,,false,Room
+node,687,122,0,Fuller Labs 2,,false,None
+node,687,248,0,Fuller Labs 2,,false,None
+node,806,248,0,Fuller Labs 2,Stairwell near the elevator on the second floor.,true,Stairs
+node,868,248,0,Fuller Labs 2,,false,None
+FL-205,868,291,0,Fuller Labs 2,,false,Room
+node,973,248,0,Fuller Labs 2,,false,None
+node,973,408,0,Fuller Labs 2,,false,None
+FL-211,866,408,0,Fuller Labs 2,,false,Room
+FL-207,868,376,0,Fuller Labs 2,,false,Room
+node,936,408,0,Fuller Labs 2,,false,None
+node,936,469,0,Fuller Labs 2,,false,None
+FL-214,973,469,0,Fuller Labs 2,,false,Room
+FL-215,973,543,0,Fuller Labs 2,,false,Room
+FL-213,912,543,0,Fuller Labs 2,,false,Room
+FL-216A,912,608,0,Fuller Labs 2,,false,Room
+FL-216,973,608,0,Fuller Labs 2,,false,Room
+node,841,543,0,Fuller Labs 2,,false,None
+FL-217,841,575,0,Fuller Labs 2,,false,Room
+node,732,543,0,Fuller Labs 2,,false,None
+node,732,423,0,Fuller Labs 2,,false,None
+FL-210,786,423,0,Fuller Labs 2,,false,Room
+node,732,368,0,Fuller Labs 2,,false,None
+node,786,368,0,Fuller Labs 2,Elevator on the second floor.,true,Elevator
+node,732,122,0,Fuller Labs 2,,false,None
+node,732,248,0,Fuller Labs 2,,false,None
+node,687,368,0,Fuller Labs 2,,false,None
+node,732,937,0,Fuller Labs 2,,false,None
+node,781,937,0,Fuller Labs 2,,false,None
+node,781,985,0,Fuller Labs 2,,false,None
+node,820,985,0,Fuller Labs 2,Stairwell by the front of Fuller Labs second floor.,true,Stairs
+node,781,1053,0,Fuller Labs 2,,false,None
+FL-222,873,937,0,Fuller Labs 2,,false,Room
+node,732,1053,0,Fuller Labs 2,,false,None
+Fuller Front Entrance,732,1105,0,Fuller Labs 2,Front entrance to Fuller Labs on the second floor.,true,Entrance
+node,732,871,0,Fuller Labs 2,,false,None
+Upper Fuller Lecture Hall,646,871,0,Fuller Labs 2,,false,Room
+node,687,820,0,Fuller Labs 2,The main staicase of the second floor.,true,Stairs
+node,687,871,0,Fuller Labs 2,,false,None

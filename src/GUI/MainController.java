@@ -104,9 +104,13 @@ public class MainController implements Initializable{
 							double angle = ((Rotate) node.getTransforms().get(0)).getAngle();
 //							double x = (node.getBoundsInParent().getMaxX() - node.getBoundsInParent().getMinX()) / 2;
 //							double y = (node.getBoundsInParent().getMaxY() - node.getBoundsInParent().getMinY()) / 2;
-    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+							if (!node.getId().equals(lastBuilding))
+							{
+	    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+							}
     						floorNum = i;
     						updateFloor(n,((Group)node).getChildren(), newValue);
+    						lastBuilding = node.getId();
     						break;
     					}
 						i++;
@@ -119,19 +123,19 @@ public class MainController implements Initializable{
     	controlVBox.getChildren().add(SidePanel.getGridPane());
 	}
     
-    private void setupCloseBtn()
-    {
-    	Button closeBtn = new Button("Close");
-    	closeBtn.setMaxWidth(Double.MAX_VALUE);
-    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
-     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
- 		    @Override public void handle(ActionEvent e) {
- 		    	BuildingPopUp.getPopUp().getChildren().clear();
- 		    	SidePanel.getGridPane().getChildren().clear();
- 		    	}});
-     	controlVBox.getChildren().add(closeBtn);
-
-    }
+//    private void setupCloseBtn()
+//    {
+//    	Button closeBtn = new Button("Close");
+//    	closeBtn.setMaxWidth(Double.MAX_VALUE);
+//    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
+//     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+// 		    @Override public void handle(ActionEvent e) {
+// 		    	BuildingPopUp.getPopUp().getChildren().clear();
+// 		    	SidePanel.getGridPane().getChildren().clear();
+// 		    	}});
+//     	controlVBox.getChildren().add(closeBtn);
+//
+//    }
     
     private void setButtonsVisibleForGroup(Group floor, boolean isVisible)
     {
@@ -154,8 +158,8 @@ public class MainController implements Initializable{
 	       startNode= tempNode;
 	       
 	       //displays new node information in the appropriate text box
-	       startMenu.setText(startNode.map +" " + startNode.nodeName);
-	       destMenu.setText(goalNode.map +" " + goalNode.nodeName);
+	       startMenu.setText(startNode.getMap() +" " + startNode.getName());
+	       destMenu.setText(goalNode.getMap()+" " + goalNode.getName());
 	       
 	       //runs A* with the new path
 	       getDirectionsProperty.set(!getDirectionsProperty.get());
@@ -169,7 +173,7 @@ public class MainController implements Initializable{
     	chooser.setTitle("JavaFX Projects");
     	File defaultDirectory = new File("c:/");
     	chooser.setInitialDirectory(defaultDirectory);
-    	return chooser.showDialog(Main.primaryStage);
+    	return chooser.showDialog(Main.getStage());
     }
     //Action handler for the load map button 
     private void loadMap() {
@@ -207,22 +211,22 @@ public class MainController implements Initializable{
     			g.getChildren().add(im);
     			g.getChildren().add(c);
     			//Add buttons to nodes
-    			for (Node n : f.getNodes())
-    			{
-    				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
-    				{
-    					Button btn;
-    					if(n.map.equals(mainMap.getBaseMapName()))
-    					{
-    						btn = getButtonForNode(n, 10);
-    					}
-    					else
-    					{
-    						btn = getButtonForNode(n, 10);
-    					}
-        				g.getChildren().add(btn);
-    				}
-    			}
+//    			for (Node n : f.getNodes())
+//    			{
+//    				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
+//    				{
+//    					Button btn;
+//    					if(n.getMap().equals(mainMap.getBaseMapName()))
+//    					{
+//    						btn = getButtonForNode(n, 10);
+//    					}
+//    					else
+//    					{
+//    						btn = getButtonForNode(n, 10);
+//    					}
+//        				g.getChildren().add(btn);
+//    				}
+//    			}
     			g.setId(f.getName());
     			g.setOnMouseClicked(new EventHandler<MouseEvent>() {
     				@Override
@@ -249,10 +253,22 @@ public class MainController implements Initializable{
 					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
-						BuildingPopUp.setupPopUp(b);
-						setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
-						floorNum = 0;
-						updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						if (lastBuilding.equals(mainMap.getBaseMapName()))
+						{
+							BuildingPopUp.setupPopUp(b);
+							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							floorNum = 0;
+							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						}
+						else
+						{
+							Building b = mainMap.getBuildings().get(0);
+							Group buildGroup = (Group)mainGroup.getChildren().get(0);
+							BuildingPopUp.setupPopUp(b);
+							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							floorNum = 0;
+							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						}
 					}
 					
 				}});
@@ -261,6 +277,7 @@ public class MainController implements Initializable{
 			
     	}
     }
+    
     
     void setUpGroupOnClick(Group buildGroup, double bAngle, double bScaleX, double x, double y)
     {
@@ -416,7 +433,7 @@ public class MainController implements Initializable{
             showDirections(directions);
             if (!path.isEmpty())
             {
-            	nextDirectionProperty.set(path.get(0).map);
+            	nextDirectionProperty.set(path.get(0).getMap());
             }
 //    		startNode = null;
 //    		goalNode = null;
@@ -424,16 +441,16 @@ public class MainController implements Initializable{
     }
     private void showDirections(List<String> directions)
     {
-    	SidePanel.setUpSidePanel("FL", "AK", directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
+    	SidePanel.setUpSidePanel(startNode.getName(),goalNode.getName() , directions, BuildingPopUp.getPopUp(), nextDirectionProperty);
     	controlVBox.setMaxHeight(imageScrollPane.getHeight());
     	controlVBox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
     }
     private Button getButtonForNode(Node node, double btnRadius)
     {
     	Button btn = new Button("");
-		btn.setId(node.nodeName);
-		btn.setTranslateX(node.xPos - btnRadius);
-		btn.setTranslateY(node.yPos - btnRadius);
+		btn.setId(node.getName());
+		btn.setTranslateX(node.getX() - btnRadius+5);
+		btn.setTranslateY(node.getY() - btnRadius+5);
 		//btn.setLayoutX(node.xPos);
 		//btn.setLayoutY(node.yPos);
 		double r = btnRadius;
@@ -466,12 +483,12 @@ public class MainController implements Initializable{
     {
     	for(Node node : nodeList)
     	{
-    		if (node.map == mainMap.getBaseMapName())
+    		if (node.getMap() == mainMap.getBaseMapName())
     		{
     			Button btn = new Button("");
-    			btn.setId(node.nodeName);
-    			btn.setLayoutX(node.xPos * scaleX - 10);
-    			btn.setLayoutY(node.yPos * scaleY - 10);
+    			btn.setId(node.getName());
+    			btn.setLayoutX(node.getX() * scaleX - 10);
+    			btn.setLayoutY(node.getY() * scaleY - 10);
     			double r = btnRadius * scaleX;
     			btn.setShape(new Circle(r));
     			btn.setMinSize(2*r, 2*r);
@@ -505,8 +522,8 @@ public class MainController implements Initializable{
     	System.out.println(path);
     	if (path.size() > 0)
     	{
-    		Canvas activeCanvas = findMapCanvas(path.get(0).map);
-    		System.out.println(path.get(0).map);
+    		Canvas activeCanvas = findMapCanvas(path.get(0).getMap());
+    		System.out.println(path.get(0).getMap());
         	clearAllCanvas();
     		
         	boolean first = true;
@@ -514,27 +531,27 @@ public class MainController implements Initializable{
         	System.out.println("CanvasEditing");
         	for(Node node : path)
         	{
-        		if (node.isTransitionNode)
+        		if (node.isTransition())
         		{
-        			System.out.println("TNode " + node.nodeName);
-        			System.out.println("Map " + node.map);
+        			System.out.println("TNode " + node.getName());
+        			System.out.println("Map " + node.getMap());
         		}
         		if (first)
         		{
         			first = false;
         			//do nothing
         		}
-        		else if (node.isTransitionNode && prevNode.isTransitionNode && !node.map.equals(prevNode.map))
+        		else if (node.isTransition() && prevNode.isTransition() && !node.getMap().equals(prevNode.getMap()))
         		{
         			System.out.println("CHANGING CANVAS");
-        			System.out.println("Map name is : " + node.map);
-        			activeCanvas = findMapCanvas(node.map);
+        			System.out.println("Map name is : " + node.getMap());
+        			activeCanvas = findMapCanvas(node.getMap());
         	    	activeCanvas.getGraphicsContext2D().clearRect(0, 0, activeCanvas.getWidth(), activeCanvas.getHeight());
         		}
         		else
         		{
         			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-        			if (node.map.equals(mainMap.getBaseMapName()))
+        			if (node.getMap().equals(mainMap.getBaseMapName()))
         			{
         				gc.setLineWidth(4);
         			}
@@ -543,8 +560,7 @@ public class MainController implements Initializable{
         				gc.setLineWidth(8);
         			}
         			gc.setStroke(Color.RED);
-        			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
-        		}
+        			gc.strokeLine(prevNode.getX()+5, prevNode.getY()+5, node.getX()+5, node.getY()+5);        		}
         		prevNode = node;
         	}
         	
@@ -562,12 +578,12 @@ public class MainController implements Initializable{
     	Canvas activeCanvas = findMapCanvas(map);
     	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
     	gc.setFill(p);
-    	gc.fillOval(xPos - (radius /2), yPos - (radius / 2), radius, radius);
+    	gc.fillOval(xPos - (radius /2)+5, yPos - (radius / 2)+5, radius, radius);
     }
     
     private void drawCircleOnNode(Node n, int radius, Paint p)
     {
-    	drawCircleOnNode(n.map, n.xPos, n.yPos, radius, p);
+    	drawCircleOnNode(n.getMap(), n.getX(), n.getY(), radius, p);
     }
     
     private void clearAllCanvas()
@@ -617,13 +633,13 @@ public class MainController implements Initializable{
         			floors2.setText(f.getName());
         			for (Node n : f.getNodes())
         			{
-        				if (n.type == Node.Type.ROOM || n.type == Node.Type.ENTRANCE)
+        				if ((n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE) && !n.getName().equals("node"))
         				{
-        					MenuItem mi1 = new MenuItem(n.nodeName);
-            				MenuItem mi2 = new MenuItem(n.nodeName);
+        					MenuItem mi1 = new MenuItem(n.getName());
+            				MenuItem mi2 = new MenuItem(n.getName());
             				mi1.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			    	startNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
+                			    	startNode = mainMap.findNodeByXYZinMap(n.getX(), n.getY(), n.getZ(), n.getMap());
                 			    	startMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			    	System.out.println("Start Node Selected");
@@ -631,14 +647,14 @@ public class MainController implements Initializable{
                 			});
                 			mi2.setOnAction(new EventHandler<ActionEvent>() {
                 			    @Override public void handle(ActionEvent e) {
-                			        goalNode = mainMap.findNodeByXYZinMap(n.xPos, n.yPos, n.zPos, n.map);
+                			        goalNode = mainMap.findNodeByXYZinMap(n.getX(), n.getY(), n.getZ(), n.getMap());
                 			    	destMenu.setText(mi1.getParentMenu().getText() + " " + mi1.getText());
                 			    	getDirectionsProperty.set(!getDirectionsProperty.get());
                 			        System.out.println("Goal Node Selected");
                 			    }
                 			});
-                			floors.getItems().add(mi1);
-                			floors2.getItems().add(mi2);
+                			addMenuItemsSorted(floors.getItems(), mi1);
+                			addMenuItemsSorted(floors2.getItems(), mi2);
         				}
         			}
         			building.getItems().add(floors);
@@ -652,6 +668,22 @@ public class MainController implements Initializable{
     		
     	}
     	
+    }
+    private void addMenuItemsSorted(List<MenuItem> menuItems, MenuItem m)
+    {
+    	for (int i = 0; i <= menuItems.size(); i++)
+    	{
+    		if (i >= menuItems.size())
+    		{
+    			menuItems.add(m);
+    			break;
+    		}
+    		else if (m.getText().compareToIgnoreCase(menuItems.get(i).getText()) < 0)
+    		{
+    			menuItems.add(i, m);
+    			break;
+    		}
+    	}
     }
 
 }

@@ -50,8 +50,7 @@ public class SidePanel {
 		final Label notificationSMS = new Label();
 		final HBox hbEmail = new HBox();
 		final HBox hbSMS = new HBox();
-		final String emailContent = String.join("<br>", directions);
-		final String txtContent = String.join("\r\n", directions);
+	
 		final List<HBox> hbList = new ArrayList<HBox>();
 		HBox hbItem;
 		Label label;
@@ -82,11 +81,8 @@ public class SidePanel {
 		
 
 for(String s: directions) {
-			System.out.println(s);
+			
 			if(s.toLowerCase().contains("go straight")) {
-				
-				System.out.println("Straight");
-
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
@@ -94,27 +90,11 @@ for(String s: directions) {
 			}
 			else if(s.toLowerCase().contains("right turn")) {
 				label = new Label(s);
-				System.out.println("Straight");
-				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
-				hbList.add(hbItem);
-			}
-			
-			else if(s.toLowerCase().contains("sharp right turn")) {
-				label = new Label(s);
-				System.out.println("Straight");
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 			else if(s.toLowerCase().contains("left turn")) {
-				label = new Label(s);
-				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
-				hbList.add(hbItem);
-			}
-			
-			else if(s.toLowerCase().contains("sharp left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
@@ -126,24 +106,28 @@ for(String s: directions) {
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
-			
-			
 			else if(s.toLowerCase().contains("slight left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
-			else if(s.toLowerCase().contains("proceed to destination")) {
+			else if(s.toLowerCase().contains("sharp right turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_sharp_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
-			else if (s.toLowerCase().contains("proceed into")){
-				System.out.println("In Procees");
+			else if(s.toLowerCase().contains("sharp left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_sharp_left.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("proceed into")) {
+				System.out.println("Yo Im in Here");
+ 				label = new Label(s);
+ 				label.getStyleClass().add("direction_label");
 				label.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override public void handle(MouseEvent e) {
 				    	System.out.println("Clicked Label");
@@ -151,9 +135,9 @@ for(String s: directions) {
 				    	s2 = s2.replace("Proceed into ", "");
 				    	stringProperty.set(s2);
 				    }});
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize,iconSize,true, true)), label);
-				hbList.add(hbItem);
-			}
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)), label);
+ 				hbList.add(hbItem);
+ 			}
 		}
 	
 		
@@ -161,25 +145,33 @@ for(String s: directions) {
 		dList.setStyle("-fx-background-color: #606060;");
 
 		send.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				String emailAddr = emailAddrInput.getText();
-				String smsNum = SMSNumInput.getText();
-				if (emailAddr != null && !emailAddr.isEmpty()){  
-					if (SendingEmail.generateAndSendEmail(emailAddr, emailContent, from, to))
-						notificationEmail.setText("Email has sent to " + emailAddr + "!");
-					else
-						notificationEmail.setText("Emailing failed!");
-				}
-				if (smsNum != null && !smsNum.isEmpty()){  
-					try {
-						if (SendingSMS.generateAndSendSMS(smsNum, txtContent, from, to))
-							notificationSMS.setText("SMS has sent to " + smsNum + "!");
-						else
-							notificationSMS.setText("Texting failed!");
+            @Override
+            public void handle(ActionEvent e) {
+                String emailAddr = emailAddrInput.getText();
+                String smsNum = SMSNumInput.getText();
+            	if (emailAddr != null && !emailAddr.isEmpty()){  
+            		if (SendingEmail.generateAndSendEmail(emailAddr, directions, from, to)) {
+            			emailAddrInput.clear();
+            			emailAddrInput.setPromptText("Emailed to " + emailAddr);
+            		}
+            		else {
+            			emailAddrInput.clear();
+            			emailAddrInput.setPromptText("Emailing Failed!");
+            		}
+            	}
+            	if (smsNum != null && !smsNum.isEmpty()){  
+            		try {
+						if (SendingSMS.generateAndSendSMS(smsNum, directions, from, to)) {
+							SMSNumInput.clear();
+							SMSNumInput.setPromptText("Texted to " + smsNum);
+						}
+						else {
+							SMSNumInput.clear();
+							SMSNumInput.setPromptText("Texting Failed!");
+						}
 					} catch (TwilioRestException e1) {}
-				}
-			}
+            	}
+            }
 		});
 
 //		grid.setVgap(13);
@@ -214,6 +206,7 @@ for(String s: directions) {
 				boxToControl.getChildren().clear();
 			}});
 		grid.add(closeBtn, 0, 15);
+		
 
 		//return grid;
 	}

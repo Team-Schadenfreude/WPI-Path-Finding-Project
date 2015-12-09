@@ -3,14 +3,14 @@ package DataAccess;
 import java.util.LinkedList;
 import java.util.List;
 public class Building {
-	String name;
-	String description = "";
-	String hours = "";
-	int angle = 0;
-	int x = 0;
-	int y = 0;
-	double scaleX = 0;
-	double scaleY = 0;
+	private String name;
+	private String description = "";
+	private String hours = "";
+	private int angle = 0;
+	private int x = 0;
+	private int y = 0;
+	private double scaleX = 0;
+	private double scaleY = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{

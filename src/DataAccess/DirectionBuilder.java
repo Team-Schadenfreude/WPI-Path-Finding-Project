@@ -35,13 +35,13 @@ public class DirectionBuilder {
 			{
 				Node n1 = path.get(i);
 				Node n2 = path.get(i+1);
-				if (n1.isTransitionNode && n2.isTransitionNode && !n1.map.equals(n2.map))
+				if (n1.isTransition() && n2.isTransition() && !n1.getMap().equals(n2.getMap()))
 				{
 					//String direction = "Procede into " + n2.map;
 					totalDistance += distance;
 					String direction = getStringFromDirectionValue(prevDirVal);
 					directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
-					directionsList.add("Proceed into " + n2.map);
+					directionsList.add("Proceed into " + n2.getMap());
 					distance = 0;
 					prevDirVal = 0;
 					prevAngle = 0;
@@ -75,8 +75,8 @@ public class DirectionBuilder {
 						prevDirVal = dirVal;
 					}
 					prevAngle = currentAngle;
-					double distance_x = (double)(n2.xPos - n1.xPos) * xScale;
-					double distance_y = (double)(n2.yPos - n1.yPos) * yScale;
+					double distance_x = (double)(n2.getX() - n1.getX()) * xScale;
+					double distance_y = (double)(n2.getY() - n1.getY()) * yScale;
 					distance = Math.sqrt((distance_x * distance_x) + (distance_y * distance_y));
 				}
 				
@@ -150,8 +150,8 @@ public class DirectionBuilder {
 	//Returns the angle between two nodes in degrees
 	private static int getAngle(Node n1, Node n2)
 	{
-		int dx = n2.xPos - n1.xPos;
-		int dy = n2.yPos - n1.yPos;
+		int dx = n2.getX() - n1.getX();
+		int dy = n2.getY() - n1.getY();
 		return (int) ((180 / Math.PI) * Math.atan2(dy,dx));
 	}
 
