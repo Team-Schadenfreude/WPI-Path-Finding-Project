@@ -57,7 +57,7 @@ CC-Front-Entrance-Above-Octo,96,471,0,CampusCenter2,The Campus Center entrance f
 node,346,388,0,CampusCenter2,Campus Center main staircase to the third floor.,true,Stairs
 node,383,388,0,CampusCenter2,Campus Center main staircase to the first floor.,true,Stairs
 node,227,471,0,CampusCenter2,,false,None
-node,265,680,0,CampusCenter2,,false,None
+CampusCenter Bookstore Entance,265,680,0,CampusCenter2,CampusCenter Bookstore Entance,true,Entrance
 node,297,611,0,CampusCenter2,,false,None
 node,297,567,0,CampusCenter2,,false,None
 node,297,567,0,CampusCenter2,,false,None
