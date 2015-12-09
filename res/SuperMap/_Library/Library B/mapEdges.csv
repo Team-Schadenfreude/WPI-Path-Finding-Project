@@ -131,9 +131,6 @@
 568,377,0,Library B,495,377,0,Library B
 420,355,0,Library B,420,377,0,Library B
 420,355,0,Library B,339,334,0,Library 1
-374,355,0,Library B,374,377,0,Library B
-374,355,0,Library B,382,334,0,Library 1
-374,355,0,Library B,371,331,0,LibrarySB
 420,377,0,Library B,495,377,0,Library B
 420,377,0,Library B,420,355,0,Library B
 420,377,0,Library B,374,377,0,Library B
@@ -143,3 +140,5 @@
 357,62,0,Library B,357,86,0,Library B
 357,62,0,Library B,400,62,0,Library B
 357,62,0,Library B,256,62,0,Library B
+374,355,0,Library B,374,377,0,Library B
+374,355,0,Library B,371,331,0,LibrarySB
