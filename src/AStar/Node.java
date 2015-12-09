@@ -177,18 +177,18 @@ public class Node{
     }
     public double distanceTo(Node node)
     {
-//    	if (this.type == Type.ELEVATOR &&  node.type == Type.ELEVATOR)
-//    	{
-//    		return 40;
-//    	}
-//    	else if (this.type == Type.STAIRS &&  node.type == Type.STAIRS)
-//    	{
-//    		return 20;
-//    	}
-    	if (this.isTransition() && node.isTransition())
+    	if (this.type == Type.ELEVATOR &&  node.type == Type.ELEVATOR)
     	{
-    		return 10000;
+    		return 4000;
     	}
+    	else if (this.type == Type.STAIRS &&  node.type == Type.STAIRS)
+    	{
+    		return 2000;
+    	}
+//    	if (this.isTransition() && node.isTransition())
+//    	{
+//    		return 10000;
+//    	}
     	if (!this.map.equals(node.map))
     	{
     		System.out.println("Here--------------------------------------------------------------");
