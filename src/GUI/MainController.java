@@ -262,6 +262,7 @@ public class MainController implements Initializable{
     	}
     }
     
+    
     void setUpGroupOnClick(Group buildGroup, double bAngle, double bScaleX, double x, double y)
     {
     	System.out.println("MainGroup has " + mainGroup.getChildren().size() + "  Buildings");

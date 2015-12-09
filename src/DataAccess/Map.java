@@ -108,4 +108,26 @@ public class Map {
 		}
 		return null;
 	}
+	 
+	public void print()
+	{
+		int i = 0;
+		for(Building b : this.getBuildings())
+		{
+			if(i == 3)
+			{
+				break;
+			}
+			System.out.println("The Building = -" + b.getName() + "----------------------" );
+			for (Floor f : b.getFloors())
+			{
+				System.out.println("The floor is " + f.getName() + "-----");
+				for (Node n : f.getNodes())
+				{
+					System.out.println("Node " + n);
+				}
+			}
+			i++;
+		}
+	}
 }

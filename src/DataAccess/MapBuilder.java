@@ -71,12 +71,6 @@ public class MapBuilder {
 					}
 				}
 
-
-
-
-
-
-
 				System.out.println("Added Building " + b.getName() + " Angle = " + b.getAngle());
 				map.addBuilding(b);
 			}
@@ -94,6 +88,7 @@ public class MapBuilder {
 				}
 			}
 		}
+		map.print();
 		return map;
 	}
 

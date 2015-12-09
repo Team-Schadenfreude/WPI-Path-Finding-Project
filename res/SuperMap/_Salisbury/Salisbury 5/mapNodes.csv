@@ -1,6 +1,6 @@
-node,872,1226,0,_Salisbury 5,,false,None
-node,872,1226,0,_Salisbury 5,STAIRS,true,Stairs
-node,864,1114,0,_Salisbury 5,,false,None
-node,693,1103,0,_Salisbury 5,,false,None
-node,503,1099,0,_Salisbury 5,,false,None
-MYSTERY ROOM,499,641,0,_Salisbury 5,,false,Room
+node,872,1226,0,Salisbury 5,,FALSE,None
+node,872,1226,0,Salisbury 5,STAIRS,TRUE,Stairs
+node,864,1114,0,Salisbury 5,,FALSE,None
+node,693,1103,0,Salisbury 5,,FALSE,None
+node,503,1099,0,Salisbury 5,,FALSE,None
+MYSTERY ROOM,499,641,0,Salisbury 5,,FALSE,Room
