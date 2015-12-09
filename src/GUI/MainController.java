@@ -617,7 +617,7 @@ public class MainController implements Initializable{
         			floors2.setText(f.getName());
         			for (Node n : f.getNodes())
         			{
-        				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
+        				if ((n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE) && !n.getName().equals("node"))
         				{
         					MenuItem mi1 = new MenuItem(n.getName());
             				MenuItem mi2 = new MenuItem(n.getName());
@@ -637,8 +637,8 @@ public class MainController implements Initializable{
                 			        System.out.println("Goal Node Selected");
                 			    }
                 			});
-                			floors.getItems().add(mi1);
-                			floors2.getItems().add(mi2);
+                			addMenuItemsSorted(floors.getItems(), mi1);
+                			addMenuItemsSorted(floors2.getItems(), mi2);
         				}
         			}
         			building.getItems().add(floors);
@@ -652,6 +652,22 @@ public class MainController implements Initializable{
     		
     	}
     	
+    }
+    private void addMenuItemsSorted(List<MenuItem> menuItems, MenuItem m)
+    {
+    	for (int i = 0; i <= menuItems.size(); i++)
+    	{
+    		if (i >= menuItems.size())
+    		{
+    			menuItems.add(m);
+    			break;
+    		}
+    		else if (m.getText().compareToIgnoreCase(menuItems.get(i).getText()) < 0)
+    		{
+    			menuItems.add(i, m);
+    			break;
+    		}
+    	}
     }
 
 }
