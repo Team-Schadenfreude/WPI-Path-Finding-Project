@@ -88,7 +88,7 @@ public class MapBuilder {
 				}
 			}
 		}
-		map.print();
+		//map.print();
 		return map;
 	}
 

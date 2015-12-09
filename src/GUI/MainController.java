@@ -253,10 +253,22 @@ public class MainController implements Initializable{
 					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
 					{
-						BuildingPopUp.setupPopUp(b);
-						setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
-						floorNum = 0;
-						updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						if (lastBuilding.equals(mainMap.getBaseMapName()))
+						{
+							BuildingPopUp.setupPopUp(b);
+							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							floorNum = 0;
+							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						}
+						else
+						{
+							Building b = mainMap.getBuildings().get(0);
+							Group buildGroup = (Group)mainGroup.getChildren().get(0);
+							BuildingPopUp.setupPopUp(b);
+							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							floorNum = 0;
+							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
+						}
 					}
 					
 				}});
