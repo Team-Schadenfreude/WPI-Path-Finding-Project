@@ -350,7 +350,7 @@ public class MainController implements Initializable{
     	floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	if (floorNum < g.getChildren().size())
+		    	if (floorNum < g.getChildren().size()-1)
 		    	{
 		    		floorNum++;
 		    	}
