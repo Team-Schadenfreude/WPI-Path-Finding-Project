@@ -97,7 +97,10 @@ public class MainController implements Initializable{
 						if (n.getId().equals(newValue))
     					{
 							double angle = ((Rotate) node.getTransforms().get(0)).getAngle();
+//							double x = (node.getBoundsInParent().getMaxX() - node.getBoundsInParent().getMinX()) / 2;
+//							double y = (node.getBoundsInParent().getMaxY() - node.getBoundsInParent().getMinY()) / 2;
     						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+    						updateFloor(n,((Group)node).getChildren(), newValue);
     						break;
     					}
             		}
@@ -231,6 +234,7 @@ public class MainController implements Initializable{
 					{
 						BuildingPopUp.setupPopUp(b);
 						setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+						updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
 					}
 					
 				}});
@@ -316,13 +320,17 @@ public class MainController implements Initializable{
     		MenuItem mi = new MenuItem(f.getId());
     		mi.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
-			    	setNodesVisible(g.getChildren(), false);
-			    	f.setVisible(true);
-			    	floorSelectionMenu.setText(mi.getText());
+			    	updateFloor(f, g.getChildren(), mi.getText());
 			    }
 			});
     		floorSelectionMenu.getItems().add(mi);
     	}
+    }
+    private void updateFloor(javafx.scene.Node floor, List<javafx.scene.Node> nodes, String text)
+    {
+    	setNodesVisible(nodes, false);
+    	floor.setVisible(true);
+    	floorSelectionMenu.setText(text);
     }
     private void setNodesVisible(List<javafx.scene.Node> nodes, boolean isVisible)
     {
@@ -460,7 +468,6 @@ public class MainController implements Initializable{
     		Canvas activeCanvas = findMapCanvas(path.get(0).map);
     		System.out.println(path.get(0).map);
         	clearAllCanvas();
-    		drawCircleOnNode(path.get(0).map,(int)activeCanvas.getWidth(), (int)activeCanvas.getHeight(), 100, Color.GREEN);
     		
         	boolean first = true;
         	Node prevNode = null;
