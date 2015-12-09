@@ -432,8 +432,8 @@ public class MainController implements Initializable{
     {
     	Button btn = new Button("");
 		btn.setId(node.nodeName);
-		btn.setTranslateX(node.xPos - btnRadius);
-		btn.setTranslateY(node.yPos - btnRadius);
+		btn.setTranslateX(node.xPos - btnRadius+5);
+		btn.setTranslateY(node.yPos - btnRadius+5);
 		//btn.setLayoutX(node.xPos);
 		//btn.setLayoutY(node.yPos);
 		double r = btnRadius;
@@ -543,7 +543,7 @@ public class MainController implements Initializable{
         				gc.setLineWidth(8);
         			}
         			gc.setStroke(Color.RED);
-        			gc.strokeLine(prevNode.xPos, prevNode.yPos, node.xPos, node.yPos);
+        			gc.strokeLine(prevNode.xPos+5, prevNode.yPos+5, node.xPos+5, node.yPos+5);
         		}
         		prevNode = node;
         	}
@@ -562,7 +562,7 @@ public class MainController implements Initializable{
     	Canvas activeCanvas = findMapCanvas(map);
     	GraphicsContext gc = activeCanvas.getGraphicsContext2D();
     	gc.setFill(p);
-    	gc.fillOval(xPos - (radius /2), yPos - (radius / 2), radius, radius);
+    	gc.fillOval(xPos - (radius /2)+5, yPos - (radius / 2)+5, radius, radius);
     }
     
     private void drawCircleOnNode(Node n, int radius, Paint p)
