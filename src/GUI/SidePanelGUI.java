@@ -21,7 +21,7 @@ public class SidePanelGUI extends Application {
         GridPane grid = new GridPane();
         List<String> directions = Arrays.asList("Go Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "Turn Left", "Turn Slightly Right", "Keep Straight", "Turn Slightly Left", "Turn Right", "Keep Straight", "You Have Arrived");
         
-        SidePanel.setUpSidePanel(grid, "FL", "AK", directions);
+        SidePanel.setUpSidePanel(grid, "Fountain", "FL145", directions);
 
         stage.setTitle("Side Panel Demo");
         Scene scene = new Scene(new Group(), grid.getPrefWidth(), grid.getPrefHeight());
