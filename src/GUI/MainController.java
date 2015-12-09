@@ -22,6 +22,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -132,6 +133,16 @@ public class MainController implements Initializable{
 
     }
     
+    private void setButtonsVisibleForGroup(Group floor, boolean isVisible)
+    {
+    	for (javafx.scene.Node n : floor.getChildren())
+    	{
+    		if(n instanceof Button)
+    		{
+    			n.setVisible(isVisible);
+    		}
+    	}
+    }
   //Function swaps the ending node with the starting node and triggers a new path to be created
     @FXML 
     protected void swapDirections(ActionEvent event) {
@@ -229,7 +240,7 @@ public class MainController implements Initializable{
 			buildGroup.setId(b.getName());
 			if (!buildGroup.getId().equals(mainMap.getBaseMapName()))
     		{
-    			buildGroup.setOpacity(0);;//0 _a
+    			buildGroup.setOpacity(0);//0 _a
     		}
 			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
@@ -280,7 +291,22 @@ public class MainController implements Initializable{
 			System.out.println(pivotX);
 			pivotY = y;
 			System.out.println(pivotY);
-			
+			System.out.println("YoYoYo");
+			File file =  new File("res/SuperMap/_Campus/Campus/map.png");
+			Group b = (Group)mainGroup.getChildren().get(0);
+			Group f = (Group) b.getChildren().get(0);
+			ImageView v = (ImageView) f.getChildren().get(0);
+			v.setImage(new Image(file.toURI().toString()));
+			setButtonsVisibleForGroup(f, true);
+		}
+		else
+		{
+			File file =  new File("res/SuperMap/_Campus/Campus/Campusempty.png");
+			Group b = (Group)mainGroup.getChildren().get(0);
+			Group f = (Group) b.getChildren().get(0);
+			ImageView v = (ImageView) f.getChildren().get(0);
+			v.setImage(new Image(file.toURI().toString()));
+			setButtonsVisibleForGroup(f, false);
 		}
 		System.out.println("Building Angle = " + bAngle);
 		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
