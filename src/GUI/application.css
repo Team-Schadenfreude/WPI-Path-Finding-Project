@@ -32,6 +32,9 @@
 }
 
 
+
+
+
 .context-menu {
     -fx-background-color: #606060;
 }
@@ -61,8 +64,7 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #606060;
+  -fx-background-color: #807777;
 }
 
 /* .button:focused {
