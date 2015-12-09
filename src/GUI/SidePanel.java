@@ -80,6 +80,18 @@ public class SidePanel {
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_slightly_left.png", 80, 80, true, true)), label);
 				hbList.add(hbItem);
 			}
+			else if(s.toLowerCase().contains("sharp right")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_sharp_right.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("sharp left")) {
+				label = new Label(s);
+				label.setStyle("-fx-font-size: 18px;");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_sharp_left.png", 80, 80, true, true)), label);
+				hbList.add(hbItem);
+			}
 			else if(s.toLowerCase().contains("arrive")) {
 				label = new Label(s);
 				label.setStyle("-fx-font-size: 18px;");
