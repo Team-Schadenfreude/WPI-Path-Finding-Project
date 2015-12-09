@@ -107,6 +107,13 @@ public class MainController implements Initializable{
 							if (!node.getId().equals(lastBuilding))
 							{
 	    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+	    						for(Building b : mainMap.getBuildings())
+	    						{
+	    							if (b.getName() == node.getId())
+	    							{
+	    								BuildingPopUp.setupPopUp(b);
+	    							}
+	    						}
 							}
     						floorNum = i;
     						updateFloor(n,((Group)node).getChildren(), newValue);
