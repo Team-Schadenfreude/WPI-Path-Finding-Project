@@ -15,6 +15,8 @@ public class MapBuilder {
 
 	private String mapPath;
 	String baseMap;
+	private List<Floor> sortedFloor = new LinkedList<Floor>();
+
 	public MapBuilder(String mapPath, String baseMap) {
 		this.mapPath = mapPath;
 		this.baseMap = baseMap;
@@ -31,54 +33,70 @@ public class MapBuilder {
 	{
 		Map map = new Map(baseMap, baseMap);
 		//File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
-    	File selectedDirectory = new File(mapPath);
-    	for (File dir : selectedDirectory.listFiles()) //Draw the super map
-    	{
-    		if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
-    		{
-    			Building b = new Building(dir.getName().substring(1));
-    			System.out.println("Reading " + b.getName());
-    			updateBuildingValuesFromFile(b, dir + "\\info.csv");
-    			for (File subDir : dir.listFiles())
-    			{
-    				if (subDir.isDirectory()) //The file is a directory and a floor plan
-    				{
-    					File file = new File(subDir + "\\map.svg");
-    					if (file.exists())
-    					{
-    						System.out.println("OpenedVector");
-    					}
-    					else
-    					{
-    						file = new File(subDir + "\\map.png");
-    					}
-    					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
-    					floor.setDirectoryPath(subDir.toURI().toString());
-    					System.out.println("Current Floor --" + floor.getName() + "-----------");
-    					floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
-    					b.addFloor(floor);
-    				}
-    			}
-    			System.out.println("Added Building " + b.getName() + " Angle = " + b.getAngle());
-    			map.addBuilding(b);
-    		}
-    	}
-    	for (File dir : selectedDirectory.listFiles()) //Draw the super map
-    	{
-    		if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
-    		{
-    			for (File subDir : dir.listFiles())
-    			{
-    				if (subDir.isDirectory()) //The file is a directory and a floor plan
-    				{
-    					connectEdgesFromFile(map, subDir + "\\mapEdges.csv");
-    				}
-    			}
-    		}
-    	}
+		File selectedDirectory = new File(mapPath);
+		for (File dir : selectedDirectory.listFiles()) //Draw the super map
+		{
+			if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
+			{
+				Building b = new Building(dir.getName().substring(1));
+				System.out.println("Reading " + b.getName());
+				updateBuildingValuesFromFile(b, dir + "\\info.csv");
+				for (File subDir : dir.listFiles())
+				{
+					if (subDir.isDirectory()) //The file is a directory and a floor plan
+					{
+						File file = new File(subDir + "\\map.svg");
+						if (file.exists())
+						{
+							System.out.println("OpenedVector");
+						}
+						else
+						{
+							file = new File(subDir + "\\map.png");
+						}
+						Floor floor = new Floor(file.toURI().toString(), subDir.getName());
+						floor.setDirectoryPath(subDir.toURI().toString());
+						System.out.println("Current Floor --" + floor.getName() + "-----------");
+						floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
+
+
+						if(floor.getName().charAt(floor.getName().length()-1)== 'B'){
+							b.getFloors().add(0,floor);
+						} else {
+							b.addFloor(floor);    	
+
+						}
+
+
+					}
+				}
+
+
+
+
+
+
+
+				System.out.println("Added Building " + b.getName() + " Angle = " + b.getAngle());
+				map.addBuilding(b);
+			}
+		}
+		for (File dir : selectedDirectory.listFiles()) //Draw the super map
+		{
+			if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
+			{
+				for (File subDir : dir.listFiles())
+				{
+					if (subDir.isDirectory()) //The file is a directory and a floor plan
+					{
+						connectEdgesFromFile(map, subDir + "\\mapEdges.csv");
+					}
+				}
+			}
+		}
 		return map;
 	}
-	
+
 	private Node.Type nodeTypeFromString(String type)
 	{
 		type = type.toUpperCase();
@@ -183,27 +201,27 @@ public class MapBuilder {
 
 				Node n1 = map.findNodeByXYZinMap(x1, y1, z1, nodeMap1);
 				Node n2 = map.findNodeByXYZinMap(x2, y2, z2, nodeMap2);
-//				if (n1 != null && n2 != null)
-//				{
-					if (n1.neighbors == null)
-					{
-						n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
-					}
-					else
-					{
-						n1.neighbors.add(n2);
-					}
+				//				if (n1 != null && n2 != null)
+				//				{
+				if (n1.neighbors == null)
+				{
+					n1.neighbors =  new LinkedList<>(Arrays.asList(n2));
+				}
+				else
+				{
+					n1.neighbors.add(n2);
+				}
 
-					if (n2.neighbors == null)
-					{
-						n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
-					}
-					else
-					{
-						n2.neighbors.add(n1);
-					}
+				if (n2.neighbors == null)
+				{
+					n2.neighbors =  new LinkedList<>(Arrays.asList(n1));
+				}
+				else
+				{
+					n2.neighbors.add(n1);
+				}
 				//}
-				
+
 				i++;
 			}
 
@@ -218,52 +236,64 @@ public class MapBuilder {
 			}
 		}
 	}
-	
-	 private void updateBuildingValuesFromFile(Building b, String path)
-	    {
-			BufferedReader br = null;
-			String line = "";
-			String delimiter = ",";
-			int imageXIndex = 0;
-			int imageYIndex = 1;
-			int imageAngleIndex = 2;
-			int imageScaleXIndex = 3;
-			int imageScaleYIndex = 4;
-			int hoursIndex = 5;
-			int descripIndex = 6;
-			
-			try {
 
-				br = new BufferedReader(new FileReader(path));
-				while ((line = br.readLine()) != null) {
+	private void updateBuildingValuesFromFile(Building b, String path)
+	{
+		BufferedReader br = null;
+		String line = "";
+		String delimiter = ",";
+		int imageXIndex = 0;
+		int imageYIndex = 1;
+		int imageAngleIndex = 2;
+		int imageScaleXIndex = 3;
+		int imageScaleYIndex = 4;
+		int hoursIndex = 5;
+		int descripIndex = 6;
 
-					// use comma as separator
-					String[] imageData = line.split(delimiter);
-					int x = Integer.parseInt(imageData[imageXIndex]);
-					int y = Integer.parseInt(imageData[imageYIndex]);
-					int angle = Integer.parseInt(imageData[imageAngleIndex]);
-					double scaleX = Double.parseDouble(imageData[imageScaleXIndex]);
-					double scaleY = Double.parseDouble(imageData[imageScaleYIndex]);
-					String hours = imageData[hoursIndex];
-					String description = imageData[descripIndex];
-					b.setX(x);
-					b.setY(y);
-					b.setAngle(angle);
-					b.setScaleX(scaleX);
-					b.setScaleY(scaleY);
-					b.setHours(hours);
-					b.setDescription(description);
-				}
+		try {
 
-			} 
-			catch (FileNotFoundException e) {e.printStackTrace();} 
-			catch (IOException e) {e.printStackTrace();} 
-			finally {
-				if (br != null) {
-					try {
-						br.close();
-					} catch (IOException e) {e.printStackTrace();}
-				}
+			br = new BufferedReader(new FileReader(path));
+			while ((line = br.readLine()) != null) {
+
+				// use comma as separator
+				String[] imageData = line.split(delimiter);
+				int x = Integer.parseInt(imageData[imageXIndex]);
+				int y = Integer.parseInt(imageData[imageYIndex]);
+				int angle = Integer.parseInt(imageData[imageAngleIndex]);
+				double scaleX = Double.parseDouble(imageData[imageScaleXIndex]);
+				double scaleY = Double.parseDouble(imageData[imageScaleYIndex]);
+				String hours = imageData[hoursIndex];
+				String description = imageData[descripIndex];
+				b.setX(x);
+				b.setY(y);
+				b.setAngle(angle);
+				b.setScaleX(scaleX);
+				b.setScaleY(scaleY);
+				b.setHours(hours);
+				b.setDescription(description);
 			}
-	    }
+
+		} 
+		catch (FileNotFoundException e) {e.printStackTrace();} 
+		catch (IOException e) {e.printStackTrace();} 
+		finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {e.printStackTrace();}
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 }
