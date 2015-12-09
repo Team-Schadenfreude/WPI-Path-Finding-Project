@@ -53,6 +53,7 @@ public class MapBuilder {
     						file = new File(subDir + "\\map.png");
     					}
     					Floor floor = new Floor(file.toURI().toString(), subDir.getName());
+    					floor.setDirectoryPath(subDir.toURI().toString());
     					System.out.println("Current Floor --" + floor.getName() + "-----------");
     					floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
     					b.addFloor(floor);

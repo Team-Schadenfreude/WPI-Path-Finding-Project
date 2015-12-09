@@ -53,7 +53,9 @@ public class MainController implements Initializable{
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
     @FXML private ScrollPane imageScrollPane;
-    @FXML private MenuButton floorSelectionMenu;
+//    @FXML private MenuButton floorSelectionMenu;
+    @FXML private Button floorUpBtn;
+    @FXML private Button floorDownBtn;
     @FXML private SplitPane primarySplitPane;
     @FXML private VBox controlVBox;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
@@ -70,6 +72,7 @@ public class MainController implements Initializable{
     //The start and end nodes for AStar
     Node startNode = null;
     Node goalNode = null;
+    int floorNum = 0;
     //Default constructor for the Main Controller
     public MainController(){
     	
@@ -80,7 +83,7 @@ public class MainController implements Initializable{
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
-    	floorSelectionMenu.getItems().clear();
+    	//floorSelectionMenu.getItems().clear();
     	primarySplitPane.setDividerPositions(1.0);
     	loadMap();
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
@@ -92,6 +95,7 @@ public class MainController implements Initializable{
             	System.out.println("String Changed to -" + newValue + "-");
             	for (javafx.scene.Node node : mainGroup.getChildren())
             	{
+            		int i = 0;
             		for (javafx.scene.Node n : ((Group) node).getChildren())
             		{
 						if (n.getId().equals(newValue))
@@ -100,9 +104,11 @@ public class MainController implements Initializable{
 //							double x = (node.getBoundsInParent().getMaxX() - node.getBoundsInParent().getMinX()) / 2;
 //							double y = (node.getBoundsInParent().getMaxY() - node.getBoundsInParent().getMinY()) / 2;
     						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
+    						floorNum = i;
     						updateFloor(n,((Group)node).getChildren(), newValue);
     						break;
     					}
+						i++;
             		}
             	}
             	//setUpGroupOnClick(Group buildGroup, Building b, int x, int y)
@@ -234,6 +240,7 @@ public class MainController implements Initializable{
 					{
 						BuildingPopUp.setupPopUp(b);
 						setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+						floorNum = 0;
 						updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
 					}
 					
@@ -273,6 +280,7 @@ public class MainController implements Initializable{
 			System.out.println(pivotX);
 			pivotY = y;
 			System.out.println(pivotY);
+			
 		}
 		System.out.println("Building Angle = " + bAngle);
 		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
@@ -296,7 +304,6 @@ public class MainController implements Initializable{
 		{
 			imageZoomPane.setZoomFactor(zoom * (.5 + bScaleX));
 		}
-		
 		lastBuilding = buildGroup.getId();
     }
     
@@ -314,23 +321,30 @@ public class MainController implements Initializable{
     }
     private void setupFloorSelection(Group g)
     {
-    	floorSelectionMenu.getItems().clear();
-    	for(javafx.scene.Node f : g.getChildren())
-    	{
-    		MenuItem mi = new MenuItem(f.getId());
-    		mi.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override public void handle(ActionEvent e) {
-			    	updateFloor(f, g.getChildren(), mi.getText());
-			    }
-			});
-    		floorSelectionMenu.getItems().add(mi);
-    	}
+    	floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+		    	if (floorNum < g.getChildren().size())
+		    	{
+		    		floorNum++;
+		    	}
+		    	updateFloor(g.getChildren().get(floorNum), g.getChildren(), g.getChildren().get(floorNum).getId());
+		    }});
+    	floorDownBtn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+		    	if (floorNum > 0)
+		    	{
+		    		floorNum--;
+		    	}
+		    	updateFloor(g.getChildren().get(floorNum), g.getChildren(), g.getChildren().get(floorNum).getId());
+		    }});
     }
     private void updateFloor(javafx.scene.Node floor, List<javafx.scene.Node> nodes, String text)
     {
     	setNodesVisible(nodes, false);
     	floor.setVisible(true);
-    	floorSelectionMenu.setText(text);
+    	//floorSelectionMenu.setText(text);
     }
     private void setNodesVisible(List<javafx.scene.Node> nodes, boolean isVisible)
     {

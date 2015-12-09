@@ -17,24 +17,28 @@
             <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" prefHeight="800.0" prefWidth="629.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <VBox fx:id="controlVBox" prefWidth="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <MenuButton fx:id="startMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Start">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
-                  <MenuButton fx:id="destMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Destination">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
-                  </MenuButton>
-                  <MenuButton fx:id="floorSelectionMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Active Floor">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
+                  <HBox>
+                     <children>
+                        <MenuButton fx:id="startMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="180.0" mnemonicParsing="false" text="Start">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </MenuButton>
+                        <Button fx:id="floorUpBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="+" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <MenuButton fx:id="destMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="180.0" mnemonicParsing="false" text="Destination">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Button fx:id="floorDownBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="222.0" text="-" />
+                     </children>
+                  </HBox>
                   <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#swapDirections" text="Swap" />
                </children>
             </VBox>
