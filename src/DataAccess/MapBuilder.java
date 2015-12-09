@@ -265,7 +265,7 @@ public class MapBuilder {
 				b.setY(y);
 				b.setAngle(angle);
 				b.setScaleX(scaleX);
-				b.setPxPerFt(1 / pxPerFt);
+				b.setPxPerFt(pxPerFt);
 				b.setHours(hours);
 				b.setDescription(description);
 			}

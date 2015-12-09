@@ -189,11 +189,20 @@ public class Node{
     	{
     		return 10000;
     	}
-    	double x1 = this.getX() * this.pxPerFt;
-    	double y1 = this.getY() * this.pxPerFt;
-    	double x2 = node.getX() * node.pxPerFt;
-    	double y2 = node.getY() * node.pxPerFt;
+    	if (!this.map.equals(node.map))
+    	{
+    		System.out.println("Here--------------------------------------------------------------");
+    		System.out.println(this.map);
+    		System.out.println(node.map);
+    		System.out.println("-------------------------------------------------------------------");
+    	}
+    	double x1 = ((double)this.getX()) * this.pxPerFt;
+    	double y1 = ((double)this.getY()) * this.pxPerFt;
+    	double x2 = ((double)node.getX()) * node.pxPerFt;
+    	double y2 = ((double)node.getY()) * node.pxPerFt;
     	double dx = x2 - x1;
+//    	dx = dx * this.pxPerFt;
+//    	dy = dy * this.
 		double dy = y2 - y1;
 		double distance = Math.sqrt(dx*dx + dy*dy);
 		return distance;
