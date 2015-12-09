@@ -119,19 +119,19 @@ public class MainController implements Initializable{
     	controlVBox.getChildren().add(SidePanel.getGridPane());
 	}
     
-    private void setupCloseBtn()
-    {
-    	Button closeBtn = new Button("Close");
-    	closeBtn.setMaxWidth(Double.MAX_VALUE);
-    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
-     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
- 		    @Override public void handle(ActionEvent e) {
- 		    	BuildingPopUp.getPopUp().getChildren().clear();
- 		    	SidePanel.getGridPane().getChildren().clear();
- 		    	}});
-     	controlVBox.getChildren().add(closeBtn);
-
-    }
+//    private void setupCloseBtn()
+//    {
+//    	Button closeBtn = new Button("Close");
+//    	closeBtn.setMaxWidth(Double.MAX_VALUE);
+//    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
+//     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+// 		    @Override public void handle(ActionEvent e) {
+// 		    	BuildingPopUp.getPopUp().getChildren().clear();
+// 		    	SidePanel.getGridPane().getChildren().clear();
+// 		    	}});
+//     	controlVBox.getChildren().add(closeBtn);
+//
+//    }
     
     private void setButtonsVisibleForGroup(Group floor, boolean isVisible)
     {

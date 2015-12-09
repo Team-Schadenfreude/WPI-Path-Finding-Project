@@ -198,6 +198,7 @@ for(String s: directions) {
 				boxToControl.getChildren().clear();
 			}});
 		grid.add(closeBtn, 0, 15);
+		
 
 		//return grid;
 	}

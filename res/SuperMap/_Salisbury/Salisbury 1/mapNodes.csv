@@ -1,0 +1,113 @@
+SL-133,166,527,0,_Salisbury 1,,false,Room
+node,166,576,0,_Salisbury 1,,false,None
+SL-135,73,576,0,_Salisbury 1,,false,Room
+node,120,576,0,_Salisbury 1,,false,None
+node,206,576,0,_Salisbury 1,,false,None
+node,256,576,0,_Salisbury 1,,false,None
+node,293,576,0,_Salisbury 1,,false,None
+node,296,695,0,_Salisbury 1,,false,None
+node,294,830,0,_Salisbury 1,,false,None
+node,264,830,0,_Salisbury 1,,false,None
+node,353,830,0,_Salisbury 1,,false,None
+node,330,830,0,_Salisbury 1,,false,None
+node,330,761,0,_Salisbury 1,MAIN STAIRCASE,true,Stairs
+node,315,860,0,_Salisbury 1,SOUTH ENTRANCE,true,Entrance
+node,389,576,0,_Salisbury 1,,false,None
+node,610,590,0,_Salisbury 1,,false,None
+node,457,576,0,_Salisbury 1,,false,None
+node,508,590,0,_Salisbury 1,,false,None
+node,355,519,0,_Salisbury 1,MAIN ELEVATOR,true,Elevator
+node,390,460,0,_Salisbury 1,,false,None
+node,355,460,0,_Salisbury 1,,false,None
+node,370,324,0,_Salisbury 1,,false,None
+node,438,275,0,_Salisbury 1,,false,None
+node,608,273,0,_Salisbury 1,,false,None
+node,333,275,0,_Salisbury 1,,false,None
+node,333,239,0,_Salisbury 1,MENS BATHROOM,false,BathroomM
+SL-102,355,222,0,_Salisbury 1,,false,Room
+node,355,239,0,_Salisbury 1,,false,None
+node,241,239,0,_Salisbury 1,WEST STAIR CASE,true,Stairs
+node,241,275,0,_Salisbury 1,WEST ENTRANCE,true,Entrance
+node,512,275,0,_Salisbury 1,,false,None
+SL-First Floor Lounge,512,339,0,_Salisbury 1,LOUNGE,false,Room
+node,439,431,0,_Salisbury 1,,false,None
+node,512,431,0,_Salisbury 1,,false,None
+node,578,275,0,_Salisbury 1,,false,None
+node,578,220,0,_Salisbury 1,,false,None
+SL-108,556,220,0,_Salisbury 1,,false,Room
+node,406,242,0,_Salisbury 1,,false,None
+node,406,275,0,_Salisbury 1,,false,None
+node,406,163,0,_Salisbury 1,,false,None
+node,406,132,0,_Salisbury 1,,false,None
+SL-124,329,132,0,_Salisbury 1,,false,Room
+node,528,129,0,_Salisbury 1,,false,None
+SL-129,528,104,0,_Salisbury 1,,false,Room
+node,556,129,0,_Salisbury 1,,false,None
+node,583,112,0,_Salisbury 1,,false,None
+node,617,112,0,_Salisbury 1,,false,None
+node,653,112,0,_Salisbury 1,,false,None
+node,653,5,0,_Salisbury 1,MAIN NORTH ENTRANCE,true,Entrance
+SL-121A,750,80,0,_Salisbury 1,,false,Room
+SL-121B,772,93,0,_Salisbury 1,,false,Room
+node,750,93,0,_Salisbury 1,,false,None
+node,703,93,0,_Salisbury 1,,false,None
+node,716,23,0,_Salisbury 1,,false,None
+node,653,23,0,_Salisbury 1,,false,None
+SL-121C,772,143,0,_Salisbury 1,,false,Room
+node,653,220,0,_Salisbury 1,,false,None
+node,653,273,0,_Salisbury 1,,false,None
+SL-120A,799,275,0,_Salisbury 1,,false,Room
+node,750,273,0,_Salisbury 1,,false,None
+node,750,306,0,_Salisbury 1,,false,None
+node,653,362,0,_Salisbury 1,EAST STAIRCASE,true,Stairs
+node,706,590,0,_Salisbury 1,,false,None
+node,751,590,0,_Salisbury 1,,false,None
+node,753,464,0,_Salisbury 1,,false,None
+node,692,622,0,_Salisbury 1,,false,None
+SL-106,692,680,0,_Salisbury 1,,false,Room
+node,692,669,0,_Salisbury 1,,false,None
+node,728,669,0,_Salisbury 1,,false,None
+node,728,756,0,_Salisbury 1,,false,None
+SL-109,765,756,0,_Salisbury 1,,false,Room
+SL-107,692,756,0,_Salisbury 1,,false,Room
+SL-108,728,811,0,_Salisbury 1,,false,Room
+node,778,605,0,_Salisbury 1,,false,None
+SL-118,957,609,0,_Salisbury 1,,false,Room
+node,911,609,0,_Salisbury 1,,false,None
+node,911,642,0,_Salisbury 1,,false,None
+node,989,642,0,_Salisbury 1,,false,None
+node,989,734,0,_Salisbury 1,,false,None
+node,989,779,0,_Salisbury 1,,false,None
+node,938,779,0,_Salisbury 1,,false,None
+node,1019,779,0,_Salisbury 1,,false,None
+SL-113,1009,732,0,_Salisbury 1,,false,Room
+node,837,725,0,_Salisbury 1,,false,None
+node,837,779,0,_Salisbury 1,,false,None
+node,837,698,0,_Salisbury 1,,false,None
+node,837,642,0,_Salisbury 1,,false,None
+node,457,590,0,_Salisbury 1,,false,None
+node,406,324,0,_Salisbury 1,,false,None
+SL-101,307,385,0,_Salisbury 1,,false,None
+node,406,431,0,_Salisbury 1,,false,None
+node,699,220,0,_Salisbury 1,,false,None
+node,750,220,0,_Salisbury 1,,false,None
+node,457,549,0,_Salisbury 1,MEN'S BATHROOM,false,BathroomM
+node,406,517,0,_Salisbury 1,,false,None
+node,406,460,0,_Salisbury 1,,false,None
+node,406,549,0,_Salisbury 1,,false,None
+node,355,549,0,_Salisbury 1,,false,None
+node,181,527,0,_Salisbury 1,,false,None
+node,181,511,0,_Salisbury 1,SOUTH WEST ENTRANCE BY VENDING MACHINE,true,Entrance
+node,181,576,0,_Salisbury 1,,false,None
+node,296,761,0,_Salisbury 1,,false,None
+SL-116,1043,511,0,_Salisbury 1,,false,Room
+SL-125,406,97,0,_Salisbury 1,,false,Room
+node,750,143,0,_Salisbury 1,,false,None
+SL-121,716,167,0,_Salisbury 1,,false,Room
+SL-115,784,424,0,_Salisbury 1,,false,Room
+SL-112,938,734,0,_Salisbury 1,,false,Room
+SL-134,121,594,0,_Salisbury 1,,false,Room
+node,209,616,0,_Salisbury 1,,false,None
+SL-104,178,744,0,_Salisbury 1,,false,Room
+node,389,633,0,_Salisbury 1,,false,None
+SL-105,479,755,0,_Salisbury 1,,false,Room
