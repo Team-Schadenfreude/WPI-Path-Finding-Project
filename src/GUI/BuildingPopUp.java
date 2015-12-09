@@ -20,31 +20,52 @@ public class BuildingPopUp {
 	public static void setupPopUp(Building b)
 	{
 		
+		System.out.println(b.getName());
 		String bName =b.getName();
 		ImageView image = new ImageView();
 		switch(bName){
 		
-//		case "AtwaterKent":
-//			Image image2 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-//			image.setImage(image2);
-//			break;
-//			
-//			
-//		case "FullerLabs":
-//			Image image3 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-//			image.setImage(image3);
-//			break;
-//			
-//		case "CampusCenter":
-//			Image image4 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-//			image.setImage(image4);
-//			break;
-//			
-//		case "BoyntonHall":
-//			Image image5 = new Image("res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-//			image.setImage(image5);
-//			break;
+		case "AtwaterKent":
+			Image image2 = new Image("/res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
+			image.setImage(image2);
+			break;
+			
+			
+		case "Fuller Labs":
+			Image image3 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
+			image.setImage(image3);
+			break;
+			
+		case "CampusCenter":
+			Image image4 = new Image("/res/BuildingImages/CampusCenter.jpg",210,200,true,true);
+			image.setImage(image4);
+			break;
+			
+		case "Boynton Hall":
+			Image image5 = new Image("/res/BuildingImages/BoyntonHall.jpg",210,200,true,true);
+			image.setImage(image5);
+			break;
+			
+		case "Salisbury":
+			Image image6 = new Image("/res/BuildingImages/SalisburyLabs.jpg",210,200,true,true);
+			image.setImage(image6);
+			break;
+			
+		case "Project Center":
+			Image image7 = new Image("/res/BuildingImages/ProjectCenter.jpg",210,200,true,true);
+			image.setImage(image7);
+			break;
+			
+		case "Library":
+			Image image8 = new Image("/res/BuildingImages/GordonLibrary.jpg",210,200,true,true);
+			image.setImage(image8);
+			break;
 
+			
+		case "Stratton":
+			Image image9 = new Image("/res/BuildingImages/Stratton.jpg",210,200,true,true);
+			image.setImage(image9);
+			break;
 		default:
 			System.out.println("default");
 		}
@@ -54,7 +75,7 @@ public class BuildingPopUp {
 		Label hours = new Label(b.getHours());
 		description.setWrapText(true);
 		vbox.getChildren().add(name);
-		vbox.getChildren().add(hours);
+	//	vbox.getChildren().add(hours);
 		//vbox.getChildren().add(description);
 		image.setFitWidth(vbox.getWidth());
 		vbox.getChildren().add(image);
