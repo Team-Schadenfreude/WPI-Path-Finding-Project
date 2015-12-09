@@ -56,7 +56,7 @@ public class SidePanel {
 		Label label;
 
 		send.setGraphic(new ImageView(new Image("/res/icons/send.png", 50, 50, true, true)));
-		send.setStyle("-fx-background-color: #DEDEDE;");
+		send.setStyle("-fx-background-color: #DEDEDE;"); // Background of Send Button
 
 
 		notificationEmail.setWrapText(true);
@@ -188,7 +188,7 @@ for(String s: directions) {
 		
 		grid.setVgap(14);
         grid.setHgap(5);
-        grid.setStyle("-fx-background-color: #606060;");
+        grid.setStyle("-fx-background-color: #415A69;"); // Direction Box Background Color
         grid.setPadding(new Insets(5, 5, 5, 5));
         label = new Label("YOUR DIRECTIONS: ");
         label.setTextFill(Color.web("#FFFFF0"));

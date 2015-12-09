@@ -65,13 +65,6 @@
   -fx-text-fill: #606060;
 }
 
-.image_display{
-	/*-fx-padding: 10;
-	-fx-background-color: firebrick;
-	-fx-border-color: #e2e2e2;
-    -fx-border-width: 2;*/
-}
-
 /* .button:focused {
     -fx-border-color: white, white;
     -fx-border-width: 1, 1;
@@ -101,7 +94,7 @@
     -fx-background-color: #606060;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-text-fill: #d8d8d8;
-    /*-fx-background-insets: 0 0 0 0, 0, 1, 2;*/
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .menu-button:hover {
@@ -130,6 +123,7 @@
 .menu-button:default {
     -fx-background-color: -fx-focus-color;
     -fx-text-fill: #ffffff;
+    
 }
 
 .menu-button:default:hover {
