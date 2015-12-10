@@ -61,7 +61,7 @@ public class Map {
 	}
 	public void addBuilding(Building building)
 	{
-		if (building.getName().equals(baseMap) && this.getBuildingCount() > 0)
+		if (building.getId().equals(baseMap) && this.getBuildingCount() > 0)
 		{
 			this.buildings.add(0,building);
 		}
@@ -118,10 +118,10 @@ public class Map {
 			{
 				break;
 			}
-			System.out.println("The Building = -" + b.getName() + "----------------------" );
+			System.out.println("The Building = -" + b.getId() + "----------------------" );
 			for (Floor f : b.getFloors())
 			{
-				System.out.println("The floor is " + f.getName() + "-----");
+				System.out.println("The floor is " + f.getId() + "-----");
 				for (Node n : f.getNodes())
 				{
 					System.out.println("Node " + n);

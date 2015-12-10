@@ -39,7 +39,7 @@ public class MapBuilder {
 			if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
 			{
 				Building b = new Building(dir.getName().substring(1));
-				System.out.println("Reading " + b.getName());
+				System.out.println("Reading " + b.getId());
 				updateBuildingValuesFromFile(b, dir + "\\info.csv");
 				for (File subDir : dir.listFiles())
 				{
@@ -56,11 +56,11 @@ public class MapBuilder {
 						}
 						Floor floor = new Floor(file.toURI().toString(), subDir.getName());
 						floor.setDirectoryPath(subDir.toURI().toString());
-						System.out.println("Current Floor --" + floor.getName() + "-----------");
+						System.out.println("Current Floor --" + floor.getId() + "-----------");
 						floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
 
 
-						if(floor.getName().charAt(floor.getName().length()-1)== 'B'){
+						if(floor.getId().charAt(floor.getId().length()-1)== 'B'){
 							b.getFloors().add(0,floor);
 						} else {
 							b.addFloor(floor);    	
@@ -71,7 +71,7 @@ public class MapBuilder {
 					}
 				}
 
-				System.out.println("Added Building " + b.getName() + " Angle = " + b.getAngle());
+				System.out.println("Added Building " + b.getId() + " Angle = " + b.getAngle());
 				map.addBuilding(b);
 			}
 		}
@@ -261,8 +261,8 @@ public class MapBuilder {
 				double pxPerFt = Double.parseDouble(imageData[imageScaleYIndex]);
 				String hours = imageData[hoursIndex];
 				String description = imageData[descripIndex];
-				b.setX(x);
-				b.setY(y);
+				b.setTranslateX(x);;
+				b.setTranslateY(y);;
 				b.setAngle(angle);
 				b.setScaleX(scaleX);
 				b.setPxPerFt(pxPerFt);

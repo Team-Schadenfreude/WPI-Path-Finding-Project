@@ -20,8 +20,8 @@ public class BuildingPopUp {
 	public static void setupPopUp(Building b)
 	{
 		
-		System.out.println(b.getName());
-		String bName =b.getName();
+		System.out.println(b.getId());
+		String bName =b.getId();
 		ImageView image = new ImageView();
 		switch(bName){
 		
@@ -87,7 +87,7 @@ public class BuildingPopUp {
 			System.out.println("default");
 		}
 		vbox.getChildren().clear();
-		Label name = new Label(b.getName());
+		Label name = new Label(b.getId());
 		Label description =  new Label(b.getDescription());
 		Label hours = new Label(b.getHours());
 		description.setWrapText(true);

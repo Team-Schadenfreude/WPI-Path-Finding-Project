@@ -109,7 +109,7 @@ public class MainController implements Initializable{
 	    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
 	    						for(Building b : mainMap.getBuildings())
 	    						{
-	    							if (b.getName() == node.getId())
+	    							if (b.getId()== node.getId())
 	    							{
 	    								BuildingPopUp.setupPopUp(b);
 	    							}
@@ -209,7 +209,7 @@ public class MainController implements Initializable{
     		if (firstRun)
 			{
 				mainGroup.getTransforms().add(new Rotate(b.getAngle()));
-				lastBuilding = b.getName();
+				lastBuilding = b.getId();
 				firstRun = false;
 			}
     		for (Floor f : b.getFloors())
@@ -236,7 +236,7 @@ public class MainController implements Initializable{
 //        				g.getChildren().add(btn);
 //    				}
 //    			}
-    			g.setId(f.getName());
+    			g.setId(f.getId());
     			g.setOnMouseClicked(new EventHandler<MouseEvent>() {
     				@Override
     				public void handle(MouseEvent event) {
@@ -248,9 +248,9 @@ public class MainController implements Initializable{
     		Rotate r = new Rotate(b.getAngle());
 			buildGroup.getTransforms().add(r);
 			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleX()));
-			buildGroup.setTranslateX(b.getX());
-			buildGroup.setTranslateY(b.getY());
-			buildGroup.setId(b.getName());
+			buildGroup.setTranslateX(b.getTranslateX());
+			buildGroup.setTranslateY(b.getTranslateY());
+			buildGroup.setId(b.getId());
 			if (!buildGroup.getId().equals(mainMap.getBaseMapName()))
     		{
     			buildGroup.setOpacity(0);//0 _a
@@ -636,14 +636,14 @@ public class MainController implements Initializable{
     		{
     			Menu building = new Menu();//Need to use two distinct objects otherwise conflicts occur
         		Menu building2 = new Menu();
-        		building.setText(b.getName());
-        		building2.setText(b.getName());
+        		building.setText(b.getId());
+        		building2.setText(b.getId());
     			for (Floor f : b.getFloors())
         		{
         			Menu floors = new Menu();
         			Menu floors2 = new Menu();
-        			floors.setText(f.getName());
-        			floors2.setText(f.getName());
+        			floors.setText(f.getId());
+        			floors2.setText(f.getId());
         			for (Node n : f.getNodes())
         			{
         				if ((n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE) && !n.getName().equals("node"))

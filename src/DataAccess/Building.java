@@ -4,19 +4,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
-public class Building {
-	private String name;
+import javafx.scene.Group;
+public class Building extends Group{
 	private String description = "";
 	private String hours = "";
 	private int angle = 0;
-	private int x = 0;
-	private int y = 0;
-	private double scaleX = 0;
 	private double pxPerFt = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{
-		this.name = name;
+		this.setId(name);
 	}
 	public void setDescription(String description)
 	{
@@ -46,18 +43,6 @@ public class Building {
 	{
 		this.angle = angle;
 	}
-	public void setX(int x)
-	{
-		this.x = x;
-	}
-	public void setY(int y)
-	{
-		this.y = y;
-	}
-	public void setScaleX(double scaleX)
-	{
-		this.scaleX = scaleX;
-	}
 	public void setPxPerFt(double pxPerFt)
 	{
 		this.pxPerFt = pxPerFt;
@@ -69,29 +54,9 @@ public class Building {
 			}
 		}
 	}
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	public String getName()
-	{
-		return this.name;
-	}
 	public int getAngle()
 	{
 		return this.angle;
-	}
-	public int getX()
-	{
-		return this.x;
-	}
-	public int getY()
-	{
-		return this.y;
-	}
-	public double getScaleX()
-	{
-		return this.scaleX;
 	}
 	public double getPxPerFt()
 	{
@@ -103,6 +68,6 @@ public class Building {
 	}
 
 	public String toString(){
-        return this.name + " : floors[ " + this.floors.toString() + " ] ";
+        return this.getId() + " : floors[ " + this.floors.toString() + " ] ";
 }
 }
