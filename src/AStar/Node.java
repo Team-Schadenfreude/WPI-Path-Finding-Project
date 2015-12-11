@@ -185,10 +185,6 @@ public class Node{
     	{
     		return 100;
     	}
-//    	else if (this.type == Type.ENTRANCE &&  node.type == Type.ENTRANCE)
-//    	{
-//    		return 0;
-//    	}
     	if (this.isTransition() && node.isTransition())
     	{
     		return 0;
