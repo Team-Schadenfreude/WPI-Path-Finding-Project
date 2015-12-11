@@ -179,16 +179,20 @@ public class Node{
     {
     	if (this.type == Type.ELEVATOR &&  node.type == Type.ELEVATOR)
     	{
-    		return 4000;
+    		return 200;
     	}
     	else if (this.type == Type.STAIRS &&  node.type == Type.STAIRS)
     	{
-    		return 2000;
+    		return 100;
     	}
-//    	if (this.isTransition() && node.isTransition())
+//    	else if (this.type == Type.ENTRANCE &&  node.type == Type.ENTRANCE)
 //    	{
-//    		return 10000;
+//    		return 0;
 //    	}
+    	if (this.isTransition() && node.isTransition())
+    	{
+    		return 0;
+    	}
     	if (!this.map.equals(node.map))
     	{
     		System.out.println("Here--------------------------------------------------------------");
