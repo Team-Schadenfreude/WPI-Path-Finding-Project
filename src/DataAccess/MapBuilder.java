@@ -109,6 +109,10 @@ public class MapBuilder {
 			return Node.Type.ENTRANCE;
 		case "ELEVATOR":
 			return Node.Type.ELEVATOR;
+		case "INTERSECTION":
+			return Node.Type.INTERSECTION;
+		case "ENDHALL":
+			return Node.Type.ENDHALL;
 		default:
 			return Node.Type.NONE;
 		}

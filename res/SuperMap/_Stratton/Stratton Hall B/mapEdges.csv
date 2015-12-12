@@ -4,7 +4,7 @@
 1036,213,0,Stratton Hall B,1036,146,0,Stratton Hall B
 881,213,0,Stratton Hall B,881,271,0,Stratton Hall B
 881,213,0,Stratton Hall B,1036,213,0,Stratton Hall B
-881,213,0,Stratton Hall B,881,185,0,Stratton Hall B
+881,213,0,Stratton Hall B,741,185,0,Stratton Hall B
 881,305,0,Stratton Hall B,881,271,0,Stratton Hall B
 881,305,0,Stratton Hall B,881,356,0,Stratton Hall B
 881,305,0,Stratton Hall B,951,305,0,Stratton Hall B
@@ -28,10 +28,8 @@
 836,356,0,Stratton Hall B,881,356,0,Stratton Hall B
 951,356,0,Stratton Hall B,881,356,0,Stratton Hall B
 1036,146,0,Stratton Hall B,1036,213,0,Stratton Hall B
-881,185,0,Stratton Hall B,881,213,0,Stratton Hall B
-881,185,0,Stratton Hall B,741,185,0,Stratton Hall B
-741,185,0,Stratton Hall B,881,185,0,Stratton Hall B
 741,185,0,Stratton Hall B,661,185,0,Stratton Hall B
+741,185,0,Stratton Hall B,881,213,0,Stratton Hall B
 661,185,0,Stratton Hall B,741,185,0,Stratton Hall B
 661,185,0,Stratton Hall B,661,144,0,Stratton Hall B
 661,185,0,Stratton Hall B,559,185,0,Stratton Hall B

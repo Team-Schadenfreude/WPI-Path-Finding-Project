@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
+import javafx.geometry.NodeOrientation;
 
 public class DirectionBuilder {
 
@@ -15,7 +16,9 @@ public class DirectionBuilder {
 	//Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path, double xScale, double yScale)
 	{
+		
 		List<String> directionsList = new LinkedList<String>();
+		
 		if(path.size() == 0)
 		{
 			directionsList.add("There is no path to follow");
@@ -31,12 +34,18 @@ public class DirectionBuilder {
 			int deltaAngle = 0;
 			boolean mapChange = false;
 			System.out.println(path);
-			for(int i = 0; i < path.size() -1 ; i++)
+						
+			for(int i = 0; i < path.size() -1 ; i++)				
 			{
 				Node n1 = path.get(i);
 				Node n2 = path.get(i+1);
+				
+				// Check node type.
+				// System.out.println(n1.getType());
+				
 				if (n1.isTransition() && n2.isTransition() && !n1.getMap().equals(n2.getMap()))
 				{
+					
 					//String direction = "Procede into " + n2.map;
 					totalDistance += distance;
 					String direction = getStringFromDirectionValue(prevDirVal);
@@ -52,21 +61,60 @@ public class DirectionBuilder {
 					mapChange = true;
 					
 				}
-				else
+				
+				else 
 				{
+					// Is the intersection found?
+					// System.out.println("INTERSECTION FOUND");
+					
+					// Finds angle between two nodes. 
 					currentAngle = getAngle(n1, n2);
+					
+					// Sets the difference between the angles.
 					deltaAngle = 0;
 					deltaAngle = currentAngle - prevAngle;
+					
+					// Translates the angles to degrees.
 					double delta_angle_rad = (Math.PI / 180) * (double) deltaAngle;
-					deltaAngle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));//Bind angle to range [-180,180]
+					
+					// Bind angle to range [-180,180]
+					deltaAngle = (int) ((180 / Math.PI) * Math.atan2(Math.sin(delta_angle_rad), Math.cos(delta_angle_rad)));
+					
+					// Direction from the deltaAngle
 					dirVal = getDirectionValueFromAngle(deltaAngle);
+					
+					// Reset variables if map changes.
 					if (i == 0 || mapChange)
 					{
 						deltaAngle = 0;
 						dirVal = 0;
 						mapChange = false;
 					}
-					if (dirVal != 0)
+					
+					// If direction exists then set the direction.
+					if (n1.getType() == Node.Type.INTERSECTION && n2.getType() == Node.Type.ROOM)
+					{
+						
+						totalDistance += distance;
+						String direction = getStringFromDirectionValue(prevDirVal);
+						System.out.println(direction);
+						directionsList.add("Take a " + direction);
+						directionsList.add("Go straight into " + n2.getName() + " after " + Integer.toString((int)distance) + " ft");
+
+					}
+					
+					// If direction exists then set the direction.
+					if (n1.getType() == Node.Type.ROOM && n2.getType() == Node.Type.INTERSECTION)
+					{
+						
+						totalDistance += distance;
+						String direction = getStringFromDirectionValue(prevDirVal);
+						directionsList.add("Go straight out of " + n1.getName() + " for " + Integer.toString((int)distance) + " ft");
+
+					}			
+					
+					// If direction exists then set the direction.
+					else if (dirVal != 0)
 					{
 						totalDistance += distance;
 						String direction = getStringFromDirectionValue(prevDirVal);
@@ -74,20 +122,27 @@ public class DirectionBuilder {
 						distance = 0;
 						prevDirVal = dirVal;
 					}
+					
+					
 					prevAngle = currentAngle;
 					distance = n1.distanceTo(n2);
+					
 				}
 				
 				
 			}
+			
+			// Setup final directions.
 			totalDistance += distance;
 			String direction = getStringFromDirectionValue(prevDirVal);
-			directionsList.add(direction + " " + Integer.toString((int)distance) + " ft");
-			directionsList.add("Proceed to Destination");
-			directionsList.add("Total Distance is " + Integer.toString((int)totalDistance) + "ft");
+			directionsList.add("You have reached your destination.");
+			directionsList.add("Total distance is " + Integer.toString((int)totalDistance) + "ft.");
 		}
+		
+		// Print final directions.
 		return directionsList;
 	}
+	
 	private static int getDirectionValueFromAngle(int angle)
 	{
 		if (-20 < angle && angle < 20)//Going Straight
@@ -123,28 +178,30 @@ public class DirectionBuilder {
 			return 0; //GoingStraight
 		}
 	}
+	
 	private static String getStringFromDirectionValue(int val)
 	{
 		switch(val)
 		{
 		case 0:
-			return "Go Straight";
+			return "Go straight";
 		case 1:
-			return "Slight right turn";
+			return "slight right turn";
 		case 2:
-			return "Right turn";
+			return "right turn";
 		case 3:
-			return "Sharp right turn";
+			return "sharp right turn";
 		case 4:
-			return "Slight left turn";
+			return "slight left turn";
 		case 5:
-			return "Left turn";
+			return "left turn";
 		case 6:
-			return "Sharp left turn";
+			return "sharp left turn";
 		default:
 			return ""; //GoingStraight
 		}
 	}
+	
 	//Returns the angle between two nodes in degrees
 	private static int getAngle(Node n1, Node n2)
 	{
