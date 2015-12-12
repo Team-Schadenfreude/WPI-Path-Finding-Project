@@ -105,14 +105,15 @@ public class DirectionBuilder {
 						// If first of the iteration.
 						if (i == 0) {
 							totalDistance += distance;
-							directionsList.add("Go " + dirVal + " out of " + n1.getName() + ".");
-							runningDistance = 0;
+							directionsList.add("Go " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
+							distance = 0;
 						}
 
 						// If direction is straight, record distance and
 						// continue.
 						else if (dirVal.equals("straight")) {
-							runningDistance += distance;
+							totalDistance += distance;
+							directionsList.add("Go " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
 							distance = 0;
 						}
 
@@ -121,9 +122,9 @@ public class DirectionBuilder {
 						// straight, and then the next direction.
 						else if (!prevDirVal.equals("straight")) {
 
-							directionsList.add("Go straight for " + runningDistance + " ft.");
-							directionsList.add("Then take a " + dirVal + "." + " (Room -> Inter)");
-							runningDistance = 0;
+							directionsList.add(
+									"Then take a " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
+							distance = 0;
 
 						}
 
@@ -131,12 +132,9 @@ public class DirectionBuilder {
 						// is straight, print the next direction.
 						else if (prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							directionsList
+									.add("Take a " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
 
-							directionsList.add("Take a " + dirVal + ".");
-
-							runningDistance = 0;
 						}
 
 					}
@@ -146,25 +144,23 @@ public class DirectionBuilder {
 
 						// If first iteration.
 						if (i == 0) {
+							totalDistance += distance;
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
-
-							directionsList.add(
-									"Go " + dirVal + " out of " + n1.getName() + " and into " + n2.getName() + ".");
-							runningDistance = 0;
+							directionsList.add("Go " + dirVal + " out of " + n1.getName() + " and into " + n2.getName()
+									+ ". (" + distance + " ft)");
+							distance = 0;
 						}
 
 						// If direction is straight, record distance and
 						// continue.
 						else if (dirVal.equals("straight")) {
-							runningDistance += distance;
-							totalDistance += runningDistance;
+
+							totalDistance += distance;
 
 							directionsList.add("Go straight from" + n1.getName() + " into " + n2.getName() + " ("
-									+ runningDistance + " ft).");
+									+ distance + " ft).");
 
-							runningDistance = 0;
+							distance = 0;
 						}
 
 						// If direction is not straight and previous direction
@@ -172,13 +168,12 @@ public class DirectionBuilder {
 						// straight, and then the next direction.
 						else if (!prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							totalDistance += distance;
 
-							directionsList.add("Go straight into " + n1.getName() + " (" + runningDistance + " ft).");
-							directionsList.add("Then take a " + dirVal + " into " + n2.getName() + ".");
+							directionsList.add("Then take a " + dirVal + " from " + n1.getName() + " into "
+									+ n2.getName() + ". (" + distance + " ft)");
 
-							runningDistance = 0;
+							distance = 0;
 
 						}
 
@@ -186,12 +181,12 @@ public class DirectionBuilder {
 						// is straight, print the next direction.
 						else if (prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							totalDistance += distance;
 
-							directionsList.add("Take a " + dirVal + " into " + n2.getName() + ".");
+							directionsList
+									.add("Take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
 
-							runningDistance = 0;
+							distance = 0;
 						}
 
 					}
@@ -202,7 +197,8 @@ public class DirectionBuilder {
 						// If direction is straight, record distance and
 						// continue.
 						if (dirVal.equals("straight")) {
-							runningDistance += distance;
+							totalDistance += distance;
+							directionsList.add("Go straight into " + n2.getName() + ". (" + distance + " ft)");
 							distance = 0;
 						}
 
@@ -211,13 +207,12 @@ public class DirectionBuilder {
 						// straight, and then the next direction.
 						else if (!prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							totalDistance += distance;
 
-							directionsList.add("Go straight for " + runningDistance + " ft.");
-							directionsList.add("Then take a " + dirVal + ".");
+							directionsList
+									.add("Then take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
 
-							runningDistance = 0;
+							distance = 0;
 
 						}
 
@@ -225,12 +220,12 @@ public class DirectionBuilder {
 						// is straight, print the next direction.
 						else if (prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							totalDistance += distance;
 
-							directionsList.add("Take a " + dirVal + ".");
+							directionsList
+									.add("Take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
 
-							runningDistance = 0;
+							distance = 0;
 						}
 
 					}
@@ -241,7 +236,8 @@ public class DirectionBuilder {
 						// If direction is straight, record distance and
 						// continue.
 						if (dirVal.equals("straight")) {
-							runningDistance += distance;
+							totalDistance += distance;
+							directionsList.add("Go straight for " + distance + " ft.");
 							distance = 0;
 						}
 
@@ -250,13 +246,7 @@ public class DirectionBuilder {
 						// straight, and then the next direction.
 						else if (!prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
-
-							directionsList.add("Go straight for " + runningDistance + " ft.");
-							directionsList.add("Then take a " + dirVal + ".");
-
-							runningDistance = 0;
+							directionsList.add("Then take a " + dirVal + ". (" + distance + " ft)");
 
 						}
 
@@ -264,12 +254,8 @@ public class DirectionBuilder {
 						// is straight, print the next direction.
 						else if (prevDirVal.equals("straight")) {
 
-							runningDistance += distance;
-							totalDistance += runningDistance;
+							directionsList.add("Take a " + dirVal + ". (" + distance + " ft)");
 
-							directionsList.add("Take a " + dirVal + ".");
-
-							runningDistance = 0;
 						}
 
 					}
