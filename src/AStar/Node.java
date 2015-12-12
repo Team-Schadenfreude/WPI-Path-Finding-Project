@@ -10,7 +10,6 @@ import java.util.List;
 //class for node. A node is a point on the grid that contains an x and y position
 public class Node{
 	public enum Type { ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE, NONE }; // an Enumeration to represent the different types of nodes
-	
 	private String nodeName; //every node has a name
     private Node parent; //node has a parent. the parent is where the current node came from
     private double gValue; //gValue is cost from current block

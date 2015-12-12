@@ -15,7 +15,6 @@ public class MapBuilder {
 
 	private String mapPath;
 	private String baseMap;
-	private List<Floor> sortedFloor = new LinkedList<Floor>();
 
 	public MapBuilder(String mapPath, String baseMap) {
 		this.mapPath = mapPath;
@@ -31,11 +30,12 @@ public class MapBuilder {
 	}
 	public Map buildMap()
 	{
-		Map map = new Map(baseMap, baseMap);
+		Map map = new Map(baseMap);
 		//File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
 		File selectedDirectory = new File(mapPath);
 		for (File dir : selectedDirectory.listFiles()) //Draw the super map
 		{
+			
 			if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
 			{
 				Building b = new Building(dir.getName().substring(1));
@@ -61,7 +61,7 @@ public class MapBuilder {
 
 
 						if(floor.getId().charAt(floor.getId().length()-1)== 'B'){
-							b.getFloors().add(0,floor);
+							b.addFloor(0, floor);;
 						} else {
 							b.addFloor(floor);    	
 
@@ -72,7 +72,16 @@ public class MapBuilder {
 				}
 
 				System.out.println("Added Building " + b.getId() + " Angle = " + b.getAngle());
-				map.addBuilding(b);
+				//System.out.println("FloorCount = " + b.getFloorsUnmodifiable().get);
+				System.out.println("The X = " + b.getFloorsUnmodifiable().get(0).getTranslate().getX());
+				if (b.getId().equals(map.getId()))
+				{
+					map.addBuilding(0,b);
+				}
+				else
+				{
+					map.addBuilding(b);
+				}
 			}
 		}
 		for (File dir : selectedDirectory.listFiles()) //Draw the super map
@@ -261,10 +270,10 @@ public class MapBuilder {
 				double pxPerFt = Double.parseDouble(imageData[imageScaleYIndex]);
 				String hours = imageData[hoursIndex];
 				String description = imageData[descripIndex];
-				b.setTranslateX(x);;
-				b.setTranslateY(y);;
-				b.setAngle(angle);
-				b.setScaleX(scaleX);
+				System.out.println("The Translation is x = " + x + "  Y = " + y);
+				b.setScale(scaleX, scaleX);
+				b.setRotateAngle(angle);
+				b.setTranslate(x, y);
 				b.setPxPerFt(pxPerFt);
 				b.setHours(hours);
 				b.setDescription(description);
@@ -282,16 +291,5 @@ public class MapBuilder {
 		}
 	}
 	
-	
-
-
-
-
-
-
-
-
-
-
 
 }

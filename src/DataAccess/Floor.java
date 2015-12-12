@@ -7,14 +7,16 @@ import AStar.Node;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-public class Floor extends Group{
+public class Floor extends MapComponent{
 
 	private Image mapImage;
 	private String dirPath = "";
 	private List<Node> nodes = new LinkedList<Node>();
 	
 	public Floor(String path, String name) {
+		super();
 		this.mapImage = new Image(path);
+		this.setBaseImage(mapImage);
 		this.setId(name);
 	}
 	public void setDirectoryPath(String path)
@@ -49,4 +51,5 @@ public class Floor extends Group{
 	{
 		return this.getId() + " : Rooms [ " + nodes.toString() + " ] ";
 	}
+
 }

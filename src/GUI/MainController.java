@@ -34,6 +34,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
 import javafx.stage.DirectoryChooser;
 import AStar.AStar;
 import AStar.Node;
@@ -43,7 +44,6 @@ import DataAccess.DirectionBuilder;
 import DataAccess.Floor;
 import DataAccess.Map;
 import DataAccess.MapBuilder;
-import GUI.ZoomingPane;
 
 public class MainController implements Initializable{
 	//FXML Layout Objects
@@ -57,16 +57,16 @@ public class MainController implements Initializable{
 //    @FXML private MenuButton floorSelectionMenu;
     @FXML private Button floorUpBtn;
     @FXML private Button floorDownBtn;
-    @FXML private SplitPane primarySplitPane;
     @FXML private VBox controlVBox;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
-	public static Map mainMap = new Map();
-    private Group mainGroup = new Group();
+	public static Map mainMap;
+    //private Group mainGroup = new Group();
     private String lastBuilding;
     //Scale s = new Scale(2,2);
-    private ZoomingPane imageZoomPane;
+    //private ZoomingPane imageZoomPane;
+    private AnchorPane zoomPane;
     //The list of all buildings on Campus
     //Boolean marking a node as selected
     private boolean nodeSelect = false;
@@ -85,7 +85,6 @@ public class MainController implements Initializable{
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
     	//floorSelectionMenu.getItems().clear();
-    	primarySplitPane.setDividerPositions(1.0);
     	loadMap();
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -94,31 +93,24 @@ public class MainController implements Initializable{
     	nextDirectionProperty.addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	System.out.println("String Changed to -" + newValue + "-");
-            	for (javafx.scene.Node node : mainGroup.getChildren())
+            	for (Building b : mainMap.getBuildingsUnmodifiable())
             	{
             		int i = 0;
-            		for (javafx.scene.Node n : ((Group) node).getChildren())
+            		for (Floor f : b.getFloorsUnmodifiable())
             		{
-						if (n.getId().equals(newValue))
+						if (f.getId().equals(newValue))
     					{
-							double angle = ((Rotate) node.getTransforms().get(0)).getAngle();
+							double angle = b.getRotation().getAngle();
 //							double x = (node.getBoundsInParent().getMaxX() - node.getBoundsInParent().getMinX()) / 2;
 //							double y = (node.getBoundsInParent().getMaxY() - node.getBoundsInParent().getMinY()) / 2;
-							if (!node.getId().equals(lastBuilding))
+							if (!b.getId().equals(lastBuilding))
 							{
-	    						setUpGroupOnClick((Group)node, angle, ((Scale)node.getTransforms().get(1)).getX(), 0, 0);
-	    						for(Building b : mainMap.getBuildings())
-	    						{
-	    							if (b.getId()== node.getId())
-	    							{
-	    								BuildingPopUp.setupPopUp(b);
-	    							}
-	    						}
-	    						
+	    						setUpGroupOnClick(b,0, 0);
+	    						BuildingPopUp.setupPopUp(b);
 							}
     						floorNum = i;
-    						updateFloor(n,((Group)node).getChildren(), newValue);
-    						lastBuilding = node.getId();
+    						updateFloor(f, b.getFloorsUnmodifiable());
+    						lastBuilding = b.getId();
     						break;
     					}
 						
@@ -132,30 +124,6 @@ public class MainController implements Initializable{
     	controlVBox.getChildren().add(SidePanel.getGridPane());
 	}
     
-//    private void setupCloseBtn()
-//    {
-//    	Button closeBtn = new Button("Close");
-//    	closeBtn.setMaxWidth(Double.MAX_VALUE);
-//    	closeBtn.setPrefWidth(Button.USE_COMPUTED_SIZE);
-//     	closeBtn.setOnAction(new EventHandler<ActionEvent>() {
-// 		    @Override public void handle(ActionEvent e) {
-// 		    	BuildingPopUp.getPopUp().getChildren().clear();
-// 		    	SidePanel.getGridPane().getChildren().clear();
-// 		    	}});
-//     	controlVBox.getChildren().add(closeBtn);
-//
-//    }
-    
-    private void setButtonsVisibleForGroup(Group floor, boolean isVisible)
-    {
-    	for (javafx.scene.Node n : floor.getChildren())
-    	{
-    		if(n instanceof Button)
-    		{
-    			n.setVisible(isVisible);
-    		}
-    	}
-    }
   //Function swaps the ending node with the starting node and triggers a new path to be created
     @FXML 
     protected void swapDirections(ActionEvent event) {
@@ -188,178 +156,123 @@ public class MainController implements Initializable{
     private void loadMap() {
     	MapBuilder mapBuilder = new MapBuilder("res/SuperMap", "Campus");
     	mainMap = mapBuilder.buildMap();
-    	drawMap(mainMap.getBuildings());
-    	imageZoomPane = new ZoomingPane(mainGroup);
-    	imageScrollPane.setContent(imageZoomPane);
+    	drawMap(mainMap);
+    	//imageZoomPane = new ZoomingPane(mainMap);
+    	imageScrollPane.setContent(mainMap);
     	setupDropDowns();
-    	imageZoomPane.setZoomFactor(.8);
+    	//imageZoomPane.setZoomFactor(.8);
     }
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, Map map)
 	{
 		AStar astar = new AStar(defaultSettings);;
-		return astar.findPath(startNode, endNode, map.toNodeList());
+		return astar.findPath(startNode, endNode, map.toNodeListUnmodifiable());
 	}
-    public void drawMap(List<Building> buildings)
+    public void drawMap(Map map)
     {
     	boolean firstRun = true;
-    	for (Building b : buildings)
+    	for (Building b : map.getBuildingsUnmodifiable())
     	{
-    		Group buildGroup = new Group();
     		if (firstRun)
 			{
-				mainGroup.getTransforms().add(new Rotate(b.getAngle()));
-				lastBuilding = b.getId();
+
+    			mainMap.setScale(b.getScale().getX(), b.getScale().getY());
+    			mainMap.setRotateAngle(b.getAngle());
+    			mainMap.setTranslate(b.getTranslate().getX(), b.getTranslate().getY());
+    			lastBuilding = b.getId();
 				firstRun = false;
 			}
-    		for (Floor f : b.getFloors())
-    		{
-    			Group g = new Group();
-    			Canvas c = new Canvas(f.getImage().getWidth(), f.getImage().getHeight());
-    			ImageView im = new ImageView(f.getImage());
-    			g.getChildren().add(im);
-    			g.getChildren().add(c);
-    			//Add buttons to nodes
-//    			for (Node n : f.getNodes())
-//    			{
-//    				if (n.getType() == Node.Type.ROOM || n.getType() == Node.Type.ENTRANCE)
-//    				{
-//    					Button btn;
-//    					if(n.getMap().equals(mainMap.getBaseMapName()))
-//    					{
-//    						btn = getButtonForNode(n, 10);
-//    					}
-//    					else
-//    					{
-//    						btn = getButtonForNode(n, 10);
-//    					}
-//        				g.getChildren().add(btn);
-//    				}
-//    			}
-    			g.setId(f.getId());
-    			g.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    				@Override
-    				public void handle(MouseEvent event) {
-    					System.out.println("GroupClicked");
-    				}});
-    			System.out.println("-" + g.getId() + "-");
-    			buildGroup.getChildren().add(g);
-    		}
-    		Rotate r = new Rotate(b.getAngle());
-			buildGroup.getTransforms().add(r);
-			buildGroup.getTransforms().add(new Scale(b.getScaleX(), b.getScaleX()));
-			buildGroup.setTranslateX(b.getTranslateX());
-			buildGroup.setTranslateY(b.getTranslateY());
-			buildGroup.setId(b.getId());
-			if (!buildGroup.getId().equals(mainMap.getBaseMapName()))
-    		{
-    			buildGroup.setOpacity(0);//0 _a
-    		}
-			buildGroup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//			if (!b.getId().equals(map.getId()))
+//    		{
+//    			b.setOpacity(0);//0 _a
+//    		}
+			b.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
-					System.out.println("BuildGroup");
+					System.out.println("Building Clicked -" + b.getId() + "-" + " Angle is = " + b.getAngle());
 					//mainGroup.setRotate(- image.getAngle());
-					if (event.isStillSincePress() && !buildGroup.getId().equals(lastBuilding))
+					if (event.isStillSincePress() && !b.getId().equals(lastBuilding)) //If this is not the last building pressed
 					{
-						if (lastBuilding.equals(mainMap.getBaseMapName()))
+						if (lastBuilding.equals(mainMap.getId())) //if the last building was the campus
 						{
 							BuildingPopUp.setupPopUp(b);
-							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							setUpGroupOnClick(b,event.getX(), event.getY());
 							floorNum = 0;
-							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
-							lastBuilding = buildGroup.getId();
+							updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+							lastBuilding = b.getId();
 						}
 						else
 						{
-							Building b = mainMap.getBuildings().get(0);
-							Group buildGroup = (Group)mainGroup.getChildren().get(0);
+							Building b = mainMap.getBuildingsUnmodifiable().get(0);
 							BuildingPopUp.setupPopUp(b);
-							setUpGroupOnClick(buildGroup, b.getAngle(),b.getScaleX(), event.getX(), event.getY());
+							setUpGroupOnClick(b, event.getX(), event.getY());
 							floorNum = 0;
-							updateFloor(buildGroup.getChildren().get(0), buildGroup.getChildren(), buildGroup.getChildren().get(0).getId());
-							lastBuilding = buildGroup.getId();
+							updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+							lastBuilding = b.getId();
 						}
 					}
 					
 				}});
-			
-			mainGroup.getChildren().add(buildGroup);
-			
     	}
     }
     
     
-    void setUpGroupOnClick(Group buildGroup, double bAngle, double bScaleX, double x, double y)
+    void setUpGroupOnClick(Building building, double x, double y)
     {
-    	System.out.println("MainGroup has " + mainGroup.getChildren().size() + "  Buildings");
-		for (javafx.scene.Node n : mainGroup.getChildren())
+		for (Building b : mainMap.getBuildingsUnmodifiable())
 		{
-			if (!n.getId().equals(mainMap.getBaseMapName()))
+			if (!b.getId().equals(mainMap.getId()))
 			{
-				n.setOpacity(0);//0 _b
+				b.setOpacity(0);//0 _b
 			}
 			//n.setPickOnBounds(true);
 		}
-		buildGroup.setOpacity(1);
+		building.setOpacity(1);
 		//buildGroup.setPickOnBounds(false);
-		imageZoomPane.setMinSize(mainGroup.getBoundsInParent().getWidth(), mainGroup.getBoundsInParent().getHeight());
-		setupFloorSelection(buildGroup);
-		centerNodeInScrollPane(imageScrollPane, buildGroup);
-		double minX = buildGroup.getBoundsInParent().getMinX();
-		double maxX = buildGroup.getBoundsInParent().getMaxX();
-		double minY = buildGroup.getBoundsInParent().getMinY();
-		double maxY = buildGroup.getBoundsInParent().getMaxY();
+		//imageZoomPane.setMinSize(mainMap.getBoundsInParent().getWidth(), mainMap.getBoundsInParent().getHeight());
+		setupFloorSelection(building);
+		centerNodeInScrollPane(imageScrollPane, building);
+		double minX = building.getBoundsInParent().getMinX();
+		double maxX = building.getBoundsInParent().getMaxX();
+		double minY = building.getBoundsInParent().getMinY();
+		double maxY = building.getBoundsInParent().getMaxY();
 		double pivotX = (minX + maxX)/2;
 		double pivotY = (minY + maxY)/2;
-		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
+		if (building.getId().equals(mainMap.getId()))
 		{
 			System.out.println("Pivot");
 			pivotX = x;
-			System.out.println(pivotX);
+			//System.out.println(pivotX);
 			pivotY = y;
-			System.out.println(pivotY);
-			System.out.println("YoYoYo");
+			//System.out.println(pivotY);
 			File file =  new File("res/SuperMap/_Campus/Campus/map.png");
-			Group b = (Group)mainGroup.getChildren().get(0);
-			Group f = (Group) b.getChildren().get(0);
-			ImageView v = (ImageView) f.getChildren().get(0);
-			v.setImage(new Image(file.toURI().toString()));
-			setButtonsVisibleForGroup(f, true);
+			Building b = mainMap.getBuildingsUnmodifiable().get(0);
+			Floor f = b.getFloorsUnmodifiable().get(0);
+			f.setBaseImage(new Image(file.toURI().toString()));
 			b.setOpacity(1);
 		}
 		else
 		{
 			File file =  new File("res/SuperMap/_Campus/Campus/Campusempty.png");
-			Group b = (Group)mainGroup.getChildren().get(0);
-			Group f = (Group) b.getChildren().get(0);
-			ImageView v = (ImageView) f.getChildren().get(0);
-			v.setImage(new Image(file.toURI().toString()));
-			setButtonsVisibleForGroup(f, false);
+			Building b = mainMap.getBuildingsUnmodifiable().get(0);
+			Floor f = b.getFloorsUnmodifiable().get(0);
+			f.setBaseImage(new Image(file.toURI().toString()));
 			b.setOpacity(0);
 			
 		}
-		System.out.println("Building Angle = " + bAngle);
-		((Rotate) mainGroup.getTransforms().get(0)).setPivotX(pivotX);
-		((Rotate) mainGroup.getTransforms().get(0)).setPivotY(pivotY);
-		((Rotate) mainGroup.getTransforms().get(0)).setAngle(- bAngle);
-		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
+		System.out.println("Building Angle = " + building.getAngle());
+		mainMap.getRotation().setPivotX(pivotX);
+		mainMap.getRotation().setPivotY(pivotY);
+		mainMap.setRotateAngle(- building.getAngle());
+
+		double zoom = imageScrollPane.getWidth() / building.getBoundsInParent().getWidth();
+		if (building.getId().equals(mainMap.getId()))
 		{
-			Point2D pt = ((Rotate) mainGroup.getTransforms().get(0)).transform(pivotX, pivotY);
-			imageZoomPane.setPivot(pt.getX(), pt.getY());
+			mainMap.setZoom(1,pivotX,pivotY);
 		}
 		else
 		{
-			imageZoomPane.setPivot(pivotX, pivotY);
-		}
-		double zoom = imageScrollPane.getWidth() / buildGroup.getBoundsInParent().getWidth();
-		if (buildGroup.getId().equals(mainMap.getBaseMapName()))
-		{
-			imageZoomPane.setZoomFactor(.8);
-		}
-		else
-		{
-			imageZoomPane.setZoomFactor(zoom * (.5 + bScaleX));
+			mainMap.setZoom(zoom * (.5 + building.getScale().getX()),pivotX,pivotY);
 		}
     }
     
@@ -375,16 +288,16 @@ public class MainController implements Initializable{
         double hor = scrollPane.getViewportBounds().getWidth();
         scrollPane.setHvalue(scrollPane.getHmax() * ((x - 0.5 * hor) / (w - hor)));
     }
-    private void setupFloorSelection(Group g)
+    private void setupFloorSelection(Building b)
     {
     	floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	if (floorNum < g.getChildren().size()-1)
+		    	if (floorNum < b.getFloorsUnmodifiable().size() - 1)
 		    	{
 		    		floorNum++;
 		    	}
-		    	updateFloor(g.getChildren().get(floorNum), g.getChildren(), g.getChildren().get(floorNum).getId());
+		    	updateFloor(b.getFloorsUnmodifiable().get(floorNum), b.getFloorsUnmodifiable());
 		    }});
     	floorDownBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
@@ -393,18 +306,18 @@ public class MainController implements Initializable{
 		    	{
 		    		floorNum--;
 		    	}
-		    	updateFloor(g.getChildren().get(floorNum), g.getChildren(), g.getChildren().get(floorNum).getId());
+		    	updateFloor(b.getFloorsUnmodifiable().get(floorNum), b.getFloorsUnmodifiable());
 		    }});
     }
-    private void updateFloor(javafx.scene.Node floor, List<javafx.scene.Node> nodes, String text)
+    private void updateFloor(Floor floor, List<Floor> floors)
     {
-    	setNodesVisible(nodes, false);
+    	setNodesVisible(floors, false);
     	floor.setVisible(true);
     	//floorSelectionMenu.setText(text);
     }
-    private void setNodesVisible(List<javafx.scene.Node> nodes, boolean isVisible)
+    private void setNodesVisible(List<Floor> floors, boolean isVisible)
     {
-    	for (javafx.scene.Node n : nodes)
+    	for (Floor n : floors)
     	{
     		n.setVisible(isVisible);
     	}
@@ -412,7 +325,7 @@ public class MainController implements Initializable{
   //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
-    	imageZoomPane.setZoomFactor(.8);
+    	//imageZoomPane.setZoomFactor(.8);
 //    	double value = imageZoomPane.getZoomFactor() + 1;
 //    	if (value > 8)
 //    	{
@@ -424,12 +337,12 @@ public class MainController implements Initializable{
     //Action handler for the zooming out of the map
     @FXML 
     protected void handleZoomOut(ActionEvent event) {
-    	double value = imageZoomPane.getZoomFactor() - 1;
-    	if (value < 1)
-    	{
-    		value = 1;
-    	}
-    	imageZoomPane.setZoomFactor(value);
+    	//double value = imageZoomPane.getZoomFactor() - 1;
+//    	if (value < 1)
+//    	{
+//    		value = 1;
+//    	}
+    	//imageZoomPane.setZoomFactor(value);
     }
     
     private void runAStar() {
@@ -490,44 +403,6 @@ public class MainController implements Initializable{
 		});
 		return btn;
     }
-    //Function to generate buttons at each accessible node on the map
-    @Deprecated
-    protected void drawNodeBtns(double scaleX, double scaleY, double btnRadius, List<Node> nodeList)
-    {
-    	for(Node node : nodeList)
-    	{
-    		if (node.getMap() == mainMap.getBaseMapName())
-    		{
-    			Button btn = new Button("");
-    			btn.setId(node.getName());
-    			btn.setLayoutX(node.getX() * scaleX - 10);
-    			btn.setLayoutY(node.getY() * scaleY - 10);
-    			double r = btnRadius * scaleX;
-    			btn.setShape(new Circle(r));
-    			btn.setMinSize(2*r, 2*r);
-    			btn.setMaxSize(2*r, 2*r);
-    			btn.setOnAction(new EventHandler<ActionEvent>() {
-    			    @Override
-    			    public void handle(ActionEvent e) {
-    			    	System.out.println("You Clicked Node " + btn.getId());
-    			    	if (nodeSelect == false)
-    			    	{
-    			    		startNode = mainMap.findNodeByName(btn.getId());
-    			    		nodeSelect = true;
-    			    	
-    			    	}
-    			    	else
-    			    	{
-    			    		goalNode = mainMap.findNodeByName(btn.getId());
-    			    		nodeSelect = false;
-    			    	}
-    			    }
-    			});
-    			anchorPane.getChildren().add(btn);
-    		}
-			
-    	}
-    }
     
     //Function to draw the Path from Node to Node
     protected void drawPath(List<Node> path)
@@ -564,7 +439,7 @@ public class MainController implements Initializable{
         		else
         		{
         			GraphicsContext gc = activeCanvas.getGraphicsContext2D();
-        			if (node.getMap().equals(mainMap.getBaseMapName()))
+        			if (node.getMap().equals(mainMap.getId()))
         			{
         				gc.setLineWidth(4);
         			}
@@ -601,11 +476,11 @@ public class MainController implements Initializable{
     
     private void clearAllCanvas()
     {
-    	for (javafx.scene.Node g : mainGroup.getChildren())
+    	for (Building b : mainMap.getBuildingsUnmodifiable())
     	{
-    		for (javafx.scene.Node subG : ((Group)g).getChildren())
+    		for (Floor f : b.getFloorsUnmodifiable())
     		{
-				Canvas c = ((Canvas) ((Group) subG).getChildren().get(1));
+				Canvas c = f.getCanvas();
     			GraphicsContext gc = c.getGraphicsContext2D();
     			gc.clearRect(0, 0, c.getWidth(), c.getHeight());
     		}
@@ -613,13 +488,13 @@ public class MainController implements Initializable{
     }
     private Canvas findMapCanvas(String map)
     {
-    	for (javafx.scene.Node g : mainGroup.getChildren())
+    	for (Building b : mainMap.getBuildingsUnmodifiable())
     	{
-    		for (javafx.scene.Node subG : ((Group)g).getChildren())
+    		for (Floor f : b.getFloorsUnmodifiable())
     		{
-    			if(subG.getId().equals(map))
+    			if(f.getId().equals(map))
         		{
-        			return (Canvas) ((Group) subG).getChildren().get(1);
+        			return f.getCanvas();
         		}
     		}
        	}
@@ -630,15 +505,15 @@ public class MainController implements Initializable{
     {
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
-    	for (Building b : mainMap.getBuildings())
+    	for (Building b : mainMap.getBuildingsUnmodifiable())
     	{
-    		if (b.getFloors() != null) //This needs to be here
+    		if (b.getFloorsUnmodifiable() != null) //This needs to be here
     		{
     			Menu building = new Menu();//Need to use two distinct objects otherwise conflicts occur
         		Menu building2 = new Menu();
         		building.setText(b.getId());
         		building2.setText(b.getId());
-    			for (Floor f : b.getFloors())
+    			for (Floor f : b.getFloorsUnmodifiable())
         		{
         			Menu floors = new Menu();
         			Menu floors2 = new Menu();

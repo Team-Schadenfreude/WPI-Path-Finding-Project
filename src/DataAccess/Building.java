@@ -1,18 +1,20 @@
 package DataAccess;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
 import javafx.scene.Group;
-public class Building extends Group{
+
+public class Building extends MapComponent{
 	private String description = "";
 	private String hours = "";
-	private int angle = 0;
 	private double pxPerFt = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{
+		super();
 		this.setId(name);
 	}
 	public void setDescription(String description)
@@ -23,10 +25,6 @@ public class Building extends Group{
 	{
 		this.hours = hours;
 	}
-	public void setFloors(List<Floor> floors)
-	{
-		this.floors = floors;
-	}
 	public String getDescription()
 	{
 		return this.description;
@@ -35,18 +33,10 @@ public class Building extends Group{
 	{
 		return this.hours;
 	}
-	public List<Floor> getFloors()
-	{
-		return this.floors;
-	}
-	public void setAngle(int angle)
-	{
-		this.angle = angle;
-	}
 	public void setPxPerFt(double pxPerFt)
 	{
 		this.pxPerFt = pxPerFt;
-		for (Floor f : this.getFloors())
+		for (Floor f : this.getFloorsUnmodifiable())
 		{
 			for (Node n : f.getNodes())
 			{
@@ -54,20 +44,26 @@ public class Building extends Group{
 			}
 		}
 	}
-	public int getAngle()
+	//Returns an unmodifiable list of floors
+	public List<Floor> getFloorsUnmodifiable()
 	{
-		return this.angle;
+		return Collections.unmodifiableList(this.floors);
+	}
+	public void addFloor(Floor f)
+	{
+		this.floors.add(f);
+		this.getChildren().add(f);
+	}
+	public void addFloor(int i, Floor f)
+	{
+		this.floors.add(i, f);
+		this.getChildren().add(i, f);
 	}
 	public double getPxPerFt()
 	{
 		return this.pxPerFt;
 	}
-	public void addFloor(Floor floor)
-	{
-		this.floors.add(floor);
-	}
-
 	public String toString(){
-        return this.getId() + " : floors[ " + this.floors.toString() + " ] ";
-}
+        return this.getId();// + " : floors[ " + this.floors.toString() + " ] ";
+	}
 }
