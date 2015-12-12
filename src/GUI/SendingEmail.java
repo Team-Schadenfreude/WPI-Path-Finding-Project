@@ -1,27 +1,37 @@
 package GUI;
 
-import java.util.*; 
+import java.util.*;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
- 
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 
 
 public class SendingEmail {
  
 	static Properties mailServerProperties;
 	static Session getMailSession;
-	static MimeMessage generateMailMessage;
+	static Message generateMailMessage;
+	static MimeMultipart multipart = new MimeMultipart("related");
+	static BodyPart messageBodyPart;
+	static int i = 0; // iterator 
 
 	public static boolean generateAndSendEmail(String emailAddr, List<String> directions, String from, String to) {
 			
@@ -29,7 +39,20 @@ public class SendingEmail {
 		
 		for(String s: directions) {
 			
-			if(s.toLowerCase().contains("straight")) {
+			if (s.contains(".png")) {
+
+	    		try{
+	    		messageBodyPart = new MimeBodyPart();
+	    		DataSource fds = new FileDataSource(s);
+	    		messageBodyPart.setDataHandler(new DataHandler(fds));
+	    		messageBodyPart.setHeader("Content-ID", "<image" + Integer.toString(i) + ">");
+	    		multipart.addBodyPart(messageBodyPart);
+
+				content = content + "<img src=\"cid:image" + Integer.toString(i) + "\">";
+				i++;
+	    		} catch(MessagingException e){}
+			}
+			else if(s.toLowerCase().contains("straight")) {
 				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/go_straight.png' height='50' width='50' style=\"margin-right: 10px; vertical-align: middle;\"><span style=\"vertical-align: middle;\">" + s + "</span></p>";
 			}
 			else if(s.toLowerCase().contains("slight right turn")) {
@@ -86,7 +109,22 @@ public class SendingEmail {
     		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddr));
     		generateMailMessage.setSubject("Your Directions from Randy");
     		
-    		generateMailMessage.setContent(content, "text/html");
+//    		messageBodyPart = new MimeBodyPart();
+//    		String htmlText = "<H1>Hello</H1><img src=\"cid:image\">";
+//    		messageBodyPart.setContent(htmlText, "text/html");
+//    		multipart.addBodyPart(messageBodyPart); 
+    		
+    		messageBodyPart = new MimeBodyPart();
+    		messageBodyPart.setContent(content, "text/html");
+    		multipart.addBodyPart(messageBodyPart);
+    		
+//    		messageBodyPart = new MimeBodyPart();
+//    		DataSource fds = new FileDataSource("res/BuildingImages/AtwaterKent.jpg");
+//    		messageBodyPart.setDataHandler(new DataHandler(fds));
+//    		messageBodyPart.setHeader("Content-ID", "<image>");
+//    		multipart.addBodyPart(messageBodyPart);
+    		
+    		generateMailMessage.setContent(multipart);
     		System.out.println("Mail session has been created successfully..");
      
     		// Step3
@@ -98,6 +136,7 @@ public class SendingEmail {
     		transport.connect("smtp.gmail.com", "schadeufreude@gmail.com", "SoftEngTeam6");
     		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
     		transport.close();
+    		System.out.println("Sent message successfully..");
     		return true;
 		} 
 		catch (AddressException ae) {return false;} 
