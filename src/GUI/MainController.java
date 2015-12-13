@@ -121,13 +121,11 @@ public class MainController implements Initializable{
     	activeFloorLabel.getStyleClass().add("active_floor_label");
     	
     	swapButton.setMaxHeight(startMenu.getBoundsInParent().getHeight() * 2);
-    	System.out.println("MaxHeight = " + startMenu.getHeight());
-    	System.out.println("Origional Height" + swapButton.getHeight());
+    	
     	ImageView swapButtonImage = new ImageView("res/icons/swap.png");
     	//swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight() * 2);
     	swapButtonImage.setFitHeight(44);
     	swapButton.setGraphic(swapButtonImage);
-    	System.out.println("New Height" + swapButton.getHeight());
     	//swapButton.setMinHeight(20);
     	zoomSetup();
 	}
