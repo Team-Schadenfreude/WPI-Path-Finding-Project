@@ -6,6 +6,9 @@
     -fx-background-color: #606060;
 }
 
+
+
+
 .label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
@@ -32,7 +35,11 @@
 }
 
 
-
+.active_floor_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
 
 
 .context-menu {

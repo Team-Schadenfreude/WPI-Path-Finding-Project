@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -45,7 +46,7 @@ public class MainController implements Initializable{
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
     @FXML private ScrollPane imageScrollPane;
-//    @FXML private MenuButton floorSelectionMenu;
+    @FXML private Label activeFloorLabel;
     @FXML private Button floorUpBtn;
     @FXML private Button floorDownBtn;
     @FXML private VBox controlVBox;
@@ -93,7 +94,8 @@ public class MainController implements Initializable{
 	    						setUpGroupOnClick(b,0, 0);
 	    						BuildingPopUp.setupPopUp(b);
 							}
-    						b.setActiveFloor(i);
+    						String floorName = b.setActiveFloor(i);
+    						activeFloorLabel.setText(floorName);
     						updateFloor(f, b.getFloorsUnmodifiable());
     						lastBuilding = b.getId();
     						break;
@@ -107,6 +109,7 @@ public class MainController implements Initializable{
     	controlVBox.getStyleClass().add("vbox");
     	controlVBox.getChildren().add(BuildingPopUp.getPopUp());
     	controlVBox.getChildren().add(SidePanel.getGridPane());
+    	activeFloorLabel.getStyleClass().add("active_floor_label");
 	}
     
   //Function swaps the ending node with the starting node and triggers a new path to be created
@@ -145,6 +148,7 @@ public class MainController implements Initializable{
     	//imageZoomPane = new ZoomingPane(mainMap);
     	imageScrollPane.setContent(mainMap);
     	setupDropDowns();
+    	activeFloorLabel.setText(mainMap.getId());
     	//imageZoomPane.setZoomFactor(.8);
     	
     }
@@ -187,7 +191,8 @@ public class MainController implements Initializable{
 							{
 								BuildingPopUp.setupPopUp(b);
 								setUpGroupOnClick(b,event.getX(), event.getY());
-								b.setActiveFloor(0);
+								String floorName = b.setActiveFloor(0);
+								activeFloorLabel.setText(floorName);
 								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
 								lastBuilding = b.getId();
 							}
@@ -196,7 +201,8 @@ public class MainController implements Initializable{
 								Building b = mainMap.getBuildingsUnmodifiable().get(0);
 								BuildingPopUp.setupPopUp(b);
 								setUpGroupOnClick(b, event.getX(), event.getY());
-								b.setActiveFloor(0);
+								String floorName = b.setActiveFloor(0);
+								activeFloorLabel.setText(floorName);
 								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
 								lastBuilding = b.getId();
 							}
@@ -264,6 +270,8 @@ public class MainController implements Initializable{
 			Floor f = b.getFloorsUnmodifiable().get(0);
 			f.setBaseImage(new Image(file.toURI().toString()));
 			b.setOpacity(1);
+			b.getFloorsUnmodifiable().get(0).getCanvas().setVisible(true);
+
 		}
 		else
 		{
@@ -271,7 +279,8 @@ public class MainController implements Initializable{
 			Building b = mainMap.getBuildingsUnmodifiable().get(0);
 			Floor f = b.getFloorsUnmodifiable().get(0);
 			f.setBaseImage(new Image(file.toURI().toString()));
-			b.setOpacity(0);
+			b.setOpacity(1);
+			b.getFloorsUnmodifiable().get(0).getCanvas().setVisible(false);
 			
 		}
 		mainMap.getRotation().setPivotX(pivotX);
@@ -306,13 +315,15 @@ public class MainController implements Initializable{
     	floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	b.setActiveFloor(b.getActiveFloor() + 1);
+		    	String floorName = b.setActiveFloor(b.getActiveFloor() + 1);
+				activeFloorLabel.setText(floorName);
 		    	updateFloor(b.getFloorsUnmodifiable().get(b.getActiveFloor()), b.getFloorsUnmodifiable());
 		    }});
     	floorDownBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	b.setActiveFloor(b.getActiveFloor() - 1);
+		    	String floorName = b.setActiveFloor(b.getActiveFloor() - 1);
+				activeFloorLabel.setText(floorName);
 		    	updateFloor(b.getFloorsUnmodifiable().get(b.getActiveFloor()), b.getFloorsUnmodifiable());
 		    }});
     }

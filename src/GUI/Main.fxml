@@ -14,17 +14,6 @@
    <children>
     <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="floorControlHBox" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label fx:id="activeFloorLabel" text="Label" />
-                  <VBox>
-                     <children>
-                        <Button fx:id="floorUpBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="+" />
-                        <Button fx:id="floorDownBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="222.0" text="-" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
             <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="800.0" prefWidth="629.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <VBox fx:id="controlVBox" maxHeight="1.7976931348623157E308" prefWidth="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -51,6 +40,17 @@
                   </HBox>
                </children>
             </VBox>
+            <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="activeFloorLabel" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="Label" />
+                  <VBox focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="floorUpBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="+" />
+                        <Button fx:id="floorDownBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="-" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <SplitPane fx:id="primarySplitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

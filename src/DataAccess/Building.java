@@ -18,12 +18,14 @@ public class Building extends MapComponent{
 		super();
 		this.setId(name);
 	}
-	public void setActiveFloor(int newFloor)
+	public String setActiveFloor(int newFloor)
 	{
 		if (newFloor < this.getFloorsUnmodifiable().size() && newFloor >= 0)
     	{
 			this.activeFloor = newFloor;
+			return this.getFloorsUnmodifiable().get(this.activeFloor).getId();
     	}
+		return this.getFloorsUnmodifiable().get(this.activeFloor).getId();
 	}
 	public void setDescription(String description)
 	{
