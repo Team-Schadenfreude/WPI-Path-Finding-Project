@@ -57,7 +57,7 @@ public class MapBuilder {
 						Floor floor = new Floor(file.toURI().toString(), subDir.getName());
 						floor.setDirectoryPath(subDir.toURI().toString());
 						System.out.println("Current Floor --" + floor.getId() + "-----------");
-						floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
+						getNodesFromFile(floor, subDir + "\\mapNodes.csv");
 
 
 						if(floor.getId().charAt(floor.getId().length()-1)== 'B'){
@@ -122,9 +122,8 @@ public class MapBuilder {
 			return Node.Type.NONE;
 		}
 	}
-	public List<Node> getNodesFromFile(String filePath)
+	public void getNodesFromFile(Floor f, String filePath)
 	{
-		List<Node> nodeList = new LinkedList<Node>();
 		BufferedReader br = null;
 		String line = "";
 		String delimiter = ",";
@@ -157,7 +156,7 @@ public class MapBuilder {
 				}
 				//System.out.println("Node Type = " + nodeType);
 				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);
-				nodeList.add(newNode);
+				f.addNode(newNode);
 			}
 
 		} 
@@ -170,7 +169,6 @@ public class MapBuilder {
 				} catch (IOException e) {e.printStackTrace();}
 			}
 		}
-		return nodeList;
 	}
 
 
