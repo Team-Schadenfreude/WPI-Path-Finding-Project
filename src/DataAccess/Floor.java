@@ -4,26 +4,24 @@ import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-public class Floor {
+public class Floor extends MapComponent{
 
-	private String name;
 	private Image mapImage;
 	private String dirPath = "";
 	private List<Node> nodes = new LinkedList<Node>();
-	
+	private List<Node> rooms = new LinkedList<Node>();
 	public Floor(String path, String name) {
+		super();
 		this.mapImage = new Image(path);
-		this.name = name;
+		this.setBaseImage(mapImage);
+		this.setId(name);
 	}
 	public void setDirectoryPath(String path)
 	{
 		this.dirPath = path;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
 	}
 	public void setImage(Image image)
 	{
@@ -37,10 +35,6 @@ public class Floor {
 	{
 		return dirPath;
 	}
-	public String getName()
-	{
-		return this.name;
-	}
 	public Image getImage()
 	{
 		return this.mapImage;
@@ -52,9 +46,36 @@ public class Floor {
 	public void addNode(Node node)
 	{
 		this.nodes.add(node);
+		if (node.getType() == Node.Type.ROOM || node.getType() == Node.Type.BATHROOM_F || node.getType() == Node.Type.BATHROOM_M)
+		{
+			this.rooms.add(node);
+		}
 	}
 	public String toString()
 	{
-		return this.name + " : Rooms [ " + nodes.toString() + " ] ";
+		return this.getId() + " : Rooms [ " + nodes.toString() + " ] ";
+	}
+	public Node getNearestRoom(int x, int y)
+	{
+		double minDistance = 0;
+		boolean firstRun = true;
+		Node closestNode = null;
+		for (Node node : this.rooms)
+		{
+			double distance = node.distanceTo(new Node("", x, y, 0, ""));
+			if(firstRun)
+			{
+				minDistance = distance;
+				firstRun = false;
+				closestNode = node;
+			}
+			else if(distance < minDistance)
+			{
+				minDistance = distance;
+				closestNode = node;
+			}
+			
+		}
+		return closestNode;
 	}
 }

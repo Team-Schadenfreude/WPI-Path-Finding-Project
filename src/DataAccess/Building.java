@@ -1,22 +1,31 @@
 package DataAccess;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
-public class Building {
-	private String name;
+import javafx.scene.Group;
+
+public class Building extends MapComponent{
 	private String description = "";
 	private String hours = "";
-	private int angle = 0;
-	private int x = 0;
-	private int y = 0;
-	private double scaleX = 0;
 	private double pxPerFt = 0;
+	private int activeFloor = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{
-		this.name = name;
+		super();
+		this.setId(name);
+	}
+	public String setActiveFloor(int newFloor)
+	{
+		if (newFloor < this.getFloorsUnmodifiable().size() && newFloor >= 0)
+    	{
+			this.activeFloor = newFloor;
+			return this.getFloorsUnmodifiable().get(this.activeFloor).getId();
+    	}
+		return this.getFloorsUnmodifiable().get(this.activeFloor).getId();
 	}
 	public void setDescription(String description)
 	{
@@ -26,10 +35,6 @@ public class Building {
 	{
 		this.hours = hours;
 	}
-	public void setFloors(List<Floor> floors)
-	{
-		this.floors = floors;
-	}
 	public String getDescription()
 	{
 		return this.description;
@@ -38,30 +43,10 @@ public class Building {
 	{
 		return this.hours;
 	}
-	public List<Floor> getFloors()
-	{
-		return this.floors;
-	}
-	public void setAngle(int angle)
-	{
-		this.angle = angle;
-	}
-	public void setX(int x)
-	{
-		this.x = x;
-	}
-	public void setY(int y)
-	{
-		this.y = y;
-	}
-	public void setScaleX(double scaleX)
-	{
-		this.scaleX = scaleX;
-	}
 	public void setPxPerFt(double pxPerFt)
 	{
 		this.pxPerFt = pxPerFt;
-		for (Floor f : this.getFloors())
+		for (Floor f : this.getFloorsUnmodifiable())
 		{
 			for (Node n : f.getNodes())
 			{
@@ -69,40 +54,30 @@ public class Building {
 			}
 		}
 	}
-	public void setName(String name)
+	public int getActiveFloor()
 	{
-		this.name = name;
+		return this.activeFloor;
 	}
-	public String getName()
+	//Returns an unmodifiable list of floors
+	public List<Floor> getFloorsUnmodifiable()
 	{
-		return this.name;
+		return Collections.unmodifiableList(this.floors);
 	}
-	public int getAngle()
+	public void addFloor(Floor f)
 	{
-		return this.angle;
+		this.floors.add(f);
+		this.getChildren().add(f);
 	}
-	public int getX()
+	public void addFloor(int i, Floor f)
 	{
-		return this.x;
-	}
-	public int getY()
-	{
-		return this.y;
-	}
-	public double getScaleX()
-	{
-		return this.scaleX;
+		this.floors.add(i, f);
+		this.getChildren().add(i, f);
 	}
 	public double getPxPerFt()
 	{
 		return this.pxPerFt;
 	}
-	public void addFloor(Floor floor)
-	{
-		this.floors.add(floor);
-	}
-
 	public String toString(){
-        return this.name + " : floors[ " + this.floors.toString() + " ] ";
-}
+        return this.getId();// + " : floors[ " + this.floors.toString() + " ] ";
+	}
 }

@@ -15,7 +15,6 @@ public class MapBuilder {
 
 	private String mapPath;
 	private String baseMap;
-	private List<Floor> sortedFloor = new LinkedList<Floor>();
 
 	public MapBuilder(String mapPath, String baseMap) {
 		this.mapPath = mapPath;
@@ -31,15 +30,16 @@ public class MapBuilder {
 	}
 	public Map buildMap()
 	{
-		Map map = new Map(baseMap, baseMap);
+		Map map = new Map(baseMap);
 		//File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
 		File selectedDirectory = new File(mapPath);
 		for (File dir : selectedDirectory.listFiles()) //Draw the super map
 		{
+			
 			if (dir.isDirectory() && dir.getName().charAt(0) == '_') //The file is a directory and a building
 			{
 				Building b = new Building(dir.getName().substring(1));
-				System.out.println("Reading " + b.getName());
+				System.out.println("Reading " + b.getId());
 				updateBuildingValuesFromFile(b, dir + "\\info.csv");
 				for (File subDir : dir.listFiles())
 				{
@@ -56,12 +56,12 @@ public class MapBuilder {
 						}
 						Floor floor = new Floor(file.toURI().toString(), subDir.getName());
 						floor.setDirectoryPath(subDir.toURI().toString());
-						System.out.println("Current Floor --" + floor.getName() + "-----------");
-						floor.setNodes(getNodesFromFile(subDir + "\\mapNodes.csv"));
+						System.out.println("Current Floor --" + floor.getId() + "-----------");
+						getNodesFromFile(floor, subDir + "\\mapNodes.csv");
 
 
-						if(floor.getName().charAt(floor.getName().length()-1)== 'B'){
-							b.getFloors().add(0,floor);
+						if(floor.getId().charAt(floor.getId().length()-1)== 'B'){
+							b.addFloor(0, floor);;
 						} else {
 							b.addFloor(floor);    	
 
@@ -71,8 +71,17 @@ public class MapBuilder {
 					}
 				}
 
-				System.out.println("Added Building " + b.getName() + " Angle = " + b.getAngle());
-				map.addBuilding(b);
+				System.out.println("Added Building " + b.getId() + " Angle = " + b.getAngle());
+				//System.out.println("FloorCount = " + b.getFloorsUnmodifiable().get);
+				System.out.println("The X = " + b.getFloorsUnmodifiable().get(0).getTranslate().getX());
+				if (b.getId().equals(map.getId()))
+				{
+					map.addBuilding(0,b);
+				}
+				else
+				{
+					map.addBuilding(b);
+				}
 			}
 		}
 		for (File dir : selectedDirectory.listFiles()) //Draw the super map
@@ -91,7 +100,7 @@ public class MapBuilder {
 		//map.print();
 		return map;
 	}
-
+	
 	private Node.Type nodeTypeFromString(String type)
 	{
 		type = type.toUpperCase();
@@ -117,9 +126,8 @@ public class MapBuilder {
 			return Node.Type.NONE;
 		}
 	}
-	public List<Node> getNodesFromFile(String filePath)
+	public void getNodesFromFile(Floor f, String filePath)
 	{
-		List<Node> nodeList = new LinkedList<Node>();
 		BufferedReader br = null;
 		String line = "";
 		String delimiter = ",";
@@ -152,7 +160,7 @@ public class MapBuilder {
 				}
 				//System.out.println("Node Type = " + nodeType);
 				Node newNode = new Node(name,0,0,0,x, y, z, mapName, transferNode, description, nodeType);
-				nodeList.add(newNode);
+				f.addNode(newNode);
 			}
 
 		} 
@@ -165,7 +173,6 @@ public class MapBuilder {
 				} catch (IOException e) {e.printStackTrace();}
 			}
 		}
-		return nodeList;
 	}
 
 
@@ -265,10 +272,10 @@ public class MapBuilder {
 				double pxPerFt = Double.parseDouble(imageData[imageScaleYIndex]);
 				String hours = imageData[hoursIndex];
 				String description = imageData[descripIndex];
-				b.setX(x);
-				b.setY(y);
-				b.setAngle(angle);
-				b.setScaleX(scaleX);
+				System.out.println("The Translation is x = " + x + "  Y = " + y);
+				b.setScale(scaleX, scaleX);
+				b.setRotateAngle(angle);
+				b.setTranslate(x, y);
 				b.setPxPerFt(pxPerFt);
 				b.setHours(hours);
 				b.setDescription(description);
@@ -286,16 +293,5 @@ public class MapBuilder {
 		}
 	}
 	
-	
-
-
-
-
-
-
-
-
-
-
 
 }
