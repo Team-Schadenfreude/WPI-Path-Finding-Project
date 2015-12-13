@@ -125,6 +125,12 @@ public class DirectionBuilder {
 
 					} else if (dirVal.equals("straight") && prevDirVal.equals("straight")) {
 						dir.distance = runningDistance;
+						dir.n2 = n2;
+
+						if (i == path.size() - 2) {
+							directionsList.add(dir.createStraightDirection());
+						}
+
 					} else if (!dirVal.equals("straight") && prevDirVal.equals("straight")) {
 
 						directionsList.add(dir.createTurnDirection());
