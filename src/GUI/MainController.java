@@ -50,6 +50,7 @@ public class MainController implements Initializable{
     @FXML private Button floorUpBtn;
     @FXML private Button floorDownBtn;
     @FXML private VBox controlVBox;
+    @FXML private Button swapButton;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -110,6 +111,14 @@ public class MainController implements Initializable{
     	controlVBox.getChildren().add(BuildingPopUp.getPopUp());
     	controlVBox.getChildren().add(SidePanel.getGridPane());
     	activeFloorLabel.getStyleClass().add("active_floor_label");
+    	
+    	swapButton.setMaxHeight(startMenu.getBoundsInParent().getHeight() * 2);
+    	System.out.println("MaxHeight = " + startMenu.getHeight());
+    	System.out.println("Origional Height" + swapButton.getHeight());
+    	ImageView swapButtonImage = new ImageView("res/icons/swap.png");
+    	swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight() * 2);
+    	swapButton.setGraphic(new ImageView("res/icons/swap.png"));
+    	System.out.println("New Height" + swapButton.getHeight());
 	}
     
   //Function swaps the ending node with the starting node and triggers a new path to be created

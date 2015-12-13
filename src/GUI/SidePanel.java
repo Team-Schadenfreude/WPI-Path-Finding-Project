@@ -88,18 +88,6 @@ for(String s: directions) {
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
-			else if(s.toLowerCase().contains("right turn")) {
-				label = new Label(s);
-				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
-				hbList.add(hbItem);
-			}
-			else if(s.toLowerCase().contains("left turn")) {
-				label = new Label(s);
-				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
-				hbList.add(hbItem);
-			}
 			else if(s.toLowerCase().contains("slight right turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
@@ -124,6 +112,25 @@ for(String s: directions) {
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_sharp_left.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
+			else if(s.toLowerCase().contains("right turn")) {
+				label = new Label(s);
+				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("left turn")) {
+				label = new Label(s);
+				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			else if(s.toLowerCase().contains("reached")) {
+				label = new Label(s);
+				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
+			}
+			
 			else if(s.toLowerCase().contains("proceed into")) {
 				System.out.println("Yo Im in Here");
  				label = new Label(s);
