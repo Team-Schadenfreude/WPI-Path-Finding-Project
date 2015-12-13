@@ -100,7 +100,7 @@ public class MapBuilder {
 		//map.print();
 		return map;
 	}
-
+	
 	private Node.Type nodeTypeFromString(String type)
 	{
 		type = type.toUpperCase();

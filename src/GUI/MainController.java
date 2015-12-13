@@ -381,6 +381,7 @@ public class MainController implements Initializable{
     {
     	setNodesVisible(floors, false);
     	floor.setVisible(true);
+    	addImagesToFloor(floor);
     	//floorSelectionMenu.setText(text);
     }
     private void setNodesVisible(List<Floor> floors, boolean isVisible)
@@ -390,7 +391,51 @@ public class MainController implements Initializable{
     		n.setVisible(isVisible);
     	}
     }
-  //Action handler for the zooming in of the map
+    private void addImagesToFloor(Floor f)
+	{
+		Canvas c = f.getCanvas();
+		int width = (int) (c.getWidth() / 18);
+		if (f.getId().equals(mainMap.getId()))
+		{
+			return;
+		}
+		int offset = width / 2;
+		
+		for (Node n : f.getNodes())
+		{
+			int x = n.getX() - offset;
+			int y = n.getY() - offset;
+			//ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE, INTERSECTION, ENDHALL, NONE
+			Node.Type type = n.getType();
+
+			if (type == Node.Type.BATHROOM_F)
+			{
+				Image i = new Image("/res/locations/Women'sBathroom.png");
+				c.getGraphicsContext2D().drawImage(i, x , y, width, width);
+			}
+			else if (type == Node.Type.BATHROOM_M)
+			{
+				Image i = new Image("/res/locations/Men'sBathroom.png");
+				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
+			}
+			else if (type == Node.Type.ELEVATOR)
+			{
+				Image i = new Image("/res/locations/Elevator.png");
+				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
+			}
+			else if (type == Node.Type.STAIRS)
+			{
+				Image i = new Image("/res/locations/Stairs.png");
+				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
+			}
+			else if (type == Node.Type.ENTRANCE)
+			{
+				Image i = new Image("/res/locations/Door.png");
+				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
+			}
+		}
+	}
+    //Action handler for the zooming in of the map
     @FXML 
     protected void handleZoomIn(ActionEvent event) {
     	//imageZoomPane.setZoomFactor(.8);
