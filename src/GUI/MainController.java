@@ -73,7 +73,7 @@ public class MainController implements Initializable{
     //The start and end nodes for AStar
     Node startNode = null;
     Node goalNode = null;
-    int floorNum = 0;
+    
     //Default constructor for the Main Controller
     public MainController(){
     	
@@ -108,7 +108,7 @@ public class MainController implements Initializable{
 	    						setUpGroupOnClick(b,0, 0);
 	    						BuildingPopUp.setupPopUp(b);
 							}
-    						floorNum = i;
+    						b.setActiveFloor(i);
     						updateFloor(f, b.getFloorsUnmodifiable());
     						lastBuilding = b.getId();
     						break;
@@ -161,6 +161,7 @@ public class MainController implements Initializable{
     	imageScrollPane.setContent(mainMap);
     	setupDropDowns();
     	//imageZoomPane.setZoomFactor(.8);
+    	
     }
 	//Method to find the path given a start node and an end node.
 	public static List<Node> getPathFromNode(Node startNode, Node endNode, Map map)
@@ -182,22 +183,20 @@ public class MainController implements Initializable{
     			lastBuilding = b.getId();
 				firstRun = false;
 			}
-//			if (!b.getId().equals(map.getId()))
-//    		{
-//    			b.setOpacity(0);//0 _a
-//    		}
+			if (!b.getId().equals(map.getId()))
+    		{
+    			b.setOpacity(0);//0 _a
+    		}
 			b.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
-					System.out.println("Building Clicked -" + b.getId() + "-" + " Angle is = " + b.getAngle());
-					//mainGroup.setRotate(- image.getAngle());
 					if (event.isStillSincePress() && !b.getId().equals(lastBuilding)) //If this is not the last building pressed
 					{
 						if (lastBuilding.equals(mainMap.getId())) //if the last building was the campus
 						{
 							BuildingPopUp.setupPopUp(b);
 							setUpGroupOnClick(b,event.getX(), event.getY());
-							floorNum = 0;
+							b.setActiveFloor(0);
 							updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
 							lastBuilding = b.getId();
 						}
@@ -206,7 +205,7 @@ public class MainController implements Initializable{
 							Building b = mainMap.getBuildingsUnmodifiable().get(0);
 							BuildingPopUp.setupPopUp(b);
 							setUpGroupOnClick(b, event.getX(), event.getY());
-							floorNum = 0;
+							b.setActiveFloor(0);
 							updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
 							lastBuilding = b.getId();
 						}
@@ -293,20 +292,14 @@ public class MainController implements Initializable{
     	floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	if (floorNum < b.getFloorsUnmodifiable().size() - 1)
-		    	{
-		    		floorNum++;
-		    	}
-		    	updateFloor(b.getFloorsUnmodifiable().get(floorNum), b.getFloorsUnmodifiable());
+		    	b.setActiveFloor(b.getActiveFloor() + 1);
+		    	updateFloor(b.getFloorsUnmodifiable().get(b.getActiveFloor()), b.getFloorsUnmodifiable());
 		    }});
     	floorDownBtn.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent e) {
-		    	if (floorNum > 0)
-		    	{
-		    		floorNum--;
-		    	}
-		    	updateFloor(b.getFloorsUnmodifiable().get(floorNum), b.getFloorsUnmodifiable());
+		    	b.setActiveFloor(b.getActiveFloor() - 1);
+		    	updateFloor(b.getFloorsUnmodifiable().get(b.getActiveFloor()), b.getFloorsUnmodifiable());
 		    }});
     }
     private void updateFloor(Floor floor, List<Floor> floors)

@@ -11,11 +11,19 @@ public class Building extends MapComponent{
 	private String description = "";
 	private String hours = "";
 	private double pxPerFt = 0;
+	private int activeFloor = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
 	public Building(String name)
 	{
 		super();
 		this.setId(name);
+	}
+	public void setActiveFloor(int newFloor)
+	{
+		if (newFloor < this.getFloorsUnmodifiable().size() && newFloor >= 0)
+    	{
+			this.activeFloor = newFloor;
+    	}
 	}
 	public void setDescription(String description)
 	{
@@ -43,6 +51,10 @@ public class Building extends MapComponent{
 				n.setPxPerFt(this.pxPerFt);
 			}
 		}
+	}
+	public int getActiveFloor()
+	{
+		return this.activeFloor;
 	}
 	//Returns an unmodifiable list of floors
 	public List<Floor> getFloorsUnmodifiable()
