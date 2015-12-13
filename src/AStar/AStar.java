@@ -54,6 +54,9 @@ public class AStar{
 			n.parent = null;
 		}
 	}
+	public Settings getSettings(){
+		return settings;
+	}
 
 	public List<Node> findPath(Node start, Node end, List<Node> map){
 		this.clearParents(map);
