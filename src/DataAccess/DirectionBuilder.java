@@ -51,9 +51,12 @@ public class DirectionBuilder {
 					// Record total distance so far.
 					totalDistance += distance;
 
+					System.out.println("Should be adding directions.");
+					System.out.println(directionsList);
 					// Print direction.
-					directionsList.add(prevDirVal + " " + Integer.toString((int) distance) + " ft.");
 					directionsList.add("Proceed into " + n2.getMap() + ".");
+					System.out.println("Should have added directions.");
+					System.out.println(directionsList);
 
 					// Reset variables.
 					// Reset distance.
@@ -105,7 +108,12 @@ public class DirectionBuilder {
 					if (dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
 						if (!directionsList.isEmpty() && i != path.size() - 2) {
-							directionsList.remove(directionsList.size() - 1);
+
+							if (directionsList.get(directionsList.size() - 1).toLowerCase().contains("proceed")) {
+								// Nothing...
+							} else {
+								directionsList.remove(directionsList.size() - 1);
+							}
 						}
 
 						if (i == path.size() - 2) {
@@ -130,7 +138,9 @@ public class DirectionBuilder {
 
 						dir = new Direction(dirVal, distance, n1, n2);
 						directionsList.add(dir.createTurnDirection());
+						System.out.println(dir.createTurnDirection());
 						directionsList.add(dir.createStraightDirection());
+						System.out.println(dir.createStraightDirection());
 
 						runningDistance = distance;
 					}
