@@ -58,7 +58,7 @@
  */
 .button {   
     -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
     -fx-background-radius: 0;
     -fx-background-color: #606060;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
