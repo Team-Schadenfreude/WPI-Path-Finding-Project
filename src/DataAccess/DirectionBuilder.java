@@ -1,6 +1,6 @@
 package DataAccess;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
@@ -14,7 +14,7 @@ public class DirectionBuilder {
 	// Method to provide a list of directions from a list of nodes.
 	public static List<String> getDirectionsList(List<Node> path, double xScale, double yScale) {
 
-		List<String> directionsList = new ArrayList<String>();
+		List<String> directionsList = new LinkedList<String>();
 
 		if (path.size() == 0) {
 			directionsList.add("There is no path to follow!");
@@ -36,6 +36,7 @@ public class DirectionBuilder {
 			// Direction values.
 			String dirVal = " ";
 			String prevDirVal = " ";
+			Direction dir = new Direction(null, 0, null, null);
 
 			// Map change value.
 			boolean mapChange = false;
@@ -91,6 +92,8 @@ public class DirectionBuilder {
 
 					// Get distance between the two nodes.
 					distance = n1.distanceTo(n2);
+					totalDistance += distance;
+					runningDistance += distance;
 
 					// Reset variables if map changes.
 					if (i == 0 || mapChange) {
@@ -99,165 +102,37 @@ public class DirectionBuilder {
 						mapChange = false;
 					}
 
-					// Room to intersection interaction.
-					if (n1.getType() == Node.Type.ROOM && n2.getType() == Node.Type.INTERSECTION) {
+					if (dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
-						// If first of the iteration.
-						if (i == 0) {
-							totalDistance += distance;
-							directionsList.add("Go " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
-							distance = 0;
+						if (!directionsList.isEmpty() && i != path.size() - 2) {
+							directionsList.remove(directionsList.size() - 1);
 						}
 
-						// If direction is straight, record distance and
-						// continue.
-						else if (dirVal.equals("straight")) {
-							totalDistance += distance;
-							directionsList.add("Go " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
-							distance = 0;
+						if (i == path.size() - 2) {
+							dir = new Direction(dirVal, distance, n1, n2);
+							directionsList.add(dir.createStraightDirection());
+						} else {
+							dir = new Direction(dirVal, runningDistance, n1, n2);
 						}
 
-						// If direction is not straight and previous direction
-						// is not straight, print the prior go
-						// straight, and then the next direction.
-						else if (!prevDirVal.equals("straight")) {
+					} else if (dirVal.equals("straight") && prevDirVal.equals("straight")) {
+						dir.distance = runningDistance;
+					} else if (!dirVal.equals("straight") && prevDirVal.equals("straight")) {
 
-							directionsList.add(
-									"Then take a " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
-							distance = 0;
+						directionsList.add(dir.createTurnDirection());
+						directionsList.add(dir.createStraightDirection());
+						dir = new Direction(dirVal, distance, n1, n2);
+						directionsList.add(dir.createTurnDirection());
+						directionsList.add(dir.createStraightDirection());
 
-						}
+						runningDistance = distance;
+					} else if (!dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
-						// If direction is not straight and previous direction
-						// is straight, print the next direction.
-						else if (prevDirVal.equals("straight")) {
+						dir = new Direction(dirVal, distance, n1, n2);
+						directionsList.add(dir.createTurnDirection());
+						directionsList.add(dir.createStraightDirection());
 
-							directionsList
-									.add("Take a " + dirVal + " out of " + n1.getName() + ". (" + distance + " ft)");
-
-						}
-
-					}
-
-					// Room to room interaction.
-					else if (n1.getType() == Node.Type.ROOM && n2.getType() == Node.Type.ROOM) {
-
-						// If first iteration.
-						if (i == 0) {
-							totalDistance += distance;
-
-							directionsList.add("Go " + dirVal + " out of " + n1.getName() + " and into " + n2.getName()
-									+ ". (" + distance + " ft)");
-							distance = 0;
-						}
-
-						// If direction is straight, record distance and
-						// continue.
-						else if (dirVal.equals("straight")) {
-
-							totalDistance += distance;
-
-							directionsList.add("Go straight from" + n1.getName() + " into " + n2.getName() + " ("
-									+ distance + " ft).");
-
-							distance = 0;
-						}
-
-						// If direction is not straight and previous direction
-						// is not straight, print the prior go
-						// straight, and then the next direction.
-						else if (!prevDirVal.equals("straight")) {
-
-							totalDistance += distance;
-
-							directionsList.add("Then take a " + dirVal + " from " + n1.getName() + " into "
-									+ n2.getName() + ". (" + distance + " ft)");
-
-							distance = 0;
-
-						}
-
-						// If direction is not straight and previous direction
-						// is straight, print the next direction.
-						else if (prevDirVal.equals("straight")) {
-
-							totalDistance += distance;
-
-							directionsList
-									.add("Take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
-
-							distance = 0;
-						}
-
-					}
-
-					// Intersection to room interaction.
-					else if (n1.getType() == Node.Type.INTERSECTION && n2.getType() == Node.Type.ROOM) {
-
-						// If direction is straight, record distance and
-						// continue.
-						if (dirVal.equals("straight")) {
-							totalDistance += distance;
-							directionsList.add("Go straight into " + n2.getName() + ". (" + distance + " ft)");
-							distance = 0;
-						}
-
-						// If direction is not straight and previous direction
-						// is not straight, print the prior go
-						// straight, and then the next direction.
-						else if (!prevDirVal.equals("straight")) {
-
-							totalDistance += distance;
-
-							directionsList
-									.add("Then take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
-
-							distance = 0;
-
-						}
-
-						// If direction is not straight and previous direction
-						// is straight, print the next direction.
-						else if (prevDirVal.equals("straight")) {
-
-							totalDistance += distance;
-
-							directionsList
-									.add("Take a " + dirVal + " into " + n2.getName() + ". (" + distance + " ft)");
-
-							distance = 0;
-						}
-
-					}
-
-					// Intersection to intersection interaction.
-					else if (n1.getType() == Node.Type.INTERSECTION && n2.getType() == Node.Type.INTERSECTION) {
-
-						// If direction is straight, record distance and
-						// continue.
-						if (dirVal.equals("straight")) {
-							totalDistance += distance;
-							directionsList.add("Go straight for " + distance + " ft.");
-							distance = 0;
-						}
-
-						// If direction is not straight and previous direction
-						// is not straight, print the prior go
-						// straight, and then the next direction.
-						else if (!prevDirVal.equals("straight")) {
-
-							directionsList.add("Then take a " + dirVal + ". (" + distance + " ft)");
-
-						}
-
-						// If direction is not straight and previous direction
-						// is straight, print the next direction.
-						else if (prevDirVal.equals("straight")) {
-
-							directionsList.add("Take a " + dirVal + ". (" + distance + " ft)");
-
-						}
-
+						runningDistance = distance;
 					}
 
 					prevAngle = currentAngle;
@@ -268,9 +143,8 @@ public class DirectionBuilder {
 			}
 
 			// Setup final directions.
-			totalDistance += distance;
-			directionsList.add("You have reached your destination.");
-			directionsList.add("Total distance is " + Integer.toString((int) totalDistance) + "ft.");
+			directionsList
+					.add("You have reached your destination after " + Integer.toString((int) totalDistance) + " ft.");
 		}
 
 		// Print final directions.
