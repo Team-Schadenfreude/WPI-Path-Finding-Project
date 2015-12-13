@@ -4,7 +4,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +27,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -63,7 +68,10 @@ public class MainController implements Initializable{
     //The start and end nodes for AStar
     Node startNode = null;
     Node goalNode = null;
-    
+    DoubleProperty zoomProperty = new SimpleDoubleProperty(1);
+    double thresh = 2;
+    int eventX = 0;
+    int eventY = 0;
     //Default constructor for the Main Controller
     public MainController(){
     	
@@ -119,6 +127,8 @@ public class MainController implements Initializable{
     	swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight() * 2);
     	swapButton.setGraphic(new ImageView("res/icons/swap.png"));
     	System.out.println("New Height" + swapButton.getHeight());
+    	
+    	zoomSetup();
 	}
     
   //Function swaps the ending node with the starting node and triggers a new path to be created
@@ -250,6 +260,15 @@ public class MainController implements Initializable{
     
     void setUpGroupOnClick(Building building, double x, double y)
     {
+    	
+    	 if(!lastBuilding.equals("Campus")){
+             zoomProperty.set(1);
+         } else {
+             zoomProperty.set(4);
+             System.out.println("Bazinga");
+         }
+         
+         thresh = zoomProperty.get()*2;
 		for (Building b : mainMap.getBuildingsUnmodifiable())
 		{
 			if (!b.getId().equals(mainMap.getId()))
@@ -568,6 +587,59 @@ public class MainController implements Initializable{
     			break;
     		}
     	}
+    }
+    
+    private void zoomSetup()
+    {
+    	mainMap.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                System.out.println("Zoom is: "+zoomProperty.get());
+
+                System.out.println(event.getDeltaY());
+                
+                System.out.println(thresh*2);
+                
+                if (event.getDeltaY() > 0 &&zoomProperty.get()<thresh*2) {
+                
+                    System.out.println("Zoom is: "+zoomProperty.get());
+                    zoomProperty.set(zoomProperty.get()*1.1);
+                    System.out.println(event.getX()+" "+event.getY());
+                    eventX = (int)event.getX();
+                    eventY = (int)event.getY();
+
+                } else if (event.getDeltaY() < 0 && zoomProperty.get()>thresh/2) {
+                    System.out.println("Zoom is: "+zoomProperty.get());
+                    zoomProperty.set(zoomProperty.get()/1.1);
+                    System.out.println(event.getX()+" "+event.getY());
+                    eventX = (int)event.getX();
+                    eventY = (int)event.getY();
+                }
+                else {
+                    System.out.println("Consuming");
+                    event.consume();
+                }
+                } 
+            
+        });
+
+
+        zoomProperty.addListener(new InvalidationListener() {
+
+            @Override
+            public void invalidated(Observable arg0) {
+                // TODO Auto-generated method stub
+
+                System.out.println(eventX +" "+eventY);
+                
+                mainMap.setZoom(zoomProperty.get(),eventX,eventY);
+                System.out.println("***********************");
+                System.out.println(zoomProperty.get());
+                System.out.println("***********************");
+
+
+            }
+        });
     }
 
 }
