@@ -65,6 +65,7 @@ public class MainController implements Initializable{
     //The list of all buildings on Campus
     //Boolean marking a node as selected
     private boolean nodeSelect = false;
+    private boolean clickOutofMap = false;
     //The start and end nodes for AStar
     Node startNode = null;
     Node goalNode = null;
@@ -201,7 +202,17 @@ public class MainController implements Initializable{
 					{
 						if (b.getId().equals(lastBuilding)) // This is the same building
 						{
-							//b.getN
+							if(clickOutofMap)
+							{
+								Building b = mainMap.getBuildingsUnmodifiable().get(0);
+								BuildingPopUp.setupPopUp(b);
+								setUpGroupOnClick(b, event.getX(), event.getY());
+								String floorName = b.setActiveFloor(0);
+								activeFloorLabel.setText(floorName);
+								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+								lastBuilding = b.getId();
+								clickOutofMap = false;
+							}
 						}
 						else //This is a diffrent building
 						{
@@ -234,9 +245,21 @@ public class MainController implements Initializable{
 				f.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
+					System.out.println("You Clicked is " + clickOutofMap);
+					
 					if (b.getId().equals(lastBuilding) && event.isStillSincePress())//Double check that this was triggered after a building was selected
 					{
-						nodeSelect(f.getNearestRoom((int)event.getX(), (int)event.getY()));
+						Floor f = b.getFloorsUnmodifiable().get(b.getActiveFloor());
+						int argb = f.getImageView().getImage().getPixelReader().getArgb((int)event.getX(), (int)event.getY());
+						int alpha = argb & 0xFF000000;
+						if (alpha == 0 && !lastBuilding.equals(mainMap.getId())) //If clicking on the transparent part of the image
+						{
+							clickOutofMap = true;
+						}
+						else
+						{
+							nodeSelect(f.getNearestRoom((int)event.getX(), (int)event.getY()));
+						}
 					}
 				}});
 			}
