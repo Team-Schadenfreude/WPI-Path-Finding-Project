@@ -37,8 +37,8 @@
 
 .active_floor_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
+    -fx-text-fill: black;
+    -fx-opacity: .8;
 }
 
 
