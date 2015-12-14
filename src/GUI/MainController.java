@@ -60,6 +60,10 @@ public class MainController implements Initializable{
     @FXML private VBox controlVBox;
     @FXML private VBox menuVBox;
     @FXML private Button swapButton;
+    
+    ComboBox startInput = new ComboBox();
+    ComboBox destInput = new ComboBox();
+		
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -601,14 +605,12 @@ public class MainController implements Initializable{
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
     	
-    	ComboBox startInput = new ComboBox();
-		ComboBox destInput = new ComboBox();
-		startInput.setEditable(true);
-		destInput.setEditable(true);
-		startInput.resize(startMenu.getPrefWidth(), startMenu.getPrefHeight());
-		destInput.resize(destMenu.getPrefWidth(), destMenu.getPrefHeight());
-		
-		List<String> nodeNames = new ArrayList<String>();
+	startInput.setEditable(true);
+	destInput.setEditable(true);
+	startInput.resize(startMenu.getPrefWidth(), startMenu.getPrefHeight());
+	destInput.resize(destMenu.getPrefWidth(), destMenu.getPrefHeight());
+	
+	List<String> nodeNames = new ArrayList<String>();
     	
     	for (Building b : mainMap.getBuildingsUnmodifiable())
     	{
