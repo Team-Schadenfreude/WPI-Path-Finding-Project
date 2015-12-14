@@ -287,7 +287,7 @@ public class MainController implements Initializable{
     void setUpGroupOnClick(Building building, double x, double y)
     {
     	
-    	 if(!lastBuilding.equals("Campus")){
+    	 if(!lastBuilding.equals(mainMap.getId())){
              zoomProperty.set(1);
          } else {
              zoomProperty.set(4);
