@@ -207,7 +207,7 @@ public class MainController implements Initializable{
 			}
 			if (!b.getId().equals(map.getId()))
     		{
-    			b.setOpacity(.5);//0 _a
+    			b.setOpacity(0);//0 _a
     		}
 			//Need to figure out how to deal with the canvas redraw for removing the selection circles.
 			b.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -394,7 +394,7 @@ public class MainController implements Initializable{
 		}
 		else
 		{
-			mainMap.setZoom(zoom * (.5 + building.getScale().getX()),pivotX,pivotY);
+			mainMap.setZoom(zoom * (.45 + building.getScale().getX()),pivotX,pivotY);
 		}
     }
     
