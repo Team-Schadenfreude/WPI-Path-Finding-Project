@@ -653,14 +653,13 @@ public class MainController implements Initializable{
     			
         		startMenu.getItems().add(building);
         		destMenu.getItems().add(building2);
-        		
-        		startInput.getItems().addAll(nodeNames);
-        		destInput.getItems().addAll(nodeNames);
-        		new AutoCompleteComboBoxListener(startInput);
-        		new AutoCompleteComboBoxListener(destInput);
     		}
-    		
     	}
+    	
+    	startInput.getItems().addAll(nodeNames);
+	destInput.getItems().addAll(nodeNames);
+	new AutoCompleteComboBoxListener(startInput);
+	new AutoCompleteComboBoxListener(destInput);
     	
     	anchorPane.setOnKeyPressed(event -> {
     		if (event.getCode() == KeyCode.TAB){
