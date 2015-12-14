@@ -61,8 +61,8 @@ public class MainController implements Initializable{
     @FXML private VBox menuVBox;
     @FXML private Button swapButton;
     
-    ComboBox startInput = new ComboBox();
-    ComboBox destInput = new ComboBox();
+    ComboBox<String> startInput = new ComboBox<String>();
+	ComboBox<String> destInput = new ComboBox<String>();
 		
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
@@ -607,8 +607,15 @@ public class MainController implements Initializable{
     	
 	startInput.setEditable(true);
 	destInput.setEditable(true);
-	startInput.resize(startMenu.getPrefWidth(), startMenu.getPrefHeight());
-	destInput.resize(destMenu.getPrefWidth(), destMenu.getPrefHeight());
+	startInput.setMinSize(180, startMenu.getMinHeight());
+	destInput.setMinSize(180, destMenu.getMinHeight());
+	startInput.setStyle("-fx-background-color: #606060; "
+				+ "-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; "
+					+ "-fx-text-fill: #d8d8d8;");
+	destInput.setStyle("-fx-background-color: #606060;"
+				+ "-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; "
+					+ "-fx-text-fill: #d8d8d8;");
+	
 	
 	List<String> nodeNames = new ArrayList<String>();
     	
