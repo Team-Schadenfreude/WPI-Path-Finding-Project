@@ -13,6 +13,7 @@ public class Building extends MapComponent{
 	private double pxPerFt = 0;
 	private int activeFloor = 0;
 	private List<Floor> floors = new LinkedList<Floor>();
+	
 	public Building(String name)
 	{
 		super();
@@ -68,10 +69,14 @@ public class Building extends MapComponent{
 		this.floors.add(f);
 		this.getChildren().add(f);
 	}
-	public void addFloor(int i, Floor f)
+	public void addBottomFloor(Floor f)
 	{
-		this.floors.add(i, f);
-		this.getChildren().add(i, f);
+		this.floors.add(0, f);
+		this.getChildren().add(this.safeChildrenIndex, f);
+	}
+	public Floor getBottomFloor()
+	{
+		return this.floors.get(0);
 	}
 	public double getPxPerFt()
 	{

@@ -1,0 +1,12 @@
+node,371,359,0,Library SB,,FALSE,None
+node,419,359,0,Library SB,,FALSE,None
+node,535,359,0,Library SB,,FALSE,None
+GL-S0C,535,187,0,Library SB,,FALSE,Room
+node,535,127,0,Library SB,,FALSE,None
+GL-S02,591,187,0,Library SB,,FALSE,Room
+GL-S01,495,127,0,Library SB,,FALSE,Room
+GL-S0D,535,61,0,Library SB,,FALSE,Room
+node,371,359,0,Library SB,,FALSE,None
+node,371,359,0,Library SB,,FALSE,None
+node,371,331,0,Library SB,Gordon Library elevator in the sub basement.,TRUE,Elevator
+GL-S0A,419,331,0,Library SB,,FALSE,Room

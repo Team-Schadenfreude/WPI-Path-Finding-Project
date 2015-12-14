@@ -14,12 +14,12 @@
    <children>
     <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="800.0" prefWidth="629.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ScrollPane fx:id="imageScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-30.0" layoutY="127.0" pannable="true" prefHeight="800.0" prefWidth="629.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <VBox fx:id="controlVBox" maxHeight="1.7976931348623157E308" maxWidth="220.0" prefWidth="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox>
                      <children>
-                        <VBox>
+                       <VBox fx:id="menuVBox">
                            <children>
                               <MenuButton fx:id="startMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="180.0" mnemonicParsing="false" text="Start">
                                 <items>
@@ -40,10 +40,20 @@
                   </HBox>
                </children>
             </VBox>
+            <HBox alignment="BOTTOM_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <MenuButton fx:id="aboutMenu" alignment="TOP_LEFT" mnemonicParsing="false" popupSide="TOP" text="About">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </HBox>
             <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
                   <Label fx:id="activeFloorLabel" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="Label" />
-                  <VBox focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+                  <VBox fx:id="floorControlVBox" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
                      <children>
                         <Button fx:id="floorUpBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="+" />
                         <Button fx:id="floorDownBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="-" />
@@ -53,15 +63,5 @@
             </HBox>
          </children>
       </AnchorPane>
-      <SplitPane fx:id="primarySplitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-            <Button fx:id="goBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="GO!" textFill="#00ff0d">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Button>
-        </items>
-      </SplitPane>
    </children>
 </AnchorPane>
