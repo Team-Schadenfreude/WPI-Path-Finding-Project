@@ -1,6 +1,7 @@
 package GUI;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
@@ -28,6 +30,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -61,6 +64,7 @@ public class MainController implements Initializable{
     @FXML private VBox controlVBox;
     @FXML private Button swapButton;
     @FXML private VBox floorControlVBox;
+    @FXML private VBox menuVBox;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -79,6 +83,8 @@ public class MainController implements Initializable{
     private int eventX = 0;
     private int eventY = 0;
     private Rectangle overlayRect = new Rectangle();
+    ComboBox<String> startInput = new ComboBox<String>();
+	ComboBox<String> destInput = new ComboBox<String>();
     //private Canvas mainMapOverlay = new Canvas();
     //Default constructor for the Main Controller
     public MainController(){
@@ -151,8 +157,17 @@ public class MainController implements Initializable{
 	       startNode= tempNode;
 	       
 	       //displays new node information in the appropriate text box
-	       startMenu.setText(startNode.getMap() +" " + startNode.getName());
-	       destMenu.setText(goalNode.getMap()+" " + goalNode.getName());
+	       //displays new node information in the appropriate text box
+	       if (startMenu.isVisible() && destMenu.isVisible()) {
+	    	   String temp1 = startMenu.getText();
+	    	   startMenu.setText(destMenu.getText());
+	    	   destMenu.setText(temp1);
+	       }
+	       if (startInput.isVisible() && destInput.isVisible()) {
+	    	   String temp2 = startInput.getPromptText();
+	    	   startInput.setPromptText(destInput.getPromptText());
+	    	   destInput.setPromptText(temp2);
+	       }
 	       
 	       //runs A* with the new path
 	       getDirectionsProperty.set(!getDirectionsProperty.get());
@@ -634,10 +649,26 @@ public class MainController implements Initializable{
 		return null;
     }
     //Function to setup the draw down menus for node selection
-    private void setupDropDowns()
+ private void setupDropDowns()
     {
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
+    	startInput.getItems().clear();
+    	destInput.getItems().clear();
+	startInput.setEditable(true);
+	destInput.setEditable(true);
+	startInput.setMinSize(180, startMenu.getMinHeight());
+	destInput.setMinSize(180, destMenu.getMinHeight());
+//	startInput.setStyle("-fx-background-color: #606060; "
+//				+ "-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; "
+//					+ "-fx-text-fill: #d8d8d8;");
+//	destInput.setStyle("-fx-background-color: #606060;"
+//				+ "-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif; "
+//					+ "-fx-text-fill: #d8d8d8;");
+	
+	
+	List<String> nodeNames = new ArrayList<String>();
+    	
     	for (Building b : mainMap.getBuildingsUnmodifiable())
     	{
     		if (b.getFloorsUnmodifiable() != null) //This needs to be here
@@ -676,6 +707,10 @@ public class MainController implements Initializable{
                 			});
                 			addMenuItemsSorted(floors.getItems(), mi1);
                 			addMenuItemsSorted(floors2.getItems(), mi2);
+                			
+                			if (!nodeNames.contains(n.getName())) {
+                				nodeNames.add(n.getName());
+                			}
         				}
         			}
         			building.getItems().add(floors);
@@ -683,14 +718,64 @@ public class MainController implements Initializable{
         		}
     			System.out.println("Building--");
     			System.out.println(building);
+    			
         		startMenu.getItems().add(building);
         		destMenu.getItems().add(building2);
     		}
-    		
     	}
     	
-    }
-    private void addMenuItemsSorted(List<MenuItem> menuItems, MenuItem m)
+    	startInput.getItems().addAll(nodeNames);
+	destInput.getItems().addAll(nodeNames);
+	new AutoCompleteComboBoxListener(startInput);
+	new AutoCompleteComboBoxListener(destInput);
+    	
+    	anchorPane.setOnKeyPressed(event -> {
+    		if (event.getCode() == KeyCode.TAB){
+    			if (startMenu.isVisible() && destMenu.isVisible()) {
+    				startMenu.setVisible(false);
+    				destMenu.setVisible(false);
+    				
+    				menuVBox.getChildren().clear();
+    				menuVBox.getChildren().addAll(startInput, destInput);
+    				startInput.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+						@Override
+						public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+							
+							startNode = mainMap.findNodeByName(arg2);
+							System.out.println(arg2);
+							System.out.println(startNode.getName());
+							getDirectionsProperty.set(!getDirectionsProperty.get());
+						}
+    					
+    				});
+    				
+    				destInput.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+						@Override
+						public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+							
+							goalNode = mainMap.findNodeByName(arg2);
+							System.out.println(arg2);
+							System.out.println(goalNode.getName());
+							getDirectionsProperty.set(!getDirectionsProperty.get());
+						}
+    					
+    				});
+    				
+    			}
+    			else {
+    				startMenu.setVisible(true);
+    				destMenu.setVisible(true);
+    				
+    				menuVBox.getChildren().clear();
+    				menuVBox.getChildren().addAll(startMenu, destMenu);
+    				
+    			}
+    		}
+    	});
+    	
+    }    private void addMenuItemsSorted(List<MenuItem> menuItems, MenuItem m)
     {
     	for (int i = 0; i <= menuItems.size(); i++)
     	{
@@ -759,5 +844,8 @@ public class MainController implements Initializable{
             }
         });
     }
+    
+    
+    
 
 }
