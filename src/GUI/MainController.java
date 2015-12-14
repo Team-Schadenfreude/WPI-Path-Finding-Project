@@ -56,6 +56,7 @@ public class MainController implements Initializable{
     @FXML private Button floorDownBtn;
     @FXML private VBox controlVBox;
     @FXML private Button swapButton;
+    @FXML private VBox floorControlVBox;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -127,6 +128,7 @@ public class MainController implements Initializable{
     	//swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight() * 2);
     	swapButtonImage.setFitHeight(44);
     	swapButton.setGraphic(swapButtonImage);
+    	floorControlVBox.setVisible(false);
     	//swapButton.setMinHeight(20);
     	zoomSetup();
 	}
@@ -258,7 +260,7 @@ public class MainController implements Initializable{
 						}
 						else
 						{
-							nodeSelect(f.getNearestRoom((int)event.getX(), (int)event.getY()));
+							nodeSelect(f, f.getNearestRoom((int)event.getX(), (int)event.getY()));
 						}
 					}
 				}});
@@ -266,15 +268,17 @@ public class MainController implements Initializable{
     	}
     }
     
-    void nodeSelect(Node n)
+    void nodeSelect(Floor f, Node n)
     {
     	if (nodeSelect)
     	{
     		startNode = n;
+    		startMenu.setText(f.getId() + " " + n.getName());
     	}
     	else
     	{
     		goalNode = n;
+    		destMenu.setText(f.getId() + " " + n.getName());
     	}
     	nodeSelect = !nodeSelect;
 	    getDirectionsProperty.set(!getDirectionsProperty.get());
@@ -382,6 +386,7 @@ public class MainController implements Initializable{
     	setNodesVisible(floors, false);
     	floor.setVisible(true);
     	addImagesToFloor(floor);
+    	floorControlVBox.setVisible(!floor.getParent().getId().equals(mainMap.getId()));
     	//floorSelectionMenu.setText(text);
     }
     private void setNodesVisible(List<Floor> floors, boolean isVisible)
