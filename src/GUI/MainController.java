@@ -34,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.DirectoryChooser;
 import AStar.AStar;
 import AStar.Node;
@@ -52,6 +53,7 @@ public class MainController implements Initializable{
     @FXML private ImageView mapView;
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
+    @FXML private MenuButton aboutMenu;
     @FXML private ScrollPane imageScrollPane;
     @FXML private Label activeFloorLabel;
     @FXML private Button floorUpBtn;
@@ -76,8 +78,8 @@ public class MainController implements Initializable{
     private double thresh = 2;
     private int eventX = 0;
     private int eventY = 0;
-    
-    private Canvas mainMapOverlay = new Canvas();
+    private Rectangle overlayRect = new Rectangle();
+    //private Canvas mainMapOverlay = new Canvas();
     //Default constructor for the Main Controller
     public MainController(){
     	
@@ -88,6 +90,7 @@ public class MainController implements Initializable{
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
+    	aboutMenu.getItems().clear();
     	//floorSelectionMenu.getItems().clear();
     	loadMap();
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
@@ -190,10 +193,12 @@ public class MainController implements Initializable{
     	{
     		if (firstRun)
 			{
-    			mainMapOverlay.setWidth(mainMap.getBoundsInLocal().getWidth());
-    			mainMapOverlay.setHeight(mainMap.getBoundsInLocal().getHeight());
-    			mainMapOverlay.setMouseTransparent(true);
-    			mainMap.getChildren().add(mainMapOverlay);
+//    			mainMapOverlay.setWidth(mainMap.getBoundsInLocal().getWidth());
+//    			mainMapOverlay.setHeight(mainMap.getBoundsInLocal().getHeight());
+//    			mainMapOverlay.setMouseTransparent(true);
+//    			mainMap.getChildren().add(mainMapOverlay);
+    			overlayRect.setMouseTransparent(true);
+    			mainMap.getChildren().add(overlayRect);
     			mainMap.setScale(b.getScale().getX(), b.getScale().getY());
     			mainMap.setRotateAngle(b.getAngle());
     			mainMap.setTranslate(b.getTranslate().getX(), b.getTranslate().getY());
@@ -202,7 +207,7 @@ public class MainController implements Initializable{
 			}
 			if (!b.getId().equals(map.getId()))
     		{
-    			b.setOpacity(0);//0 _a
+    			b.setOpacity(.5);//0 _a
     		}
 			//Need to figure out how to deal with the canvas redraw for removing the selection circles.
 			b.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -211,15 +216,30 @@ public class MainController implements Initializable{
 					if (lastBuilding.equals(mainMap.getId()) && !b.getId().equals(mainMap.getId()))
 					{
 						Bounds bounds = b.getBoundsInParent();
-						GraphicsContext gc = mainMapOverlay.getGraphicsContext2D();
-						gc.strokeOval(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight());
+						overlayRect.setX(bounds.getMinX());
+						overlayRect.setY(bounds.getMinY());
+						overlayRect.setWidth(bounds.getWidth());
+						overlayRect.setHeight(bounds.getHeight());
+						overlayRect.setRotate(b.getAngle() - 90);
+						overlayRect.setStrokeWidth(15);
+						overlayRect.setArcHeight(5);
+						overlayRect.setArcWidth(5);
+						overlayRect.setFill(new Color(0,0,0,0));
+						overlayRect.setOpacity(.8);
+						if (b.getId().equals("Salisbury") || b.getId().equals("Boynton Hall"))
+						{
+							overlayRect.setRotate(b.getAngle());
+						}
+						overlayRect.setStroke(Color.BLUE);
+						overlayRect.setVisible(true);
 					}
 				}
 			});
 			b.setOnMouseExited(new EventHandler<MouseEvent>(){
 				@Override
 				public void handle(MouseEvent arg0) {
-					mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
+					overlayRect.setVisible(false);
+					//mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
 				}
 			});
 			b.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -311,8 +331,8 @@ public class MainController implements Initializable{
     
     void setUpGroupOnClick(Building building, double x, double y)
     {
-		mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
-
+		//mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
+    	overlayRect.setVisible(false);
     	 if(!lastBuilding.equals(mainMap.getId())){
              zoomProperty.set(1);
          } else {

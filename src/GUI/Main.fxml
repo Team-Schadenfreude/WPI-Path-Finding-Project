@@ -40,6 +40,16 @@
                   </HBox>
                </children>
             </VBox>
+            <HBox alignment="BOTTOM_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <MenuButton fx:id="aboutMenu" alignment="TOP_LEFT" mnemonicParsing="false" popupSide="TOP" text="About">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </HBox>
             <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
                   <Label fx:id="activeFloorLabel" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="Label" />
