@@ -87,15 +87,17 @@ public class BuildingPopUp {
 			System.out.println("default");
 		}
 		vbox.getChildren().clear();
-		Label name = new Label(b.getId());
-		Label description =  new Label(b.getDescription());
-		Label hours = new Label(b.getHours());
-		description.setWrapText(true);
-		vbox.getChildren().add(name);
-	//	vbox.getChildren().add(hours);
-		//vbox.getChildren().add(description);
-		image.setFitWidth(vbox.getWidth());
-		vbox.getChildren().add(image);
+
+		if (!bName.equals("Campus"))
+		{
+			Label name = new Label(b.getId());
+			Label description =  new Label(b.getDescription());
+			Label hours = new Label(b.getHours());
+			description.setWrapText(true);
+			vbox.getChildren().add(name);
+			image.setFitWidth(vbox.getWidth());
+			vbox.getChildren().add(image);
+		}
 	}
 
 }
