@@ -146,8 +146,17 @@ public class MainController implements Initializable{
 	       startNode= tempNode;
 	       
 	       //displays new node information in the appropriate text box
-	       startMenu.setText(startNode.getMap() +" " + startNode.getName());
-	       destMenu.setText(goalNode.getMap()+" " + goalNode.getName());
+	       //displays new node information in the appropriate text box
+	       if (startMenu.isVisible() && destMenu.isVisible()) {
+	    	   String temp1 = startMenu.getText();
+	    	   startMenu.setText(destMenu.getText());
+	    	   destMenu.setText(temp1);
+	       }
+	       if (startInput.isVisible() && destInput.isVisible()) {
+	    	   String temp2 = startInput.getPromptText();
+	    	   startInput.setPromptText(destInput.getPromptText());
+	    	   destInput.setPromptText(temp2);
+	       }
 	       
 	       //runs A* with the new path
 	       getDirectionsProperty.set(!getDirectionsProperty.get());
