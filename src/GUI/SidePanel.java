@@ -105,8 +105,7 @@ public class SidePanel {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_sharp_right.png", iconSize, iconSize, true, true)),
-						label);
+						new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("sharp left turn")) {
 				label = new Label(s);
@@ -131,6 +130,12 @@ public class SidePanel {
 				label.getStyleClass().add("direction_label");
 				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)),
 						label);
+				hbList.add(hbItem);
+			} else if (s.toLowerCase().contains("follow")) {
+				label = new Label(s);
+				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10,
+						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 

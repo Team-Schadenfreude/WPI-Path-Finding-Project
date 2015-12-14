@@ -34,8 +34,12 @@ public class Direction {
 			stringDirection = ("Go straight into " + n2.getName() + ". (" + distance + " ft)");
 
 		} else if (n1.getType() == Node.Type.INTERSECTION && n2.getType() == Node.Type.INTERSECTION) {
-			System.out.println("INTERSECTION TO INSECTION STRAIGHT DISTANCE FOUND");
-			stringDirection = ("Go straight for " + distance + " ft.");
+			if (n1.getMap().toLowerCase().equals("campus")) {
+				stringDirection = ("Follow the path for " + distance + " ft.");
+			} else {
+				stringDirection = ("Go straight for " + distance + " ft.");
+			}
+
 		} else if (n1.getType() == Node.Type.ELEVATOR) {
 			if (n2.getType() == Node.Type.ROOM) {
 				stringDirection = ("Leave the elevator and enter " + n2.getName() + ". (" + distance + " ft)");
@@ -80,6 +84,8 @@ public class Direction {
 				stringDirection = ("Go straight to the " + n2.getName() + ". (" + distance + " ft)");
 			}
 
+		} else if (n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.INTERSECTION) {
+			stringDirection = ("Follow the path for " + distance + " ft.");
 		}
 
 		return stringDirection;
@@ -87,7 +93,10 @@ public class Direction {
 
 	public String createTurnDirection() {
 		String stringDirection = " ";
-		stringDirection = ("Take a " + dirVal + ".");
+
+		if (!(n1.getType() == Node.Type.NONE)) {
+			stringDirection = ("Take a " + dirVal + ".");
+		}
 
 		return stringDirection;
 

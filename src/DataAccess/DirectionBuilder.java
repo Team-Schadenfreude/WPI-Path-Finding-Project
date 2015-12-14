@@ -105,6 +105,10 @@ public class DirectionBuilder {
 						mapChange = false;
 					}
 
+					if (n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.NONE) {
+						dirVal = "straight";
+					}
+
 					if (dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
 						if (!directionsList.isEmpty() && i != path.size() - 2) {
@@ -168,20 +172,20 @@ public class DirectionBuilder {
 	}
 
 	private static String getDirectionValueFromAngle(int angle) {
-		if (-20 < angle && angle < 20)// Going Straight
+		if (-25 < angle && angle < 25)// Going Straight
 		{
 			return "straight";
-		} else if (20 <= angle && angle < 60) {
+		} else if (25 <= angle && angle < 50) {
 			return "slight right turn";
-		} else if (60 <= angle && angle < 120) {
+		} else if (50 <= angle && angle < 130) {
 			return "right turn";
-		} else if (120 < angle && angle <= 180) {
+		} else if (130 < angle && angle <= 180) {
 			return "sharp right turn";
-		} else if (-60 < angle && angle <= -20) {
+		} else if (-50 < angle && angle <= -25) {
 			return "slight left turn";
-		} else if (-120 < angle && angle <= -60) {
+		} else if (-130 < angle && angle <= -50) {
 			return "left turn";
-		} else if (-180 < angle && angle <= -120) {
+		} else if (-180 < angle && angle <= -130) {
 			return "sharp left turn";
 		} else {
 			return " "; // GoingStraight
