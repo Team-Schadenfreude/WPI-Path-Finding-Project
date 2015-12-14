@@ -53,8 +53,14 @@ public class DirectionBuilder {
 
 					System.out.println("Should be adding directions.");
 					System.out.println(directionsList);
+
 					// Print direction.
-					directionsList.add("Proceed into " + n2.getMap() + ".");
+					if (n2.getMap().toLowerCase().equals("campus")) {
+						directionsList.add("Proceed out to " + n2.getMap() + ". (" + runningDistance + " ft)");
+					} else {
+						directionsList.add("Proceed into " + n2.getMap() + ".");
+					}
+
 					System.out.println("Should have added directions.");
 					System.out.println(directionsList);
 
@@ -113,11 +119,10 @@ public class DirectionBuilder {
 
 						if (!directionsList.isEmpty() && i != path.size() - 2) {
 
-							if (directionsList.get(directionsList.size() - 1).toLowerCase().contains("proceed")) {
-								// Nothing...
-							} else {
+							if (!(directionsList.get(directionsList.size() - 1).toLowerCase().contains("proceed"))) {
 								directionsList.remove(directionsList.size() - 1);
 							}
+
 						}
 
 						if (i == path.size() - 2) {
