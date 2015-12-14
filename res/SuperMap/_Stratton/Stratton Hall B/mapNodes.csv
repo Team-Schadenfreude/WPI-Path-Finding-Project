@@ -1,26 +1,26 @@
-SH-007,661,144,0,Stratton Hall B,,FALSE,Room
-SH-006,559,142,0,Stratton Hall B,,FALSE,Room
-SH-012,1036,213,0,Stratton Hall B,,FALSE,Room
-node,881,213,0,Stratton Hall B,,FALSE,Intersection
-SH-009,881,305,0,Stratton Hall B,,FALSE,Room
-node,666,271,0,Stratton Hall B,,FALSE,Intersection
-node,530,271,0,Stratton Hall B,,FALSE,Intersection
-SH-001,377,346,0,Stratton Hall B,,FALSE,Room
-SH-003,377,309,0,Stratton Hall B,,FALSE,Room
-Stratton Hall Large Front Entrance,530,466,0,Stratton Hall B,Stratton Hall Large Front Entrance,TRUE,Entrance
-node,881,271,0,Stratton Hall B,,FALSE,Intersection
-SH-011,951,305,0,Stratton Hall B,,FALSE,Room
-SH-009B,881,356,0,Stratton Hall B,,FALSE,Room
-SH-009A,836,356,0,Stratton Hall B,,FALSE,Room
-SH-010,951,356,0,Stratton Hall B,,FALSE,Room
-SH-013,1036,146,0,Stratton Hall B,,FALSE,Room
-SH-014,741,185,0,Stratton Hall B,,FALSE,Room
-node,661,185,0,Stratton Hall B,,FALSE,Intersection
-node,559,185,0,Stratton Hall B,,FALSE,Intersection
-node,501,185,0,Stratton Hall B,,FALSE,Intersection
-node,501,215,0,Stratton Hall B,,FALSE,Intersection
-SH-002,458,215,0,Stratton Hall B,,FALSE,Room
-node,530,346,0,Stratton Hall B,,FALSE,Intersection
-Stratton Hall Small Front Entrance,666,464,0,Stratton Hall B,Stratton Hall Small Front Entrance,TRUE,Entrance
-node,686,422,0,Stratton Hall B,Stratton Hall stairs from the basement to the first floor.,TRUE,Stairs
-node,666,422,0,Stratton Hall B,,FALSE,Intersection
+SH-007,661,144,0,Stratton Hall B,,false,Room
+SH-006,559,142,0,Stratton Hall B,,false,Room
+SH-012,1036,213,0,Stratton Hall B,,false,Room
+node,881,213,0,Stratton Hall B,,false,Intersection
+SH-009,881,305,0,Stratton Hall B,,false,Room
+node,666,271,0,Stratton Hall B,,false,Intersection
+node,530,271,0,Stratton Hall B,,false,Intersection
+SH-001,377,346,0,Stratton Hall B,,false,Room
+SH-003,377,309,0,Stratton Hall B,,false,Room
+Stratton Hall Large Front Entrance,530,466,0,Stratton Hall B,Stratton Hall Large Front Entrance,true,Entrance
+node,881,271,0,Stratton Hall B,,false,Intersection
+SH-011,951,305,0,Stratton Hall B,,false,Room
+SH-009B,881,356,0,Stratton Hall B,,false,Room
+SH-009A,836,356,0,Stratton Hall B,,false,Room
+SH-010,951,356,0,Stratton Hall B,,false,Room
+SH-013,1036,146,0,Stratton Hall B,,false,Room
+SH-014,741,185,0,Stratton Hall B,,false,Room
+node,661,185,0,Stratton Hall B,,false,Intersection
+node,559,185,0,Stratton Hall B,,false,Intersection
+node,501,185,0,Stratton Hall B,,false,Intersection
+node,501,215,0,Stratton Hall B,,false,Intersection
+SH-002,458,215,0,Stratton Hall B,,false,Room
+node,530,346,0,Stratton Hall B,,false,Intersection
+Stratton Hall Small Front Entrance,666,464,0,Stratton Hall B,Stratton Hall Small Front Entrance,true,Entrance
+node,686,422,0,Stratton Hall B,Stratton Hall stairs from the basement to the first floor.,true,Stairs
+node,666,422,0,Stratton Hall B,,false,Intersection
