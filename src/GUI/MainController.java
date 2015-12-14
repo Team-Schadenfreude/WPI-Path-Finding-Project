@@ -1,6 +1,7 @@
 package GUI;
 import java.io.File;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -69,12 +70,14 @@ public class MainController implements Initializable{
     private boolean nodeSelect = false;
     private boolean clickOutofMap = false;
     //The start and end nodes for AStar
-    Node startNode = null;
-    Node goalNode = null;
-    DoubleProperty zoomProperty = new SimpleDoubleProperty(1);
-    double thresh = 2;
-    int eventX = 0;
-    int eventY = 0;
+    private Node startNode = null;
+    private Node goalNode = null;
+    private DoubleProperty zoomProperty = new SimpleDoubleProperty(1);
+    private double thresh = 2;
+    private int eventX = 0;
+    private int eventY = 0;
+    
+    private Canvas mainMapOverlay = new Canvas();
     //Default constructor for the Main Controller
     public MainController(){
     	
@@ -187,7 +190,10 @@ public class MainController implements Initializable{
     	{
     		if (firstRun)
 			{
-
+    			mainMapOverlay.setWidth(mainMap.getBoundsInLocal().getWidth());
+    			mainMapOverlay.setHeight(mainMap.getBoundsInLocal().getHeight());
+    			mainMapOverlay.setMouseTransparent(true);
+    			mainMap.getChildren().add(mainMapOverlay);
     			mainMap.setScale(b.getScale().getX(), b.getScale().getY());
     			mainMap.setRotateAngle(b.getAngle());
     			mainMap.setTranslate(b.getTranslate().getX(), b.getTranslate().getY());
@@ -202,11 +208,18 @@ public class MainController implements Initializable{
 			b.setOnMouseEntered(new EventHandler<MouseEvent>(){
 				@Override
 				public void handle(MouseEvent arg0) {
-					Bounds bounds = b.getBoundsInParent();
-					Canvas c = mainMap.getBaseBuilding().getBottomFloor().getCanvas();
-					GraphicsContext gc = c.getGraphicsContext2D();
-					//mainMap.getBaseBuilding().getBottomFloor()
-					gc.strokeOval(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight());
+					if (lastBuilding.equals(mainMap.getId()) && !b.getId().equals(mainMap.getId()))
+					{
+						Bounds bounds = b.getBoundsInParent();
+						GraphicsContext gc = mainMapOverlay.getGraphicsContext2D();
+						gc.strokeOval(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight());
+					}
+				}
+			});
+			b.setOnMouseExited(new EventHandler<MouseEvent>(){
+				@Override
+				public void handle(MouseEvent arg0) {
+					mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
 				}
 			});
 			b.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -298,7 +311,8 @@ public class MainController implements Initializable{
     
     void setUpGroupOnClick(Building building, double x, double y)
     {
-    	
+		mainMapOverlay.getGraphicsContext2D().clearRect(0, 0, mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
+
     	 if(!lastBuilding.equals(mainMap.getId())){
              zoomProperty.set(1);
          } else {
