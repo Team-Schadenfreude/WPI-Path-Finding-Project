@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -197,6 +198,17 @@ public class MainController implements Initializable{
     		{
     			b.setOpacity(0);//0 _a
     		}
+			//Need to figure out how to deal with the canvas redraw for removing the selection circles.
+			b.setOnMouseEntered(new EventHandler<MouseEvent>(){
+				@Override
+				public void handle(MouseEvent arg0) {
+					Bounds bounds = b.getBoundsInParent();
+					Canvas c = mainMap.getBaseBuilding().getBottomFloor().getCanvas();
+					GraphicsContext gc = c.getGraphicsContext2D();
+					//mainMap.getBaseBuilding().getBottomFloor()
+					gc.strokeOval(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight());
+				}
+			});
 			b.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
@@ -206,12 +218,12 @@ public class MainController implements Initializable{
 						{
 							if(clickOutofMap)
 							{
-								Building b = mainMap.getBuildingsUnmodifiable().get(0);
+								Building b = mainMap.getBaseBuilding();
 								BuildingPopUp.setupPopUp(b);
 								setUpGroupOnClick(b, event.getX(), event.getY());
 								String floorName = b.setActiveFloor(0);
 								activeFloorLabel.setText(floorName);
-								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+								updateFloor(b.getBottomFloor(), b.getFloorsUnmodifiable());
 								lastBuilding = b.getId();
 								clickOutofMap = false;
 							}
@@ -224,17 +236,17 @@ public class MainController implements Initializable{
 								setUpGroupOnClick(b,event.getX(), event.getY());
 								String floorName = b.setActiveFloor(0);
 								activeFloorLabel.setText(floorName);
-								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+								updateFloor(b.getBottomFloor(), b.getFloorsUnmodifiable());
 								lastBuilding = b.getId();
 							}
 							else
 							{
-								Building b = mainMap.getBuildingsUnmodifiable().get(0);
+								Building b = mainMap.getBaseBuilding();
 								BuildingPopUp.setupPopUp(b);
 								setUpGroupOnClick(b, event.getX(), event.getY());
 								String floorName = b.setActiveFloor(0);
 								activeFloorLabel.setText(floorName);
-								updateFloor(b.getFloorsUnmodifiable().get(0), b.getFloorsUnmodifiable());
+								updateFloor(b.getBottomFloor(), b.getFloorsUnmodifiable());
 								lastBuilding = b.getId();
 							}
 						}
@@ -320,21 +332,21 @@ public class MainController implements Initializable{
 			pivotY = y;
 
 			File file =  new File("res/SuperMap/_Campus/Campus/map.png");
-			Building b = mainMap.getBuildingsUnmodifiable().get(0);
-			Floor f = b.getFloorsUnmodifiable().get(0);
+			Building b = mainMap.getBaseBuilding();
+			Floor f = b.getBottomFloor();
 			f.setBaseImage(new Image(file.toURI().toString()));
 			b.setOpacity(1);
-			b.getFloorsUnmodifiable().get(0).getCanvas().setVisible(true);
+			b.getBottomFloor().getCanvas().setVisible(true);
 
 		}
 		else
 		{
 			File file =  new File("res/SuperMap/_Campus/Campus/Campusempty.png");
-			Building b = mainMap.getBuildingsUnmodifiable().get(0);
-			Floor f = b.getFloorsUnmodifiable().get(0);
+			Building b = mainMap.getBaseBuilding();
+			Floor f = b.getBottomFloor();
 			f.setBaseImage(new Image(file.toURI().toString()));
 			b.setOpacity(1);
-			b.getFloorsUnmodifiable().get(0).getCanvas().setVisible(false);
+			b.getBottomFloor().getCanvas().setVisible(false);
 			
 		}
 		mainMap.getRotation().setPivotX(pivotX);

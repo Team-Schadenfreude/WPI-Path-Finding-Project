@@ -61,7 +61,7 @@ public class MapBuilder {
 
 
 						if(floor.getId().charAt(floor.getId().length()-1)== 'B'){
-							b.addFloor(0, floor);;
+							b.addBottomFloor(floor);
 						} else {
 							b.addFloor(floor);    	
 
@@ -76,7 +76,7 @@ public class MapBuilder {
 				System.out.println("The X = " + b.getFloorsUnmodifiable().get(0).getTranslate().getX());
 				if (b.getId().equals(map.getId()))
 				{
-					map.addBuilding(0,b);
+					map.addBaseBuilding(b);
 				}
 				else
 				{

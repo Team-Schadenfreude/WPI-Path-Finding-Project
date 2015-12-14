@@ -18,12 +18,11 @@ public abstract class MapComponent extends Group {
 	//CanvasIndex = 1
 	private final static int imageViewIndex = 0;
 	private final static int canvasIndex = 1;
+	protected final int safeChildrenIndex = canvasIndex + 1;
 	private final static int translateIndex = 0;
 	private final static int scaleIndex = 1;
 	private final static int rotateIndex = 2;
-
 	public MapComponent() {
-		super();
 		initChildren();
 		initTransforms();
 	}
@@ -33,6 +32,9 @@ public abstract class MapComponent extends Group {
 		this.getChildren().clear();
 		this.getChildren().add(new ImageView());
 		this.getChildren().add(new Canvas());
+		int x = this.getChildren().size();
+		Canvas c = this.getCanvas();
+		System.out.println(c);
 	}
 	final private void initTransforms()
 	{

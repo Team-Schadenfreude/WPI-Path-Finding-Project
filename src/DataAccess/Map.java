@@ -12,9 +12,7 @@ public class Map extends MapComponent{
 
 	private List<Node> nodes = new LinkedList<Node>();
 	private List<Building> buildings = new LinkedList<Building>();
-	
 	public Map(String name){
-		super();
 		this.setId(name);
 	}
 	public List<Building> getBuildingsUnmodifiable()
@@ -31,18 +29,24 @@ public class Map extends MapComponent{
 		this.getChildren().add(building);
 		addNodesFromBuilding(building);
 	}
-	public void addBuilding(int index, Building building)
+	public void addBaseBuilding(Building b)
 	{
-		if (buildings.size() > 0)
+		if (this.getChildren().size() > this.safeChildrenIndex)
 		{
-			this.buildings.add(0, building);
-			this.getChildren().add(0, building);
-			addNodesFromBuilding(building);
+			this.buildings.add(0, b);
+			this.getChildren().add(this.safeChildrenIndex, b);
 		}
 		else
 		{
-			addBuilding(building);
-		}		
+			System.out.println("Dangerous Index Overwite Detected");
+			this.buildings.add(b);
+			this.getChildren().add(b);
+		}
+		addNodesFromBuilding(b);
+	}
+	public Building getBaseBuilding()
+	{
+		return (Building)this.getChildren().get(this.safeChildrenIndex);
 	}
 	private void addNodesFromBuilding(Building b)
 	{
