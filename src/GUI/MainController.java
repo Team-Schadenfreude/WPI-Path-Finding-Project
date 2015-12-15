@@ -165,7 +165,7 @@ public class MainController implements Initializable {
 		activeFloorLabel.getStyleClass().add("active_floor_label");
 
 		swapButton.setMaxHeight(startMenu.getBoundsInParent().getHeight() * 2);
-		File swapImageFile = new File("/Software Engineering/icons/swap.png");
+		File swapImageFile = new File("res/icons/swap.png");
 		ImageView swapButtonImage = new ImageView(swapImageFile.toURI().toString());
 		// swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight()
 		// * 2);
