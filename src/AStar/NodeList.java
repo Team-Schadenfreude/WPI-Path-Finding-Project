@@ -25,7 +25,9 @@ public class NodeList {
 	public Node findNode(String name){
 		return nodes.get(name);
 	}
-	
+	public int getSize(){
+		return nodes.size();
+	}
 	public Node findNode (int x, int y){	
 		return null;
 	}

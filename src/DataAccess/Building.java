@@ -18,17 +18,26 @@ public class Building {
 	{
 		this.name = name;
 	}
+	public Building(String name, String desc){
+		this.name = name;
+		this.description= desc;
+	}
 	public void setDescription(String description)
 	{
 		this.description = description;
 	}
+
 	public void setHours(String hours)
 	{
 		this.hours = hours;
 	}
-	public void setFloors(List<Floor> floors)
+	public boolean setFloors(List<Floor> floors)
 	{
+		if(floors==null){
+			return false;
+		}
 		this.floors = floors;
+		return true;
 	}
 	public String getDescription()
 	{

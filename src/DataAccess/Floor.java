@@ -17,6 +17,9 @@ public class Floor {
 		this.mapImage = new Image(path);
 		this.name = name;
 	}
+	public Floor(String name){
+		this.name=name;
+	}
 	public void setDirectoryPath(String path)
 	{
 		this.dirPath = path;

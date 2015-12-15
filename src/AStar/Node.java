@@ -62,6 +62,11 @@ public class Node{
         this.description = "";
         this.type = Type.NONE;
     }
+    public Node(int x, int y, String name){
+    	this.xPos=x;
+    	this.yPos=y;
+    	this.nodeName=name;
+    }
     public double getPxPerFt()
     {
     	return this.pxPerFt;
@@ -98,6 +103,7 @@ public class Node{
     {
     	return this.map;
     }
+   
     public String getDescription()
     {
     	return this.description;
