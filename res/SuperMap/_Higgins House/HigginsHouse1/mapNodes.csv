@@ -1,70 +1,70 @@
-111,328,98,0,HigginsHouse1,,false,Room
-node,193,134,0,HigginsHouse1,,false,None
-node,278,209,0,HigginsHouse1,,false,None
-node,164,224,0,HigginsHouse1,,false,None
-103,193,209,0,HigginsHouse1,,false,Room
-100,103,179,0,HigginsHouse1,,false,Room
-node,164,114,0,HigginsHouse1,,false,None
-Porch Entrance,150,13,0,HigginsHouse1,,true,Entrance
-Porch,191,95,0,HigginsHouse1,,false,Room
-node,215,114,0,HigginsHouse1,,false,None
-node,193,114,0,HigginsHouse1,,false,None
-node,300,116,0,HigginsHouse1,,false,None
-114,506,151,0,HigginsHouse1,,false,Room
-node,517,198,0,HigginsHouse1,,false,None
-node,464,230,0,HigginsHouse1,,false,None
-node,300,209,0,HigginsHouse1,,false,None
-110,394,173,0,HigginsHouse1,,false,Room
-North Stairs,236,113,0,HigginsHouse1,Higgins House North Stairs,true,Stairs
-node,462,117,0,HigginsHouse1,,false,None
-node,625,232,0,HigginsHouse1,,false,None
-node,595,354,0,HigginsHouse1,,false,None
-node,901,220,0,HigginsHouse1,,false,None
-120,402,309,0,HigginsHouse1,,false,Room
-node,482,306,0,HigginsHouse1,,false,None
-node,483,332,0,HigginsHouse1,,false,None
-node,544,332,0,HigginsHouse1,,false,None
-118,544,309,0,HigginsHouse1,,false,Room
-node,402,332,0,HigginsHouse1,,false,None
-node,595,332,0,HigginsHouse1,,false,None
-node,373,332,0,HigginsHouse1,,false,None
-node,373,377,0,HigginsHouse1,,false,None
-135,373,492,0,HigginsHouse1,,false,Room
-node,440,492,0,HigginsHouse1,,false,None
-146,415,555,0,HigginsHouse1,,false,Room
-136,296,559,0,HigginsHouse1,,false,Room
-SouthWestEntrance,266,589,0,HigginsHouse1,Higgins House South West Entrance (Front Door),true,Entrance
-Basement Stairs,402,377,0,HigginsHouse1,Higgins House Basement Stairs,true,Stairs
-139,523,492,0,HigginsHouse1,,false,Room
-node,523,398,0,HigginsHouse1,,false,None
-node,523,377,0,HigginsHouse1,,false,None
-node,595,377,0,HigginsHouse1,,false,None
-node,694,377,0,HigginsHouse1,,false,None
-131,769,276,0,HigginsHouse1,,false,Room
-node,694,354,0,HigginsHouse1,,false,None
-node,851,375,0,HigginsHouse1,,false,None
-node,851,349,0,HigginsHouse1,,false,None
-133,1017,309,0,HigginsHouse1,,false,Room
-node,936,375,0,HigginsHouse1,,false,None
-node,1086,363,0,HigginsHouse1,,false,None
-East Entrance,1085,299,0,HigginsHouse1,,true,Entrance
-node,1087,235,0,HigginsHouse1,,false,None
-node,1008,189,0,HigginsHouse1,,false,None
-119,543,232,0,HigginsHouse1,,false,Room
-node,694,501,0,HigginsHouse1,,false,None
-node,743,640,0,HigginsHouse1,,false,None
-node,512,617,0,HigginsHouse1,,false,None
-142,437,613,0,HigginsHouse1,,false,Room
-145,437,647,0,HigginsHouse1,,false,Room
-141,510,670,0,HigginsHouse1,,false,Room
-node,554,669,0,HigginsHouse1,,false,None
-South Stairs,555,643,0,HigginsHouse1,Higgins South Stairs,true,Stairs
-node,595,670,0,HigginsHouse1,,false,None
-147,595,643,0,HigginsHouse1,,false,Room
-146,681,793,0,HigginsHouse1,,false,Room
-node,774,590,0,HigginsHouse1,,false,None
-Central Stairs,482,377,0,HigginsHouse1,Higgins House Central Stairs,true,Stairs
-node,595,293,0,HigginsHouse1,,false,None
-node,482,264,0,HigginsHouse1,,false,None
-node,345,132,0,HigginsHouse1,,false,None
-node,933,220,0,HigginsHouse1,,false,None
+111,328,98,0,HigginsHouse1,,FALSE,Room
+node,193,134,0,HigginsHouse1,,FALSE,Intersection
+node,278,209,0,HigginsHouse1,,FALSE,Intersection
+node,164,224,0,HigginsHouse1,,FALSE,Intersection
+103,193,209,0,HigginsHouse1,,FALSE,Room
+100,103,179,0,HigginsHouse1,,FALSE,Room
+node,164,114,0,HigginsHouse1,,FALSE,Intersection
+Porch Entrance,150,13,0,HigginsHouse1,,TRUE,Entrance
+Porch,191,95,0,HigginsHouse1,,FALSE,Room
+node,215,114,0,HigginsHouse1,,FALSE,Intersection
+node,193,114,0,HigginsHouse1,,FALSE,Intersection
+node,300,116,0,HigginsHouse1,,FALSE,Intersection
+114,506,151,0,HigginsHouse1,,FALSE,Room
+node,517,198,0,HigginsHouse1,,FALSE,Intersection
+node,464,230,0,HigginsHouse1,,FALSE,Intersection
+node,300,209,0,HigginsHouse1,,FALSE,Intersection
+110,394,173,0,HigginsHouse1,,FALSE,Room
+North Stairs,236,113,0,HigginsHouse1,Higgins House North Stairs,TRUE,Stairs
+node,462,117,0,HigginsHouse1,,FALSE,Intersection
+node,625,232,0,HigginsHouse1,,FALSE,Intersection
+node,595,354,0,HigginsHouse1,,FALSE,Intersection
+node,901,220,0,HigginsHouse1,,FALSE,Intersection
+120,402,309,0,HigginsHouse1,,FALSE,Room
+node,482,306,0,HigginsHouse1,,FALSE,Intersection
+node,483,332,0,HigginsHouse1,,FALSE,Intersection
+node,544,332,0,HigginsHouse1,,FALSE,Intersection
+118,544,309,0,HigginsHouse1,,FALSE,Room
+node,402,332,0,HigginsHouse1,,FALSE,Intersection
+node,595,332,0,HigginsHouse1,,FALSE,Intersection
+node,373,332,0,HigginsHouse1,,FALSE,Intersection
+node,373,377,0,HigginsHouse1,,FALSE,Intersection
+135,373,492,0,HigginsHouse1,,FALSE,Room
+node,440,492,0,HigginsHouse1,,FALSE,Intersection
+146,415,555,0,HigginsHouse1,,FALSE,Room
+136,296,559,0,HigginsHouse1,,FALSE,Room
+SouthWestEntrance,266,589,0,HigginsHouse1,Higgins House South West Entrance (Front Door),TRUE,Entrance
+Basement Stairs,402,377,0,HigginsHouse1,Higgins House Basement Stairs,TRUE,Stairs
+139,523,492,0,HigginsHouse1,,FALSE,Room
+node,523,398,0,HigginsHouse1,,FALSE,Intersection
+node,523,377,0,HigginsHouse1,,FALSE,Intersection
+node,595,377,0,HigginsHouse1,,FALSE,Intersection
+node,694,377,0,HigginsHouse1,,FALSE,Intersection
+131,769,276,0,HigginsHouse1,,FALSE,Room
+node,694,354,0,HigginsHouse1,,FALSE,Intersection
+node,851,375,0,HigginsHouse1,,FALSE,Intersection
+node,851,349,0,HigginsHouse1,,FALSE,Intersection
+133,1017,309,0,HigginsHouse1,,FALSE,Room
+node,936,375,0,HigginsHouse1,,FALSE,Intersection
+node,1086,363,0,HigginsHouse1,,FALSE,Intersection
+East Entrance,1085,299,0,HigginsHouse1,,TRUE,Entrance
+node,1087,235,0,HigginsHouse1,,FALSE,Intersection
+node,1008,189,0,HigginsHouse1,,FALSE,Intersection
+119,543,232,0,HigginsHouse1,,FALSE,Room
+node,694,501,0,HigginsHouse1,,FALSE,Intersection
+node,743,640,0,HigginsHouse1,,FALSE,Intersection
+node,512,617,0,HigginsHouse1,,FALSE,Intersection
+142,437,613,0,HigginsHouse1,,FALSE,Room
+145,437,647,0,HigginsHouse1,,FALSE,Room
+141,510,670,0,HigginsHouse1,,FALSE,Room
+node,554,669,0,HigginsHouse1,,FALSE,Intersection
+South Stairs,555,643,0,HigginsHouse1,Higgins South Stairs,TRUE,Stairs
+node,595,670,0,HigginsHouse1,,FALSE,Intersection
+147,595,643,0,HigginsHouse1,,FALSE,Room
+146,681,793,0,HigginsHouse1,,FALSE,Room
+node,774,590,0,HigginsHouse1,,FALSE,Intersection
+Central Stairs,482,377,0,HigginsHouse1,Higgins House Central Stairs,TRUE,Stairs
+node,595,293,0,HigginsHouse1,,FALSE,Intersection
+node,482,264,0,HigginsHouse1,,FALSE,Intersection
+node,345,132,0,HigginsHouse1,,FALSE,Intersection
+node,933,220,0,HigginsHouse1,,FALSE,Intersection
