@@ -56,7 +56,7 @@ public class MainController implements Initializable{
     @FXML private ImageView mapView;
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
-    @FXML private MenuButton aboutMenu;
+    @FXML private Button helpBtn;
     @FXML private ScrollPane imageScrollPane;
     @FXML private Label activeFloorLabel;
     @FXML private Button floorUpBtn;
@@ -96,7 +96,6 @@ public class MainController implements Initializable{
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
-    	aboutMenu.getItems().clear();
     	//floorSelectionMenu.getItems().clear();
     	loadMap();
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {

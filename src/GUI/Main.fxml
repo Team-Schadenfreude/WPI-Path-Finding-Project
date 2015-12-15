@@ -42,21 +42,17 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <MenuButton fx:id="aboutMenu" alignment="TOP_LEFT" mnemonicParsing="false" popupSide="TOP" text="About">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
+                  <Button fx:id="helpBtn" mnemonicParsing="false" text="Help" />
                </children>
             </HBox>
-            <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <Label fx:id="activeFloorLabel" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="Label" />
-                  <VBox fx:id="floorControlVBox" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="floorControlVBox" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="90.0">
                      <children>
-                        <Button fx:id="floorUpBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="+" />
-                        <Button fx:id="floorDownBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="-" />
+                        <Label fx:id="activeFloorLabel" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="100.0" prefHeight="20.0" prefWidth="50.0" text="Label" />
+                        <Button fx:id="floorUpBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="Floor Up" />
+                        <Button fx:id="floorDownBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" text="Floor Down" />
                      </children>
                   </VBox>
                </children>
