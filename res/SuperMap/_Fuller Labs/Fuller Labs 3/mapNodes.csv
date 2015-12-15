@@ -1,33 +1,33 @@
-node,793,1097,0,Fuller Labs 3,The staircase at the front end of the building.,true,Stairs
-node,793,1063,0,Fuller Labs 3,,false,None
-node,854,1097,0,Fuller Labs 3,,false,None
-FL-320,854,1063,0,Fuller Labs 3,,false,Room
-node,854,1014,0,Fuller Labs 3,,false,None
-node,1042,1014,0,Fuller Labs 3,,false,None
-node,1042,981,0,Fuller Labs 3,,false,None
-FL-319,885,981,0,Fuller Labs 3,,false,Room
-node,885,798,0,Fuller Labs 3,,false,None
-FL-318,929,798,0,Fuller Labs 3,,false,Room
-node,885,730,0,Fuller Labs 3,,false,None
-FL-317,929,730,0,Fuller Labs 3,,false,Room
-node,739,798,0,Fuller Labs 3,,false,None
-FL-316,794,867,0,Fuller Labs 3,,false,Room
-node,739,1063,0,Fuller Labs 3,,false,None
-node,739,867,0,Fuller Labs 3,,false,None
-node,739,750,0,Fuller Labs 3,,false,None
-FL-314,800,750,0,Fuller Labs 3,,false,Room
-node,739,533,0,Fuller Labs 3,,false,None
-node,866,533,0,Fuller Labs 3,,false,None
-FL-307,866,492,0,Fuller Labs 3,,false,Room
-node,866,579,0,Fuller Labs 3,,false,None
-FL-312,934,579,0,Fuller Labs 3,,false,Room
-node,1046,533,0,Fuller Labs 3,,false,None
-node,934,533,0,Fuller Labs 3,,false,None
-FL-311,935,425,0,Fuller Labs 3,,false,Room
-FL-308,866,392,0,Fuller Labs 3,,false,Room
-node,810,425,0,Fuller Labs 3,Stair near the elevator on the third floor.,true,Stairs
-node,739,475,0,Fuller Labs 3,,false,None
-node,769,475,0,Fuller Labs 3,Elevator on the third floor of Fuller.,true,Elevator
-node,739,425,0,Fuller Labs 3,,false,None
-node,1046,579,0,Fuller Labs 3,,false,None
-node,866,425,0,Fuller Labs 3,,false,None
+node,793,1097,0,Fuller Labs 3,The staircase at the front end of the building.,TRUE,Stairs
+node,793,1063,0,Fuller Labs 3,,FALSE,Intersection
+node,854,1097,0,Fuller Labs 3,,FALSE,Intersection
+FL-320,854,1063,0,Fuller Labs 3,,FALSE,Room
+node,854,1014,0,Fuller Labs 3,,FALSE,Intersection
+node,1042,1014,0,Fuller Labs 3,,FALSE,Intersection
+node,1042,981,0,Fuller Labs 3,,FALSE,Intersection
+FL-319,885,981,0,Fuller Labs 3,,FALSE,Room
+node,885,798,0,Fuller Labs 3,,FALSE,Intersection
+FL-318,929,798,0,Fuller Labs 3,,FALSE,Room
+node,885,730,0,Fuller Labs 3,,FALSE,Intersection
+FL-317,929,730,0,Fuller Labs 3,,FALSE,Room
+node,739,798,0,Fuller Labs 3,,FALSE,Intersection
+FL-316,794,867,0,Fuller Labs 3,,FALSE,Room
+node,739,1063,0,Fuller Labs 3,,FALSE,Intersection
+node,739,867,0,Fuller Labs 3,,FALSE,Intersection
+node,739,750,0,Fuller Labs 3,,FALSE,Intersection
+FL-314,800,750,0,Fuller Labs 3,,FALSE,Room
+node,739,533,0,Fuller Labs 3,,FALSE,Intersection
+node,866,533,0,Fuller Labs 3,,FALSE,Intersection
+FL-307,866,492,0,Fuller Labs 3,,FALSE,Room
+node,866,579,0,Fuller Labs 3,,FALSE,Intersection
+FL-312,934,579,0,Fuller Labs 3,,FALSE,Room
+node,1046,533,0,Fuller Labs 3,,FALSE,Intersection
+node,934,533,0,Fuller Labs 3,,FALSE,Intersection
+FL-311,935,425,0,Fuller Labs 3,,FALSE,Room
+FL-308,866,392,0,Fuller Labs 3,,FALSE,Room
+node,810,425,0,Fuller Labs 3,Stair near the elevator on the third floor.,TRUE,Stairs
+node,739,475,0,Fuller Labs 3,,FALSE,Intersection
+node,769,475,0,Fuller Labs 3,Elevator on the third floor of Fuller.,TRUE,Elevator
+node,739,425,0,Fuller Labs 3,,FALSE,Intersection
+node,1046,579,0,Fuller Labs 3,,FALSE,Intersection
+node,866,425,0,Fuller Labs 3,,FALSE,Intersection
