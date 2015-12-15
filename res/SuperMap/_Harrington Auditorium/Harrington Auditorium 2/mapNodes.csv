@@ -1,0 +1,81 @@
+node,11,345,0,Harrington Auditorium 2,Entrance 1,TRUE,Entrance
+node,9,374,0,Harrington Auditorium 2,Entrance 2,TRUE,Entrance
+node,8,403,0,Harrington Auditorium 2,Entrance 3,TRUE,Entrance
+HA-106,39,325,0,Harrington Auditorium 2,,FALSE,Room
+HA-105,121,277,0,Harrington Auditorium 2,,FALSE,Room
+node,52,473,0,Harrington Auditorium 2,Elevator,TRUE,Elevator
+HA-107,171,277,0,Harrington Auditorium 2,,FALSE,Room
+node,213,90,0,Harrington Auditorium 2,Stairs at the top,TRUE,Stairs
+HA-108,888,111,0,Harrington Auditorium 2,,FALSE,Room
+HA-118,908,343,0,Harrington Auditorium 2,,FALSE,Room
+node,1046,369,0,Harrington Auditorium 2,Stairs at the right side of the building,TRUE,Stairs
+HA-112,872,467,0,Harrington Auditorium 2,,FALSE,Room
+node,851,639,0,Harrington Auditorium 2,,FALSE,Intersection
+HA-113,783,694,0,Harrington Auditorium 2,,FALSE,Room
+node,814,727,0,Harrington Auditorium 2,Stairs at the bottom right corner,TRUE,Stairs
+node,255,728,0,Harrington Auditorium 2,Stairs at the bottom left corner,TRUE,Stairs
+HA-101,298,695,0,Harrington Auditorium 2,,FALSE,Room
+HA-111S,99,454,0,Harrington Auditorium 2,,FALSE,Room
+HA-111A,125,450,0,Harrington Auditorium 2,,FALSE,Room
+HA-111C,100,489,0,Harrington Auditorium 2,,FALSE,Room
+HA-111D,88,527,0,Harrington Auditorium 2,,FALSE,Room
+HA-111,152,516,0,Harrington Auditorium 2,,FALSE,Room
+node,39,345,0,Harrington Auditorium 2,,FALSE,Intersection
+node,39,374,0,Harrington Auditorium 2,,FALSE,Intersection
+node,39,403,0,Harrington Auditorium 2,,FALSE,Intersection
+node,52,403,0,Harrington Auditorium 2,,FALSE,Intersection
+node,121,291,0,Harrington Auditorium 2,,FALSE,Intersection
+node,171,291,0,Harrington Auditorium 2,,FALSE,Intersection
+node,121,374,0,Harrington Auditorium 2,,FALSE,Intersection
+node,171,374,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,374,0,Harrington Auditorium 2,,FALSE,Intersection
+HA-115,404,695,0,Harrington Auditorium 2,,FALSE,Room
+node,668,694,0,Harrington Auditorium 2,,FALSE,Intersection
+node,319,695,0,Harrington Auditorium 2,,FALSE,Intersection
+node,374,695,0,Harrington Auditorium 2,,FALSE,Intersection
+node,374,615,0,Harrington Auditorium 2,,FALSE,Intersection
+node,319,615,0,Harrington Auditorium 2,,FALSE,Intersection
+node,111,450,0,Harrington Auditorium 2,,FALSE,Intersection
+node,111,489,0,Harrington Auditorium 2,,FALSE,Intersection
+node,111,516,0,Harrington Auditorium 2,,FALSE,Intersection
+node,111,527,0,Harrington Auditorium 2,,FALSE,Intersection
+node,111,633,0,Harrington Auditorium 2,,FALSE,Intersection
+node,697,694,0,Harrington Auditorium 2,,FALSE,Intersection
+node,754,694,0,Harrington Auditorium 2,,FALSE,Intersection
+node,697,612,0,Harrington Auditorium 2,,FALSE,Intersection
+node,754,612,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,639,0,Harrington Auditorium 2,,FALSE,Intersection
+node,872,443,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,551,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,443,0,Harrington Auditorium 2,,FALSE,Intersection
+HA-110,908,377,0,Harrington Auditorium 2,,FALSE,Room
+node,1046,353,0,Harrington Auditorium 2,,FALSE,Intersection
+node,982,353,0,Harrington Auditorium 2,,FALSE,Intersection
+node,982,377,0,Harrington Auditorium 2,,FALSE,Intersection
+node,872,377,0,Harrington Auditorium 2,,FALSE,Intersection
+node,255,695,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,612,0,Harrington Auditorium 2,,FALSE,Intersection
+node,872,111,0,Harrington Auditorium 2,,FALSE,Intersection
+node,78,291,0,Harrington Auditorium 2,,FALSE,Intersection
+node,78,277,0,Harrington Auditorium 2,,FALSE,Intersection
+node,78,259,0,Harrington Auditorium 2,Stairs next to the entrance,TRUE,Stairs
+node,78,374,0,Harrington Auditorium 2,,FALSE,Intersection
+node,52,374,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,111,0,Harrington Auditorium 2,,FALSE,Intersection
+node,872,310,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,310,0,Harrington Auditorium 2,,FALSE,Intersection
+node,298,443,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,310,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,443,0,Harrington Auditorium 2,,FALSE,Intersection
+HA-118,920,277,0,Harrington Auditorium 2,,FALSE,Room
+HA-117,920,178,0,Harrington Auditorium 2,,FALSE,Room
+node,909,178,0,Harrington Auditorium 2,,FALSE,Intersection
+node,908,277,0,Harrington Auditorium 2,,FALSE,Intersection
+node,908,353,0,Harrington Auditorium 2,,FALSE,Intersection
+node,814,694,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,615,0,Harrington Auditorium 2,,FALSE,Intersection
+node,213,633,0,Harrington Auditorium 2,,FALSE,Intersection
+node,298,615,0,Harrington Auditorium 2,,FALSE,Intersection
+node,298,310,0,Harrington Auditorium 2,,FALSE,Intersection
+node,298,111,0,Harrington Auditorium 2,,FALSE,Intersection
+node,812,111,0,Harrington Auditorium 2,,FALSE,Intersection

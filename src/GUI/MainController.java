@@ -238,7 +238,7 @@ public class MainController implements Initializable {
 				firstRun = false;
 			}
 			if (!b.getId().equals(map.getId())) {
-				b.setOpacity(0);// 0 _a
+				b.setOpacity(.5);// 0 _a
 			}
 			// Need to figure out how to deal with the canvas redraw for
 			// removing the selection circles.

@@ -1,0 +1,100 @@
+HA-209A,99,237,0,Harrington Auditorium 3,,FALSE,Room
+HA-209B,98,269,0,Harrington Auditorium 3,,FALSE,Room
+HA-209C,98,299,0,Harrington Auditorium 3,,FALSE,Room
+HA-209D,97,331,0,Harrington Auditorium 3,,FALSE,Room
+node,87,175,0,Harrington Auditorium 3,,FALSE,Intersection
+node,76,162,0,Harrington Auditorium 3,,FALSE,Intersection
+node,46,151,0,Harrington Auditorium 3,Stairs at the top left corner,TRUE,Stairs
+node,84,379,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-205,74,498,0,Harrington Auditorium 3,,FALSE,Room
+HA-202,230,582,0,Harrington Auditorium 3,,FALSE,Room
+node,193,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,786,565,0,Harrington Auditorium 3,Entrance at the bottom right corner 1,TRUE,Entrance
+node,786,612,0,Harrington Auditorium 3,Entrance at the bottom right corner 2,TRUE,Entrance
+HA-220A,915,450,0,Harrington Auditorium 3,,FALSE,Room
+node,878,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,939,126,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-219A,918,197,0,Harrington Auditorium 3,,FALSE,Room
+node,902,98,0,Harrington Auditorium 3,,FALSE,Intersection
+node,399,662,0,Harrington Auditorium 3,Entrance at the bottom 1,TRUE,Entrance
+node,488,664,0,Harrington Auditorium 3,Entrance at the bottom 2,TRUE,Entrance
+node,575,664,0,Harrington Auditorium 3,Entrance at the bottom 3,TRUE,Entrance
+HA-215,869,148,0,Harrington Auditorium 3,,FALSE,Room
+node,869,523,0,Harrington Auditorium 3,,FALSE,Intersection
+node,959,532,0,Harrington Auditorium 3,Entrance at the bottom right corner,TRUE,Entrance
+HA-216,1039,347,0,Harrington Auditorium 3,,FALSE,Room
+node,169,621,0,Harrington Auditorium 3,Stairs at the bottom left corner2,TRUE,Stairs
+HA-208,43,422,0,Harrington Auditorium 3,,FALSE,Room
+node,84,299,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,331,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,269,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,237,0,Harrington Auditorium 3,,FALSE,Intersection
+node,87,162,0,Harrington Auditorium 3,,FALSE,Intersection
+node,46,162,0,Harrington Auditorium 3,,FALSE,Intersection
+node,43,432,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,432,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-207,74,412,0,Harrington Auditorium 3,,FALSE,Room
+node,84,412,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,498,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-206,72,458,0,Harrington Auditorium 3,,FALSE,Room
+node,84,458,0,Harrington Auditorium 3,,FALSE,Intersection
+node,84,533,0,Harrington Auditorium 3,,FALSE,Intersection
+node,229,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,229,33,0,Harrington Auditorium 3,,FALSE,Intersection
+node,89,33,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,33,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,668,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,575,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,399,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,315,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,315,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,668,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,575,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,399,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,488,565,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-220,869,534,0,Harrington Auditorium 3,,FALSE,Room
+node,915,534,0,Harrington Auditorium 3,,FALSE,Intersection
+node,959,450,0,Harrington Auditorium 3,,FALSE,Intersection
+node,959,347,0,Harrington Auditorium 3,Stairs on the left side,TRUE,Stairs
+node,918,98,0,Harrington Auditorium 3,,FALSE,Intersection
+node,918,126,0,Harrington Auditorium 3,,FALSE,Intersection
+node,918,34,0,Harrington Auditorium 3,,FALSE,Intersection
+node,1039,361,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-217,1039,379,0,Harrington Auditorium 3,,FALSE,Room
+node,959,361,0,Harrington Auditorium 3,,FALSE,Intersection
+node,869,98,0,Harrington Auditorium 3,,FALSE,Intersection
+node,169,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,230,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,230,621,0,Harrington Auditorium 3,Stairs at the bottom left corner,TRUE,Stairs
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,1077,361,0,Harrington Auditorium 3,Entrance at the left side,TRUE,Entrance
+HA-209,46,269,0,Harrington Auditorium 3,,FALSE,Room
+HA-211,74,76,0,Harrington Auditorium 3,,FALSE,Room
+node,89,76,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,612,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,565,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,612,0,Harrington Auditorium 3,,FALSE,Intersection
+node,757,612,0,Harrington Auditorium 3,Stairs at the bottom right corner,TRUE,Stairs
+node,757,587,0,Harrington Auditorium 3,,FALSE,Intersection
+HA-222,757,587,0,Harrington Auditorium 3,,FALSE,Room
+node,1039,126,0,Harrington Auditorium 3,,FALSE,Intersection

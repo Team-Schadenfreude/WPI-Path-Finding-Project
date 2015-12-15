@@ -1,0 +1,42 @@
+node,313,619,0,Alden B,,FALSE,Intersection
+node,171,591,0,Alden B,,FALSE,Intersection
+AH-B17,171,619,0,Alden B,,FALSE,Room
+node,376,619,0,Alden B,,FALSE,Intersection
+node,171,557,0,Alden B,,FALSE,Intersection
+node,311,389,0,Alden B,,FALSE,Intersection
+AH-B19,171,389,0,Alden B,,FALSE,Room
+node,171,517,0,Alden B,,FALSE,Intersection
+node,376,557,0,Alden B,,FALSE,Intersection
+node,466,501,0,Alden B,,FALSE,Intersection
+node,376,501,0,Alden B,,FALSE,Intersection
+node,376,389,0,Alden B,,FALSE,Intersection
+node,522,415,0,Alden B,,FALSE,Intersection
+node,522,360,0,Alden B,,FALSE,Intersection
+node,522,389,0,Alden B,,FALSE,Intersection
+AH-B06,522,501,0,Alden B,,FALSE,Room
+node,643,389,0,Alden B,,FALSE,Intersection
+node,643,362,0,Alden B,,FALSE,Intersection
+node,759,363,0,Alden B,,FALSE,Intersection
+AH-B30,701,320,0,Alden B,,FALSE,Room
+node,376,226,0,Alden B,,FALSE,Intersection
+node,476,226,0,Alden B,,FALSE,Intersection
+AH-B29,522,226,0,Alden B,,FALSE,Room
+node,388,182,0,Alden B,,FALSE,Intersection
+node,346,149,0,Alden B,ELEVATOR,TRUE,Elevator
+AH-B24,388,149,0,Alden B,,FALSE,Room
+AH-B37,388,87,0,Alden B,,FALSE,Room
+node,179,226,0,Alden B,,FALSE,Intersection
+AH-B21,179,172,0,Alden B,,FALSE,Room
+node,179,278,0,Alden B,,FALSE,Intersection
+node,961,313,0,Alden B,RIGHT STAIRS FROM MAIN ENTRANCE,TRUE,Stairs
+node,961,387,0,Alden B,,FALSE,Intersection
+node,961,454,0,Alden B,LEFT STAIRS FROM MAIN ENTRANCE,TRUE,Stairs
+AH-B04,911,432,0,Alden B,,FALSE,Room
+node,961,432,0,Alden B,,FALSE,Intersection
+AH-B35,1006,387,0,Alden B,,FALSE,Room
+node,376,758,0,Alden B,ROAD WITH BRIDGE OVER IT ENTRANCE,TRUE,Entrance
+node,740,415,0,Alden B,,FALSE,Intersection
+node,740,389,0,Alden B,,FALSE,Intersection
+node,759,389,0,Alden B,,FALSE,Intersection
+AH-B33,908,338,0,Alden B,,FALSE,Room
+node,961,338,0,Alden B,,FALSE,Intersection

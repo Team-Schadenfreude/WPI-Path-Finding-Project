@@ -1,0 +1,18 @@
+AH-SB10,236,48,0,Alden SB,,FALSE,Room
+node,280,94,0,Alden SB,MAIN ELEVATOR,TRUE,Elevator
+AH-SB11,206,48,0,Alden SB,,FALSE,Room
+node,236,94,0,Alden SB,,FALSE,Intersection
+node,206,94,0,Alden SB,,FALSE,Intersection
+AH-SB6,236,147,0,Alden SB,,FALSE,Room
+node,206,147,0,Alden SB,,FALSE,Intersection
+AH-SB8,137,118,0,Alden SB,,FALSE,Room
+node,137,94,0,Alden SB,,FALSE,Intersection
+node,206,232,0,Alden SB,,FALSE,Intersection
+AH-SB5,163,232,0,Alden SB,,FALSE,Room
+node,206,296,0,Alden SB,,FALSE,Intersection
+AH-SB4,206,366,0,Alden SB,,FALSE,Room
+node,289,435,0,Alden SB,,FALSE,Intersection
+AH-SB3,256,527,0,Alden SB,,FALSE,Room
+AH-SB1,372,528,0,Alden SB,,FALSE,Room
+node,289,527,0,Alden SB,,FALSE,Intersection
+node,111,94,0,Alden SB,INSTITUTE RD ENTRANCE,TRUE,Entrance

@@ -1,0 +1,37 @@
+node,142,409,0,Higgins3,,FALSE,Intersection
+node,290,403,0,Higgins3,,FALSE,Intersection
+310,290,262,0,Higgins3,,FALSE,Room
+node,145,382,0,Higgins3,,FALSE,Intersection
+West Stairs,116,404,0,Higgins3,West Stairs,TRUE,Stairs
+node,169,400,0,Higgins3,,FALSE,Intersection
+node,276,398,0,Higgins3,,FALSE,Intersection
+node,276,355,0,Higgins3,,FALSE,Intersection
+node,276,262,0,Higgins3,,FALSE,Intersection
+node,276,232,0,Higgins3,,FALSE,Intersection
+node,430,230,0,Higgins3,,FALSE,Intersection
+node,614,231,0,Higgins3,,FALSE,Intersection
+311,647,231,0,Higgins3,,FALSE,Room
+312,450,195,0,Higgins3,,FALSE,Room
+313,413,194,0,Higgins3,,FALSE,Room
+Elevator,313,201,0,Higgins3,Elevator,TRUE,Elevator
+314,284,167,0,Higgins3,,FALSE,Room
+307,395,374,0,Higgins3,,FALSE,Room
+306,459,374,0,Higgins3,,FALSE,Room
+317,481,373,0,Higgins3,,FALSE,Room
+node,395,403,0,Higgins3,,FALSE,Intersection
+node,459,403,0,Higgins3,,FALSE,Intersection
+node,481,403,0,Higgins3,,FALSE,Intersection
+301,616,400,0,Higgins3,,FALSE,Room
+node,614,315,0,Higgins3,,FALSE,Intersection
+node,616,362,0,Higgins3,,FALSE,Intersection
+East Stairs,649,357,0,Higgins3,East Stairs,TRUE,Stairs
+304,591,334,0,Higgins3,,FALSE,Room
+303,588,284,0,Higgins3,,FALSE,Room
+node,725,416,0,Higgins3,,FALSE,Intersection
+node,142,308,0,Higgins3,,FALSE,Intersection
+323,177,300,0,Higgins3,,FALSE,Room
+node,144,519,0,Higgins3,,FALSE,Intersection
+node,763,513,0,Higgins3,,FALSE,Intersection
+node,763,416,0,Higgins3,,FALSE,Intersection
+309,290,355,0,Higgins3,,FALSE,Room
+305,430,253,0,Higgins3,,FALSE,Room

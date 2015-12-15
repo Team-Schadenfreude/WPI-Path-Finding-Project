@@ -1,0 +1,34 @@
+node,951,266,0,Alden 2,RIGHT STAIR CASE FROM ENTRANCE,TRUE,Stairs
+AH-201,1003,296,0,Alden 2,,FALSE,Room
+node,951,296,0,Alden 2,,FALSE,Intersection
+node,951,466,0,Alden 2,LEFT STAIR CASE FROM ENTRANCE,TRUE,Stairs
+AH-202,951,372,0,Alden 2,,FALSE,Room
+AH-205,305,702,0,Alden 2,,FALSE,Room
+node,256,702,0,Alden 2,,FALSE,Intersection
+node,256,617,0,Alden 2,,FALSE,Intersection
+node,256,586,0,Alden 2,,FALSE,Intersection
+AH-204,304,600,0,Alden 2,,FALSE,Room
+node,285,644,0,Alden 2,BOTTOM STAIRS,TRUE,Stairs
+node,285,600,0,Alden 2,,FALSE,Intersection
+AH-208,208,600,0,Alden 2,,FALSE,Room
+node,208,586,0,Alden 2,,FALSE,Intersection
+AH-209,133,600,0,Alden 2,,FALSE,Room
+node,133,586,0,Alden 2,,FALSE,Intersection
+node,108,586,0,Alden 2,,FALSE,Intersection
+node,108,488,0,Alden 2,,FALSE,Intersection
+AH-210,96,488,0,Alden 2,,FALSE,Room
+AH-211,79,375,0,Alden 2,,FALSE,Room
+node,108,334,0,Alden 2,,FALSE,Intersection
+node,91,375,0,Alden 2,,FALSE,Intersection
+node,108,404,0,Alden 2,,FALSE,Intersection
+node,108,276,0,Alden 2,,FALSE,Intersection
+AH-212,91,276,0,Alden 2,,FALSE,Room
+node,106,145,0,Alden 2,,FALSE,Intersection
+node,119,145,0,Alden 2,,FALSE,Intersection
+AH-215,119,116,0,Alden 2,,FALSE,Intersection
+node,176,145,0,Alden 2,,FALSE,Intersection
+AH-216,176,116,0,Alden 2,,FALSE,Room
+node,221,145,0,Alden 2,,FALSE,Intersection
+node,242,145,0,Alden 2,MAIN ELEVATOR,TRUE,Elevator
+node,248,95,0,Alden 2,TOP STAIR CASE,TRUE,Stairs
+AH-217,221,95,0,Alden 2,,FALSE,Room
