@@ -7,6 +7,7 @@ public class Building {
 	String name;
 	String description;
 	List<String> times = new ArrayList<String>();
+	String time;	
 	int angle = 0;
 	int x = 0;
 	int y = 0;
@@ -20,11 +21,15 @@ public class Building {
 	public Building (String name, String desc, String times){
 		this.name = name;
 		this.description = desc;
-		//not processing the times right now
+		this.time=times;
 	}
-	public void setFloors(List<Floor> floors)
+	public boolean setFloors(List<Floor> floors)
 	{
+		if(floors==null){
+			return false;
+		}
 		this.floors = floors;
+		return true;
 	}
 	public List<Floor> getFloors()
 	{
@@ -62,7 +67,7 @@ public class Building {
 		return this.name;
 	}
 	public String getTimes(){
-		return null;
+		return time;
 	}
 	public int getAngle()
 	{
