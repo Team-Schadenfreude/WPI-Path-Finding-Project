@@ -111,10 +111,10 @@ public class Main extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		
 		Image image = new Image(APPLICATION_ICON);
         mainStage.getIcons().add(image);
-        mainStage.setFullScreen(true);
+        mainStage.setMaximized(true);
        // mainStage.setF
         Scene scene = new Scene(root, root.getWidth(), root.getHeight());
         
