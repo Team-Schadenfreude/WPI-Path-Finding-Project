@@ -68,6 +68,7 @@ public class MainController implements Initializable{
     @FXML private Button swapButton;
     @FXML private VBox floorControlVBox;
     @FXML private VBox menuVBox;
+    @FXML private ImageView preloaderImageView;
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -97,11 +98,17 @@ public class MainController implements Initializable{
     //Function called on initialization of a Main Controller object
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	preloaderImageView.setImage(new Image("/res/icons/preloader.png"));
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
     	//floorSelectionMenu.getItems().clear();
-    	loadMap();
+    	//loadMap();
+    	drawMap(mainMap);
+    	//imageZoomPane = new ZoomingPane(mainMap);
+    	imageScrollPane.setContent(mainMap);
+    	setupDropDowns();
+    	activeFloorLabel.setText(mainMap.getId());
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	runAStar();
@@ -147,6 +154,8 @@ public class MainController implements Initializable{
     	floorControlVBox.setVisible(false);
     	//swapButton.setMinHeight(20);
     	zoomSetup();
+    	anchorPane.getChildren().remove(anchorPane.getChildren().size() -1);
+
 	}
     
   //Function swaps the ending node with the starting node and triggers a new path to be created
@@ -177,24 +186,10 @@ public class MainController implements Initializable{
     	}
     }
     
-    @Deprecated
-    private File getDirectoryFromDialog()
-    {
-    	DirectoryChooser chooser = new DirectoryChooser();
-    	chooser.setTitle("JavaFX Projects");
-    	File defaultDirectory = new File("c:/");
-    	chooser.setInitialDirectory(defaultDirectory);
-    	return chooser.showDialog(Main.getStage());
-    }
     //Action handler for the load map button 
-    private void loadMap() {
+    public void loadMap() {
     	MapBuilder mapBuilder = new MapBuilder("res/SuperMap", "Campus");
     	mainMap = mapBuilder.buildMap();
-    	drawMap(mainMap);
-    	//imageZoomPane = new ZoomingPane(mainMap);
-    	imageScrollPane.setContent(mainMap);
-    	setupDropDowns();
-    	activeFloorLabel.setText(mainMap.getId());
     	//imageZoomPane.setZoomFactor(.8);
     	
     }
