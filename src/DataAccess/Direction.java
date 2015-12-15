@@ -21,7 +21,14 @@ public class Direction {
 
 		String stringDirection = " ";
 
-		if (n1.getType() == Node.Type.ROOM && n2.getType() == Node.Type.INTERSECTION) {
+		if (n1.getDescription().toLowerCase().contains("cross")
+				&& n2.getDescription().toLowerCase().contains("cross")) {
+
+			stringDirection = ("Cross the street. (" + this.distance + " ft)");
+
+		}
+
+		else if (n1.getType() == Node.Type.ROOM && n2.getType() == Node.Type.INTERSECTION) {
 
 			stringDirection = ("Go straight out of " + n1.getName() + ". (" + this.distance + " ft)");
 

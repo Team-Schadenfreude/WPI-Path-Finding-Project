@@ -113,9 +113,24 @@ public class DirectionBuilder {
 					if ((n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.NONE)
 							|| (n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.INTERSECTION)) {
 						dirVal = "straight";
+
 					}
 
-					if (dirVal.equals("straight") && !prevDirVal.equals("straight")) {
+					if (n1.getDescription().toLowerCase().contains("cross")
+							&& n2.getDescription().toLowerCase().contains("cross")) {
+
+						if (dir.distance != 0) {
+							// directionsList.add(dir.createTurnDirection());
+							directionsList.add(dir.createStraightDirection());
+						}
+
+						dir = new Direction(dirVal, (int) distance, n1, n2);
+						directionsList.add(dir.createTurnDirection());
+						directionsList.add(dir.createStraightDirection());
+
+						dir = new Direction(dirVal, 0, n1, n2);
+
+					} else if (dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
 						if (!directionsList.isEmpty() && i != path.size() - 2) {
 
@@ -129,18 +144,25 @@ public class DirectionBuilder {
 							dir = new Direction(dirVal, (int) distance, n1, n2);
 							directionsList.add(dir.createStraightDirection());
 						} else {
+
 							if (dir == null) {
 								dir = new Direction(dirVal, (int) distance, n1, n2);
 							} else {
+
 								tempDistance = (int) (dir.distance + distance);
 								dir.distance = tempDistance;
-								// new Direction(dirVal, tempDistance, n1, n2);
 								tempDistance = 0;
+
 							}
 
 						}
 
 					} else if (dirVal.equals("straight") && prevDirVal.equals("straight")) {
+
+						if (n1.getDescription().toLowerCase().contains("cross")
+								|| n2.getDescription().toLowerCase().contains("cross")) {
+							dir = new Direction(dirVal, dir.distance, n1, n2);
+						}
 						dir.distance += (int) distance;
 
 						if (i == path.size() - 2) {
@@ -153,7 +175,11 @@ public class DirectionBuilder {
 								&& directionsList.get(directionsList.size() - 1).contains("straight")) {
 							directionsList.add(dir.createTurnDirection());
 						}
-						directionsList.add(dir.createStraightDirection());
+						
+						if (dir.distance != 0){
+							directionsList.add(dir.createStraightDirection());
+						}
+						
 
 						dir = new Direction(dirVal, (int) distance, n1, n2);
 						directionsList.add(dir.createTurnDirection());
