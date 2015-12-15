@@ -82,7 +82,7 @@ node,1540,1296,0,Campus,,false,None
 node,1524,1293,0,Campus,,false,None
 node,1452,1280,0,Campus,,false,Intersection
 node,1453,1269,0,Campus,,false,None
-node,1560,1317,0,Campus,,false,None
+node,1560,1317,0,Campus,,false,Intersection
 node,1566,1334,0,Campus,,false,None
 node,1567,1350,0,Campus,,false,None
 node,1524,1609,0,Campus,,false,Intersection
@@ -97,9 +97,9 @@ node,1647,1580,0,Campus,,false,None
 node,1661,1595,0,Campus,,false,None
 node,1674,1607,0,Campus,,false,None
 node,1687,1615,0,Campus,,false,None
-node,1703,1600,0,Campus,,false,None
-node,1709,1489,0,Campus,,false,None
-node,1709,1466,0,Campus,,false,Intersection
+node,1703,1600,0,Campus,cross,false,None
+node,1709,1489,0,Campus,cross,false,None
+node,1709,1466,0,Campus,cross,false,Intersection
 node,1604,1509,0,Campus,,false,None
 node,1600,1492,0,Campus,,false,None
 node,1598,1478,0,Campus,,false,None
@@ -113,7 +113,7 @@ node,1715,1668,0,Campus,,false,None
 node,1753,1692,0,Campus,,false,None
 node,1763,1707,0,Campus,,false,None
 node,1934,1726,0,Campus,,false,Intersection
-node,1706,1625,0,Campus,,false,Intersection
+node,1706,1625,0,Campus,cross,false,Intersection
 node,1950,1773,0,Campus,,false,Intersection
 node,1966,1728,0,Campus,,false,Intersection
 Skull Tomb,1963,1678,0,Campus,,false,Room
@@ -143,7 +143,6 @@ node,1503,1434,0,Campus,,false,None
 Alden Hall Front Entrance,1434,1432,0,Campus,Front entrance of AH.,true,Entrance
 node,1436,1421,0,Campus,,false,Intersection
 node,1773,1476,0,Campus,,false,Intersection
-node,1787,1396,0,Campus,,false,Intersection
 node,1894,1260,0,Campus,,false,None
 node,1922,1276,0,Campus,,false,Intersection
 node,1883,1186,0,Campus,,false,Intersection
@@ -221,16 +220,25 @@ node,2042,832,0,Campus,,false,Intersection
 node,2024,796,0,Campus,,false,Intersection
 Fuller Labs Back Entance,2015,801,0,Campus,Back entrance to FL.,true,Entrance
 node,1837,1303,0,Campus,,false,None
-node,1868,1166,0,Campus,,false,Intersection
 node,1599,1433,0,Campus,,false,None
 node,1605,1410,0,Campus,,false,None
 node,1614,1387,0,Campus,,false,None
-node,1624,1369,0,Campus,,false,None
-node,1633,1354,0,Campus,,false,None
-node,1648,1343,0,Campus,,false,Intersection
+node,1624,1369,0,Campus,,false,Intersection
 node,1649,1061,0,Campus,,false,Intersection
 node,1708,1069,0,Campus,,false,None
 node,1737,1085,0,Campus,,false,Intersection
 node,1759,1105,0,Campus,,false,None
 Project Center Front Entrance,1643,1088,0,Campus,Front entrance of the PC.,true,Entrance
 Salisbury Side Entrance,1741,1047,0,Campus,Side entrance of Salisbury.,true,Entrance
+node,1805,1113,0,Campus,,false,Intersection
+Washburn Main Entrance,1798,1154,0,Campus,Main entrance to Washburn.,true,Entrance
+node,1871,1242,0,Campus,,false,None
+node,1842,1261,0,Campus,,false,Intersection
+node,1866,1254,0,Campus,,false,None
+node,1856,1259,0,Campus,,false,None
+node,1798,1479,0,Campus,,false,Intersection
+node,1787,1398,0,Campus,,false,Intersection
+node,1817,1403,0,Campus,,false,Intersection
+node,1608,1357,0,Campus,,false,None
+node,1582,1339,0,Campus,,false,None
+node,1707,1544,0,Campus,,false,None

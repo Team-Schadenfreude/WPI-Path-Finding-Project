@@ -24,9 +24,9 @@ public class DirectionBuilder {
 
 			// Set all variables to be used in finding the directions.
 			// Distance variables.
-			double totalDistance = 0;
-			double runningDistance = 0;
+			int totalDistance = 0;
 			double distance = 0;
+			int tempDistance = 0;
 
 			// Angle variables.
 			int prevAngle = 0;
@@ -56,7 +56,7 @@ public class DirectionBuilder {
 
 					// Print direction.
 					if (n2.getMap().toLowerCase().equals("campus")) {
-						directionsList.add("Proceed out to " + n2.getMap() + ". (" + runningDistance + " ft)");
+						directionsList.add("Proceed out to " + n2.getMap() + ". (" + distance + " ft)");
 					} else {
 						directionsList.add("Proceed into " + n2.getMap() + ".");
 					}
@@ -101,8 +101,7 @@ public class DirectionBuilder {
 
 					// Get distance between the two nodes.
 					distance = n1.distanceTo(n2);
-					totalDistance += distance;
-					runningDistance += distance;
+					totalDistance += (int) distance;
 
 					// Reset variables if map changes.
 					if (i == 0 || mapChange) {
@@ -111,7 +110,8 @@ public class DirectionBuilder {
 						mapChange = false;
 					}
 
-					if (n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.NONE) {
+					if ((n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.NONE)
+							|| (n1.getType() == Node.Type.NONE && n2.getType() == Node.Type.INTERSECTION)) {
 						dirVal = "straight";
 					}
 
@@ -126,15 +126,22 @@ public class DirectionBuilder {
 						}
 
 						if (i == path.size() - 2) {
-							dir = new Direction(dirVal, distance, n1, n2);
+							dir = new Direction(dirVal, (int) distance, n1, n2);
 							directionsList.add(dir.createStraightDirection());
 						} else {
-							dir = new Direction(dirVal, runningDistance, n1, n2);
+							if (dir.n1 == null) {
+								dir = new Direction(dirVal, (int) distance, n1, n2);
+							} else {
+
+								tempDistance = dir.distance += distance;
+								new Direction(dirVal, tempDistance, n1, n2);
+								tempDistance = 0;
+							}
+
 						}
 
 					} else if (dirVal.equals("straight") && prevDirVal.equals("straight")) {
-						dir.distance = runningDistance;
-						dir.n2 = n2;
+						dir.distance += (int) distance;
 
 						if (i == path.size() - 2) {
 							directionsList.add(dir.createStraightDirection());
@@ -142,22 +149,24 @@ public class DirectionBuilder {
 
 					} else if (!dirVal.equals("straight") && prevDirVal.equals("straight")) {
 
-						directionsList.add(dir.createTurnDirection());
+						if (!(directionsList.isEmpty())
+								&& directionsList.get(directionsList.size() - 1).contains("straight")) {
+							directionsList.add(dir.createTurnDirection());
+						}
 						directionsList.add(dir.createStraightDirection());
-						dir = new Direction(dirVal, distance, n1, n2);
+
+						dir = new Direction(dirVal, (int) distance, n1, n2);
 						directionsList.add(dir.createTurnDirection());
 						directionsList.add(dir.createStraightDirection());
 
-						runningDistance = distance;
 					} else if (!dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
-						dir = new Direction(dirVal, distance, n1, n2);
+						dir.distance += distance;
+						tempDistance = (int) (dir.distance + distance);
+						dir = new Direction(dirVal, tempDistance, n1, n2);
 						directionsList.add(dir.createTurnDirection());
-						System.out.println(dir.createTurnDirection());
 						directionsList.add(dir.createStraightDirection());
-						System.out.println(dir.createStraightDirection());
-
-						runningDistance = distance;
+						tempDistance = 0;
 					}
 
 					prevAngle = currentAngle;
