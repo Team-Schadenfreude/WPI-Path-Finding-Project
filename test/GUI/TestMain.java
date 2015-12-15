@@ -1,4 +1,4 @@
-package AStar;
+package GUI;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,18 +8,22 @@ import java.util.List;
 
 import org.junit.Test;
 
+import AStar.AStar;
+import AStar.Node;
+import AStar.Settings;
+
 public class TestMain {
 	
 	/*
 	 * Tests for running AStar.
 	 */
-	@Test
-	public void testGetNodesFromFileWhenFileDoesNotExist(){
-
-		List<Node> l=Main.getNodesFromFile("");
-		assertEquals(true,l.isEmpty());
-		assertEquals("FileNotFound", Main.excmessage);
-	}
+//	@Test
+//	public void testGetNodesFromFileWhenFileDoesNotExist(){
+//
+//		List<Node> l=Main.getNodesFromFile("");
+//		assertEquals(true,l.isEmpty());
+//		assertEquals("FileNotFound", Main.excmessage);
+//	}
 /*	@Test
 	public void testGetNodesFromFileThatIsNotReadable(){
 		Main.excmessage="";
@@ -239,15 +243,15 @@ public class TestMain {
 	@Test
 	public void mapTest1()
 	{
-		String nodePath = "src/res/Alonso_Node_Map.csv";
+		List<Node> nodes=Main.getNodesFromFile("src/res/Alonso_Node_Map.csv");
 		String edgePath = "src/res/Alonso_Edge_Map.csv";
-		List<Node> map = Main.readMap(nodePath, edgePath);
-		List<Node> path = Main.getPathFromNode(map.get(3), map.get(1), map);
+		Main.connectEdgesFromFile(nodes, edgePath);
+		List<Node> path = Main.getPathFromNode(nodes.get(3), nodes.get(1), nodes);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
-		bestPath.add(map.get(3));
-		bestPath.add(map.get(2));
-		bestPath.add(map.get(1));
+		bestPath.add(nodes.get(3));
+		bestPath.add(nodes.get(2));
+		bestPath.add(nodes.get(1));
 		assertEquals(bestPath, path);
 	}
 	
@@ -256,7 +260,7 @@ public class TestMain {
 	{
 		String nodePath = "src/res/Node_Map_MARS.csv";
 		String edgePath = "src/res/Edge_Map_MARS.csv";
-		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> map = Main.getNodesFromFile(nodePath);
 		List<Node> path = Main.getPathFromNode(map.get(6), map.get(1), map);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
@@ -272,7 +276,7 @@ public class TestMain {
 	{
 		String nodePath = "src/res/Node_Map_TSL.csv";
 		String edgePath = "src/res/Edge_Map_TSL.csv";
-		List<Node> map = Main.readMap(nodePath, edgePath);
+		List<Node> map = Main.getNodesFromFile(nodePath);
 		List<Node> path = Main.getPathFromNode(map.get(0), map.get(4), map);
 		// System.out.println(path);
 		List<Node> bestPath = new ArrayList<Node>();
@@ -337,14 +341,15 @@ public class TestMain {
 		path.add(n2);
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
-		testDirections = Main.getDirectionsList(path);
+		testDirections = Main.getDirectionsList(path,1,1);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight walk 4.68 ft");
-		solution.add("Left turn walk 6.48 ft");
-		solution.add("Continue straight until you've have reached your destination");
+		solution.add("Go Straight 3 ft");
+		solution.add("Left turn 3 ft");
+		solution.add("Procede to Destination");
+		solution.add("Total Distance is 6ft");
 		
 		assertEquals(solution, testDirections);
 	}
@@ -360,14 +365,15 @@ public class TestMain {
 		path.add(n2);
 		path.add(n3);
 		List<String> testDirections = new ArrayList<String>();
-		testDirections = Main.getDirectionsList(path);
+		testDirections = Main.getDirectionsList(path,1,1);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight walk 4.68 ft");
-		solution.add("Right turn walk 6.48 ft");
-		solution.add("Continue straight until you've have reached your destination");
+		solution.add("Go Straight 3 ft");
+		solution.add("Right turn 3 ft");
+		solution.add("Procede to Destination");
+		solution.add("Total Distance is 6ft");
 		
 		assertEquals(solution, testDirections);
 	}
@@ -389,18 +395,19 @@ public class TestMain {
 		path.add(n5);
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
-		testDirections = Main.getDirectionsList(path);
+		testDirections = Main.getDirectionsList(path,1,1);
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		
-		solution.add("Go Straight walk 6.24 ft");
-		solution.add("Sharp right turn walk 7.99 ft");
-		solution.add("Left turn walk 7.99 ft");
-		solution.add("Left turn walk 19.65 ft");
-		solution.add("Sharp left turn walk 6.24 ft");
-		solution.add("Continue straight until you've have reached your destination");
+		solution.add("Go Straight 4 ft");
+		solution.add("Sharp right turn 4 ft");
+		solution.add("Left turn 4 ft");
+		solution.add("Left turn 10 ft");
+		solution.add("Sharp left turn 4 ft");
+		solution.add("Procede to Destination");
+		solution.add("Total Distance is 26ft");
 		assertEquals(solution, testDirections);
 	}
 	
@@ -421,17 +428,19 @@ public class TestMain {
 		path.add(n5);
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
-		testDirections = Main.getDirectionsList(path);
+		testDirections = Main.getDirectionsList(path,1,1);
 //		System.out.println("Path and Directions:");
 //		System.out.println(path);
 //		System.out.println(testDirections);
+		
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight walk 4.68 ft");
-		solution.add("Slight left turn walk 5.33 ft");
-		solution.add("Sharp left turn walk 3.12 ft");
-		solution.add("Slight right turn walk 6.37 ft");
-		solution.add("Sharp right turn walk 4.68 ft");
-		solution.add("Continue straight until you've have reached your destination");
+		solution.add("Go Straight 3 ft");
+		solution.add("Slight left turn 2 ft");
+		solution.add("Sharp left turn 2 ft");
+		solution.add("Slight right turn 3 ft");
+		solution.add("Sharp right turn 3 ft");
+		solution.add("Procede to Destination");
+		solution.add("Total Distance is 14ft");
 		assertEquals(solution, testDirections);
 	}
 	
@@ -444,15 +453,15 @@ public class TestMain {
 	// bounds execption where input is beyond maximum value
 	//
 	// }
-	
-	@Test
-	public void testForGetScaleFromFile() {
-		List<Integer> n1 = Main.getScaleFromFile("./src/res/mapScale.csv");
-		List<Integer> n2 = new ArrayList<Integer>();
-		n2.add(18);
-		n2.add(13);
-		assertEquals(n1, n2);
-	}
+//	
+//	@Test
+//	public void testForGetScaleFromFile() {
+//		List<Integer> n1 = Main.getScaleFromFile("./src/res/mapScale.csv");
+//		List<Integer> n2 = new ArrayList<Integer>();
+//		n2.add(18);
+//		n2.add(13);
+//		assertEquals(n1, n2);
+//	}
 
 
 }
