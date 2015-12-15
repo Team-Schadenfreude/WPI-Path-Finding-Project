@@ -23,6 +23,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
@@ -39,6 +40,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.WindowEvent;
 import AStar.AStar;
 import AStar.Node;
 import AStar.Settings;
@@ -83,6 +85,7 @@ public class MainController implements Initializable{
     private int eventX = 0;
     private int eventY = 0;
     private Rectangle overlayRect = new Rectangle();
+    private ContextMenu contextMenu = new ContextMenu();
     ComboBox<String> startInput = new ComboBox<String>();
 	ComboBox<String> destInput = new ComboBox<String>();
     //private Canvas mainMapOverlay = new Canvas();
@@ -319,14 +322,37 @@ public class MainController implements Initializable{
 						}
 						else
 						{
-							nodeSelect(f, f.getNearestRoom((int)event.getX(), (int)event.getY()));
+							Node selectedNode = f.getNearestRoom((int)event.getX(), (int)event.getY());
+							
+							setUpContextMenu(f, selectedNode);
+							contextMenu.show(f, event.getX(), event.getY());
+							nodeSelect(f, selectedNode);
 						}
 					}
 				}});
 			}
     	}
     }
-    
+    void setUpContextMenu(Floor f, Node targetNode)
+    {
+    	MenuItem startItem = new MenuItem("Start");
+    	startItem.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	    	startNode = targetNode;
+        		startMenu.setText(f.getId() + " " + targetNode.getName());
+    	    }
+    	});
+    	MenuItem destItem = new MenuItem("Destination");
+    	startItem.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	    	goalNode = targetNode;
+        		destMenu.setText(f.getId() + " " + targetNode.getName());
+    	    }
+    	});
+    	contextMenu.getItems().clear();
+    	contextMenu.getItems().add(startItem);
+		contextMenu.getItems().add(destItem);
+    }
     void nodeSelect(Floor f, Node n)
     {
     	if (nodeSelect)
