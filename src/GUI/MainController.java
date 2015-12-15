@@ -32,6 +32,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -323,10 +324,16 @@ public class MainController implements Initializable{
 						else
 						{
 							Node selectedNode = f.getNearestRoom((int)event.getX(), (int)event.getY());
-							
-							setUpContextMenu(f, selectedNode);
-							contextMenu.show(f, event.getX(), event.getY());
-							nodeSelect(f, selectedNode);
+							//event.is
+							if (event.getButton() == MouseButton.SECONDARY)
+							{
+								setUpContextMenu(f, selectedNode);
+								contextMenu.show(f, event.getScreenX(), event.getScreenY());
+							}
+							else
+							{
+								contextMenu.hide();
+							}
 						}
 					}
 				}});
@@ -340,13 +347,15 @@ public class MainController implements Initializable{
     	    public void handle(ActionEvent e) {
     	    	startNode = targetNode;
         		startMenu.setText(f.getId() + " " + targetNode.getName());
+        	    getDirectionsProperty.set(!getDirectionsProperty.get());
     	    }
     	});
     	MenuItem destItem = new MenuItem("Destination");
-    	startItem.setOnAction(new EventHandler<ActionEvent>() {
+    	destItem.setOnAction(new EventHandler<ActionEvent>() {
     	    public void handle(ActionEvent e) {
     	    	goalNode = targetNode;
         		destMenu.setText(f.getId() + " " + targetNode.getName());
+        	    getDirectionsProperty.set(!getDirectionsProperty.get());
     	    }
     	});
     	contextMenu.getItems().clear();
