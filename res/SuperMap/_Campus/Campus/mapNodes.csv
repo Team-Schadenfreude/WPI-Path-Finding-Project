@@ -201,7 +201,6 @@ node,1798,877,0,Campus,,false,Intersection
 node,1847,899,0,Campus,,false,Intersection
 node,1859,874,0,Campus,,false,Intersection
 Atwater Kent Side Entrance,1816,849,0,Campus,Side entrance of AK.,true,Entrance
-node,1885,911,0,Campus,,true,Entrance
 node,1786,859,0,Campus,,false,None
 node,1710,815,0,Campus,,false,Intersection
 Atwater Kent Front Entrance,1714,806,0,Campus,Front entrance of AK.,true,Entrance
@@ -242,3 +241,4 @@ node,1817,1403,0,Campus,,false,Intersection
 node,1608,1357,0,Campus,,false,None
 node,1582,1339,0,Campus,,false,None
 node,1707,1544,0,Campus,,false,None
+Fuller Labs Front Entrance,1886,912,0,Campus,Front entrance of FL.,true,Entrance

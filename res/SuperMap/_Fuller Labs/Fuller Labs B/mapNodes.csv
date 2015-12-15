@@ -1,63 +1,63 @@
-FL-B28,255,285,0,Fuller Labs B,,FALSE,Room
-FL-B27,177,285,0,Fuller Labs B,,FALSE,Room
-FL-B29,255,225,0,Fuller Labs B,,FALSE,Room
-FL-B26,177,193,0,Fuller Labs B,,FALSE,Room
-FL-B24,177,112,0,Fuller Labs B,,FALSE,Room
-FL-B23,222,80,0,Fuller Labs B,,FALSE,Room
-node,222,112,0,Fuller Labs B,,FALSE,Intersection
-node,222,193,0,Fuller Labs B,,FALSE,Intersection
-node,222,225,0,Fuller Labs B,,FALSE,Intersection
-node,222,285,0,Fuller Labs B,,FALSE,Intersection
-node,205,316,0,Fuller Labs B,Office stairwell o the basement floor.,TRUE,Stairs
-node,205,285,0,Fuller Labs B,,FALSE,Intersection
-node,329,112,0,Fuller Labs B,,FALSE,Intersection
-FL-B22,329,80,0,Fuller Labs B,,FALSE,Room
-FL-B30,329,158,0,Fuller Labs B,,FALSE,Room
-node,412,112,0,Fuller Labs B,,FALSE,Intersection
-FL-B33,412,158,0,Fuller Labs B,,FALSE,Room
-node,448,112,0,Fuller Labs B,,FALSE,Intersection
-FL-B21,448,80,0,Fuller Labs B,,FALSE,Room
-node,547,112,0,Fuller Labs B,,FALSE,Intersection
-FL-B20,547,80,0,Fuller Labs B,,FALSE,Room
-FL-B33,547,152,0,Fuller Labs B,,FALSE,Room
-node,579,112,0,Fuller Labs B,,FALSE,Intersection
-Professor Wong's Office,579,80,0,Fuller Labs B,The best office saved the highest caliber of professor. Currently host Professor Wong,FALSE,FALSE
-node,579,152,0,Fuller Labs B,,FALSE,Intersection
-node,643,152,0,Fuller Labs B,,FALSE,Intersection
-Lower Fuller Lecture Hall,643,279,0,Fuller Labs B,,FALSE,Room
-node,709,234,0,Fuller Labs B,Main staircase on the basement level.,TRUE,Stairs
-node,709,152,0,Fuller Labs B,,FALSE,Intersection
-Fuller Back Entrance,709,118,0,Fuller Labs B,,TRUE,Entrance
-node,743,152,0,Fuller Labs B,,FALSE,Intersection
-node,743,234,0,Fuller Labs B,,FALSE,Intersection
-node,743,257,0,Fuller Labs B,,FALSE,Intersection
-node,800,257,0,Fuller Labs B,Stairwell near the elevator in the basement of Fuller.,TRUE,Stairs
-node,957,257,0,Fuller Labs B,,FALSE,Intersection
-node,957,292,0,Fuller Labs B,,FALSE,Intersection
-node,994,292,0,Fuller Labs B,,FALSE,Intersection
-FL-B08,919,315,0,Fuller Labs B,,FALSE,Room
-FL-B06,919,346,0,Fuller Labs B,,FALSE,Room
-FL-B07,919,393,0,Fuller Labs B,,FALSE,Room
-node,957,346,0,Fuller Labs B,,FALSE,Intersection
-node,957,315,0,Fuller Labs B,,FALSE,Intersection
-node,957,393,0,Fuller Labs B,,FALSE,Intersection
-node,957,440,0,Fuller Labs B,,FALSE,Intersection
-node,838,440,0,Fuller Labs B,,FALSE,Intersection
-node,838,476,0,Fuller Labs B,,FALSE,Intersection
-node,877,476,0,Fuller Labs B,,FALSE,Intersection
-node,743,374,0,Fuller Labs B,,FALSE,Intersection
-node,778,374,0,Fuller Labs B,The elevator of Fuller on the basement level.,TRUE,Elevator
-node,743,440,0,Fuller Labs B,,FALSE,Intersection
-node,743,558,0,Fuller Labs B,,FALSE,Intersection
-FL-B03,697,558,0,Fuller Labs B,,FALSE,Intersection
-node,843,648,0,Fuller Labs B,,FALSE,Intersection
-node,957,509,0,Fuller Labs B,,FALSE,Intersection
-FL-B11,994,393,0,Fuller Labs B,,FALSE,Room
-node,994,509,0,Fuller Labs B,,FALSE,Intersection
-node,957,542,0,Fuller Labs B,,FALSE,Intersection
-FL-B14,994,542,0,Fuller Labs B,,FALSE,Room
-node,957,616,0,Fuller Labs B,,FALSE,Intersection
-FL-B16,957,706,0,Fuller Labs B,,FALSE,Room
-FL-B12A,843,706,0,Fuller Labs B,,FALSE,Room
-FL-B17,743,648,0,Fuller Labs B,,FALSE,Intersection
-FL-B12,843,616,0,Fuller Labs B,,FALSE,Room
+FL-B28,255,285,0,Fuller Labs B,,false,Room
+FL-B27,177,285,0,Fuller Labs B,,false,Room
+FL-B29,255,225,0,Fuller Labs B,,false,Room
+FL-B26,177,193,0,Fuller Labs B,,false,Room
+FL-B24,177,112,0,Fuller Labs B,,false,Room
+FL-B23,222,80,0,Fuller Labs B,,false,Room
+node,222,112,0,Fuller Labs B,,false,Intersection
+node,222,193,0,Fuller Labs B,,false,Intersection
+node,222,225,0,Fuller Labs B,,false,Intersection
+node,222,285,0,Fuller Labs B,,false,Intersection
+node,205,316,0,Fuller Labs B,Office stairwell o the basement floor.,true,Stairs
+node,205,285,0,Fuller Labs B,,false,Intersection
+node,329,112,0,Fuller Labs B,,false,Intersection
+FL-B22,329,80,0,Fuller Labs B,,false,Room
+FL-B30,329,158,0,Fuller Labs B,,false,Room
+node,412,112,0,Fuller Labs B,,false,Intersection
+FL-B33,412,158,0,Fuller Labs B,,false,Room
+node,448,112,0,Fuller Labs B,,false,Intersection
+FL-B21,448,80,0,Fuller Labs B,,false,Room
+node,547,112,0,Fuller Labs B,,false,Intersection
+FL-B20,547,80,0,Fuller Labs B,,false,Room
+FL-B33,547,152,0,Fuller Labs B,,false,Room
+node,579,112,0,Fuller Labs B,,false,Intersection
+Professor Wong's Office,579,80,0,Fuller Labs B,The best office saved the highest caliber of professor. Currently host Professor Wong,false,FALSE
+node,579,152,0,Fuller Labs B,,false,Intersection
+node,643,152,0,Fuller Labs B,,false,Intersection
+Lower Fuller Lecture Hall,643,279,0,Fuller Labs B,,false,Room
+node,709,234,0,Fuller Labs B,Main staircase on the basement level.,true,Stairs
+node,709,152,0,Fuller Labs B,,false,Intersection
+Fuller Back Entrance,709,118,0,Fuller Labs B,Back entrance to FL.,true,Entrance
+node,743,152,0,Fuller Labs B,,false,Intersection
+node,743,234,0,Fuller Labs B,,false,Intersection
+node,743,257,0,Fuller Labs B,,false,Intersection
+node,800,257,0,Fuller Labs B,Stairwell near the elevator in the basement of Fuller.,true,Stairs
+node,957,257,0,Fuller Labs B,,false,Intersection
+node,957,292,0,Fuller Labs B,,false,Intersection
+node,994,292,0,Fuller Labs B,,false,Intersection
+FL-B08,919,315,0,Fuller Labs B,,false,Room
+FL-B06,919,346,0,Fuller Labs B,,false,Room
+FL-B07,919,393,0,Fuller Labs B,,false,Room
+node,957,346,0,Fuller Labs B,,false,Intersection
+node,957,315,0,Fuller Labs B,,false,Intersection
+node,957,393,0,Fuller Labs B,,false,Intersection
+node,957,440,0,Fuller Labs B,,false,Intersection
+node,838,440,0,Fuller Labs B,,false,Intersection
+node,838,476,0,Fuller Labs B,,false,Intersection
+node,877,476,0,Fuller Labs B,,false,Intersection
+node,743,374,0,Fuller Labs B,,false,Intersection
+node,778,374,0,Fuller Labs B,The elevator of Fuller on the basement level.,true,Elevator
+node,743,440,0,Fuller Labs B,,false,Intersection
+node,743,558,0,Fuller Labs B,,false,Intersection
+FL-B03,697,558,0,Fuller Labs B,,false,Intersection
+node,843,648,0,Fuller Labs B,,false,Intersection
+node,957,509,0,Fuller Labs B,,false,Intersection
+FL-B11,994,393,0,Fuller Labs B,,false,Room
+node,994,509,0,Fuller Labs B,,false,Intersection
+node,957,542,0,Fuller Labs B,,false,Intersection
+FL-B14,994,542,0,Fuller Labs B,,false,Room
+node,957,616,0,Fuller Labs B,,false,Intersection
+FL-B16,957,706,0,Fuller Labs B,,false,Room
+FL-B12A,843,706,0,Fuller Labs B,,false,Room
+FL-B17,743,648,0,Fuller Labs B,,false,Intersection
+FL-B12,843,616,0,Fuller Labs B,,false,Room

@@ -45,6 +45,7 @@
 1450,1006,0,Campus,1446,1028,0,Campus
 1450,1006,0,Campus,1460,983,0,Campus
 1440,978,0,Campus,1460,983,0,Campus
+1440,978,0,Campus,265,680,0,CampusCenter2
 1460,983,0,Campus,1493,986,0,Campus
 1460,983,0,Campus,1450,1006,0,Campus
 1460,983,0,Campus,1470,959,0,Campus
@@ -84,6 +85,7 @@
 1280,621,0,Campus,1282,640,0,Campus
 1280,621,0,Campus,1266,613,0,Campus
 1282,640,0,Campus,1280,621,0,Campus
+1282,640,0,Campus,266,589,0,HigginsHouse1
 1434,665,0,Campus,1393,660,0,Campus
 1266,613,0,Campus,1280,621,0,Campus
 1266,613,0,Campus,1260,598,0,Campus
@@ -141,6 +143,8 @@
 1332,889,0,Campus,1353,869,0,Campus
 1332,889,0,Campus,1355,904,0,Campus
 1355,904,0,Campus,1332,889,0,Campus
+1355,904,0,Campus,516,292,0,CampusCenter1
+1355,904,0,Campus,96,471,0,CampusCenter2
 1614,924,0,Campus,1603,996,0,Campus
 1614,924,0,Campus,1616,909,0,Campus
 1614,924,0,Campus,1627,927,0,Campus
@@ -170,6 +174,7 @@
 1632,813,0,Campus,1645,792,0,Campus
 1632,813,0,Campus,1625,790,0,Campus
 1699,966,0,Campus,1683,963,0,Campus
+1699,966,0,Campus,653,5,0,Salisbury 1
 1575,1173,0,Campus,1595,1052,0,Campus
 1575,1173,0,Campus,1562,1256,0,Campus
 1575,1173,0,Campus,1512,1162,0,Campus
@@ -244,10 +249,12 @@
 1616,1451,0,Campus,1598,1451,0,Campus
 1616,1451,0,Campus,1709,1466,0,Campus
 1709,1447,0,Campus,1709,1466,0,Campus
+1709,1447,0,Campus,447,452,0,Boynton Hall 1
 1752,1474,0,Campus,1754,1460,0,Campus
 1752,1474,0,Campus,1709,1466,0,Campus
 1752,1474,0,Campus,1773,1476,0,Campus
 1754,1460,0,Campus,1752,1474,0,Campus
+1754,1460,0,Campus,962,511,0,Boynton Hall 1
 1715,1668,0,Campus,1753,1692,0,Campus
 1715,1668,0,Campus,1706,1625,0,Campus
 1753,1692,0,Campus,1763,1707,0,Campus
@@ -380,6 +387,7 @@
 1890,1128,0,Campus,1839,1119,0,Campus
 1890,1128,0,Campus,1910,1132,0,Campus
 1910,1132,0,Campus,1890,1128,0,Campus
+1910,1132,0,Campus,581,571,0,Library 2
 2047,1292,0,Campus,2099,1368,0,Campus
 2047,1292,0,Campus,2035,1288,0,Campus
 2047,1292,0,Campus,2062,1211,0,Campus
@@ -431,6 +439,7 @@
 1877,920,0,Campus,1890,934,0,Campus
 1877,920,0,Campus,1869,943,0,Campus
 1877,920,0,Campus,1847,899,0,Campus
+1877,920,0,Campus,1886,912,0,Campus
 1869,943,0,Campus,1877,920,0,Campus
 1869,943,0,Campus,1867,956,0,Campus
 1867,956,0,Campus,1869,943,0,Campus
@@ -446,12 +455,14 @@
 1859,874,0,Campus,1847,899,0,Campus
 1859,874,0,Campus,1816,849,0,Campus
 1816,849,0,Campus,1859,874,0,Campus
+1816,849,0,Campus,193,125,0,AtwaterKent1
 1786,859,0,Campus,1798,877,0,Campus
 1786,859,0,Campus,1710,815,0,Campus
 1710,815,0,Campus,1786,859,0,Campus
 1710,815,0,Campus,1714,806,0,Campus
 1710,815,0,Campus,1686,800,0,Campus
 1714,806,0,Campus,1710,815,0,Campus
+1714,806,0,Campus,744,0,0,AtwaterKent1
 1686,800,0,Campus,1710,815,0,Campus
 1686,800,0,Campus,1645,792,0,Campus
 1645,792,0,Campus,1686,800,0,Campus
@@ -474,6 +485,7 @@
 1859,1014,0,Campus,1839,1119,0,Campus
 1859,1014,0,Campus,1836,1009,0,Campus
 1836,1009,0,Campus,1859,1014,0,Campus
+1836,1009,0,Campus,315,860,0,Salisbury 1
 2009,850,0,Campus,2042,832,0,Campus
 2009,850,0,Campus,2032,900,0,Campus
 2042,832,0,Campus,2024,796,0,Campus
@@ -481,6 +493,7 @@
 2024,796,0,Campus,2015,801,0,Campus
 2024,796,0,Campus,2042,832,0,Campus
 2015,801,0,Campus,2024,796,0,Campus
+2015,801,0,Campus,709,118,0,Fuller Labs B
 1837,1303,0,Campus,1842,1261,0,Campus
 1837,1303,0,Campus,1817,1403,0,Campus
 1599,1433,0,Campus,1605,1410,0,Campus
@@ -503,7 +516,9 @@
 1759,1105,0,Campus,1737,1085,0,Campus
 1759,1105,0,Campus,1805,1113,0,Campus
 1643,1088,0,Campus,1649,1061,0,Campus
+1643,1088,0,Campus,10,379,0,Project Center 1
 1741,1047,0,Campus,1737,1085,0,Campus
+1741,1047,0,Campus,241,275,0,Salisbury 1
 1805,1113,0,Campus,1839,1119,0,Campus
 1805,1113,0,Campus,1759,1105,0,Campus
 1805,1113,0,Campus,1798,1154,0,Campus
@@ -530,3 +545,5 @@
 1582,1339,0,Campus,1560,1317,0,Campus
 1707,1544,0,Campus,1709,1489,0,Campus
 1707,1544,0,Campus,1703,1600,0,Campus
+1886,912,0,Campus,1877,920,0,Campus
+1886,912,0,Campus,732,1105,0,Fuller Labs 2
