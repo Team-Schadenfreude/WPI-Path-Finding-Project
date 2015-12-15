@@ -1,9 +1,8 @@
-8,8,8,6
-8,6,14,5
-14,5,12,11
-12,11,8,8
-8,8,4,11
-4,11,0,5
-4,11,7,13
-7,13,12,20
-7,13,8,8
+8,8,0,Base Camp,8,6,0,Solar Array
+8,6,0,Solar Array,1,1,1,test
+14,5,0,Crash Site Alpha,1,1,1,tets
+12,11,0,Southern Riverbed,1,1,1,test
+7,13,0,Western Ridge,1,1,1,test
+4,11,0,Water Reclaimation Facility,8,8,0,Base Camp
+0,5,0,Russian Astronaut Camp,4,11,0,Water Reclaimation Facility
+12,20,0,Martian Camp,1,1,1,test

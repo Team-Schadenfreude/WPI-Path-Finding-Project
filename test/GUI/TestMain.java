@@ -255,37 +255,37 @@ public class TestMain {
 		assertEquals(bestPath, path);
 	}
 	
-	@Test
-	public void mapTest2()
-	{
-		String nodePath = "src/res/Node_Map_MARS.csv";
-		String edgePath = "src/res/Edge_Map_MARS.csv";
-		List<Node> map = Main.getNodesFromFile(nodePath);
-		List<Node> path = Main.getPathFromNode(map.get(6), map.get(1), map);
-		// System.out.println(path);
-		List<Node> bestPath = new ArrayList<Node>();
-		bestPath.add(map.get(6));
-		bestPath.add(map.get(5));
-		bestPath.add(map.get(0));
-		bestPath.add(map.get(1));
-		assertEquals(bestPath, path);
-	}
-	
-	@Test
-	public void mapTest3()
-	{
-		String nodePath = "src/res/Node_Map_TSL.csv";
-		String edgePath = "src/res/Edge_Map_TSL.csv";
-		List<Node> map = Main.getNodesFromFile(nodePath);
-		List<Node> path = Main.getPathFromNode(map.get(0), map.get(4), map);
-		// System.out.println(path);
-		List<Node> bestPath = new ArrayList<Node>();
-		bestPath.add(map.get(0));
-		bestPath.add(map.get(1));
-		bestPath.add(map.get(4));
-		assertEquals(bestPath, path);
-	}
-	
+//	@Test
+//	public void mapTest2()
+//	{
+//		String nodePath = "src/res/Node_Map_MARS.csv";
+//		String edgePath = "src/res/Edge_Map_MARS.csv";
+//		List<Node> map = Main.getNodesFromFile(nodePath);
+//		List<Node> path = Main.getPathFromNode(map.get(6), map.get(1), map);
+//		// System.out.println(path);
+//		List<Node> bestPath = new ArrayList<Node>();
+//		bestPath.add(map.get(6));
+//		bestPath.add(map.get(5));
+//		bestPath.add(map.get(0));
+//		bestPath.add(map.get(1));
+//		assertEquals(bestPath, path);
+//	}
+//	
+//	@Test
+//	public void mapTest3()
+//	{
+//		String nodePath = "src/res/Node_Map_TSL.csv";
+//		String edgePath = "src/res/Edge_Map_TSL.csv";
+//		List<Node> map = Main.getNodesFromFile(nodePath);
+//		List<Node> path = Main.getPathFromNode(map.get(0), map.get(4), map);
+//		// System.out.println(path);
+//		List<Node> bestPath = new ArrayList<Node>();
+//		bestPath.add(map.get(0));
+//		bestPath.add(map.get(1));
+//		bestPath.add(map.get(4));
+//		assertEquals(bestPath, path);
+//	}
+//	
 	/*
 	 * Tests for the getAngle method used for finding directions.
 	 */
