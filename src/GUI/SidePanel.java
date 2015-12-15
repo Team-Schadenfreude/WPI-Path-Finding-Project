@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +56,8 @@ public class SidePanel {
 		final List<HBox> hbList = new ArrayList<HBox>();
 		HBox hbItem;
 		Label label;
-
-		send.setGraphic(new ImageView(new Image("/res/icons/send.png", 50, 50, true, true)));
+		File p = new File("/res/icons/send.png");
+		send.setGraphic(new ImageView(new Image(p.toURI().toString(), 50, 50, true, true)));
 		// send.setStyle("-fx-background-color: #DEDEDE;"); // Background of
 		// Send Button
 		System.out.println(send.getStyle());
@@ -80,68 +81,78 @@ public class SidePanel {
 		// dList.getItems().addAll(directions);
 
 		for (String s : directions) {
-
+			File path;
 			if (s.toLowerCase().contains("go straight")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/go_straight.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("slight right turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/turn_slightly_right.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_slightly_right.png", iconSize, iconSize, true, true)),
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)),
 						label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("slight left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path =  new File("/res/icons/turn_slightly_left.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_slightly_left.png", iconSize, iconSize, true, true)),
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)),
 						label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("sharp right turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/turn_right.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("sharp left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/turn_left.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("right turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/turn_right.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_right.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("left turn")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/turn_left.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/turn_left.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("reached")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)),
+				path = new File("/res/icons/arrive.png");
+				hbItem = new HBox(10, new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)),
 						label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("follow")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/go_straight.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			} else if (s.toLowerCase().contains("cross")) {
 				label = new Label(s);
 				label.getStyleClass().add("direction_label");
+				path = new File("/res/icons/go_straight.png");
 				hbItem = new HBox(10,
-						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
+						new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
 			}
 
@@ -160,7 +171,8 @@ public class SidePanel {
 						stringProperty.set(s2);
 					}
 				});
-				hbItem = new HBox(10, new ImageView(new Image("/res/icons/arrive.png", iconSize, iconSize, true, true)),
+				path = new File("/res/icons/arrive.png");
+				hbItem = new HBox(10, new ImageView(new Image(path.toURI().toString(), iconSize, iconSize, true, true)),
 						label);
 				hbList.add(hbItem);
 			}

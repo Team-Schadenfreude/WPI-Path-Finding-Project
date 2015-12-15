@@ -82,7 +82,7 @@ public class BuildingPopUp {
 			path = "res/BuildingImages/Project Center/";
 			slideshow = new Slideshow(path);
 			imgContainer.getChildren().addAll(slideshow.getSlides());
-			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/ProjectCenter/Project Center.html",path);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/ProjectCenter/ProjectCenter.html",path);
 			image.getStyleClass().add("image_display");
 			break;
 			
@@ -109,7 +109,7 @@ public class BuildingPopUp {
 			path = "res/BuildingImages/Higgins House/";
 			slideshow = new Slideshow(path);
 			imgContainer.getChildren().addAll(slideshow.getSlides());
-			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Salisbury/HigginsHouse.html",path);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/HigginsHouse/HigginsHouse.html",path);
 			image.getStyleClass().add("image_display");
 			break;
 			
