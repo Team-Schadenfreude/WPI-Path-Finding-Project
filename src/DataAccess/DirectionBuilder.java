@@ -36,7 +36,7 @@ public class DirectionBuilder {
 			// Direction values.
 			String dirVal = " ";
 			String prevDirVal = " ";
-			Direction dir = new Direction(null, 0, null, null);
+			Direction dir = null;
 
 			// Map change value.
 			boolean mapChange = false;
@@ -129,12 +129,12 @@ public class DirectionBuilder {
 							dir = new Direction(dirVal, (int) distance, n1, n2);
 							directionsList.add(dir.createStraightDirection());
 						} else {
-							if (dir.n1 == null) {
+							if (dir == null) {
 								dir = new Direction(dirVal, (int) distance, n1, n2);
 							} else {
-
-								tempDistance = dir.distance += distance;
-								new Direction(dirVal, tempDistance, n1, n2);
+								tempDistance = (int) (dir.distance + distance);
+								dir.distance = tempDistance;
+								// new Direction(dirVal, tempDistance, n1, n2);
 								tempDistance = 0;
 							}
 
@@ -161,12 +161,11 @@ public class DirectionBuilder {
 
 					} else if (!dirVal.equals("straight") && !prevDirVal.equals("straight")) {
 
-						dir.distance += distance;
-						tempDistance = (int) (dir.distance + distance);
-						dir = new Direction(dirVal, tempDistance, n1, n2);
+						// tempDistance = (int) (dir.distance + distance);
+						dir = new Direction(dirVal, (int) distance, n1, n2);
 						directionsList.add(dir.createTurnDirection());
 						directionsList.add(dir.createStraightDirection());
-						tempDistance = 0;
+						// tempDistance = 0;
 					}
 
 					prevAngle = currentAngle;
