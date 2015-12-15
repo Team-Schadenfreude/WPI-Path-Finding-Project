@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="src/lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="src/lib/twilio-java-sdk-6.0.1-edge-jar-with-dependencies (2).jar"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="src/lib/jsoup-1.8.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,9 +1,12 @@
 package GUI;
 
 import DataAccess.Building;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class BuildingPopUp {
@@ -19,57 +22,72 @@ public class BuildingPopUp {
 	}
 	public static void setupPopUp(Building b)
 	{
-		
+		StackPane imgContainer = new StackPane();
 		System.out.println(b.getId());
 		String bName =b.getId();
 		ImageView image = new ImageView();
+		Slideshow slideshow;
+		ImageReader imageReader;
 		switch(bName){
-		
+
+
 		case "AtwaterKent":
-			Image image2 = new Image("/res/BuildingImages/AtwaterKent.jpg",210,200,true,true);
-			image.setImage(image2);
+			imgContainer.setMaxSize(210, 200);
+
+			slideshow = new Slideshow("res/BuildingImages/Atwater/");
+			imgContainer.getChildren().addAll(slideshow.slides);
 			image.getStyleClass().add("image_display");
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Atwater/Atwater.html","res/BuildingImages/Atwater");
+			
 			break;
 			
 		case "Fuller Labs":
-			Image image3 = new Image("/res/BuildingImages/FullerLabs.jpg",210,200,true,true);
-			image.setImage(image3);
+			slideshow = new Slideshow("res/BuildingImages/Fuller/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Fuller/Fuller.html","res/BuildingImages/Fuller");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "CampusCenter":
-			Image image4 = new Image("/res/BuildingImages/CampusCenter.jpg",210,200,true,true);
-			image.setImage(image4);
+			slideshow = new Slideshow("res/BuildingImages/Center/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Center/Center.html","res/BuildingImages/Center");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Boynton Hall":
-			Image image5 = new Image("/res/BuildingImages/BoyntonHall.jpg",210,200,true,true);
-			image.setImage(image5);
+			slideshow = new Slideshow("res/BuildingImages/Boynton/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Boynton/Boynton.html","res/BuildingImages/Boynton");
+
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Salisbury":
-			Image image6 = new Image("/res/BuildingImages/SalisburyLabs.jpg",210,200,true,true);
-			image.setImage(image6);
+			slideshow = new Slideshow("res/BuildingImages/Salisbury/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Salisbury/Salisbury.html","res/BuildingImages/Salisbury");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Project Center":
-			Image image7 = new Image("/res/BuildingImages/ProjectCenter.jpg",210,200,true,true);
-			image.setImage(image7);
+			slideshow = new Slideshow("res/BuildingImages/Project Center/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/ProjectCenter/Project Center.html","res/BuildingImages/Project Center");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Library":
-			Image image8 = new Image("/res/BuildingImages/GordonLibrary.jpg",210,200,true,true);
-			image.setImage(image8);
+			slideshow = new Slideshow("res/BuildingImages/Library/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Library/Library.html","res/BuildingImages/Library");
 			image.getStyleClass().add("image_display");
 			break;
 
 		case "Stratton":
-			Image image9 = new Image("/res/BuildingImages/StrattonHall.jpg",210,200,true,true);
-			image.setImage(image9);
+			slideshow = new Slideshow("res/BuildingImages/Stratton/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Stratton/Stratton.html","res/BuildingImages/Stratton");
 			image.getStyleClass().add("image_display");
 			break;
 			
@@ -77,8 +95,9 @@ public class BuildingPopUp {
 			
 			
 		case "Higgins House":
-			Image image10 = new Image("/res/BuildingImages/HigginsHouse.jpg",210,200,true,true);
-			image.setImage(image10);
+			slideshow = new Slideshow("res/BuildingImages/Higgins House/");
+			imgContainer.getChildren().addAll(slideshow.slides);
+			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Salisbury/HigginsHouse.html","res/BuildingImages/Higgins House");
 			image.getStyleClass().add("image_display");
 			break;
 			
@@ -92,11 +111,9 @@ public class BuildingPopUp {
 		{
 			Label name = new Label(b.getId());
 			Label description =  new Label(b.getDescription());
-			Label hours = new Label(b.getHours());
 			description.setWrapText(true);
 			vbox.getChildren().add(name);
-			image.setFitWidth(vbox.getWidth());
-			vbox.getChildren().add(image);
+			vbox.getChildren().add(imgContainer);
 		}
 	}
 
