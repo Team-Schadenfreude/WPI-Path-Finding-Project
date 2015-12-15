@@ -255,8 +255,10 @@ public class MainController implements Initializable {
 						overlayRect.setStrokeWidth(15);
 						overlayRect.setArcHeight(5);
 						overlayRect.setArcWidth(5);
-						overlayRect.setFill(new Color(0, 0, 0, 0));
-						overlayRect.setOpacity(.8);
+					//	overlayRect.setFill(new Color(1, 0, 0, 0));
+						overlayRect.setFill(Color.BLUE);
+						
+						overlayRect.setOpacity(.2);
 						if (b.getId().equals("Salisbury") || b.getId().equals("Boynton Hall")) {
 							overlayRect.setRotate(b.getAngle());
 						}
