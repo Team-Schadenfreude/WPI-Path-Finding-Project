@@ -71,12 +71,8 @@ public class MainController implements Initializable{
     @FXML private Button swapButton;
     @FXML private VBox floorControlVBox;
     @FXML private VBox menuVBox;
-<<<<<<< HEAD
-    @FXML private ImageView preloaderImageView;
-=======
     private Menu about = new Menu();
     private Menu tutorial = new Menu();
->>>>>>> branch 'mike_branch_3' of https://github.com/CS3733-Team6/WPI-Path-Finding-Project.git
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -106,7 +102,6 @@ public class MainController implements Initializable{
     //Function called on initialization of a Main Controller object
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	preloaderImageView.setImage(new Image("/res/icons/preloader.png"));
     	System.out.println("BeforePath");
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
