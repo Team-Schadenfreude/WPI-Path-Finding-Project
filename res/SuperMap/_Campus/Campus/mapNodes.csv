@@ -33,14 +33,14 @@ node,1304,622,0,Campus,,false,None
 node,1291,622,0,Campus,,false,None
 node,1280,621,0,Campus,,false,None
 Higgins House Front Entrance,1282,640,0,Campus,Front entrance to Higgins House.,true,Entrance
-node,1434,665,0,Campus,,false,None
+node,1434,665,0,Campus,cross,false,Intersection
 node,1266,613,0,Campus,,false,None
 node,1260,598,0,Campus,,false,None
 node,1262,585,0,Campus,,false,None
 node,1270,571,0,Campus,,false,None
 node,1282,561,0,Campus,,false,None
 node,1293,557,0,Campus,,false,Intersection
-node,1286,521,0,Campus,,false,None
+node,1286,521,0,Campus,,false,Intersection
 node,1386,781,0,Campus,,false,None
 node,1382,801,0,Campus,,false,None
 node,1378,817,0,Campus,,false,None
@@ -59,7 +59,7 @@ node,1278,859,0,Campus,,false,None
 node,1282,872,0,Campus,,false,None
 node,1291,882,0,Campus,,false,None
 node,1301,888,0,Campus,,false,None
-Campus Center Patio,1332,889,0,Campus,,false,Room
+node,1332,889,0,Campus,,false,Room
 Campus Center Patio Entrance,1355,904,0,Campus,Entrance to the CC via its patio.,true,Entrance
 node,1614,924,0,Campus,,false,Intersection
 node,1616,909,0,Campus,,false,Intersection
@@ -71,7 +71,7 @@ node,1694,903,0,Campus,,false,None
 node,1703,894,0,Campus,,false,None
 node,1715,889,0,Campus,,false,None
 node,1625,864,0,Campus,,false,Intersection
-node,1632,813,0,Campus,,false,Intersection
+node,1632,813,0,Campus,cross,false,Intersection
 Salisbury Front Entrance,1699,966,0,Campus,Front entrance to SL.,true,Entrance
 node,1575,1173,0,Campus,,false,Intersection
 Higgins Labs Front Entrance,1512,1162,0,Campus,Front entrance of HL.,true,Entrance
@@ -80,9 +80,9 @@ Stratton Hall Front Entrance,1583,1259,0,Campus,Front entrance of SH.,true,Entra
 node,1553,1305,0,Campus,,false,Intersection
 node,1540,1296,0,Campus,,false,None
 node,1524,1293,0,Campus,,false,None
-node,1452,1280,0,Campus,,false,Intersection
-node,1453,1269,0,Campus,,false,None
-node,1560,1317,0,Campus,,false,None
+node,1452,1280,0,Campus,cross,false,Intersection
+Higgins Labs Beech Tree Entrance,1453,1269,0,Campus,Entrance to Higgins Labs near the Beech Tree.,true,Entrance
+node,1560,1317,0,Campus,,false,Intersection
 node,1566,1334,0,Campus,,false,None
 node,1567,1350,0,Campus,,false,None
 node,1524,1609,0,Campus,,false,Intersection
@@ -97,15 +97,15 @@ node,1647,1580,0,Campus,,false,None
 node,1661,1595,0,Campus,,false,None
 node,1674,1607,0,Campus,,false,None
 node,1687,1615,0,Campus,,false,None
-node,1703,1600,0,Campus,,false,None
-node,1709,1489,0,Campus,,false,None
-node,1709,1466,0,Campus,,false,Intersection
+node,1703,1600,0,Campus,cross,false,Intersection
+node,1709,1489,0,Campus,cross,false,Intersection
+node,1709,1466,0,Campus,cross,false,Intersection
 node,1604,1509,0,Campus,,false,None
 node,1600,1492,0,Campus,,false,None
 node,1598,1478,0,Campus,,false,None
 node,1596,1461,0,Campus,,false,None
-node,1598,1451,0,Campus,,false,Intersection
-node,1616,1451,0,Campus,,false,None
+node,1598,1451,0,Campus,cross,false,Intersection
+node,1616,1451,0,Campus,cross,false,None
 Boynton Hall Main Entrance,1709,1447,0,Campus,Main entrance to BH.,true,Entrance
 node,1752,1474,0,Campus,,false,Intersection
 Boynton Hall Small Entrance,1754,1460,0,Campus,Small entrance to BH.,true,Entrance
@@ -113,7 +113,7 @@ node,1715,1668,0,Campus,,false,None
 node,1753,1692,0,Campus,,false,None
 node,1763,1707,0,Campus,,false,None
 node,1934,1726,0,Campus,,false,Intersection
-node,1706,1625,0,Campus,,false,Intersection
+node,1706,1625,0,Campus,cross,false,Intersection
 node,1950,1773,0,Campus,,false,Intersection
 node,1966,1728,0,Campus,,false,Intersection
 Skull Tomb,1963,1678,0,Campus,,false,Room
@@ -124,7 +124,7 @@ node,2037,1753,0,Campus,,false,None
 node,2057,1750,0,Campus,,false,None
 node,2078,1749,0,Campus,,false,None
 node,2099,1749,0,Campus,,false,None
-node,2115,1746,0,Campus,,false,Intersection
+node,2115,1746,0,Campus,cross,false,Intersection
 node,1513,1677,0,Campus,,false,Intersection
 node,1929,1778,0,Campus,,false,None
 node,1889,1784,0,Campus,,false,None
@@ -141,9 +141,8 @@ node,1563,1443,0,Campus,,false,None
 Bridge,1531,1437,0,Campus,,false,Room
 node,1503,1434,0,Campus,,false,None
 Alden Hall Front Entrance,1434,1432,0,Campus,Front entrance of AH.,true,Entrance
-node,1436,1421,0,Campus,,false,Intersection
-node,1773,1476,0,Campus,,false,Intersection
-node,1787,1396,0,Campus,,false,Intersection
+node,1436,1421,0,Campus,cross,false,Intersection
+node,1773,1476,0,Campus,cross,false,Intersection
 node,1894,1260,0,Campus,,false,None
 node,1922,1276,0,Campus,,false,Intersection
 node,1883,1186,0,Campus,,false,Intersection
@@ -153,7 +152,6 @@ node,1928,1372,0,Campus,,false,None
 node,1923,1340,0,Campus,,false,None
 node,1938,1393,0,Campus,,false,None
 node,1947,1407,0,Campus,,false,None
-node,1961,1414,0,Campus,,false,None
 node,1971,1407,0,Campus,,false,None
 node,1981,1388,0,Campus,,false,None
 node,1988,1369,0,Campus,,false,None
@@ -166,25 +164,23 @@ node,1950,1254,0,Campus,,false,None
 node,1964,1253,0,Campus,,false,None
 node,1979,1262,0,Campus,,false,None
 node,1989,1273,0,Campus,,false,Intersection
-node,2011,1280,0,Campus,,false,Intersection
-node,2035,1288,0,Campus,,true,Stairs
-node,1839,1119,0,Campus,,false,Intersection
-node,1890,1128,0,Campus,,false,Intersection
+node,2011,1280,0,Campus,cross,false,Intersection
+node,1839,1119,0,Campus,cross,false,Intersection
+node,1890,1128,0,Campus,cross,false,Intersection
 Gordon Library Front Entrance,1910,1132,0,Campus,The front entrance of GL.,true,Entrance
-node,2047,1292,0,Campus,,false,Intersection
 node,2099,1368,0,Campus,,false,None
 node,2153,1399,0,Campus,,false,None
-node,2177,1397,0,Campus,,false,None
+node,2177,1397,0,Campus,cross,false,Intersection
 node,2062,1211,0,Campus,,false,None
 node,2078,1126,0,Campus,,false,None
 node,2089,1078,0,Campus,,false,None
 node,2111,1063,0,Campus,,false,None
-node,2110,1042,0,Campus,,false,None
+node,2110,1042,0,Campus,cross,false,None
 node,2016,1256,0,Campus,,false,None
 node,2053,1079,0,Campus,,false,None
 node,2061,1055,0,Campus,,false,None
 node,2072,1037,0,Campus,,false,None
-node,2090,1021,0,Campus,,false,Intersection
+node,2090,1021,0,Campus,cross,false,Intersection
 node,2032,900,0,Campus,,false,Intersection
 node,2001,916,0,Campus,,true,Stairs
 node,1982,926,0,Campus,,false,None
@@ -194,23 +190,22 @@ node,1907,965,0,Campus,,false,Intersection
 node,1942,947,0,Campus,,false,None
 node,1900,949,0,Campus,,false,None
 node,1890,934,0,Campus,,false,None
-node,1877,920,0,Campus,,false,Intersection
-node,1869,943,0,Campus,,false,None
+node,1877,920,0,Campus,cross,false,Intersection
+node,1869,943,0,Campus,cross,false,None
 node,1867,956,0,Campus,,true,Stairs
 node,1864,973,0,Campus,,false,None
-node,1798,877,0,Campus,,false,Intersection
+node,1798,877,0,Campus,cross,false,Intersection
 node,1847,899,0,Campus,,false,Intersection
 node,1859,874,0,Campus,,false,Intersection
 Atwater Kent Side Entrance,1816,849,0,Campus,Side entrance of AK.,true,Entrance
-node,1885,911,0,Campus,,true,Entrance
 node,1786,859,0,Campus,,false,None
 node,1710,815,0,Campus,,false,Intersection
 Atwater Kent Front Entrance,1714,806,0,Campus,Front entrance of AK.,true,Entrance
 node,1686,800,0,Campus,,false,None
-node,1645,792,0,Campus,,false,Intersection
+node,1645,792,0,Campus,cross,false,Intersection
 node,1765,897,0,Campus,,false,None
-node,1789,895,0,Campus,,false,None
-node,1625,790,0,Campus,,false,Intersection
+node,1789,895,0,Campus,cross,false,None
+node,1625,790,0,Campus,cross,false,Intersection
 node,1622,763,0,Campus,,false,None
 node,1562,749,0,Campus,,false,None
 node,1509,741,0,Campus,,false,None
@@ -221,16 +216,239 @@ node,2042,832,0,Campus,,false,Intersection
 node,2024,796,0,Campus,,false,Intersection
 Fuller Labs Back Entance,2015,801,0,Campus,Back entrance to FL.,true,Entrance
 node,1837,1303,0,Campus,,false,None
-node,1868,1166,0,Campus,,false,Intersection
 node,1599,1433,0,Campus,,false,None
 node,1605,1410,0,Campus,,false,None
 node,1614,1387,0,Campus,,false,None
-node,1624,1369,0,Campus,,false,None
-node,1633,1354,0,Campus,,false,None
-node,1648,1343,0,Campus,,false,Intersection
+node,1624,1369,0,Campus,,false,Intersection
 node,1649,1061,0,Campus,,false,Intersection
-node,1708,1069,0,Campus,,false,None
 node,1737,1085,0,Campus,,false,Intersection
 node,1759,1105,0,Campus,,false,None
 Project Center Front Entrance,1643,1088,0,Campus,Front entrance of the PC.,true,Entrance
 Salisbury Side Entrance,1741,1047,0,Campus,Side entrance of Salisbury.,true,Entrance
+node,1805,1113,0,Campus,,false,Intersection
+Washburn Main Entrance,1798,1154,0,Campus,Main entrance to Washburn.,true,Entrance
+node,1871,1242,0,Campus,,false,None
+node,1842,1261,0,Campus,,false,Intersection
+node,1866,1254,0,Campus,,false,None
+node,1856,1259,0,Campus,,false,None
+node,1798,1479,0,Campus,cross,false,Intersection
+node,1787,1398,0,Campus,cross,false,Intersection
+node,1817,1403,0,Campus,cross,false,Intersection
+node,1608,1357,0,Campus,,false,None
+node,1582,1339,0,Campus,,false,None
+node,1707,1544,0,Campus,,false,None
+Fuller Labs Front Entrance,1886,912,0,Campus,Front entrance of FL.,true,Entrance
+Higgins Labs Fountain Side Entrance,1493,1054,0,Campus,Entrance to HL near the fountain.,true,Entrance
+node,1447,1302,0,Campus,cross,false,Intersection
+node,1438,1397,0,Campus,cross,false,Intersection
+Higgins Labs Small Entrance,1389,1196,0,Campus,Small entrance to HL.,true,Entrance
+node,1362,1213,0,Campus,cross,false,Intersection
+node,1384,1156,0,Campus,,false,Intersection
+node,1392,1269,0,Campus,,false,None
+node,1381,1262,0,Campus,,false,None
+node,1376,1250,0,Campus,,false,None
+node,1373,1236,0,Campus,,false,None
+node,1367,1222,0,Campus,,false,None
+node,1326,1150,0,Campus,,false,Intersection
+node,1355,1198,0,Campus,,false,None
+node,1355,1198,0,Campus,,false,None
+node,1345,1180,0,Campus,,false,None
+node,1345,1180,0,Campus,,false,None
+node,1335,1163,0,Campus,,false,None
+node,1335,1163,0,Campus,,false,None
+node,1187,1126,0,Campus,,false,None
+node,1173,1130,0,Campus,,false,None
+node,1157,1138,0,Campus,,false,None
+node,1141,1148,0,Campus,,false,Intersection
+node,1127,1152,0,Campus,,false,None
+node,1106,1156,0,Campus,,false,None
+node,1083,1158,0,Campus,,false,None
+node,1044,1153,0,Campus,,false,Intersection
+Harrington Auditorium Entrance,1048,1127,0,Campus,Entrance to HA.,true,Entrance
+node,1024,1153,0,Campus,,false,None
+node,987,1160,0,Campus,,false,None
+node,971,1167,0,Campus,,false,None
+node,959,1174,0,Campus,,false,Intersection
+node,1018,1144,0,Campus,,false,None
+node,1018,1144,0,Campus,,false,None
+node,936,1117,0,Campus,,false,None
+Sports and Recreation Center Entrance,936,1117,0,Campus,Entrance for the Rec Center.,true,Entrance
+Quad,1050,1288,0,Campus,,false,Room
+node,1346,1224,0,Campus,cross,false,Intersection
+node,1330,1230,0,Campus,,false,Intersection
+node,1205,1209,0,Campus,,false,Intersection
+node,1191,1201,0,Campus,,false,Intersection
+node,1214,1229,0,Campus,,false,None
+node,1222,1250,0,Campus,,false,None
+node,1228,1276,0,Campus,,false,None
+node,1229,1293,0,Campus,,false,None
+Gompei Statue,1214,1312,0,Campus,,false,Room
+Bartlett Center Entrance,1230,1314,0,Campus,Entrance of the BC.,true,Entrance
+node,1222,1334,0,Campus,,false,None
+node,1219,1353,0,Campus,,false,None
+node,1211,1370,0,Campus,,false,None
+node,1196,1391,0,Campus,,false,None
+node,1205,1380,0,Campus,,false,None
+node,1188,1398,0,Campus,,false,None
+node,1176,1407,0,Campus,,false,Intersection
+node,1154,1411,0,Campus,,false,Intersection
+node,937,1199,0,Campus,,false,None
+node,927,1224,0,Campus,,false,None
+node,917,1253,0,Campus,,false,None
+node,911,1278,0,Campus,,false,None
+node,909,1337,0,Campus,,false,Intersection
+node,888,1331,0,Campus,,false,None
+node,906,1308,0,Campus,,false,None
+node,958,1111,0,Campus,,false,Intersection
+node,942,1084,0,Campus,,false,None
+node,817,977,0,Campus,,false,None
+node,951,1003,0,Campus,,false,Intersection
+node,967,947,0,Campus,,false,Intersection
+node,937,904,0,Campus,,false,Intersection
+node,922,896,0,Campus,,false,None
+node,908,885,0,Campus,,false,None
+node,898,870,0,Campus,,false,None
+node,893,851,0,Campus,,false,None
+node,891,832,0,Campus,,false,Intersection
+node,968,906,0,Campus,,false,Intersection
+node,1004,889,0,Campus,,false,None
+node,1017,872,0,Campus,,false,None
+node,1023,852,0,Campus,,false,None
+node,1020,826,0,Campus,,false,None
+node,1012,805,0,Campus,,false,None
+node,995,789,0,Campus,,false,None
+node,958,777,0,Campus,,false,Intersection
+node,989,901,0,Campus,,false,None
+node,978,781,0,Campus,,false,None
+node,921,790,0,Campus,cross,false,Intersection
+node,958,777,0,Campus,cross,false,None
+Parking Garage,905,776,0,Campus,,false,Room
+node,1126,541,0,Campus,,false,None
+node,1158,523,0,Campus,,false,None
+node,1185,509,0,Campus,,false,None
+node,1202,488,0,Campus,,false,None
+node,1218,478,0,Campus,,false,Intersection
+node,867,864,0,Campus,,false,Intersection
+node,880,863,0,Campus,,false,Intersection
+node,896,938,0,Campus,,false,Intersection
+node,879,885,0,Campus,,false,None
+node,881,906,0,Campus,,false,None
+node,889,921,0,Campus,,false,None
+node,880,936,0,Campus,,false,None
+node,861,938,0,Campus,,false,None
+node,840,948,0,Campus,,false,None
+node,826,959,0,Campus,,false,None
+node,909,947,0,Campus,,false,None
+node,923,959,0,Campus,,false,None
+node,930,975,0,Campus,,false,None
+node,935,994,0,Campus,,false,None
+node,1001,1416,0,Campus,,false,Intersection
+node,919,1367,0,Campus,,false,Intersection
+node,959,1405,0,Campus,,false,None
+node,946,1398,0,Campus,,false,None
+node,935,1389,0,Campus,,false,None
+node,927,1380,0,Campus,,false,None
+node,1112,1433,0,Campus,,false,Intersection
+Beech Tree,1419,1342,0,Campus,,false,Room
+node,1367,1336,0,Campus,,false,Intersection
+node,1337,1331,0,Campus,,false,Intersection
+node,1316,1328,0,Campus,,false,Intersection
+node,1298,1428,0,Campus,cross,false,Intersection
+node,1172,1463,0,Campus,cross,false,Intersection
+node,1129,1458,0,Campus,cross,false,Intersection
+Riley Hall Entrance,1257,1505,0,Campus,Front entrance to RH.,true,Entrance
+node,1291,1465,0,Campus,,false,None
+node,1265,1469,0,Campus,,false,Intersection
+node,1315,1457,0,Campus,cross,false,Intersection
+node,1242,1468,0,Campus,,false,None
+node,1210,1463,0,Campus,,false,None
+node,1330,1444,0,Campus,,false,None
+node,1339,1432,0,Campus,,false,None
+node,1353,1419,0,Campus,,false,None
+node,1368,1412,0,Campus,,false,None
+node,1417,1417,0,Campus,,false,None
+node,1383,1412,0,Campus,,false,None
+node,1399,1415,0,Campus,,false,None
+node,1697,1097,0,Campus,,false,Intersection
+node,1700,1069,0,Campus,,false,Intersection
+Project Center Side Entrance,1666,1145,0,Campus,Side Entrance of PC.,true,Entrance
+node,1685,1150,0,Campus,,false,Intersection
+node,1634,1354,0,Campus,,false,None
+node,1639,1329,0,Campus,,false,None
+Stratton Hall Back Entrance,1642,1277,0,Campus,Back entrance of SH.,true,Entrance
+node,1661,1279,0,Campus,,false,Intersection
+Wedge / Morgan Hall Entrance,864,1403,0,Campus,Entrance to Morgan Hall and the Wedge.,true,Entrance
+Daniels Hall Entrance,973,1467,0,Campus,Entrance to Daniel's Hall.,true,Entrance
+node,2119,1013,0,Campus,cross,false,Intersection
+Kaven Hall Entrance,2129,979,0,Campus,Entrance to KH.,true,Entrance
+node,2151,1007,0,Campus,,false,None
+node,2241,999,0,Campus,cross,false,Intersection
+node,2237,1027,0,Campus,,false,Intersection
+node,2171,1429,0,Campus,,false,Intersection
+node,2131,1670,0,Campus,cross,false,Intersection
+node,2126,1702,0,Campus,,false,Intersection
+node,2163,1747,0,Campus,cross,false,Intersection
+node,2217,1387,0,Campus,cross,false,Intersection
+node,2203,1488,0,Campus,,false,Intersection
+node,2169,1678,0,Campus,cross,false,Intersection
+Founder's Hall Entrance,2289,1502,0,Campus,Entrance of FH.,true,Entrance
+node,2286,1238,0,Campus,,false,None
+node,2282,1274,0,Campus,,false,None
+node,2269,1287,0,Campus,,false,None
+node,2257,1293,0,Campus,,false,None
+node,2242,1296,0,Campus,,false,None
+node,2231,1294,0,Campus,,false,Intersection
+node,2282,1226,0,Campus,,false,None
+node,2273,1216,0,Campus,,false,None
+node,2260,1208,0,Campus,,false,None
+node,2247,1204,0,Campus,,false,Intersection
+node,2279,1004,0,Campus,cross,false,Intersection
+East Hall Entrance,2290,1257,0,Campus,Entrance to EH.,true,Entrance
+node,2151,1803,0,Campus,cross,false,Intersection
+node,2139,1859,0,Campus,,false,Intersection
+Institute Hall Entrance,2156,1863,0,Campus,Entrance of IH.,true,Entrance
+node,2073,2273,0,Campus,cross,false,Intersection
+node,2029,2277,0,Campus,cross,false,Intersection
+Dragon Dynasty,1971,2283,0,Campus,,false,Room
+node,2093,2317,0,Campus,cross,false,Intersection
+node,2041,2323,0,Campus,cross,false,Intersection
+Honey Farms,1981,2381,0,Campus,,false,Room
+node,2085,2361,0,Campus,,false,None
+Boomer's Sub and Deli,2085,2361,0,Campus,,false,Room
+node,1567,717,0,Campus,,false,Intersection
+Goddard Hall Entrance,1567,699,0,Campus,Entrance to GH.,true,Entrance
+node,1519,707,0,Campus,,false,None
+node,1511,685,0,Campus,,false,Intersection
+node,1725,1635,0,Campus,,false,None
+node,1815,1633,0,Campus,,false,None
+node,1835,1623,0,Campus,,false,None
+node,1873,1597,0,Campus,,false,None
+node,1893,1577,0,Campus,,false,None
+node,1921,1541,0,Campus,,false,None
+node,1945,1507,0,Campus,,false,None
+node,1959,1477,0,Campus,,false,None
+node,1975,1441,0,Campus,cross,false,Intersection
+node,1751,1641,0,Campus,,false,None
+node,1781,1640,0,Campus,,false,None
+node,1958,1413,0,Campus,cross,false,Intersection
+node,1992,1440,0,Campus,,false,None
+node,2003,1448,0,Campus,,false,None
+node,2009,1461,0,Campus,,false,None
+node,2019,1487,0,Campus,,false,None
+node,2029,1540,0,Campus,,false,None
+node,2032,1590,0,Campus,,false,None
+node,2036,1625,0,Campus,,false,None
+node,2049,1653,0,Campus,,false,None
+node,2078,1678,0,Campus,,false,None
+node,1910,983,0,Campus,,false,None
+node,1910,1001,0,Campus,,false,None
+node,1909,1023,0,Campus,,false,None
+node,1905,1045,0,Campus,,false,None
+node,1900,1074,0,Campus,,false,None
+node,1781,1439,0,Campus,,false,None
+node,1809,1449,0,Campus,,false,None
+node,1659,1457,0,Campus,,false,None
+node,1627,801,0,Campus,,false,None
+node,2028,1289,0,Campus,cross,false,Intersection
+node,2037,1292,0,Campus,,true,Stairs
+node,2046,1295,0,Campus,,false,Intersection

@@ -137,9 +137,6 @@
 391,405,0,CampusCenter1,322,405,0,CampusCenter1
 391,405,0,CampusCenter1,516,405,0,CampusCenter1
 391,405,0,CampusCenter1,391,465,0,CampusCenter1
-516,292,0,CampusCenter1,516,370,0,CampusCenter1
-516,292,0,CampusCenter1,420,292,0,CampusCenter1
-516,292,0,CampusCenter1,644,346,0,CampusCenter1
 516,370,0,CampusCenter1,391,370,0,CampusCenter1
 516,370,0,CampusCenter1,516,405,0,CampusCenter1
 516,370,0,CampusCenter1,516,292,0,CampusCenter1
@@ -264,3 +261,6 @@
 872,423,0,CampusCenter1,872,467,0,CampusCenter1
 911,423,0,CampusCenter1,872,423,0,CampusCenter1
 911,423,0,CampusCenter1,861,434,0,CampusCenter2
+516,292,0,CampusCenter1,516,370,0,CampusCenter1
+516,292,0,CampusCenter1,420,292,0,CampusCenter1
+516,292,0,CampusCenter1,644,346,0,CampusCenter1

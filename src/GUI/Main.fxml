@@ -42,7 +42,7 @@
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button fx:id="helpBtn" mnemonicParsing="false" text="Help" />
+                  <MenuButton fx:id="helpBtn" mnemonicParsing="false" text="Help" />
                </children>
             </HBox>
             <HBox fx:id="floorControlHBox" focusTraversable="true" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -57,6 +57,7 @@
                   </VBox>
                </children>
             </HBox>
+            <ImageView fx:id="preloaderImageView" fitHeight="800.0" fitWidth="1376.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

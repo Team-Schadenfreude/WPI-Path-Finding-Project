@@ -137,6 +137,12 @@ public class SidePanel {
 				hbItem = new HBox(10,
 						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
 				hbList.add(hbItem);
+			} else if (s.toLowerCase().contains("cross")) {
+				label = new Label(s);
+				label.getStyleClass().add("direction_label");
+				hbItem = new HBox(10,
+						new ImageView(new Image("/res/icons/go_straight.png", iconSize, iconSize, true, true)), label);
+				hbList.add(hbItem);
 			}
 
 			else if (s.toLowerCase().contains("proceed")) {

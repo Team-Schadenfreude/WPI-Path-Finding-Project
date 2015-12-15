@@ -1,95 +1,95 @@
-CC-221,97,73,0,CampusCenter2,,FALSE,Room
-node,97,91,0,CampusCenter2,,FALSE,Intersection
-node,81,91,0,CampusCenter2,,FALSE,Intersection
-CC-225,81,73,0,CampusCenter2,,FALSE,Room
-node,172,91,0,CampusCenter2,,FALSE,Intersection
-CC-223,153,57,0,CampusCenter2,,FALSE,Room
-node,172,57,0,CampusCenter2,,FALSE,Intersection
-CC-217,81,145,0,CampusCenter2,,FALSE,Room
-CC-222,51,145,0,CampusCenter2,,FALSE,Room
-node,81,177,0,CampusCenter2,,FALSE,Intersection
-CC-220,51,177,0,CampusCenter2,,FALSE,Room
-node,81,207,0,CampusCenter2,,FALSE,Intersection
-CC-219,51,207,0,CampusCenter2,,FALSE,Room
-node,172,73,0,CampusCenter2,,FALSE,Intersection
-node,209,43,0,CampusCenter2,Campus Center stairs across the hall from room 223 on the second floor.,TRUE,Stairs
-node,209,73,0,CampusCenter2,,FALSE,Intersection
-node,302,73,0,CampusCenter2,,FALSE,Intersection
-CC-227,326,73,0,CampusCenter2,,FALSE,Room
-CC-226,337,97,0,CampusCenter2,,FALSE,Room
-node,302,97,0,CampusCenter2,,FALSE,Intersection
-CC-229A,302,126,0,CampusCenter2,,FALSE,Room
-CC-229B,302,160,0,CampusCenter2,,FALSE,Room
-CC-230,339,182,0,CampusCenter2,,FALSE,Room
-node,302,182,0,CampusCenter2,,FALSE,Intersection
-CC-231,326,204,0,CampusCenter2,,FALSE,Room
-node,302,204,0,CampusCenter2,,FALSE,Intersection
-CC-233,302,234,0,CampusCenter2,,FALSE,Room
-CC-232,239,204,0,CampusCenter2,,FALSE,Room
-CC-234,239,234,0,CampusCenter2,,FALSE,Room
-node,172,145,0,CampusCenter2,,FALSE,Intersection
-node,209,204,0,CampusCenter2,,FALSE,Intersection
-node,172,204,0,CampusCenter2,,FALSE,Intersection
-node,143,204,0,CampusCenter2,,FALSE,Intersection
-CC-228,256,73,0,CampusCenter2,,FALSE,Room
-node,172,234,0,CampusCenter2,,FALSE,Intersection
-node,172,282,0,CampusCenter2,,FALSE,Intersection
-node,118,282,0,CampusCenter2,,FALSE,Intersection
-CS-214,118,234,0,CampusCenter2,,FALSE,Room
-CC-213,56,246,0,CampusCenter2,,FALSE,Room
-CS-212,56,327,0,CampusCenter2,,FALSE,Room
-node,96,327,0,CampusCenter2,,FALSE,Intersection
-node,96,282,0,CampusCenter2,,FALSE,Intersection
-node,96,246,0,CampusCenter2,,FALSE,Intersection
-node,143,282,0,CampusCenter2,,FALSE,Intersection
-node,143,327,0,CampusCenter2,Campus Center elevator across from 214 on the second floor.,TRUE,Elevator
-node,172,302,0,CampusCenter2,,FALSE,Intersection
-CC-236,227,386,0,CampusCenter2,,FALSE,Room
-node,227,302,0,CampusCenter2,,FALSE,Intersection
-CC-235,227,302,0,CampusCenter2,,FALSE,Room
-node,172,386,0,CampusCenter2,,FALSE,Intersection
-node,172,386,0,CampusCenter2,,FALSE,Intersection
-node,172,386,0,CampusCenter2,,FALSE,Intersection
-CC-207,135,371,0,CampusCenter2,,FALSE,Room
-node,172,371,0,CampusCenter2,,FALSE,Intersection
-node,172,471,0,CampusCenter2,,FALSE,Intersection
-CC-Front-Entrance-Above-Octo,96,471,0,CampusCenter2,The Campus Center entrance facing Higgins upon exit.,TRUE,Entrance
-node,346,388,0,CampusCenter2,Campus Center main staircase to the third floor.,TRUE,Stairs
-node,383,388,0,CampusCenter2,Campus Center main staircase to the first floor.,TRUE,Stairs
-node,227,471,0,CampusCenter2,,FALSE,Intersection
-CampusCenter Bookstore Entance,265,680,0,CampusCenter2,CampusCenter Bookstore Entance,TRUE,Entrance
-node,297,611,0,CampusCenter2,,FALSE,Intersection
-node,297,567,0,CampusCenter2,,FALSE,Intersection
-node,297,567,0,CampusCenter2,,FALSE,Intersection
-node,227,567,0,CampusCenter2,,FALSE,Intersection
-Octowedge,227,567,0,CampusCenter2,Common gathering spot in the Rubin Campus Center. Named due to its shape.,FALSE,Room
-node,297,471,0,CampusCenter2,,FALSE,Intersection
-node,297,471,0,CampusCenter2,,FALSE,Intersection
-node,346,471,0,CampusCenter2,,FALSE,Intersection
-node,383,471,0,CampusCenter2,,FALSE,Intersection
-node,341,611,0,CampusCenter2,,FALSE,Intersection
-node,370,665,0,CampusCenter2,,FALSE,Intersection
-CC-258,370,738,0,CampusCenter2,,FALSE,Room
-CC-257,396,738,0,CampusCenter2,,FALSE,Room
-node,370,710,0,CampusCenter2,,FALSE,Intersection
-CC-254,396,710,0,CampusCenter2,,FALSE,Room
-CC-255,491,710,0,CampusCenter2,,FALSE,Room
-node,457,710,0,CampusCenter2,,FALSE,Intersection
-CC-256,457,738,0,CampusCenter2,,FALSE,Room
-node,452,471,0,CampusCenter2,,FALSE,Intersection
-node,549,471,0,CampusCenter2,,FALSE,Intersection
-node,452,417,0,CampusCenter2,,FALSE,Intersection
-node,549,417,0,CampusCenter2,,FALSE,Intersection
-Dunkin' Donuts,655,471,0,CampusCenter2,Small Dunkin' Donuts.,FALSE,Room
-Campus Bookstore,549,518,0,CampusCenter2,Local campus bookstore. Great to pick up WPI memorabilia and overpriced textbooks.,FALSE,Room
-node,861,471,0,CampusCenter2,,FALSE,Intersection
-node,861,434,0,CampusCenter2,Campus center staircase past the Dunkin' Donuts.,TRUE,Elevator
-CC-241,986,471,0,CampusCenter2,,FALSE,Room
-CC-242,986,436,0,CampusCenter2,,FALSE,Room
-node,1034,471,0,CampusCenter2,Elevator inside of 241 on the Campus Center's second floor.,TRUE,Elevator
-node,986,521,0,CampusCenter2,,FALSE,Intersection
-CC-245,1034,521,0,CampusCenter2,,FALSE,Room
-CC-248,986,606,0,CampusCenter2,,FALSE,Room
-node,910,606,0,CampusCenter2,,FALSE,Intersection
-CC-250,910,548,0,CampusCenter2,,FALSE,Room
-CC-249,938,548,0,CampusCenter2,,FALSE,Room
+CC-221,97,73,0,CampusCenter2,,false,Room
+node,97,91,0,CampusCenter2,,false,Intersection
+node,81,91,0,CampusCenter2,,false,Intersection
+CC-225,81,73,0,CampusCenter2,,false,Room
+node,172,91,0,CampusCenter2,,false,Intersection
+CC-223,153,57,0,CampusCenter2,,false,Room
+node,172,57,0,CampusCenter2,,false,Intersection
+CC-217,81,145,0,CampusCenter2,,false,Room
+CC-222,51,145,0,CampusCenter2,,false,Room
+node,81,177,0,CampusCenter2,,false,Intersection
+CC-220,51,177,0,CampusCenter2,,false,Room
+node,81,207,0,CampusCenter2,,false,Intersection
+CC-219,51,207,0,CampusCenter2,,false,Room
+node,172,73,0,CampusCenter2,,false,Intersection
+node,209,43,0,CampusCenter2,Campus Center stairs across the hall from room 223 on the second floor.,true,Stairs
+node,209,73,0,CampusCenter2,,false,Intersection
+node,302,73,0,CampusCenter2,,false,Intersection
+CC-227,326,73,0,CampusCenter2,,false,Room
+CC-226,337,97,0,CampusCenter2,,false,Room
+node,302,97,0,CampusCenter2,,false,Intersection
+CC-229A,302,126,0,CampusCenter2,,false,Room
+CC-229B,302,160,0,CampusCenter2,,false,Room
+CC-230,339,182,0,CampusCenter2,,false,Room
+node,302,182,0,CampusCenter2,,false,Intersection
+CC-231,326,204,0,CampusCenter2,,false,Room
+node,302,204,0,CampusCenter2,,false,Intersection
+CC-233,302,234,0,CampusCenter2,,false,Room
+CC-232,239,204,0,CampusCenter2,,false,Room
+CC-234,239,234,0,CampusCenter2,,false,Room
+node,172,145,0,CampusCenter2,,false,Intersection
+node,209,204,0,CampusCenter2,,false,Intersection
+node,172,204,0,CampusCenter2,,false,Intersection
+node,143,204,0,CampusCenter2,,false,Intersection
+CC-228,256,73,0,CampusCenter2,,false,Room
+node,172,234,0,CampusCenter2,,false,Intersection
+node,172,282,0,CampusCenter2,,false,Intersection
+node,118,282,0,CampusCenter2,,false,Intersection
+CS-214,118,234,0,CampusCenter2,,false,Room
+CC-213,56,246,0,CampusCenter2,,false,Room
+CS-212,56,327,0,CampusCenter2,,false,Room
+node,96,327,0,CampusCenter2,,false,Intersection
+node,96,282,0,CampusCenter2,,false,Intersection
+node,96,246,0,CampusCenter2,,false,Intersection
+node,143,282,0,CampusCenter2,,false,Intersection
+node,143,327,0,CampusCenter2,Campus Center elevator across from 214 on the second floor.,true,Elevator
+node,172,302,0,CampusCenter2,,false,Intersection
+CC-236,227,386,0,CampusCenter2,,false,Room
+node,227,302,0,CampusCenter2,,false,Intersection
+CC-235,227,302,0,CampusCenter2,,false,Room
+node,172,386,0,CampusCenter2,,false,Intersection
+node,172,386,0,CampusCenter2,,false,Intersection
+node,172,386,0,CampusCenter2,,false,Intersection
+CC-207,135,371,0,CampusCenter2,,false,Room
+node,172,371,0,CampusCenter2,,false,Intersection
+node,172,471,0,CampusCenter2,,false,Intersection
+node,346,388,0,CampusCenter2,Campus Center main staircase to the third floor.,true,Stairs
+node,383,388,0,CampusCenter2,Campus Center main staircase to the first floor.,true,Stairs
+node,227,471,0,CampusCenter2,,false,Intersection
+node,297,611,0,CampusCenter2,,false,Intersection
+node,297,567,0,CampusCenter2,,false,Intersection
+node,297,567,0,CampusCenter2,,false,Intersection
+node,227,567,0,CampusCenter2,,false,Intersection
+Octowedge,227,567,0,CampusCenter2,Common gathering spot in the Rubin Campus Center. Named due to its shape.,false,Room
+node,297,471,0,CampusCenter2,,false,Intersection
+node,297,471,0,CampusCenter2,,false,Intersection
+node,346,471,0,CampusCenter2,,false,Intersection
+node,383,471,0,CampusCenter2,,false,Intersection
+node,341,611,0,CampusCenter2,,false,Intersection
+node,370,665,0,CampusCenter2,,false,Intersection
+CC-258,370,738,0,CampusCenter2,,false,Room
+CC-257,396,738,0,CampusCenter2,,false,Room
+node,370,710,0,CampusCenter2,,false,Intersection
+CC-254,396,710,0,CampusCenter2,,false,Room
+CC-255,491,710,0,CampusCenter2,,false,Room
+node,457,710,0,CampusCenter2,,false,Intersection
+CC-256,457,738,0,CampusCenter2,,false,Room
+node,452,471,0,CampusCenter2,,false,Intersection
+node,549,471,0,CampusCenter2,,false,Intersection
+node,452,417,0,CampusCenter2,,false,Intersection
+node,549,417,0,CampusCenter2,,false,Intersection
+Dunkin' Donuts,655,471,0,CampusCenter2,Small Dunkin' Donuts.,false,Room
+Campus Bookstore,549,518,0,CampusCenter2,Local campus bookstore. Great to pick up WPI memorabilia and overpriced textbooks.,false,Room
+node,861,471,0,CampusCenter2,,false,Intersection
+node,861,434,0,CampusCenter2,Campus center staircase past the Dunkin' Donuts.,true,Elevator
+CC-241,986,471,0,CampusCenter2,,false,Room
+CC-242,986,436,0,CampusCenter2,,false,Room
+node,1034,471,0,CampusCenter2,Elevator inside of 241 on the Campus Center's second floor.,true,Elevator
+node,986,521,0,CampusCenter2,,false,Intersection
+CC-245,1034,521,0,CampusCenter2,,false,Room
+CC-248,986,606,0,CampusCenter2,,false,Room
+node,910,606,0,CampusCenter2,,false,Intersection
+CC-250,910,548,0,CampusCenter2,,false,Room
+CC-249,938,548,0,CampusCenter2,,false,Room
+CC-Desk Entrance,97,471,0,CampusCenter2,Entrance near the front desk of the CC.,true,Entrance
+CC-Bookstore Entrance,269,681,0,CampusCenter2,CC-Bookstore Entrance,true,Entrance
