@@ -1,79 +1,56 @@
 package DataAccess;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
+import javafx.collections.ObservableList;
+import javafx.scene.Group;
 
-public class Map {
+public class Map extends MapComponent{
 
-	private List<Building> buildings = new LinkedList<Building>();
 	private List<Node> nodes = new LinkedList<Node>();
-	private String name;
-	private String baseMap;
-	public Map() {
+	private List<Building> buildings = new LinkedList<Building>();
+	public Map(String name){
+		this.setId(name);
 	}
-	public Map(String name, String baseMap){
-		this.name = name;
-		this.baseMap = baseMap;
-	}
-	public String getBaseMapName()
+	public List<Building> getBuildingsUnmodifiable()
 	{
-		return this.baseMap;
+		return Collections.unmodifiableList(this.buildings);
 	}
-	public void setBaseMapName(String baseMap)
+	public List<Node> toNodeListUnmodifiable() //Be extremely careful using this function
 	{
-		this.baseMap = baseMap;
-	}
-	private void getNodesFromBuildings()
-	{
-		for(Building b : this.buildings)
-		{
-			for (Floor f : b.getFloors())
-			{
-				for (Node n : f.getNodes())
-				{
-					nodes.add(n);
-				}
-			}
-		}
-	}
-	public List<Building> getBuildings()
-	{
-		return this.buildings;
-	}
-	public List<Node> toNodeList() //Be extremely careful using this function
-	{
-		return this.nodes;
-	}
-	public String getName()
-	{
-		return this.name;
-	}
-	public void setBuidlings(List<Building> buildings)
-	{
-		this.buildings = buildings;
-		getNodesFromBuildings();
-	}
-	public void setName(String name)
-	{
-		this.name = name;
+		return Collections.unmodifiableList(this.nodes);
 	}
 	public void addBuilding(Building building)
 	{
-		if (building.getId().equals(baseMap) && this.getBuildingCount() > 0)
+		this.buildings.add(building);
+		this.getChildren().add(building);
+		addNodesFromBuilding(building);
+	}
+	public void addBaseBuilding(Building b)
+	{
+		if (this.getChildren().size() > this.safeChildrenIndex)
 		{
-			this.buildings.add(0,building);
+			this.buildings.add(0, b);
+			this.getChildren().add(this.safeChildrenIndex, b);
 		}
 		else
 		{
-			this.buildings.add(building);
+			System.out.println("Dangerous Index Overwite Detected");
+			this.buildings.add(b);
+			this.getChildren().add(b);
 		}
-		addNodesFromBuilding(building);
+		addNodesFromBuilding(b);
+	}
+	public Building getBaseBuilding()
+	{
+		return (Building)this.getChildren().get(this.safeChildrenIndex);
 	}
 	private void addNodesFromBuilding(Building b)
 	{
-		for (Floor f : b.getFloors())
+		for (Floor f : b.getFloorsUnmodifiable())
 		{
 			nodes.addAll(f.getNodes());
 		}
@@ -108,26 +85,15 @@ public class Map {
 		}
 		return null;
 	}
-	 
-	public void print()
-	{
-		int i = 0;
-		for(Building b : this.getBuildings())
-		{
-			if(i == 3)
-			{
-				break;
-			}
-			System.out.println("The Building = -" + b.getId() + "----------------------" );
-			for (Floor f : b.getFloors())
-			{
-				System.out.println("The floor is " + f.getId() + "-----");
-				for (Node n : f.getNodes())
-				{
-					System.out.println("Node " + n);
-				}
-			}
-			i++;
-		}
-	}
+	 public void setZoom(double zoomFactor)
+	 {
+		 this.setScale(zoomFactor, zoomFactor);
+	 }
+
+	 public void setZoom(double zoomFactor, double pivotX, double pivotY)
+	 {
+		 this.getScale().setPivotX(pivotX);
+		 this.getScale().setPivotY(pivotY);
+		 this.setZoom(zoomFactor);
+	 }
 }

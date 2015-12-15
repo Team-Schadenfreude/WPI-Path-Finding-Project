@@ -73,6 +73,12 @@ public class SendingEmail {
 			else if(s.toLowerCase().contains("left turn")) {
 				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_left.png' height='50' width='50' style=\"margin-right: 10px; vertical-align: middle;\"><span style=\"vertical-align: middle;\">" + s + "</span></p>";
 			}
+			else if(s.toLowerCase().contains("right turn")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_right.png' height='50' width='50' style=\"margin-right: 10px; vertical-align: middle;\"><span style=\"vertical-align: middle;\">" + s + "</span></p>";
+			}
+			else if(s.toLowerCase().contains("left turn")) {
+				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/turn_left.png' height='50' width='50' style=\"margin-right: 10px; vertical-align: middle;\"><span style=\"vertical-align: middle;\">" + s + "</span></p>";
+			}
 			else if(s.toLowerCase().contains("proceed")) {
 				content = content + "<p><img src='https://randy-image-server.herokuapp.com/public/img/proceed.png' height='50' width='50' style=\"margin-right: 10px; vertical-align: middle;\"><span style=\"vertical-align: middle;\">" + s + "</span></p>";
 			}

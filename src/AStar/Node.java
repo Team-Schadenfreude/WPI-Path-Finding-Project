@@ -9,8 +9,8 @@ import java.util.List;
 
 //class for node. A node is a point on the grid that contains an x and y position
 public class Node{
-	public enum Type { ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE, NONE }; // an Enumeration to represent the different types of nodes
-	
+	public enum Type { ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE, INTERSECTION, ENDHALL, NONE }; // an Enumeration to represent the different types of nodes
+
 	private String nodeName; //every node has a name
     private Node parent; //node has a parent. the parent is where the current node came from
     private double gValue; //gValue is cost from current block
@@ -179,16 +179,16 @@ public class Node{
     {
     	if (this.type == Type.ELEVATOR &&  node.type == Type.ELEVATOR)
     	{
-    		return 4000;
+    		return 200;
     	}
     	else if (this.type == Type.STAIRS &&  node.type == Type.STAIRS)
     	{
-    		return 2000;
+    		return 100;
     	}
-//    	if (this.isTransition() && node.isTransition())
-//    	{
-//    		return 10000;
-//    	}
+    	if (this.isTransition() && node.isTransition())
+    	{
+    		return 0;
+    	}
     	if (!this.map.equals(node.map))
     	{
     		System.out.println("Here--------------------------------------------------------------");
