@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import AStar.Node;
+import javafx.scene.image.Image;
 
 public class MapBuilder {
 
@@ -30,6 +31,7 @@ public class MapBuilder {
 	}
 	public Map buildMap()
 	{
+
 		Map map = new Map(baseMap);
 		//File selectedDirectory = getDirectoryFromDialog(); //Get SuperMap Directory
 		File selectedDirectory = new File(mapPath);

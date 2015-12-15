@@ -15,14 +15,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
@@ -31,6 +35,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +44,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.WindowEvent;
 import AStar.AStar;
 import AStar.Node;
 import AStar.Settings;
@@ -56,7 +62,7 @@ public class MainController implements Initializable{
     @FXML private ImageView mapView;
     @FXML private MenuButton startMenu;
     @FXML private MenuButton destMenu;
-    @FXML private Button helpBtn;
+    @FXML private MenuButton helpBtn;
     @FXML private ScrollPane imageScrollPane;
     @FXML private Label activeFloorLabel;
     @FXML private Button floorUpBtn;
@@ -65,6 +71,8 @@ public class MainController implements Initializable{
     @FXML private Button swapButton;
     @FXML private VBox floorControlVBox;
     @FXML private VBox menuVBox;
+    private Menu about = new Menu();
+    private Menu tutorial = new Menu();
     SimpleStringProperty nextDirectionProperty = new SimpleStringProperty();
     SimpleBooleanProperty getDirectionsProperty = new SimpleBooleanProperty(false);
 	private static Settings defaultSettings = new Settings(false, false, false);
@@ -83,6 +91,7 @@ public class MainController implements Initializable{
     private int eventX = 0;
     private int eventY = 0;
     private Rectangle overlayRect = new Rectangle();
+    private ContextMenu contextMenu = new ContextMenu();
     ComboBox<String> startInput = new ComboBox<String>();
 	ComboBox<String> destInput = new ComboBox<String>();
     //private Canvas mainMapOverlay = new Canvas();
@@ -97,7 +106,13 @@ public class MainController implements Initializable{
     	startMenu.getItems().clear();
     	destMenu.getItems().clear();
     	//floorSelectionMenu.getItems().clear();
-    	loadMap();
+    	//loadMap();
+    	drawMap(mainMap);
+    	//imageZoomPane = new ZoomingPane(mainMap);
+    	imageScrollPane.setContent(mainMap);
+    	setupDropDowns();
+    	activeFloorLabel.setText(mainMap.getId());
+    	setupHelp();
     	getDirectionsProperty.addListener(new ChangeListener<Boolean>() {
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
             	runAStar();
@@ -143,6 +158,8 @@ public class MainController implements Initializable{
     	floorControlVBox.setVisible(false);
     	//swapButton.setMinHeight(20);
     	zoomSetup();
+    	anchorPane.getChildren().remove(anchorPane.getChildren().size() -1);
+
 	}
     
   //Function swaps the ending node with the starting node and triggers a new path to be created
@@ -173,24 +190,10 @@ public class MainController implements Initializable{
     	}
     }
     
-    @Deprecated
-    private File getDirectoryFromDialog()
-    {
-    	DirectoryChooser chooser = new DirectoryChooser();
-    	chooser.setTitle("JavaFX Projects");
-    	File defaultDirectory = new File("c:/");
-    	chooser.setInitialDirectory(defaultDirectory);
-    	return chooser.showDialog(Main.getStage());
-    }
     //Action handler for the load map button 
-    private void loadMap() {
+    public void loadMap() {
     	MapBuilder mapBuilder = new MapBuilder("res/SuperMap", "Campus");
     	mainMap = mapBuilder.buildMap();
-    	drawMap(mainMap);
-    	//imageZoomPane = new ZoomingPane(mainMap);
-    	imageScrollPane.setContent(mainMap);
-    	setupDropDowns();
-    	activeFloorLabel.setText(mainMap.getId());
     	//imageZoomPane.setZoomFactor(.8);
     	
     }
@@ -319,14 +322,45 @@ public class MainController implements Initializable{
 						}
 						else
 						{
-							nodeSelect(f, f.getNearestRoom((int)event.getX(), (int)event.getY()));
+							Node selectedNode = f.getNearestRoom((int)event.getX(), (int)event.getY());
+							//event.is
+							if (event.getButton() == MouseButton.SECONDARY)
+							{
+								setUpContextMenu(f, selectedNode);
+								contextMenu.show(f, event.getScreenX(), event.getScreenY());
+							}
+							else
+							{
+								contextMenu.hide();
+							}
 						}
 					}
 				}});
 			}
     	}
     }
-    
+    void setUpContextMenu(Floor f, Node targetNode)
+    {
+    	MenuItem startItem = new MenuItem("Start");
+    	startItem.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	    	startNode = targetNode;
+        		startMenu.setText(f.getId() + " " + targetNode.getName());
+        	    getDirectionsProperty.set(!getDirectionsProperty.get());
+    	    }
+    	});
+    	MenuItem destItem = new MenuItem("Destination");
+    	destItem.setOnAction(new EventHandler<ActionEvent>() {
+    	    public void handle(ActionEvent e) {
+    	    	goalNode = targetNode;
+        		destMenu.setText(f.getId() + " " + targetNode.getName());
+        	    getDirectionsProperty.set(!getDirectionsProperty.get());
+    	    }
+    	});
+    	contextMenu.getItems().clear();
+    	contextMenu.getItems().add(startItem);
+		contextMenu.getItems().add(destItem);
+    }
     void nodeSelect(Floor f, Node n)
     {
     	if (nodeSelect)
@@ -842,6 +876,62 @@ public class MainController implements Initializable{
 
             }
         });
+    }
+    
+    
+ private void setupHelp(){
+    	
+    	
+    	about.setText("About");
+    	tutorial.setText("Tutorial");
+    	helpBtn.setText("Help");
+    	helpBtn.getItems().add(about);
+    	helpBtn.getItems().add(tutorial);
+    	
+    	
+    	tutorial.setOnAction(new EventHandler(){
+
+		
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+		    	alert.setTitle("Tutorial");
+		        alert.setHeaderText("How to use the Program");
+		        alert.setHeaderText("Entering Locations: " + "\n\n"+"1) Use the dropdowns to select a location"+"\n\n"+"2) Press Tab to access the text fields and typer your location"+"\n\n"+"3) Right click on a room and select your start or end destination"+"\n\n"+"Additional Features Tutorial:"+"\n\n"+"To get text directions, follow the following format: @Floor@Floor"+"\n\n"+"To Zoom in, use the scrollwheel or trackpad wheel");
+		        alert.setGraphic(null);
+		        alert.showAndWait();
+		        arg0.consume();
+			}
+			
+    		
+    	});
+    	
+    	
+    	about.setOnAction(new EventHandler(){
+
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+
+		    	Alert alert = new Alert(AlertType.CONFIRMATION);
+		    	alert.setTitle("About Us");
+		        alert.setHeaderText("About the Team");
+		        alert.setContentText("Worcester Polytechnic Institute"
+		        		+ "\n"+"\n" +"CS-3733 2015 B-Term"+"\n"+"\n"+"Team: Schadenfreude"+"\n"+"\n"+"Members:"+"\n" +"Alonso Martinez, Thomas Lourenco, Michael McConnel, Brianna Greenlaw, Kewen Gu, Tyler Beaupre, Felix Schlicht, Jackson Treadwell, Alex Caracappa"+"\n"+"\n"+"Professor: Wilson Wong"+"\n"+"\n"+"Coach: Nicholas McMahon");
+		       
+		        alert.setGraphic(null);
+		        alert.showAndWait();
+		        arg0.consume();
+
+			}
+			
+    		
+    	});    	
+    	
+    	
+    	  
     }
     
     
