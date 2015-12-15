@@ -1,7 +1,9 @@
 package AStar;
 
 import java.util.HashMap;
-
+/*
+ * this class holds the information of all the nodes
+ */
 public class NodeList {
 	private HashMap<String, Node> nodes;
 
@@ -17,8 +19,8 @@ public class NodeList {
 		return nodes.size();
 	}
 	
-	public boolean addNode(String s, Node n) {
-		return (nodes.put(s,n)==n);		
+	public void addNode(String s, Node n) {
+		nodes.put(s,n);		
 	}
 
 	public boolean deleteNode(String name) {

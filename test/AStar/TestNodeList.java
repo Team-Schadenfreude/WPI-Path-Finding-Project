@@ -29,5 +29,43 @@ public class TestNodeList extends TestCase{
 		assertEquals(n4, n2);
 	}
 	
+	public void testgetSize(){
+		NodeList nodes = new NodeList();
+		Node n1 = new Node(0, 0, "A");
+		Node n2 = new Node(1, 0, "B");
+		nodes.addNode("A", n1);
+		nodes.addNode("B", n2);
+		int i=nodes.getSize();
+		assertEquals(2,i);
+		
+	}
+	
+	public void testDeleteNode(){
+		NodeList nodes = new NodeList();
+		Node n1 = new Node(0, 0, "A");
+		nodes.addNode("A", n1);
+		boolean b =nodes.deleteNode("A");
+		assertTrue(b);
+		assertEquals(0, nodes.getSize());
+		
+	}
+	
+	public void testDeleteNodeWhenListIsEmpty(){
+		NodeList nodes = new NodeList();
+		boolean b =nodes.deleteNode("A");
+		assertEquals(false, b);
+		
+	}
+	
+	public void testFindNodeThatExistsInNodelist(){
+		NodeList nodes = new NodeList();
+		Node n1 = new Node(0, 0, "A");
+		nodes.addNode("A", n1);
+		Node t =nodes.findNode("A");
+		
+		assertEquals("A", t.toString());
+	}
+	
+	
 	
 }
