@@ -1,0 +1,59 @@
+node,880,449,0,Washburn 1,MAIN STAIRCASE,TRUE,Stairs
+Men's Bathroom,1017,547,0,Washburn 1,,FALSE,BathroomM
+node,978,533,0,Washburn 1,,FALSE,Intersection
+women's Bathroom,977,569,0,Washburn 1,,FALSE,BathroomW
+node,978,547,0,Washburn 1,,FALSE,Intersection
+WS-109,880,533,0,Washburn 1,,FALSE,Room
+node,929,533,0,Washburn 1,MAIN ELEVATOR,TRUE,Elevator
+node,929,500,0,Washburn 1,,FALSE,Intersection
+node,978,500,0,Washburn 1,,FALSE,Intersection
+node,991,458,0,Washburn 1,,FALSE,Intersection
+node,880,500,0,Washburn 1,,FALSE,Intersection
+node,820,500,0,Washburn 1,,FALSE,Intersection
+node,772,500,0,Washburn 1,,FALSE,Intersection
+node,729,464,0,Washburn 1,,FALSE,Intersection
+node,729,500,0,Washburn 1,,FALSE,Intersection
+node,676,500,0,Washburn 1,,FALSE,Intersection
+node,542,500,0,Washburn 1,,FALSE,Intersection
+WS-107J,542,465,0,Washburn 1,,FALSE,Room
+node,729,446,0,Washburn 1,,FALSE,Intersection
+WS-107M,604,432,0,Washburn 1,,FALSE,Intersection
+node,650,410,0,Washburn 1,,FALSE,Intersection
+WS-107L,650,446,0,Washburn 1,,FALSE,Room
+node,650,365,0,Washburn 1,,FALSE,Intersection
+WS-108A,604,365,0,Washburn 1,,FALSE,Room
+node,810,438,0,Washburn 1,,FALSE,Intersection
+node,792,438,0,Washburn 1,,FALSE,Intersection
+node,792,500,0,Washburn 1,,FALSE,Intersection
+WS-108,792,362,0,Washburn 1,,FALSE,Room
+WS-108B,604,319,0,Washburn 1,,FALSE,Room
+node,676,571,0,Washburn 1,,FALSE,Intersection
+WS-107N,729,571,0,Washburn 1,,FALSE,Room
+WS-107I,476,617,0,Washburn 1,,FALSE,Room
+node,195,549,0,Washburn 1,SOUTH WEST STAIR CASE,TRUE,Stairs
+WS-103,146,549,0,Washburn 1,,FALSE,Room
+WS-102,92,549,0,Washburn 1,,FALSE,Room
+WS-101,62,549,0,Washburn 1,,FALSE,Room
+node,62,535,0,Washburn 1,,FALSE,Intersection
+node,92,535,0,Washburn 1,,FALSE,Intersection
+node,146,535,0,Washburn 1,,FALSE,Intersection
+node,195,535,0,Washburn 1,,FALSE,Intersection
+WS-105,156,500,0,Washburn 1,,FALSE,Room
+node,173,500,0,Washburn 1,,FALSE,Intersection
+node,173,535,0,Washburn 1,,FALSE,Intersection
+WS-107,476,500,0,Washburn 1,,FALSE,Room
+node,880,637,0,Washburn 1,Loading Dock,TRUE,Entrance
+WS-112B,915,396,0,Washburn 1,,FALSE,Room
+node,864,397,0,Washburn 1,,FALSE,Intersection
+node,934,100,0,Washburn 1,,FALSE,Intersection
+WS-112A,934,42,0,Washburn 1,,FALSE,Room
+node,973,42,0,Washburn 1,,FALSE,Intersection
+WS-113A,1001,128,0,Washburn 1,,FALSE,Room
+WS-113,991,333,0,Washburn 1,,FALSE,Room
+node,991,173,0,Washburn 1,,FALSE,Intersection
+node,985,76,0,Washburn 1,,FALSE,Intersection
+node,991,42,0,Washburn 1,TOP STAIRCASE,TRUE,Stairs
+node,915,365,0,Washburn 1,,FALSE,Intersection
+node,864,362,0,Washburn 1,,FALSE,Intersection
+WS-112,915,271,0,Washburn 1,,FALSE,Room
+node,991,128,0,Washburn 1,,FALSE,Intersection

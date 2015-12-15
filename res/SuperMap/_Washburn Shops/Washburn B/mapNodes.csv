@@ -1,0 +1,32 @@
+node,1088,461,0,Washburn B,,FALSE,Intersection
+node,1088,461,0,Washburn B,MAIN ENTRANCE,TRUE,Entrance
+node,1044,461,0,Washburn B,,FALSE,Intersection
+node,944,445,0,Washburn B,MAIN STAIRCASE,TRUE,Stairs
+node,1003,445,0,Washburn B,,FALSE,Intersection
+node,1003,416,0,Washburn B,,FALSE,Intersection
+WS-009,986,256,0,Washburn B,,FALSE,Room
+node,949,31,0,Washburn B,TOP RIGHT STAIR CASE,TRUE,Stairs
+node,935,31,0,Washburn B,,FALSE,Intersection
+WS-004A,893,31,0,Washburn B,,FALSE,Room
+node,893,87,0,Washburn B,,FALSE,Intersection
+node,835,460,0,Washburn B,,FALSE,Intersection
+node,870,460,0,Washburn B,,FALSE,Intersection
+node,835,485,0,Washburn B,,FALSE,Intersection
+node,870,485,0,Washburn B,,FALSE,Intersection
+node,1003,485,0,Washburn B,,FALSE,Intersection
+node,1003,461,0,Washburn B,,FALSE,Intersection
+WS-003,835,505,0,Washburn B,,FALSE,Room
+node,807,485,0,Washburn B,,FALSE,Intersection
+node,944,505,0,Washburn B,,FALSE,Intersection
+node,944,485,0,Washburn B,,FALSE,Intersection
+WS-00X3,899,505,0,Washburn B,MAIN ELEVATOR,TRUE,Elevator
+node,899,485,0,Washburn B,,FALSE,Intersection
+Women's Bathroom,938,537,0,Washburn B,,FALSE,BathroomW
+Men's Bathroom,976,516,0,Washburn B,,FALSE,BathroomM
+node,944,516,0,Washburn B,,FALSE,Intersection
+WS-001,741,485,0,Washburn B,,FALSE,Room
+node,741,591,0,Washburn B,BOTTOM STAIR CASE,TRUE,Stairs
+node,1044,35,0,Washburn B,ENTRANCE NEAR PROJECT CENTER,TRUE,Entrance
+WS-004,870,250,0,Washburn B,,FALSE,Room
+node,1012,51,0,Washburn B,,FALSE,Intersection
+node,949,51,0,Washburn B,,FALSE,Intersection

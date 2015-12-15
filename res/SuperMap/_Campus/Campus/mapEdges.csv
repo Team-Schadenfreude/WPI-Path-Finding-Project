@@ -183,6 +183,7 @@
 1575,1173,0,Campus,1562,1256,0,Campus
 1575,1173,0,Campus,1512,1162,0,Campus
 1512,1162,0,Campus,1575,1173,0,Campus
+1512,1162,0,Campus,546,553,0,HigginsB
 1562,1256,0,Campus,1575,1173,0,Campus
 1562,1256,0,Campus,1583,1259,0,Campus
 1562,1256,0,Campus,1553,1305,0,Campus
@@ -199,6 +200,7 @@
 1452,1280,0,Campus,1447,1302,0,Campus
 1452,1280,0,Campus,1392,1269,0,Campus
 1453,1269,0,Campus,1452,1280,0,Campus
+1453,1269,0,Campus,13,353,0,HigginsB
 1560,1317,0,Campus,1553,1305,0,Campus
 1560,1317,0,Campus,1566,1334,0,Campus
 1560,1317,0,Campus,1582,1339,0,Campus
@@ -331,6 +333,7 @@
 1503,1434,0,Campus,1531,1437,0,Campus
 1503,1434,0,Campus,1436,1421,0,Campus
 1434,1432,0,Campus,1436,1421,0,Campus
+1434,1432,0,Campus,1059,360,0,Alden 1
 1436,1421,0,Campus,1503,1434,0,Campus
 1436,1421,0,Campus,1434,1432,0,Campus
 1436,1421,0,Campus,1438,1397,0,Campus
@@ -561,6 +564,7 @@
 1886,912,0,Campus,1877,920,0,Campus
 1886,912,0,Campus,732,1105,0,Fuller Labs 2
 1493,1054,0,Campus,1496,1035,0,Campus
+1493,1054,0,Campus,1081,353,0,HigginsB
 1447,1302,0,Campus,1452,1280,0,Campus
 1447,1302,0,Campus,1419,1342,0,Campus
 1438,1397,0,Campus,1436,1421,0,Campus

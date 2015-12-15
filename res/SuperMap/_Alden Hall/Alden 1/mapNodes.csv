@@ -1,0 +1,16 @@
+node,936,261,0,Alden 1,RIGHT STAIRCASE FROM ENTRANCE,TRUE,Stairs
+node,938,460,0,Alden 1,LEFT STAIRCASE FROM ENTRACNE,TRUE,Stairs
+node,936,360,0,Alden 1,,FALSE,Intersection
+node,880,360,0,Alden 1,,FALSE,Intersection
+node,384,180,0,Alden 1,,FALSE,Intersection
+node,378,546,0,Alden 1,,FALSE,Intersection
+Main Auditorium,592,360,0,Alden 1,,FALSE,Room
+node,384,360,0,Alden 1,,FALSE,Intersection
+node,384,498,0,Alden 1,,FALSE,Intersection
+node,1059,360,0,Alden 1,MAIN ENTRANCE,TRUE,Entrance
+node,384,85,0,Alden 1,,FALSE,Intersection
+node,384,35,0,Alden 1,RILEY HALL ENTRANCE,TRUE,Entrance
+node,378,611,0,Alden 1,,FALSE,Intersection
+node,378,714,0,Alden 1,ROAD WITH BRIDGE OVER IT ENTRANCE,TRUE,Entrance
+node,353,145,0,Alden 1,MAIN ELEVATOR,TRUE,Elevator
+node,384,145,0,Alden 1,,FALSE,Intersection
