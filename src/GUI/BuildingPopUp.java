@@ -1,5 +1,7 @@
 package GUI;
 
+
+
 import DataAccess.Building;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -34,7 +36,7 @@ public class BuildingPopUp {
 		case "AtwaterKent":
 			imgContainer.setMaxSize(210, 200);
 
-			slideshow = new Slideshow("res/BuildingImages/Atwater/");
+			slideshow = new Slideshow("res/BuildingImages/Atwater Kent/");
 			imgContainer.getChildren().addAll(slideshow.slides);
 			image.getStyleClass().add("image_display");
 			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Atwater/Atwater.html","res/BuildingImages/Atwater");
@@ -42,21 +44,21 @@ public class BuildingPopUp {
 			break;
 			
 		case "Fuller Labs":
-			slideshow = new Slideshow("res/BuildingImages/Fuller/");
+			slideshow = new Slideshow("res/BuildingImages/Fuller Labs/");
 			imgContainer.getChildren().addAll(slideshow.slides);
 			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Fuller/Fuller.html","res/BuildingImages/Fuller");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "CampusCenter":
-			slideshow = new Slideshow("res/BuildingImages/Center/");
+			slideshow = new Slideshow("res/BuildingImages/Campus Center/");
 			imgContainer.getChildren().addAll(slideshow.slides);
 			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Center/Center.html","res/BuildingImages/Center");
 			image.getStyleClass().add("image_display");
 			break;
 			
 		case "Boynton Hall":
-			slideshow = new Slideshow("res/BuildingImages/Boynton/");
+			slideshow = new Slideshow("res/BuildingImages/Boynton Hall/");
 			imgContainer.getChildren().addAll(slideshow.slides);
 			imageReader = new ImageReader("http://greatestsoftengteamschadenfreude.comxa.com/Boynton/Boynton.html","res/BuildingImages/Boynton");
 

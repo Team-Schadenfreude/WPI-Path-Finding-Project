@@ -18,7 +18,7 @@ import javafx.util.Duration;
 Alonso
 */
 public class Slideshow {
-	 ImageView[] slides;
+	 private ImageView[] slides;
 	 
 	 
 	 
@@ -49,7 +49,9 @@ public class Slideshow {
 					Image imageImg = SwingFXUtils.toFXImage(image, null);
 					 System.out.println("Before IMageView");
 			    	image2 = new ImageView();
+			    	
 			    	image2.setImage(imageImg);
+			    
 			    	image2.setFitWidth(210);
 			    	image2.setFitHeight(200);
 					 System.out.println("After IMageView");
@@ -97,5 +99,8 @@ public class Slideshow {
 	      return ft;
 
 	    }
-	  
+	 public ImageView[] getSlides()
+	 {
+		 return this.slides;
+	 }
 }
