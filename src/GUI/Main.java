@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.animation.FadeTransition;
@@ -30,9 +31,14 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Main extends Application {
-	public static final String APPLICATION_ICON = "/res/icons/window_icon.png";
-	public static final String SPLASH_IMAGE = "/res/icons/preloader.png";
-	private Image preloaderImage = new Image(SPLASH_IMAGE);
+	
+	public static final String APPLICATION_ICON = "res/icons/window_icon.png";
+	public static final String SPLASH_IMAGE = "res/icons/preloader.png";
+
+	File splashImage = new File(SPLASH_IMAGE);
+	File appIconImage = new File(APPLICATION_ICON);
+	
+	private Image preloaderImage = new Image(splashImage.toURI().toString());
 	private ImageView splash = new ImageView(preloaderImage);
 	private Pane splashLayout;
 	private ProgressBar loadProgress;
@@ -74,7 +80,7 @@ public class Main extends Application {
 				return foundFriends;
 			}
 		};
-		Image image = new Image(APPLICATION_ICON);
+		Image image = new Image(appIconImage.toURI().toString());
 		initStage.getIcons().add(image);
 		showSplash(initStage, friendTask, () -> showMainStage(friendTask.valueProperty()));
 		new Thread(friendTask).start();
@@ -92,7 +98,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 
-		Image image = new Image(APPLICATION_ICON);
+		Image image = new Image(appIconImage.toURI().toString());
 		mainStage.getIcons().add(image);
 		mainStage.setMaximized(true);
 		// mainStage.setF

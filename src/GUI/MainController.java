@@ -165,8 +165,8 @@ public class MainController implements Initializable {
 		activeFloorLabel.getStyleClass().add("active_floor_label");
 
 		swapButton.setMaxHeight(startMenu.getBoundsInParent().getHeight() * 2);
-
-		ImageView swapButtonImage = new ImageView("res/icons/swap.png");
+		File swapImageFile = new File("res/icons/swap.png");
+		ImageView swapButtonImage = new ImageView(swapImageFile.toURI().toString());
 		// swapButtonImage.setFitHeight(startMenu.getBoundsInParent().getHeight()
 		// * 2);
 		swapButtonImage.setFitHeight(44);
@@ -255,8 +255,10 @@ public class MainController implements Initializable {
 						overlayRect.setStrokeWidth(15);
 						overlayRect.setArcHeight(5);
 						overlayRect.setArcWidth(5);
-						overlayRect.setFill(new Color(0, 0, 0, 0));
-						overlayRect.setOpacity(.8);
+					//	overlayRect.setFill(new Color(1, 0, 0, 0));
+						overlayRect.setFill(Color.BLUE);
+						
+						overlayRect.setOpacity(.2);
 						if (b.getId().equals("Salisbury") || b.getId().equals("Boynton Hall")) {
 							overlayRect.setRotate(b.getAngle());
 						}
@@ -526,21 +528,26 @@ public class MainController implements Initializable {
 			// ROOM, STAIRS, ELEVATOR, BATHROOM_M, BATHROOM_F, ENTRANCE,
 			// INTERSECTION, ENDHALL, NONE
 			Node.Type type = n.getType();
-
+			File path;
 			if (type == Node.Type.BATHROOM_F) {
-				Image i = new Image("/res/locations/Women'sBathroom.png");
+				path = new File("/res/locations/Women'sBathroom.png");
+				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.BATHROOM_M) {
-				Image i = new Image("/res/locations/Men'sBathroom.png");
+				path = new File("/res/locations/Men'sBathroom.png");
+				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.ELEVATOR) {
-				Image i = new Image("/res/locations/Elevator.png");
+				path = new File("/res/locations/Elevator.png");
+				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.STAIRS) {
-				Image i = new Image("/res/locations/Stairs.png");
+				path =  new File("/res/locations/Stairs.png");
+				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.ENTRANCE) {
-				Image i = new Image("/res/locations/Door.png");
+				path = new File("/res/locations/Door.png");
+				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			}
 		}
