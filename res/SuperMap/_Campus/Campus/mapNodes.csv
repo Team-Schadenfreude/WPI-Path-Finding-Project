@@ -59,7 +59,7 @@ node,1278,859,0,Campus,,false,None
 node,1282,872,0,Campus,,false,None
 node,1291,882,0,Campus,,false,None
 node,1301,888,0,Campus,,false,None
-Campus Center Patio,1332,889,0,Campus,,false,Room
+node,1332,889,0,Campus,,false,Room
 Campus Center Patio Entrance,1355,904,0,Campus,Entrance to the CC via its patio.,true,Entrance
 node,1614,924,0,Campus,,false,Intersection
 node,1616,909,0,Campus,,false,Intersection
