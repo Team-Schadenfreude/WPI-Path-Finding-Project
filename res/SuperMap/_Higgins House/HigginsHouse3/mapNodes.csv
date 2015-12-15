@@ -1,8 +1,8 @@
-Down Stairs,630,315,0,HigginsHouse3,Higgins House Down Stairs,true,Stairs
-307,672,315,0,HigginsHouse3,,false,Room
-302,696,319,0,HigginsHouse3,,false,Room
-node,679,282,0,HigginsHouse3,,false,None
-node,679,217,0,HigginsHouse3,,false,None
-node,405,213,0,HigginsHouse3,,false,None
-303,405,246,0,HigginsHouse3,,false,Room
-304,401,422,0,HigginsHouse3,,false,Room
+Down Stairs,630,315,0,HigginsHouse3,Higgins House Down Stairs,TRUE,Stairs
+307,672,315,0,HigginsHouse3,,FALSE,Room
+302,696,319,0,HigginsHouse3,,FALSE,Room
+node,679,282,0,HigginsHouse3,,FALSE,Intersection
+node,679,217,0,HigginsHouse3,,FALSE,Intersection
+node,405,213,0,HigginsHouse3,,FALSE,Intersection
+303,405,246,0,HigginsHouse3,,FALSE,Room
+304,401,422,0,HigginsHouse3,,FALSE,Room
