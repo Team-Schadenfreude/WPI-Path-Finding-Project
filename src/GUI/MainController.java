@@ -220,7 +220,7 @@ public class MainController implements Initializable {
 		;
 		return astar.findPath(startNode, endNode, map.toNodeListUnmodifiable());
 	}
-
+	//Function sets up the needed scales for map display and on click handlers for buildings and floors
 	public void drawMap(Map map) {
 		boolean firstRun = true;
 		for (Building b : map.getBuildingsUnmodifiable()) {
@@ -373,7 +373,7 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-
+	//Sets up the on right click node selection context menu
 	void setUpContextMenu(Floor f, Node targetNode) {
 		MenuItem startItem = new MenuItem("Start");
 		startItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -395,7 +395,7 @@ public class MainController implements Initializable {
 		contextMenu.getItems().add(startItem);
 		contextMenu.getItems().add(destItem);
 	}
-
+	//Function to flip the make a node start or destinations
 	void nodeSelect(Floor f, Node n) {
 		if (nodeSelect) {
 			startNode = n;
@@ -407,7 +407,7 @@ public class MainController implements Initializable {
 		nodeSelect = !nodeSelect;
 		getDirectionsProperty.set(!getDirectionsProperty.get());
 	}
-
+	//Helper function to set up portions of the building on click handler
 	void setUpGroupOnClick(Building building, double x, double y) {
 		// mainMapOverlay.getGraphicsContext2D().clearRect(0, 0,
 		// mainMapOverlay.getWidth(), mainMapOverlay.getHeight());
@@ -469,7 +469,7 @@ public class MainController implements Initializable {
 			mainMap.setZoom(zoom * (.45 + building.getScale().getX()), pivotX, pivotY);
 		}
 	}
-
+	//Function to center a node in the view pane
 	public void centerNodeInScrollPane(ScrollPane scrollPane, javafx.scene.Node node) {
 		double h = scrollPane.getContent().getBoundsInLocal().getHeight();
 		double y = (node.getBoundsInParent().getMaxY() + node.getBoundsInParent().getMinY()) / 2.0;
@@ -480,7 +480,7 @@ public class MainController implements Initializable {
 		double hor = scrollPane.getViewportBounds().getWidth();
 		scrollPane.setHvalue(scrollPane.getHmax() * ((x - 0.5 * hor) / (w - hor)));
 	}
-
+	//Function sets up the active floor control buttons event handlers
 	private void setupFloorSelection(Building b) {
 		floorUpBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -499,21 +499,21 @@ public class MainController implements Initializable {
 			}
 		});
 	}
-
+	//Function to update the displayed floor
 	private void updateFloor(Floor floor, List<Floor> floors) {
 		setNodesVisible(floors, false);
 		floor.setVisible(true);
-		addImagesToFloor(floor);
+		//addImagesToFloor(floor);
 		floorControlVBox.setVisible(!floor.getParent().getId().equals(mainMap.getId()));
 		// floorSelectionMenu.setText(text);
 	}
-
+	//Function to set the visibility of the provided list of floors
 	private void setNodesVisible(List<Floor> floors, boolean isVisible) {
 		for (Floor n : floors) {
 			n.setVisible(isVisible);
 		}
 	}
-
+	//Function adds node type context images to maps
 	private void addImagesToFloor(Floor f) {
 		Canvas c = f.getCanvas();
 		int width = (int) (c.getWidth() / 18);
@@ -530,23 +530,23 @@ public class MainController implements Initializable {
 			Node.Type type = n.getType();
 			File path;
 			if (type == Node.Type.BATHROOM_F) {
-				path = new File("/res/locations/Women'sBathroom.png");
+				path = new File("res/locations/Women'sBathroom.png");
 				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.BATHROOM_M) {
-				path = new File("/res/locations/Men'sBathroom.png");
+				path = new File("res/locations/Men'sBathroom.png");
 				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.ELEVATOR) {
-				path = new File("/res/locations/Elevator.png");
+				path = new File("res/locations/Elevator.png");
 				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.STAIRS) {
-				path = new File("/res/locations/Stairs.png");
+				path = new File("res/locations/Stairs.png");
 				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			} else if (type == Node.Type.ENTRANCE) {
-				path = new File("/res/locations/Door.png");
+				path = new File("res/locations/Door.png");
 				Image i = new Image(path.toURI().toString());
 				c.getGraphicsContext2D().drawImage(i, x, y, width, width);
 			}
@@ -578,7 +578,7 @@ public class MainController implements Initializable {
 		// }
 		// imageZoomPane.setZoomFactor(value);
 	}
-
+	//Function runs AStar to find a path
 	private void runAStar() {
 		System.out.println("Nodes");
 		System.out.println(startNode);
@@ -597,7 +597,7 @@ public class MainController implements Initializable {
 			// goalNode = null;
 		}
 	}
-
+	//Function displays the directions panel and scales the appropriate components
 	private void showDirections(List<String> directions) {
 		SidePanel.setUpSidePanel(startNode.getName(), goalNode.getName(), directions, BuildingPopUp.getPopUp(),
 				nextDirectionProperty);
@@ -649,18 +649,18 @@ public class MainController implements Initializable {
 			System.out.println("No Path");
 		}
 	}
-
+	//Draws a circle on the given coordinates
 	private void drawCircleOnNode(String map, int xPos, int yPos, int radius, Paint p) {
 		Canvas activeCanvas = findMapCanvas(map);
 		GraphicsContext gc = activeCanvas.getGraphicsContext2D();
 		gc.setFill(p);
 		gc.fillOval(xPos - (radius / 2) + 5, yPos - (radius / 2) + 5, radius, radius);
 	}
-
+	//Draws a circle on the node
 	private void drawCircleOnNode(Node n, int radius, Paint p) {
 		drawCircleOnNode(n.getMap(), n.getX(), n.getY(), radius, p);
 	}
-
+	//Clears all the canvas in the display
 	private void clearAllCanvas() {
 		for (Building b : mainMap.getBuildingsUnmodifiable()) {
 			for (Floor f : b.getFloorsUnmodifiable()) {
@@ -670,7 +670,7 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-
+	//Finds a canvas corresponding to the given map
 	private Canvas findMapCanvas(String map) {
 		for (Building b : mainMap.getBuildingsUnmodifiable()) {
 			for (Floor f : b.getFloorsUnmodifiable()) {
@@ -807,7 +807,7 @@ public class MainController implements Initializable {
 		});
 
 	}
-
+	//Adds the menu items in alphabetical order to a list of menu items
 	private void addMenuItemsSorted(List<MenuItem> menuItems, MenuItem m) {
 		for (int i = 0; i <= menuItems.size(); i++) {
 			if (i >= menuItems.size()) {
@@ -819,7 +819,7 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-
+	//Sets up the zooming feature
 	private void zoomSetup() {
 		mainMap.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
 			@Override
@@ -868,7 +868,7 @@ public class MainController implements Initializable {
 			}
 		});
 	}
-
+	//Sets up the help button
 	private void setupHelp() {
 
 		about.setText("About");

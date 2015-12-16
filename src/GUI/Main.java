@@ -44,12 +44,12 @@ public class Main extends Application {
 	private ProgressBar loadProgress;
 	private Label progressText;
 	private static Stage mainStage;
-
+	//Function to start the program
 	public static void main(String[] args) {
 		// SvgImageLoaderFactory.install();
 		launch(args);
 	}
-
+	//Runs the preloader and loads in the needed maps
 	@Override
 	public void init() {
 		splash.setFitWidth(960);
@@ -65,7 +65,7 @@ public class Main extends Application {
 						+ "linear-gradient(" + "to bottom, " + "cornsilk, " + "derive(cornsilk, 50%)" + ");");
 		splashLayout.setEffect(new DropShadow());
 	}
-
+	//Start function that loads the needed maps while the preloader is run
 	@Override
 	public void start(final Stage initStage) throws Exception {
 		final Task<ObservableList<String>> friendTask = new Task<ObservableList<String>>() {
@@ -85,7 +85,7 @@ public class Main extends Application {
 		showSplash(initStage, friendTask, () -> showMainStage(friendTask.valueProperty()));
 		new Thread(friendTask).start();
 	}
-
+	//Change the view to the main program
 	private void showMainStage(ReadOnlyObjectProperty<ObservableList<String>> friends) {
 		mainStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -110,7 +110,7 @@ public class Main extends Application {
 
 		mainStage.show();
 	}
-
+	//Show the preloader window
 	private void showSplash(final Stage initStage, Task<?> task, InitCompletionHandler initCompletionHandler) {
 		progressText.textProperty().bind(task.messageProperty());
 		loadProgress.progressProperty().bind(task.progressProperty());
@@ -137,7 +137,6 @@ public class Main extends Application {
 		initStage.setY(bounds.getMinY() + bounds.getHeight() / 2 - splash.getFitHeight() / 2);
 		initStage.show();
 	}
-
 	public interface InitCompletionHandler {
 		public void complete();
 	}
