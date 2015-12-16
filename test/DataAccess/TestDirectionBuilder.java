@@ -32,17 +32,20 @@ public class TestDirectionBuilder {
 		path.add(n1);
 		path.add(n2);
 		path.add(n3);
+		
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = DirectionBuilder.getDirectionsList(path,1,1);
+		
+		
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		solution.add("Take a straight.");
-		solution.add("Go straight out of Node 1 into Node 2. (3.0ft)");
+		solution.add("Go straight out of Node 1 and into Node 2. (3.0 ft)");
 		solution.add("Take a left turn.");
-		solution.add("Go straight out of Node 2 into Node 3. (3.0ft)");
-		solution.add("You have reached your destination after 6ft.");
+		solution.add("Go straight out of Node 2 and into Node 3. (3.0 ft)");
+		solution.add("You have reached your destination after 6 ft.");
 		
 		assertEquals(solution, testDirections);
 	}
@@ -68,11 +71,13 @@ public class TestDirectionBuilder {
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
+		
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight 3 ft");
-		solution.add("Right turn 3 ft");
-		solution.add("Procede to Destination");
-		solution.add("Total Distance is 6ft");
+		solution.add("Take a straight.");
+		solution.add("Go straight out of Node 1 and into Node 2. (3.0 ft)");
+		solution.add("Take a right turn.");
+		solution.add("Go straight out of Node 2 and into Node 3. (3.0 ft)");
+		solution.add("You have reached your destination after 6 ft.");
 		
 		assertEquals(solution, testDirections);
 	}
@@ -107,18 +112,23 @@ public class TestDirectionBuilder {
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = DirectionBuilder.getDirectionsList(path,1,1);
+		
 		// System.out.println("Path and Directions:");
 		// System.out.println(path);
 		// System.out.println(testDirections);
 		List<String> solution = new ArrayList<String>();
 		
-		solution.add("Go Straight 4 ft");
-		solution.add("Sharp right turn 4 ft");
-		solution.add("Left turn 4 ft");
-		solution.add("Left turn 10 ft");
-		solution.add("Sharp left turn 4 ft");
-		solution.add("Procede to Destination");
-		solution.add("Total Distance is 26ft");
+		solution.add("Take a straight.");
+		solution.add("Go straight out of Node 1 and into Node 2. (4.0 ft)");
+		solution.add("Take a sharp right turn.");
+		solution.add("Go straight out of Node 2 and into Node 3. (4.242640687119285 ft)");
+		solution.add("Take a left turn.");
+		solution.add("Go straight out of Node 3 and into Node 4. (4.242640687119285 ft)");
+		solution.add("Take a left turn.");
+		solution.add("Go straight out of Node 4 and into Node 5. (10.0 ft)");
+		solution.add("Take a sharp left turn.");
+		solution.add("Go straight out of Node 5 and into Node 6. (4.0 ft)");
+		solution.add("You have reached your destination after 26 ft.");
 		assertEquals(solution, testDirections);
 	}
 	
@@ -152,18 +162,26 @@ public class TestDirectionBuilder {
 		path.add(n6);
 		List<String> testDirections = new ArrayList<String>();
 		testDirections = DirectionBuilder.getDirectionsList(path,1,1);
+		
+		
 //		System.out.println("Path and Directions:");
 //		System.out.println(path);
 //		System.out.println(testDirections);
 		
 		List<String> solution = new ArrayList<String>();
-		solution.add("Go Straight 3 ft");
-		solution.add("Slight left turn 2 ft");
-		solution.add("Sharp left turn 2 ft");
-		solution.add("Slight right turn 3 ft");
-		solution.add("Sharp right turn 3 ft");
-		solution.add("Procede to Destination");
-		solution.add("Total Distance is 14ft");
+		solution.add("Take a straight.");
+		solution.add("Go straight out of Node 1 and into Node 2. (3.0 ft)");
+		solution.add("Take a slight left turn.");
+		solution.add("Go straight out of Node 2 and into Node 3. (2.8284271247461903 ft)");
+		solution.add("Take a sharp left turn.");
+		solution.add("Go straight out of Node 3 and into Node 4. (2.0 ft)");
+		solution.add("Take a slight right turn.");
+		solution.add("Go straight out of Node 4 and into Node 5. (3.605551275463989 ft)");
+		solution.add("Take a sharp right turn.");
+		solution.add("Go straight out of Node 5 and into Node 6. (3.0 ft)");
+		solution.add("You have reached your destination after 14 ft.");
+		
+
 		assertEquals(solution, testDirections);
 	}
 	
