@@ -5,7 +5,7 @@
 * An map coordinate tool enables the developers to quickly enter coordinates and their neighbors or edges for a map
 * Incorporates a turn-based interface which tells the user where to turn and how far to go
 
-### Djikstra path finding algorithm or A* algorithm
+### A* algorithm for finding the shortest pathes
 
 ### Agile Scrum methodology
 
